@@ -1,6 +1,6 @@
-package dev.kokiriglade.corn.special;
+package dev.kokiriglade.popcorn.special;
 
-import dev.kokiriglade.corn.AbstractItemBuilder;
+import dev.kokiriglade.popcorn.AbstractItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -11,6 +11,7 @@ import java.util.Map;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link EnchantmentStorageMeta}.
+ *
  * @since 1.0.0
  */
 @SuppressWarnings("unused")

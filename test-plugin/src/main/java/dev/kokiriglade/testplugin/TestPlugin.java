@@ -1,7 +1,7 @@
 package dev.kokiriglade.testplugin;
 
 import com.mojang.brigadier.Command;
-import dev.kokiriglade.corn.ItemBuilder;
+import dev.kokiriglade.popcorn.ItemBuilder;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import net.kyori.adventure.text.Component;

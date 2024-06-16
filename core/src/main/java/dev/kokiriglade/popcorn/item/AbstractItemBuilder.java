@@ -1,4 +1,4 @@
-package dev.kokiriglade.corn;
+package dev.kokiriglade.popcorn.item;
 
 import com.google.common.collect.Multimap;
 import net.kyori.adventure.text.Component;

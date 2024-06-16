@@ -32,7 +32,7 @@ tasks {
         }
     }
     shadowJar {
-        relocate("dev.kokiriglade.corn", "dev.kokiriglade.testplugin.corn")
+        relocate("dev.kokiriglade.popcorn", "dev.kokiriglade.testplugin.corn")
     }
 }
 

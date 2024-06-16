@@ -1,6 +1,6 @@
-package dev.kokiriglade.corn.special;
+package dev.kokiriglade.popcorn.special;
 
-import dev.kokiriglade.corn.AbstractItemBuilder;
+import dev.kokiriglade.popcorn.AbstractItemBuilder;
 import org.bukkit.FireworkEffect;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link FireworkMeta}.
+ *
  * @since 1.0.0
  */
 @SuppressWarnings("unused")

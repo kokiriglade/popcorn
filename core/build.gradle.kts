@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.kokiriglade"
-version = "1.2.0"
+version = "2.0.0"
 
 repositories {
     mavenCentral()
@@ -27,7 +27,7 @@ configure<JavaPluginExtension> {
 configure<PublishingExtension> {
     publications {
         register<MavenPublication>("maven") {
-            artifactId = "corn"
+            artifactId = "popcorn"
             from(components["java"])
         }
     }
@@ -35,7 +35,7 @@ configure<PublishingExtension> {
         mavenLocal()
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/celerry/corn")
+            url = uri("https://maven.pkg.github.com/celerry/popcorn")
             credentials {
                 username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_ACTOR")
                 password = project.findProperty("gpr.token") as String? ?: System.getenv("GITHUB_TOKEN")

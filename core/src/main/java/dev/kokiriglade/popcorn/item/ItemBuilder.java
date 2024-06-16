@@ -1,4 +1,4 @@
-package dev.kokiriglade.corn;
+package dev.kokiriglade.popcorn.item;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -11,6 +11,7 @@ import java.util.Objects;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link ItemMeta}.
+ *
  * @since 1.0.0
  */
 @SuppressWarnings({"unused"})

@@ -1,6 +1,6 @@
-package dev.kokiriglade.corn.special;
+package dev.kokiriglade.popcorn.special;
 
-import dev.kokiriglade.corn.AbstractItemBuilder;
+import dev.kokiriglade.popcorn.AbstractItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.inventory.ItemStack;
@@ -9,6 +9,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link AxolotlBucketMeta}.
+ *
  * @since 1.0.0
  */
 @SuppressWarnings("unused")

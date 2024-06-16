@@ -1,6 +1,7 @@
 package dev.kokiriglade.popcorn.item;
 
 import com.google.common.collect.Multimap;
+import dev.kokiriglade.popcorn.util.PersistentDataHolderBuilder;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
@@ -30,7 +31,7 @@ import java.util.function.Consumer;
  * @since 1.0.0
  */
 @SuppressWarnings({"unchecked", "unused"})
-public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M extends ItemMeta> {
+public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M extends ItemMeta> implements PersistentDataHolderBuilder<B> {
 
     private static final Component DISABLE_ITALICS = Component.empty().decoration(TextDecoration.ITALIC, false);
 

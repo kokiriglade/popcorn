@@ -5,9 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.EntitySnapshot;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.OminousBottleMeta;
 import org.bukkit.inventory.meta.SpawnEggMeta;
-import org.bukkit.material.SpawnEgg;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
@@ -66,6 +64,7 @@ public final class SpawnEggBuilder extends AbstractItemBuilder<SpawnEggBuilder, 
 
     /**
      * Gets the {@link EntitySnapshot} that will be spawned by this egg or null if no entity has been set.
+     *
      * @return the {@code EntitySnapshot}, or {@code null}
      */
     public EntitySnapshot spawnedEntity() {

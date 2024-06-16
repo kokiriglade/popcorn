@@ -1,11 +1,8 @@
 package dev.kokiriglade.corn.special;
 
-import com.google.common.base.Preconditions;
 import dev.kokiriglade.corn.AbstractItemBuilder;
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.BookMeta;
 import org.bukkit.inventory.meta.WritableBookMeta;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;

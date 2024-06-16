@@ -53,6 +53,45 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
     }
 
     /**
+     * Attempts to cast {@code meta} to {@code expectedType},
+     * and returns the result if successful.
+     *
+     * @param meta         the meta
+     * @param expectedType the class of the expected type
+     * @param <T>          the expected type
+     * @return {@code meta} casted to {@code expectedType}
+     * @throws IllegalArgumentException if {@code} meta is not the type of {@code expectedType}
+     */
+    protected static <T extends ItemMeta> T castMeta(final ItemMeta meta, final Class<T> expectedType)
+        throws IllegalArgumentException {
+        try {
+            return expectedType.cast(meta);
+        } catch (final ClassCastException e) {
+            throw new IllegalArgumentException("The ItemMeta must be of type %s but received ItemMeta of type %s"
+                .formatted(
+                    expectedType.getSimpleName(),
+                    meta.getClass().getSimpleName()
+                )
+            );
+        }
+    }
+
+    /**
+     * Returns an {@code ItemStack} of {@code material} if it is an item,
+     * else throws an exception.
+     *
+     * @param material the material
+     * @return an {@code ItemStack} of type {@code material}
+     * @throws IllegalArgumentException if {@code material} is not an item
+     */
+    protected static @NonNull ItemStack getItem(final @NonNull Material material) throws IllegalArgumentException {
+        if (!material.isItem()) {
+            throw new IllegalArgumentException("The Material must be an obtainable item.");
+        }
+        return new ItemStack(material);
+    }
+
+    /**
      * Gets the display name.
      *
      * @return the display name
@@ -156,45 +195,6 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
 
         this.itemMeta.lore(lore);
         return (B) this;
-    }
-
-    /**
-     * Attempts to cast {@code meta} to {@code expectedType},
-     * and returns the result if successful.
-     *
-     * @param meta         the meta
-     * @param expectedType the class of the expected type
-     * @param <T>          the expected type
-     * @return {@code meta} casted to {@code expectedType}
-     * @throws IllegalArgumentException if {@code} meta is not the type of {@code expectedType}
-     */
-    protected static <T extends ItemMeta> T castMeta(final ItemMeta meta, final Class<T> expectedType)
-        throws IllegalArgumentException {
-        try {
-            return expectedType.cast(meta);
-        } catch (final ClassCastException e) {
-            throw new IllegalArgumentException("The ItemMeta must be of type %s but received ItemMeta of type %s"
-                .formatted(
-                    expectedType.getSimpleName(),
-                    meta.getClass().getSimpleName()
-                )
-            );
-        }
-    }
-
-    /**
-     * Returns an {@code ItemStack} of {@code material} if it is an item,
-     * else throws an exception.
-     *
-     * @param material the material
-     * @return an {@code ItemStack} of type {@code material}
-     * @throws IllegalArgumentException if {@code material} is not an item
-     */
-    protected static @NonNull ItemStack getItem(final @NonNull Material material) throws IllegalArgumentException {
-        if (!material.isItem()) {
-            throw new IllegalArgumentException("The Material must be an obtainable item.");
-        }
-        return new ItemStack(material);
     }
 
     /**

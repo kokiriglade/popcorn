@@ -4,7 +4,6 @@ import dev.kokiriglade.corn.AbstractItemBuilder;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ArmorMeta;
 import org.bukkit.inventory.meta.ColorableArmorMeta;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.checkerframework.checker.nullness.qual.NonNull;

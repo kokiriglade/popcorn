@@ -57,7 +57,7 @@ public final class BlockStateBuilder extends AbstractItemBuilder<BlockStateBuild
      * @return the builder
      */
     public @NonNull BlockStateBuilder blockState(final @Nullable BlockState blockState) {
-        if(blockState == null) {
+        if (blockState == null) {
             this.itemMeta.clearBlockState();
         } else {
             this.itemMeta.setBlockState(blockState);

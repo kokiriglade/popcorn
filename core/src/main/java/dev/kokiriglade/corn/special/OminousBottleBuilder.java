@@ -3,11 +3,8 @@ package dev.kokiriglade.corn.special;
 import dev.kokiriglade.corn.AbstractItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ArmorMeta;
 import org.bukkit.inventory.meta.OminousBottleMeta;
-import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link OminousBottleMeta}.

@@ -4,9 +4,7 @@ import dev.kokiriglade.corn.AbstractItemBuilder;
 import org.bukkit.Material;
 import org.bukkit.MusicInstrument;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ArmorMeta;
 import org.bukkit.inventory.meta.MusicInstrumentMeta;
-import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 

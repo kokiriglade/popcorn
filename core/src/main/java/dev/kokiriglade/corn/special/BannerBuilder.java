@@ -75,6 +75,7 @@ public final class BannerBuilder extends AbstractItemBuilder<BannerBuilder, Bann
 
     /**
      * Gets the number of patterns on this banner.
+     *
      * @return the number of patterns
      */
     public int numberOfPatterns() {

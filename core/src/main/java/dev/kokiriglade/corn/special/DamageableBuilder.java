@@ -9,6 +9,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link Damageable}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class DamageableBuilder extends AbstractItemBuilder<DamageableBuilder, Damageable> {
@@ -23,6 +24,7 @@ public final class DamageableBuilder extends AbstractItemBuilder<DamageableBuild
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code DamageableBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull DamageableBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new DamageableBuilder(itemStack, castMeta(itemStack.getItemMeta(), Damageable.class));
@@ -35,6 +37,7 @@ public final class DamageableBuilder extends AbstractItemBuilder<DamageableBuild
      * @return instance of {@code DamageableBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull DamageableBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return DamageableBuilder.of(getItem(material));
@@ -44,6 +47,7 @@ public final class DamageableBuilder extends AbstractItemBuilder<DamageableBuild
      * Gets the damage.
      *
      * @return the damage
+     * @since 1.0.0
      */
     public @Nullable Integer damage() {
         if (!this.itemMeta.hasDamage()) {
@@ -57,6 +61,7 @@ public final class DamageableBuilder extends AbstractItemBuilder<DamageableBuild
      *
      * @param damage the damage
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull DamageableBuilder damage(final @NonNull Integer damage) {
         this.itemMeta.setDamage(damage);
@@ -67,6 +72,7 @@ public final class DamageableBuilder extends AbstractItemBuilder<DamageableBuild
      * Gets the max damage.
      *
      * @return the max damage
+     * @since 1.0.0
      */
     public @Nullable Integer maxDamage() {
         if (!this.itemMeta.hasMaxDamage()) {
@@ -80,6 +86,7 @@ public final class DamageableBuilder extends AbstractItemBuilder<DamageableBuild
      *
      * @param maxDamage the max damage
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull DamageableBuilder maxDamage(final @NonNull Integer maxDamage) {
         this.itemMeta.setMaxDamage(maxDamage);

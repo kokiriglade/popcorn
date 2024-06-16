@@ -22,10 +22,11 @@ import java.util.*;
 import java.util.function.Consumer;
 
 /**
- * Modifies {@link ItemStack}s using methods that both Paper and Spigot share.
+ * Modifies {@link ItemStack}s
  *
  * @param <B> the builder type
  * @param <M> the {@link ItemMeta} type
+ * @since 1.0.0
  */
 @SuppressWarnings({"unchecked", "unused"})
 public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M extends ItemMeta> {
@@ -48,6 +49,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param itemStack the {@code ItemStack}
      * @param itemMeta  the {@code ItemMeta}
+     * @since 1.0.0
      */
     protected AbstractItemBuilder(final @NonNull ItemStack itemStack, final @NonNull M itemMeta) {
         this.itemStack = itemStack.clone();
@@ -63,6 +65,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * @param <T>          the expected type
      * @return {@code meta} casted to {@code expectedType}
      * @throws IllegalArgumentException if {@code} meta is not the type of {@code expectedType}
+     * @since 1.0.0
      */
     protected static <T extends ItemMeta> T castMeta(final ItemMeta meta, final Class<T> expectedType)
         throws IllegalArgumentException {
@@ -85,6 +88,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * @param material the material
      * @return an {@code ItemStack} of type {@code material}
      * @throws IllegalArgumentException if {@code material} is not an item
+     * @since 1.0.0
      */
     protected static @NonNull ItemStack getItem(final @NonNull Material material) throws IllegalArgumentException {
         if (!material.isItem()) {
@@ -97,6 +101,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Gets the display name.
      *
      * @return the display name
+     * @since 1.0.0
      */
     public @Nullable Component displayName() {
         return this.itemMeta.displayName();
@@ -107,6 +112,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param name the display name
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B displayName(final @Nullable Component name) {
         this.itemMeta.displayName(name);
@@ -117,6 +123,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Gets the item name.
      *
      * @return the item name
+     * @since 1.0.0
      */
     public @Nullable Component itemName() {
         return this.itemMeta.itemName();
@@ -127,6 +134,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param name the item name
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B itemName(final @Nullable Component name) {
         this.itemMeta.itemName(name);
@@ -138,6 +146,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Gets the lore.
      *
      * @return the lore
+     * @since 1.0.0
      */
     public @Nullable List<Component> lore() {
         return this.itemMeta.lore();
@@ -153,6 +162,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param lines the lines of the lore
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B lore(final @Nullable List<Component> lines) {
         if (lines == null) {
@@ -175,6 +185,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param lines the lines of the lore
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B loreList(final @NonNull Component... lines) {
         return this.lore(List.of(lines));
@@ -187,6 +198,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param consumer the {@code Consumer} to modify the lore with
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B loreModifier(final @NonNull Consumer<@NonNull List<Component>> consumer) {
         final @NonNull List<Component> lore = Optional
@@ -203,6 +215,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Gets the {@code Material}.
      *
      * @return the {@code Material}
+     * @since 1.0.0
      */
     public @NonNull Material material() {
         return this.itemStack.getType();
@@ -213,6 +226,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param material the {@code Material}
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B material(final @NonNull Material material) {
         this.itemStack = this.itemStack.withType(material);
@@ -223,6 +237,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Gets the quantity.
      *
      * @return the quantity
+     * @since 1.0.0
      */
     public int amount() {
         return this.itemStack.getAmount();
@@ -233,6 +248,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param amount the quantity
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B amount(final int amount) {
         this.itemStack.setAmount(amount);
@@ -247,6 +263,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * @param <T>  the primary object type of the data
      * @param <Z>  the retrieve object type of the data
      * @return the data
+     * @since 1.0.0
      */
     public <T, Z> @Nullable Z getData(
         final @NonNull NamespacedKey key,
@@ -264,6 +281,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * @param <T>  the primary object type of the data
      * @param <Z>  the retrieve object type of the data
      * @return {@code true} if the data exists, {@code false} otherwise
+     * @since 1.0.0
      */
     public <T, Z> boolean hasData(
         final @NonNull NamespacedKey key,
@@ -281,6 +299,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * @param <T>    the primary object type of the data
      * @param <Z>    the retrieve object type of the data
      * @return the builder
+     * @since 1.0.0
      */
     public <T, Z> @NonNull B setData(
         final @NonNull NamespacedKey key,
@@ -296,6 +315,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param key the {@code NamespacedKey} to use
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B removeData(
         final @NonNull NamespacedKey key
@@ -308,6 +328,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Gets the {@code ItemFlag}s.
      *
      * @return the {@code ItemFlag}s
+     * @since 1.0.0
      */
     public @NonNull Set<ItemFlag> flags() {
         return this.itemMeta.getItemFlags();
@@ -318,6 +339,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param flags the {@code ItemFlag}s
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B flags(final @Nullable List<ItemFlag> flags) {
         this.clearFlags();
@@ -336,6 +358,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param flag the {@code ItemFlag} to add
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B addFlag(final @NonNull ItemFlag... flag) {
         this.itemMeta.addItemFlags(flag);
@@ -347,6 +370,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param flag the {@code ItemFlag} to remove
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B removeFlag(final @NonNull ItemFlag... flag) {
         this.itemMeta.removeItemFlags(flag);
@@ -357,6 +381,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Gets the {@code Enchantment}s.
      *
      * @return the {@code Enchantment}s
+     * @since 1.0.0
      */
     public @NonNull Map<Enchantment, Integer> enchants() {
         return new HashMap<>(this.itemStack.getEnchantments());
@@ -367,6 +392,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param enchants the {@code Enchantment}s
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B enchants(final @Nullable Map<Enchantment, Integer> enchants) {
         this.clearEnchants();
@@ -388,6 +414,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * @param enchantment the {@code Enchantment} to add
      * @param level       the level of the {@code Enchantment}
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B addEnchant(final @NonNull Enchantment enchantment, final int level) {
         this.itemMeta.addEnchant(enchantment, level, true);
@@ -399,6 +426,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param enchantment the {@code Enchantment} to remove
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B removeEnchant(final @NonNull Enchantment... enchantment) {
         for (final Enchantment item : enchantment) {
@@ -412,6 +440,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param hideTooltip whether the {@code ItemStack} is hiding its tooltip
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B hideTooltip(final boolean hideTooltip) {
         itemMeta.setHideTooltip(hideTooltip);
@@ -423,6 +452,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Gets whether the {@code ItemStack} is hiding its tooltip.
      *
      * @return {@code true} if the item is hiding tooltip, {@code false} otherwise
+     * @since 1.0.0
      */
     public boolean hideTooltip() {
         return itemMeta.isHideTooltip();
@@ -432,6 +462,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Get the max stack size.
      *
      * @return the max stack size
+     * @since 1.0.0
      */
     public int maxStackSize() {
         return this.itemStack.getMaxStackSize();
@@ -442,6 +473,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param rarity the rarity
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B rarity(final ItemRarity rarity) {
         itemMeta.setRarity(rarity);
@@ -452,6 +484,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Get the rarity.
      *
      * @return the rarity
+     * @since 1.0.0
      */
     public @Nullable ItemRarity rarity() {
         if (!this.itemMeta.hasRarity()) {
@@ -465,6 +498,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param maxStackSize the max stack size
      * @return the builder
+     * @since 1.0.0
      */
     public B maxStackSize(@Nullable Integer maxStackSize) {
         itemMeta.setMaxStackSize(maxStackSize);
@@ -475,6 +509,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Gets the custom model data.
      *
      * @return the custom model data
+     * @since 1.0.0
      */
     public @Nullable Integer customModelData() {
         // we use the wrapper with null signifying absent for api consistency
@@ -489,6 +524,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param customModelData the custom model data
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B customModelData(final @Nullable Integer customModelData) {
         this.itemMeta.setCustomModelData(customModelData);
@@ -499,6 +535,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Gets the {@code AttributeModifier}s.
      *
      * @return the {@code AttributeModifier}s
+     * @since 1.0.0
      */
     public @Nullable Multimap<Attribute, AttributeModifier> attributeModifiers() {
         return this.itemMeta.getAttributeModifiers();
@@ -509,6 +546,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param attributeModifiers the {@code AttributeModifier}s
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B attributeModifiers(final @Nullable Multimap<Attribute, AttributeModifier> attributeModifiers) {
         this.itemMeta.setAttributeModifiers(attributeModifiers);
@@ -521,6 +559,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * @param attribute         the attribute to modify
      * @param attributeModifier the {@code AttributeModifier} to add
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B addAttributeModifier(
         final @NonNull Attribute attribute,
@@ -536,6 +575,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * @param attribute         the attribute to modify
      * @param attributeModifier the {@code AttributeModifier} to remove
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B removeAttributeModifier(
         final @NonNull Attribute attribute,
@@ -550,6 +590,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param attribute the {@code Attribute}
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull B removeAttributeModifier(final @NonNull Attribute... attribute) {
         for (final @NonNull Attribute item : attribute) {
@@ -562,6 +603,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Gets the enchantment glint override.
      *
      * @return the enchantment glint override
+     * @since 1.1.0
      */
     public @NonNull Boolean enchantmentGlintOverride() {
         return this.itemMeta.getEnchantmentGlintOverride();
@@ -572,6 +614,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param enchantmentGlintOverride the enchantment glint override
      * @return the builder
+     * @since 1.1.0
      */
     public @NonNull B enchantmentGlintOverride(final @NonNull Boolean enchantmentGlintOverride) {
         this.itemMeta.setEnchantmentGlintOverride(enchantmentGlintOverride);
@@ -582,6 +625,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Gets the jukebox playable component.
      *
      * @return the jukebox playable component
+     * @since 1.1.0
      */
     @SuppressWarnings("UnstableApiUsage")
     public @Nullable JukeboxPlayableComponent jukeboxPlayable() {
@@ -592,6 +636,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Checks if the item has a jukebox playable component.
      *
      * @return {@code true} if the item has a jukebox playable component, {@code false} otherwise
+     * @since 1.1.0
      */
     public boolean hasJukeboxPlayable() {
         return this.itemMeta.hasJukeboxPlayable();
@@ -602,6 +647,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param jukeboxPlayableComponent the jukebox playable component
      * @return the builder
+     * @since 1.1.0
      */
     @SuppressWarnings("UnstableApiUsage")
     public @NonNull B jukeboxPlayable(final @Nullable JukeboxPlayableComponent jukeboxPlayableComponent) {
@@ -613,6 +659,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Gets the food component.
      *
      * @return the food component
+     * @since 1.1.0
      */
     @SuppressWarnings("UnstableApiUsage")
     public @NonNull FoodComponent food() {
@@ -623,6 +670,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Checks if the item has a food component.
      *
      * @return {@code true} if the item has a food component, {@code false} otherwise
+     * @since 1.1.0
      */
     public boolean hasFood() {
         return this.itemMeta.hasFood();
@@ -633,6 +681,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param food the food component
      * @return the builder
+     * @since 1.1.0
      */
     @SuppressWarnings("UnstableApiUsage")
     public @NonNull B food(final @Nullable FoodComponent food) {
@@ -644,6 +693,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Checks if the item is fire resistant.
      *
      * @return {@code true} if the item is fire resistant, {@code false} otherwise
+     * @since 1.1.0
      */
     public boolean fireResistant() {
         return this.itemMeta.isFireResistant();
@@ -654,6 +704,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      *
      * @param fireResistant whether the item is fire resistant
      * @return the builder
+     * @since 1.1.0
      */
     public B fireResistant(boolean fireResistant) {
         this.itemMeta.setFireResistant(fireResistant);
@@ -665,6 +716,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * Builds the {@code ItemStack} from the set properties.
      *
      * @return the built {@code ItemStack}
+     * @since 1.0.0
      */
     public @NonNull ItemStack build() {
         this.itemStack.setItemMeta(this.itemMeta);

@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link SuspiciousStewMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class SuspiciousStewBuilder extends AbstractItemBuilder<SuspiciousStewBuilder, SuspiciousStewMeta> {
@@ -28,6 +29,7 @@ public final class SuspiciousStewBuilder extends AbstractItemBuilder<SuspiciousS
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code SuspiciousStewBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull SuspiciousStewBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new SuspiciousStewBuilder(itemStack, castMeta(itemStack.getItemMeta(), SuspiciousStewMeta.class));
@@ -40,6 +42,7 @@ public final class SuspiciousStewBuilder extends AbstractItemBuilder<SuspiciousS
      * @return instance of {@code SuspiciousStewBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull SuspiciousStewBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return SuspiciousStewBuilder.of(getItem(material));
@@ -51,6 +54,7 @@ public final class SuspiciousStewBuilder extends AbstractItemBuilder<SuspiciousS
      * @return instance of {@code SuspiciousStewBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull SuspiciousStewBuilder ofSuspiciousStew() throws IllegalArgumentException {
         return ofType(Material.SUSPICIOUS_STEW);
@@ -60,6 +64,7 @@ public final class SuspiciousStewBuilder extends AbstractItemBuilder<SuspiciousS
      * Gets the custom effects.
      *
      * @return the custom effects
+     * @since 1.0.0
      */
     public @NonNull List<@NonNull PotionEffect> customEffects() {
         return this.itemMeta.getCustomEffects();
@@ -70,6 +75,7 @@ public final class SuspiciousStewBuilder extends AbstractItemBuilder<SuspiciousS
      *
      * @param customEffects custom effects
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull SuspiciousStewBuilder customEffects(final @Nullable List<@NonNull SuspiciousEffectEntry> customEffects) {
         this.itemMeta.clearCustomEffects();
@@ -87,6 +93,7 @@ public final class SuspiciousStewBuilder extends AbstractItemBuilder<SuspiciousS
      * @param customEffect the custom effect to add
      * @param overwrite    whether to overwrite {@code PotionEffect}s of the same type
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull SuspiciousStewBuilder addCustomEffect(final @NonNull SuspiciousEffectEntry customEffect, final boolean overwrite) {
         this.itemMeta.addCustomEffect(customEffect, overwrite);
@@ -98,6 +105,7 @@ public final class SuspiciousStewBuilder extends AbstractItemBuilder<SuspiciousS
      *
      * @param customEffectType the custom effect type to remove
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull SuspiciousStewBuilder removeCustomEffect(final @NonNull PotionEffectType... customEffectType) {
         for (final PotionEffectType item : customEffectType) {
@@ -111,6 +119,7 @@ public final class SuspiciousStewBuilder extends AbstractItemBuilder<SuspiciousS
      *
      * @param customEffectType the custom effect type
      * @return the builder
+     * @since 1.0.0
      */
     public boolean hasCustomEffect(final @NonNull PotionEffectType customEffectType) {
         return this.itemMeta.hasCustomEffect(customEffectType);

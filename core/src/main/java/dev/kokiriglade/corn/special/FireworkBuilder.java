@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link FireworkMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class FireworkBuilder extends AbstractItemBuilder<FireworkBuilder, FireworkMeta> {
@@ -26,6 +27,7 @@ public final class FireworkBuilder extends AbstractItemBuilder<FireworkBuilder, 
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code FireworkBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull FireworkBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new FireworkBuilder(itemStack, castMeta(itemStack.getItemMeta(), FireworkMeta.class));
@@ -38,6 +40,7 @@ public final class FireworkBuilder extends AbstractItemBuilder<FireworkBuilder, 
      * @return instance of {@code FireworkBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull FireworkBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return FireworkBuilder.of(getItem(material));
@@ -49,6 +52,7 @@ public final class FireworkBuilder extends AbstractItemBuilder<FireworkBuilder, 
      * @return instance of {@code FireworkBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull FireworkBuilder ofFireworkRocket() throws IllegalArgumentException {
         return ofType(Material.FIREWORK_ROCKET);
@@ -58,6 +62,7 @@ public final class FireworkBuilder extends AbstractItemBuilder<FireworkBuilder, 
      * Gets the power.
      *
      * @return the power
+     * @since 1.0.0
      */
     public @IntRange(from = 0, to = 127) int power() {
         return this.itemMeta.getPower();
@@ -68,6 +73,7 @@ public final class FireworkBuilder extends AbstractItemBuilder<FireworkBuilder, 
      *
      * @param power the power
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull FireworkBuilder power(final @IntRange(from = 0, to = 127) int power) {
         this.itemMeta.setPower(power);
@@ -78,6 +84,7 @@ public final class FireworkBuilder extends AbstractItemBuilder<FireworkBuilder, 
      * Gets the {@code FireworkEffect}s.
      *
      * @return the {@code FireworkEffect}s
+     * @since 1.0.0
      */
     public @NonNull List<@NonNull FireworkEffect> fireworkEffects() {
         return this.itemMeta.getEffects();
@@ -88,6 +95,7 @@ public final class FireworkBuilder extends AbstractItemBuilder<FireworkBuilder, 
      *
      * @param fireworkEffects the {@code FireworkEffect}s
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull FireworkBuilder fireworkEffects(final @NonNull List<@NonNull FireworkEffect> fireworkEffects) {
         this.itemMeta.clearEffects();
@@ -100,6 +108,7 @@ public final class FireworkBuilder extends AbstractItemBuilder<FireworkBuilder, 
      *
      * @param fireworkEffect the {@code FireworkEffect} to add
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull FireworkBuilder addFireworkEffect(final @NonNull FireworkEffect... fireworkEffect) {
         this.itemMeta.addEffects(fireworkEffect);

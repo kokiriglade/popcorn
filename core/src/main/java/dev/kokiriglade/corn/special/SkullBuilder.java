@@ -19,6 +19,7 @@ import java.util.UUID;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link SkullMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class SkullBuilder extends AbstractItemBuilder<SkullBuilder, SkullMeta> {
@@ -33,6 +34,7 @@ public final class SkullBuilder extends AbstractItemBuilder<SkullBuilder, SkullM
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code SkullBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull SkullBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new SkullBuilder(itemStack, castMeta(itemStack.getItemMeta(), SkullMeta.class));
@@ -45,6 +47,7 @@ public final class SkullBuilder extends AbstractItemBuilder<SkullBuilder, SkullM
      * @return instance of {@code SkullBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull SkullBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return SkullBuilder.of(getItem(material));
@@ -56,6 +59,7 @@ public final class SkullBuilder extends AbstractItemBuilder<SkullBuilder, SkullM
      * @return instance of {@code SkullBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull SkullBuilder ofPlayerHead() throws IllegalArgumentException {
         return ofType(Material.PLAYER_HEAD);
@@ -65,6 +69,7 @@ public final class SkullBuilder extends AbstractItemBuilder<SkullBuilder, SkullM
      * Gets the textures.
      *
      * @return the textures
+     * @since 1.0.0
      */
     public @NonNull List<@NonNull ProfileProperty> textures() {
         final @Nullable PlayerProfile profile = this.itemMeta.getPlayerProfile();
@@ -87,6 +92,7 @@ public final class SkullBuilder extends AbstractItemBuilder<SkullBuilder, SkullM
      *
      * @param data the textures
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull SkullBuilder textures(final @NonNull String data) {
         final @NonNull PlayerProfile profile = Optional
@@ -103,6 +109,7 @@ public final class SkullBuilder extends AbstractItemBuilder<SkullBuilder, SkullM
      * Gets the {@code PlayerProfile}.
      *
      * @return the {@code PlayerProfile}
+     * @since 1.0.0
      */
     public @Nullable PlayerProfile playerProfile() {
         return this.itemMeta.getPlayerProfile();
@@ -113,6 +120,7 @@ public final class SkullBuilder extends AbstractItemBuilder<SkullBuilder, SkullM
      *
      * @param playerProfile the {@code PlayerProfile}
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull SkullBuilder playerProfile(final @Nullable PlayerProfile playerProfile) {
         this.itemMeta.setPlayerProfile(playerProfile);
@@ -123,6 +131,7 @@ public final class SkullBuilder extends AbstractItemBuilder<SkullBuilder, SkullM
      * Gets the owning player.
      *
      * @return the owning player
+     * @since 1.0.0
      */
     public @Nullable OfflinePlayer owningPlayer() {
         return this.itemMeta.getOwningPlayer();
@@ -133,6 +142,7 @@ public final class SkullBuilder extends AbstractItemBuilder<SkullBuilder, SkullM
      *
      * @param owningPlayer the owning player
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull SkullBuilder owningPlayer(final @Nullable OfflinePlayer owningPlayer) {
         this.itemMeta.setOwningPlayer(owningPlayer);
@@ -143,6 +153,7 @@ public final class SkullBuilder extends AbstractItemBuilder<SkullBuilder, SkullM
      * Gets the note block sound.
      *
      * @return the note block sound
+     * @since 1.0.0
      */
     public NamespacedKey noteBlockSound() {
         return this.itemMeta.getNoteBlockSound();
@@ -153,6 +164,7 @@ public final class SkullBuilder extends AbstractItemBuilder<SkullBuilder, SkullM
      *
      * @param noteBlockSound the note block sound
      * @return the builder
+     * @since 1.0.0
      */
     public SkullBuilder noteBlockSound(final NamespacedKey noteBlockSound) {
         this.itemMeta.setNoteBlockSound(noteBlockSound);

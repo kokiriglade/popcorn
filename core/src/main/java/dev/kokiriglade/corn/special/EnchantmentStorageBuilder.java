@@ -11,6 +11,7 @@ import java.util.Map;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link EnchantmentStorageMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class EnchantmentStorageBuilder extends AbstractItemBuilder<EnchantmentStorageBuilder, EnchantmentStorageMeta> {
@@ -25,6 +26,7 @@ public final class EnchantmentStorageBuilder extends AbstractItemBuilder<Enchant
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code EnchantmentStorageBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull EnchantmentStorageBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new EnchantmentStorageBuilder(itemStack, castMeta(itemStack.getItemMeta(), EnchantmentStorageMeta.class));
@@ -37,15 +39,29 @@ public final class EnchantmentStorageBuilder extends AbstractItemBuilder<Enchant
      * @return instance of {@code EnchantmentStorageBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull EnchantmentStorageBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return EnchantmentStorageBuilder.of(getItem(material));
     }
 
     /**
+     * Creates a {@code EnchantmentStorageBuilder} of type {@link Material#ENCHANTED_BOOK}. A convenience method.
+     *
+     * @return instance of {@code EnchantmentStorageBuilder}
+     * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
+     *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.2.0
+     */
+    public static @NonNull EnchantmentStorageBuilder ofEnchantedBook() throws IllegalArgumentException {
+        return ofType(Material.ENCHANTED_BOOK);
+    }
+
+    /**
      * Gets the stored enchants.
      *
      * @return the stored enchants
+     * @since 1.0.0
      */
     public @NonNull Map<@NonNull Enchantment, @NonNull Integer> storedEnchants() {
         return this.itemMeta.getStoredEnchants();
@@ -56,6 +72,7 @@ public final class EnchantmentStorageBuilder extends AbstractItemBuilder<Enchant
      *
      * @param storedEnchants the stored enchants
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull EnchantmentStorageBuilder storedEnchants(final @NonNull Map<@NonNull Enchantment, @NonNull Integer> storedEnchants) {
         for (final @NonNull Enchantment item : this.itemMeta.getStoredEnchants().keySet()) {
@@ -73,6 +90,7 @@ public final class EnchantmentStorageBuilder extends AbstractItemBuilder<Enchant
      * @param enchant the {@code Enchantment} to add
      * @param level   the level of the {@code Enchantment}
      * @return the builder
+     * @since 1.0.0
      */
     @SuppressWarnings("UnusedReturnValue")
     public @NonNull EnchantmentStorageBuilder addStoredEnchant(final @NonNull Enchantment enchant, final int level) {
@@ -85,6 +103,7 @@ public final class EnchantmentStorageBuilder extends AbstractItemBuilder<Enchant
      *
      * @param enchant the {@code Enchantment} to remove
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull EnchantmentStorageBuilder removeStoredEnchant(final @NonNull Enchantment... enchant) {
         for (final @NonNull Enchantment item : enchant) {

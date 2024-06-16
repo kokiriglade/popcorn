@@ -11,6 +11,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link ColorableArmorMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class ColorableArmorBuilder extends AbstractItemBuilder<ColorableArmorBuilder, ColorableArmorMeta> {
@@ -25,6 +26,7 @@ public final class ColorableArmorBuilder extends AbstractItemBuilder<ColorableAr
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code ColorableArmorBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull ColorableArmorBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new ColorableArmorBuilder(itemStack, castMeta(itemStack.getItemMeta(), ColorableArmorMeta.class));
@@ -37,6 +39,7 @@ public final class ColorableArmorBuilder extends AbstractItemBuilder<ColorableAr
      * @return instance of {@code ColorableArmorBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull ColorableArmorBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return ColorableArmorBuilder.of(getItem(material));
@@ -46,6 +49,7 @@ public final class ColorableArmorBuilder extends AbstractItemBuilder<ColorableAr
      * Gets the trim.
      *
      * @return the trim
+     * @since 1.0.0
      */
     public @Nullable ArmorTrim trim() {
         return this.itemMeta.getTrim();
@@ -56,6 +60,7 @@ public final class ColorableArmorBuilder extends AbstractItemBuilder<ColorableAr
      *
      * @param trim the trim
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull ColorableArmorBuilder trim(final @Nullable ArmorTrim trim) {
         this.itemMeta.setTrim(trim);
@@ -67,6 +72,7 @@ public final class ColorableArmorBuilder extends AbstractItemBuilder<ColorableAr
      * If true, a specific trim will be applied.
      *
      * @return whether a trim tag exists
+     * @since 1.0.0
      */
     public boolean hasTrim() {
         return this.itemMeta.hasTrim();
@@ -76,6 +82,7 @@ public final class ColorableArmorBuilder extends AbstractItemBuilder<ColorableAr
      * Gets the color.
      *
      * @return the color
+     * @since 1.0.0
      */
     public @NonNull Color color() {
         return this.itemMeta.getColor();
@@ -86,6 +93,7 @@ public final class ColorableArmorBuilder extends AbstractItemBuilder<ColorableAr
      *
      * @param color the color
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull ColorableArmorBuilder color(final @Nullable Color color) {
         this.itemMeta.setColor(color);

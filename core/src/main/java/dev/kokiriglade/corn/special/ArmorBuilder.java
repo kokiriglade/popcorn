@@ -10,6 +10,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link ArmorMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class ArmorBuilder extends AbstractItemBuilder<ArmorBuilder, ArmorMeta> {
@@ -24,6 +25,7 @@ public final class ArmorBuilder extends AbstractItemBuilder<ArmorBuilder, ArmorM
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code ArmorMetaBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull ArmorBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new ArmorBuilder(itemStack, castMeta(itemStack.getItemMeta(), ArmorMeta.class));
@@ -36,6 +38,7 @@ public final class ArmorBuilder extends AbstractItemBuilder<ArmorBuilder, ArmorM
      * @return instance of {@code ArmorMetaBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull ArmorBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return ArmorBuilder.of(getItem(material));
@@ -45,6 +48,7 @@ public final class ArmorBuilder extends AbstractItemBuilder<ArmorBuilder, ArmorM
      * Gets the trim.
      *
      * @return the trim
+     * @since 1.0.0
      */
     public @Nullable ArmorTrim trim() {
         return this.itemMeta.getTrim();
@@ -55,6 +59,7 @@ public final class ArmorBuilder extends AbstractItemBuilder<ArmorBuilder, ArmorM
      *
      * @param trim the trim
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull ArmorBuilder trim(final @Nullable ArmorTrim trim) {
         this.itemMeta.setTrim(trim);
@@ -66,6 +71,7 @@ public final class ArmorBuilder extends AbstractItemBuilder<ArmorBuilder, ArmorM
      * If true, a specific trim will be applied.
      *
      * @return whether a trim tag exists
+     * @since 1.0.0
      */
     public boolean hasTrim() {
         return this.itemMeta.hasTrim();

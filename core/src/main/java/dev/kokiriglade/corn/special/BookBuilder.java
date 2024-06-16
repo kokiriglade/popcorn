@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link BookMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta> {
@@ -28,6 +29,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code BookBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull BookBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new BookBuilder(itemStack, castMeta(itemStack.getItemMeta(), BookMeta.class));
@@ -40,6 +42,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      * @return instance of {@code BookBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull BookBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return BookBuilder.of(getItem(material));
@@ -51,6 +54,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      * @return instance of {@code BookBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull BookBuilder ofWrittenBook() throws IllegalArgumentException {
         return ofType(Material.WRITTEN_BOOK);
@@ -60,6 +64,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      * Gets the title.
      *
      * @return the title
+     * @since 1.0.0
      */
     public @Nullable Component title() {
         return this.itemMeta.title();
@@ -70,6 +75,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      *
      * @param title the title
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull BookBuilder title(final @Nullable Component title) {
         this.itemMeta.title(title);
@@ -80,6 +86,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      * Gets the author.
      *
      * @return the author
+     * @since 1.0.0
      */
     public @Nullable Component author() {
         return this.itemMeta.author();
@@ -90,6 +97,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      *
      * @param author the author
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull BookBuilder author(final @Nullable Component author) {
         this.itemMeta.author(author);
@@ -100,6 +108,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      * Gets the {@code Generation}.
      *
      * @return the generation
+     * @since 1.0.0
      */
     public BookMeta.@Nullable Generation generation() {
         return this.itemMeta.getGeneration();
@@ -110,6 +119,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      *
      * @param generation the generation
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull BookBuilder generation(final BookMeta.@Nullable Generation generation) {
         this.itemMeta.setGeneration(generation);
@@ -120,6 +130,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      * Gets the pages.
      *
      * @return the pages
+     * @since 1.0.0
      */
     public @NonNull List<@NonNull Component> pages() {
         return this.itemMeta.pages();
@@ -130,6 +141,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      *
      * @param pages the pages
      * @return the builder
+     * @since 1.0.0
      */
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public @NonNull BookBuilder pages(final @Nullable List<@NonNull Component> pages) {
@@ -152,6 +164,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      *
      * @param index the index (1-indexed)
      * @return the page
+     * @since 1.0.0
      */
     public @NonNull Component getPage(final @IntRange(from = 1) int index) {
         return this.itemMeta.page(index);
@@ -163,6 +176,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      * @param index the index (1-indexed)
      * @param page  the page
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull BookBuilder setPage(final @IntRange(from = 1) int index, final @NonNull Component page) {
         this.itemMeta.page(index, page);
@@ -174,6 +188,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      *
      * @param page the page to add
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull BookBuilder addPage(final @NonNull Component... page) {
         this.itemMeta.addPages(page);
@@ -185,6 +200,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      *
      * @param index the index of the page to remove (1-indexed)
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull BookBuilder removePage(final @IntRange(from = 1) int... index) {
         for (final int i : index) {
@@ -197,6 +213,7 @@ public final class BookBuilder extends AbstractItemBuilder<BookBuilder, BookMeta
      * Gets the page count.
      *
      * @return the page count
+     * @since 1.0.0
      */
     public int pageCount() {
         return this.itemMeta.getPageCount();

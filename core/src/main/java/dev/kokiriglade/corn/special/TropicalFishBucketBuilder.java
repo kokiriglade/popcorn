@@ -10,6 +10,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link TropicalFishBucketMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class TropicalFishBucketBuilder extends AbstractItemBuilder<TropicalFishBucketBuilder, TropicalFishBucketMeta> {
@@ -24,6 +25,7 @@ public final class TropicalFishBucketBuilder extends AbstractItemBuilder<Tropica
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code TropicalFishBucketBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull TropicalFishBucketBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new TropicalFishBucketBuilder(itemStack, castMeta(itemStack.getItemMeta(), TropicalFishBucketMeta.class));
@@ -36,6 +38,7 @@ public final class TropicalFishBucketBuilder extends AbstractItemBuilder<Tropica
      * @return instance of {@code TropicalFishBucketBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull TropicalFishBucketBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return TropicalFishBucketBuilder.of(getItem(material));
@@ -47,6 +50,7 @@ public final class TropicalFishBucketBuilder extends AbstractItemBuilder<Tropica
      * @return instance of {@code TropicalFishBucketBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull TropicalFishBucketBuilder ofTropicalFishBucket() throws IllegalArgumentException {
         return ofType(Material.TROPICAL_FISH_BUCKET);
@@ -56,6 +60,7 @@ public final class TropicalFishBucketBuilder extends AbstractItemBuilder<Tropica
      * Gets the {@code Pattern}.
      *
      * @return the pattern
+     * @since 1.0.0
      */
     public TropicalFish.@NonNull Pattern pattern() {
         return this.itemMeta.getPattern();
@@ -66,6 +71,7 @@ public final class TropicalFishBucketBuilder extends AbstractItemBuilder<Tropica
      *
      * @param pattern the pattern
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull TropicalFishBucketBuilder pattern(final TropicalFish.@NonNull Pattern pattern) {
         this.itemMeta.setPattern(pattern);
@@ -76,6 +82,7 @@ public final class TropicalFishBucketBuilder extends AbstractItemBuilder<Tropica
      * Gets the pattern color.
      *
      * @return the pattern color
+     * @since 1.0.0
      */
     public @NonNull DyeColor patternColor() {
         return this.itemMeta.getPatternColor();
@@ -86,6 +93,7 @@ public final class TropicalFishBucketBuilder extends AbstractItemBuilder<Tropica
      *
      * @param patternColor the pattern color
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull TropicalFishBucketBuilder patternColor(final @NonNull DyeColor patternColor) {
         this.itemMeta.setPatternColor(patternColor);
@@ -96,6 +104,7 @@ public final class TropicalFishBucketBuilder extends AbstractItemBuilder<Tropica
      * Gets the body color.
      *
      * @return the body color
+     * @since 1.0.0
      */
     public @NonNull DyeColor bodyColor() {
         return this.itemMeta.getBodyColor();
@@ -106,6 +115,7 @@ public final class TropicalFishBucketBuilder extends AbstractItemBuilder<Tropica
      *
      * @param bodyColor the body color
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull TropicalFishBucketBuilder bodyColor(final @NonNull DyeColor bodyColor) {
         this.itemMeta.setBodyColor(bodyColor);
@@ -117,6 +127,7 @@ public final class TropicalFishBucketBuilder extends AbstractItemBuilder<Tropica
      * If true, a specific fish will be spawned.
      *
      * @return whether a variant tag exists
+     * @since 1.0.0
      */
     public boolean variant() {
         return this.itemMeta.hasVariant();

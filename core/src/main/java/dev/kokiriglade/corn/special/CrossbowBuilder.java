@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link CrossbowMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class CrossbowBuilder extends AbstractItemBuilder<CrossbowBuilder, CrossbowMeta> {
@@ -25,6 +26,7 @@ public final class CrossbowBuilder extends AbstractItemBuilder<CrossbowBuilder, 
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code CrossbowBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull CrossbowBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new CrossbowBuilder(itemStack, castMeta(itemStack.getItemMeta(), CrossbowMeta.class));
@@ -37,6 +39,7 @@ public final class CrossbowBuilder extends AbstractItemBuilder<CrossbowBuilder, 
      * @return instance of {@code CrossbowBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull CrossbowBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return CrossbowBuilder.of(getItem(material));
@@ -48,6 +51,7 @@ public final class CrossbowBuilder extends AbstractItemBuilder<CrossbowBuilder, 
      * @return instance of {@code CrossbowBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull CrossbowBuilder ofCrossbow() throws IllegalArgumentException {
         return ofType(Material.CROSSBOW);
@@ -57,6 +61,7 @@ public final class CrossbowBuilder extends AbstractItemBuilder<CrossbowBuilder, 
      * Gets the charged projectiles.
      *
      * @return the charged projectiles
+     * @since 1.0.0
      */
     public @NonNull List<@NonNull ItemStack> chargedProjectiles() {
         return this.itemMeta.getChargedProjectiles();
@@ -66,6 +71,7 @@ public final class CrossbowBuilder extends AbstractItemBuilder<CrossbowBuilder, 
      * Gets whether the crossbow has any charged projectiles.
      *
      * @return whether the crossbow has any the charged projectiles
+     * @since 1.0.0
      */
     public boolean hasChargedProjectiles() {
         return this.itemMeta.hasChargedProjectiles();
@@ -77,6 +83,7 @@ public final class CrossbowBuilder extends AbstractItemBuilder<CrossbowBuilder, 
      *
      * @param chargedProjectiles the charged projectiles
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull CrossbowBuilder chargedProjectiles(final @Nullable List<@NonNull ItemStack> chargedProjectiles) {
         this.itemMeta.setChargedProjectiles(chargedProjectiles);
@@ -89,6 +96,7 @@ public final class CrossbowBuilder extends AbstractItemBuilder<CrossbowBuilder, 
      *
      * @param chargedProjectile the charged projectile to add
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull CrossbowBuilder addChargedProjectile(final @NonNull ItemStack... chargedProjectile) {
         for (final ItemStack item : chargedProjectile) {

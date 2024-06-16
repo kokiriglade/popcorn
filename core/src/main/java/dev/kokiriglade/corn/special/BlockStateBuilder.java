@@ -10,6 +10,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link BlockStateMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class BlockStateBuilder extends AbstractItemBuilder<BlockStateBuilder, BlockStateMeta> {
@@ -24,6 +25,7 @@ public final class BlockStateBuilder extends AbstractItemBuilder<BlockStateBuild
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code BlockStateBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull BlockStateBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new BlockStateBuilder(itemStack, castMeta(itemStack.getItemMeta(), BlockStateMeta.class));
@@ -36,6 +38,7 @@ public final class BlockStateBuilder extends AbstractItemBuilder<BlockStateBuild
      * @return instance of {@code BlockStateBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull BlockStateBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return BlockStateBuilder.of(getItem(material));
@@ -45,6 +48,7 @@ public final class BlockStateBuilder extends AbstractItemBuilder<BlockStateBuild
      * Gets a copy of {@code BlockState}. Creates a new one if it doesn't currently exist.
      *
      * @return the {@code BlockState}
+     * @since 1.0.0
      */
     public @NonNull BlockState blockState() {
         return this.itemMeta.getBlockState();
@@ -55,6 +59,7 @@ public final class BlockStateBuilder extends AbstractItemBuilder<BlockStateBuild
      *
      * @param blockState the {@code BlockState}
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull BlockStateBuilder blockState(final @Nullable BlockState blockState) {
         if (blockState == null) {
@@ -69,6 +74,7 @@ public final class BlockStateBuilder extends AbstractItemBuilder<BlockStateBuild
      * Gets whether a {@code BlockState} is currently attached.
      *
      * @return whether a {@code BlockState} is currently attached
+     * @since 1.0.0
      */
     public boolean hasBlockState() {
         return this.itemMeta.hasBlockState();

@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link BannerMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class BannerBuilder extends AbstractItemBuilder<BannerBuilder, BannerMeta> {
@@ -26,6 +27,7 @@ public final class BannerBuilder extends AbstractItemBuilder<BannerBuilder, Bann
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code BannerBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull BannerBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new BannerBuilder(itemStack, castMeta(itemStack.getItemMeta(), BannerMeta.class));
@@ -38,6 +40,7 @@ public final class BannerBuilder extends AbstractItemBuilder<BannerBuilder, Bann
      * @return instance of {@code SkullBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull BannerBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return BannerBuilder.of(getItem(material));
@@ -47,6 +50,7 @@ public final class BannerBuilder extends AbstractItemBuilder<BannerBuilder, Bann
      * Gets the patterns.
      *
      * @return the patterns
+     * @since 1.0.0
      */
     public @NonNull List<Pattern> patterns() {
         return this.itemMeta.getPatterns();
@@ -57,6 +61,7 @@ public final class BannerBuilder extends AbstractItemBuilder<BannerBuilder, Bann
      *
      * @param patterns the patterns
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull BannerBuilder patterns(final @NonNull List<Pattern> patterns) {
         this.itemMeta.setPatterns(patterns);
@@ -68,6 +73,7 @@ public final class BannerBuilder extends AbstractItemBuilder<BannerBuilder, Bann
      *
      * @param index the index (0-indexed)
      * @return the pattern
+     * @since 1.0.0
      */
     public @NonNull Pattern getPattern(final @IntRange(from = 0) int index) {
         return this.itemMeta.getPattern(index);
@@ -77,6 +83,7 @@ public final class BannerBuilder extends AbstractItemBuilder<BannerBuilder, Bann
      * Gets the number of patterns on this banner.
      *
      * @return the number of patterns
+     * @since 1.0.0
      */
     public int numberOfPatterns() {
         return this.itemMeta.numberOfPatterns();
@@ -88,6 +95,7 @@ public final class BannerBuilder extends AbstractItemBuilder<BannerBuilder, Bann
      * @param index   the index
      * @param pattern the pattern (0-indexed)
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull BannerBuilder setPattern(final @IntRange(from = 0) int index, final @NonNull Pattern pattern) {
         this.itemMeta.setPattern(index, pattern);
@@ -99,6 +107,7 @@ public final class BannerBuilder extends AbstractItemBuilder<BannerBuilder, Bann
      *
      * @param pattern the pattern
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull BannerBuilder addPattern(final @NonNull Pattern... pattern) {
         for (final Pattern item : pattern) {
@@ -112,6 +121,7 @@ public final class BannerBuilder extends AbstractItemBuilder<BannerBuilder, Bann
      *
      * @param index the index (0-indexed)
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull BannerBuilder removePattern(final @IntRange(from = 0) int... index) {
         for (final int item : index) {

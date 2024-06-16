@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link WritableBookMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class WritableBookBuilder extends AbstractItemBuilder<WritableBookBuilder, WritableBookMeta> {
@@ -27,6 +28,7 @@ public final class WritableBookBuilder extends AbstractItemBuilder<WritableBookB
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code WritableBookBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull WritableBookBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new WritableBookBuilder(itemStack, castMeta(itemStack.getItemMeta(), WritableBookMeta.class));
@@ -39,6 +41,7 @@ public final class WritableBookBuilder extends AbstractItemBuilder<WritableBookB
      * @return instance of {@code WritableBookBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull WritableBookBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return WritableBookBuilder.of(getItem(material));
@@ -50,6 +53,7 @@ public final class WritableBookBuilder extends AbstractItemBuilder<WritableBookB
      * @return instance of {@code WritableBookBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull WritableBookBuilder ofWritableBook() throws IllegalArgumentException {
         return ofType(Material.WRITABLE_BOOK);
@@ -59,6 +63,7 @@ public final class WritableBookBuilder extends AbstractItemBuilder<WritableBookB
      * Gets the pages.
      *
      * @return the pages
+     * @since 1.0.0
      */
     public @NonNull List<@NonNull String> pages() {
         return this.itemMeta.getPages();
@@ -69,6 +74,7 @@ public final class WritableBookBuilder extends AbstractItemBuilder<WritableBookB
      *
      * @param pages the pages
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull WritableBookBuilder pages(final @Nullable List<@NonNull String> pages) {
         if (pages == null) {
@@ -85,6 +91,7 @@ public final class WritableBookBuilder extends AbstractItemBuilder<WritableBookB
      *
      * @param index the index (1-indexed)
      * @return the page
+     * @since 1.0.0
      */
     public @NonNull String getPage(final @IntRange(from = 1) int index) {
         return this.itemMeta.getPage(index);
@@ -96,6 +103,7 @@ public final class WritableBookBuilder extends AbstractItemBuilder<WritableBookB
      * @param index the index (1-indexed)
      * @param page  the page
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull WritableBookBuilder setPage(final @IntRange(from = 1) int index, final @NonNull String page) {
         this.itemMeta.setPage(index, page);
@@ -107,6 +115,7 @@ public final class WritableBookBuilder extends AbstractItemBuilder<WritableBookB
      *
      * @param page the page to add
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull WritableBookBuilder addPage(final @NonNull String... page) {
         this.itemMeta.addPage(page);
@@ -118,6 +127,7 @@ public final class WritableBookBuilder extends AbstractItemBuilder<WritableBookB
      *
      * @param index the index of the page to remove (1-indexed)
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull WritableBookBuilder removePage(final @IntRange(from = 1) int... index) {
         for (final int i : index) {
@@ -130,6 +140,7 @@ public final class WritableBookBuilder extends AbstractItemBuilder<WritableBookB
      * Gets the page count.
      *
      * @return the page count
+     * @since 1.0.0
      */
     public int pageCount() {
         return this.itemMeta.getPageCount();

@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link KnowledgeBookMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class KnowledgeBookBuilder extends AbstractItemBuilder<KnowledgeBookBuilder, KnowledgeBookMeta> {
@@ -25,6 +26,7 @@ public final class KnowledgeBookBuilder extends AbstractItemBuilder<KnowledgeBoo
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code KnowledgeBookBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull KnowledgeBookBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new KnowledgeBookBuilder(itemStack, castMeta(itemStack.getItemMeta(), KnowledgeBookMeta.class));
@@ -37,6 +39,7 @@ public final class KnowledgeBookBuilder extends AbstractItemBuilder<KnowledgeBoo
      * @return instance of {@code KnowledgeBookBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull KnowledgeBookBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return KnowledgeBookBuilder.of(getItem(material));
@@ -48,6 +51,7 @@ public final class KnowledgeBookBuilder extends AbstractItemBuilder<KnowledgeBoo
      * @return instance of {@code KnowledgeBookBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull KnowledgeBookBuilder ofKnowledgeBook() throws IllegalArgumentException {
         return ofType(Material.KNOWLEDGE_BOOK);
@@ -57,6 +61,7 @@ public final class KnowledgeBookBuilder extends AbstractItemBuilder<KnowledgeBoo
      * Gets the recipes.
      *
      * @return the recipes
+     * @since 1.0.0
      */
     public @NonNull List<NamespacedKey> recipes() {
         return this.itemMeta.getRecipes();
@@ -67,6 +72,7 @@ public final class KnowledgeBookBuilder extends AbstractItemBuilder<KnowledgeBoo
      *
      * @param recipes the recipes
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull KnowledgeBookBuilder recipes(final @NonNull List<@NonNull NamespacedKey> recipes) {
         this.itemMeta.setRecipes(recipes);
@@ -78,6 +84,7 @@ public final class KnowledgeBookBuilder extends AbstractItemBuilder<KnowledgeBoo
      *
      * @param recipe the recipe to add
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull KnowledgeBookBuilder addRecipe(final @NonNull NamespacedKey... recipe) {
         this.itemMeta.addRecipe(recipe);

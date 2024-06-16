@@ -11,6 +11,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link MapMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class MapBuilder extends AbstractItemBuilder<MapBuilder, MapMeta> {
@@ -25,6 +26,7 @@ public final class MapBuilder extends AbstractItemBuilder<MapBuilder, MapMeta> {
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code MapBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull MapBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new MapBuilder(itemStack, castMeta(itemStack.getItemMeta(), MapMeta.class));
@@ -37,15 +39,29 @@ public final class MapBuilder extends AbstractItemBuilder<MapBuilder, MapMeta> {
      * @return instance of {@code MapBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull MapBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return MapBuilder.of(getItem(material));
     }
 
     /**
+     * Creates a {@code MapBuilder} of type {@link Material#FILLED_MAP}. A convenience method.
+     *
+     * @return instance of {@code MapBuilder}
+     * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
+     *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.2.0
+     */
+    public static @NonNull MapBuilder ofFilledMap() throws IllegalArgumentException {
+        return ofType(Material.FILLED_MAP);
+    }
+
+    /**
      * Gets the {@code Color}.
      *
      * @return the {@code Color}
+     * @since 1.0.0
      */
     public @Nullable Color color() {
         return this.itemMeta.getColor();
@@ -56,6 +72,7 @@ public final class MapBuilder extends AbstractItemBuilder<MapBuilder, MapMeta> {
      *
      * @param color the {@code Color}
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull MapBuilder color(final @Nullable Color color) {
         this.itemMeta.setColor(color);
@@ -66,6 +83,7 @@ public final class MapBuilder extends AbstractItemBuilder<MapBuilder, MapMeta> {
      * Gets the {@code MapView}.
      *
      * @return the {@code MapView}
+     * @since 1.0.0
      */
     public @Nullable MapView mapView() {
         return this.itemMeta.getMapView();
@@ -76,6 +94,7 @@ public final class MapBuilder extends AbstractItemBuilder<MapBuilder, MapMeta> {
      *
      * @param mapView the {@code MapView}
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull MapBuilder mapView(final @Nullable MapView mapView) {
         this.itemMeta.setMapView(mapView);
@@ -86,6 +105,7 @@ public final class MapBuilder extends AbstractItemBuilder<MapBuilder, MapMeta> {
      * Gets whether the map is scaling.
      *
      * @return whether the map is scaling
+     * @since 1.0.0
      */
     public boolean scaling() {
         return this.itemMeta.isScaling();
@@ -96,6 +116,7 @@ public final class MapBuilder extends AbstractItemBuilder<MapBuilder, MapMeta> {
      *
      * @param scaling whether the map is scaling
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull MapBuilder scaling(final boolean scaling) {
         this.itemMeta.setScaling(scaling);

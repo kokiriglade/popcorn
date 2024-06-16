@@ -8,6 +8,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link ArmorStandMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuilder, ArmorStandMeta> {
@@ -21,6 +22,7 @@ public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuild
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code ArmorStandBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull ArmorStandBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new ArmorStandBuilder(itemStack, castMeta(itemStack.getItemMeta(), ArmorStandMeta.class));
@@ -33,6 +35,7 @@ public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuild
      * @return instance of {@code ArmorStandBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull ArmorStandBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return ArmorStandBuilder.of(getItem(material));
@@ -44,6 +47,7 @@ public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuild
      * @return instance of {@code ArmorStandBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull ArmorStandBuilder ofArmorStand() throws IllegalArgumentException {
         return ofType(Material.ARMOR_STAND);
@@ -53,6 +57,7 @@ public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuild
      * Gets whether the armor stand is invisible.
      *
      * @return whether the armor stand is invisible
+     * @since 1.0.0
      */
     public boolean invisible() {
         return this.itemMeta.isInvisible();
@@ -63,6 +68,7 @@ public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuild
      *
      * @param invisible whether the armor stand is invisible
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull ArmorStandBuilder invisible(final boolean invisible) {
         this.itemMeta.setInvisible(invisible);
@@ -73,6 +79,7 @@ public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuild
      * Gets whether the armor stand is small.
      *
      * @return whether the armor stand is small
+     * @since 1.0.0
      */
     public boolean small() {
         return this.itemMeta.isSmall();
@@ -83,6 +90,7 @@ public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuild
      *
      * @param small whether the armor stand is small
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull ArmorStandBuilder small(final boolean small) {
         this.itemMeta.setSmall(small);
@@ -93,6 +101,7 @@ public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuild
      * Gets whether the armor stand shows its arms.
      *
      * @return whether the armor stand shows arms
+     * @since 1.0.0
      */
     public boolean showArms() {
         return this.itemMeta.shouldShowArms();
@@ -103,6 +112,7 @@ public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuild
      *
      * @param showArms whether the armor stand shows arms
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull ArmorStandBuilder showArms(final boolean showArms) {
         this.itemMeta.setShowArms(showArms);
@@ -113,6 +123,7 @@ public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuild
      * Gets whether the armor stand has no base plate.
      *
      * @return whether the armor stand has no base plate
+     * @since 1.0.0
      */
     public boolean noBasePlate() {
         return this.itemMeta.hasNoBasePlate();
@@ -123,6 +134,7 @@ public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuild
      *
      * @param noBasePlate whether the armor stand has no base plate
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull ArmorStandBuilder noBasePlate(final boolean noBasePlate) {
         this.itemMeta.setNoBasePlate(noBasePlate);
@@ -133,6 +145,7 @@ public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuild
      * Gets whether the armor stand is a marker.
      *
      * @return whether the armor stand is a marker
+     * @since 1.0.0
      */
     public boolean marker() {
         return this.itemMeta.isMarker();
@@ -143,6 +156,7 @@ public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuild
      *
      * @param marker whether the armor stand is a marker
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull ArmorStandBuilder marker(final boolean marker) {
         this.itemMeta.setMarker(marker);

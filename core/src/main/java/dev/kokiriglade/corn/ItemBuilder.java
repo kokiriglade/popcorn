@@ -11,6 +11,7 @@ import java.util.Objects;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link ItemMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings({"unused"})
 public class ItemBuilder extends AbstractItemBuilder<ItemBuilder, ItemMeta> {
@@ -27,6 +28,7 @@ public class ItemBuilder extends AbstractItemBuilder<ItemBuilder, ItemMeta> {
      *
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code ItemBuilder}
+     * @since 1.0.0
      */
     public static @NonNull ItemBuilder of(final @NonNull ItemStack itemStack) {
         return new ItemBuilder(itemStack, itemStack.getItemMeta());
@@ -38,6 +40,7 @@ public class ItemBuilder extends AbstractItemBuilder<ItemBuilder, ItemMeta> {
      * @param material the {@code Material} to base the builder off of
      * @return instance of {@code ItemBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item
+     * @since 1.0.0
      */
     public static @NonNull ItemBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return ItemBuilder.of(getItem(material));

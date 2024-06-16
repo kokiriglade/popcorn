@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link BundleMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings({"unused", "UnstableApiUsage"})
 @ApiStatus.Experimental
@@ -29,6 +30,7 @@ public final class BundleBuilder extends AbstractItemBuilder<BundleBuilder, Bund
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code BundleBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull BundleBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new BundleBuilder(itemStack, castMeta(itemStack.getItemMeta(), BundleMeta.class));
@@ -41,6 +43,7 @@ public final class BundleBuilder extends AbstractItemBuilder<BundleBuilder, Bund
      * @return instance of {@code BundleBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull BundleBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return BundleBuilder.of(getItem(material));
@@ -52,6 +55,7 @@ public final class BundleBuilder extends AbstractItemBuilder<BundleBuilder, Bund
      * @return instance of {@code BundleBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull BundleBuilder ofBundle() throws IllegalArgumentException {
         return ofType(Material.BUNDLE);
@@ -61,6 +65,7 @@ public final class BundleBuilder extends AbstractItemBuilder<BundleBuilder, Bund
      * Gets the items.
      *
      * @return the items
+     * @since 1.0.0
      */
     public @NonNull List<@NonNull ItemStack> items() {
         return this.itemMeta.getItems();
@@ -71,6 +76,7 @@ public final class BundleBuilder extends AbstractItemBuilder<BundleBuilder, Bund
      *
      * @param items the items
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull BundleBuilder items(final @Nullable List<@NonNull ItemStack> items) {
         this.itemMeta.setItems(items);
@@ -78,10 +84,11 @@ public final class BundleBuilder extends AbstractItemBuilder<BundleBuilder, Bund
     }
 
     /**
-     * Adds a item.
+     * Adds an item.
      *
      * @param item the item to add
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull BundleBuilder addItem(final @NonNull ItemStack... item) {
         for (final ItemStack i : item) {

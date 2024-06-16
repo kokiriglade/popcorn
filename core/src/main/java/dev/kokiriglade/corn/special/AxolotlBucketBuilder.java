@@ -9,6 +9,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link AxolotlBucketMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class AxolotlBucketBuilder extends AbstractItemBuilder<AxolotlBucketBuilder, AxolotlBucketMeta> {
@@ -23,6 +24,7 @@ public final class AxolotlBucketBuilder extends AbstractItemBuilder<AxolotlBucke
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code AxolotlBucketBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull AxolotlBucketBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new AxolotlBucketBuilder(itemStack, castMeta(itemStack.getItemMeta(), AxolotlBucketMeta.class));
@@ -35,6 +37,7 @@ public final class AxolotlBucketBuilder extends AbstractItemBuilder<AxolotlBucke
      * @return instance of {@code AxolotlBucketBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull AxolotlBucketBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return AxolotlBucketBuilder.of(getItem(material));
@@ -46,6 +49,7 @@ public final class AxolotlBucketBuilder extends AbstractItemBuilder<AxolotlBucke
      * @return instance of {@code AxolotlBucketBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull AxolotlBucketBuilder ofAxolotlBucket() throws IllegalArgumentException {
         return ofType(Material.AXOLOTL_BUCKET);
@@ -55,6 +59,7 @@ public final class AxolotlBucketBuilder extends AbstractItemBuilder<AxolotlBucke
      * Gets the variant.
      *
      * @return the variant
+     * @since 1.0.0
      */
     public Axolotl.@NonNull Variant variant() {
         return this.itemMeta.getVariant();
@@ -65,6 +70,7 @@ public final class AxolotlBucketBuilder extends AbstractItemBuilder<AxolotlBucke
      *
      * @param variant the variant
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull AxolotlBucketBuilder variant(final Axolotl.@NonNull Variant variant) {
         this.itemMeta.setVariant(variant);
@@ -76,6 +82,7 @@ public final class AxolotlBucketBuilder extends AbstractItemBuilder<AxolotlBucke
      * If true, a specific axolotl will be spawned.
      *
      * @return whether a variant tag exists
+     * @since 1.0.0
      */
     public boolean hasVariant() {
         return this.itemMeta.hasVariant();

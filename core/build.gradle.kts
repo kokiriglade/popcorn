@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.kokiriglade"
-version = "1.1.0"
+version = "1.2.0"
 
 repositories {
     mavenCentral()
@@ -34,11 +34,11 @@ configure<PublishingExtension> {
     repositories {
         mavenLocal()
         maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/celerry/corn")
+            name = "OSSRH"
+            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
             credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_ACTOR")
-                password = project.findProperty("gpr.token") as String? ?: System.getenv("GITHUB_TOKEN")
+                username = System.getenv("MAVEN_USERNAME")
+                password = System.getenv("MAVEN_PASSWORD")
             }
         }
     }

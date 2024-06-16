@@ -10,6 +10,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link CompassMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class CompassBuilder extends AbstractItemBuilder<CompassBuilder, CompassMeta> {
@@ -24,6 +25,7 @@ public final class CompassBuilder extends AbstractItemBuilder<CompassBuilder, Co
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code CompassBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull CompassBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new CompassBuilder(itemStack, castMeta(itemStack.getItemMeta(), CompassMeta.class));
@@ -36,6 +38,7 @@ public final class CompassBuilder extends AbstractItemBuilder<CompassBuilder, Co
      * @return instance of {@code CompassBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull CompassBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return CompassBuilder.of(getItem(material));
@@ -47,6 +50,7 @@ public final class CompassBuilder extends AbstractItemBuilder<CompassBuilder, Co
      * @return instance of {@code CompassBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull CompassBuilder ofCompass() throws IllegalArgumentException {
         return ofType(Material.COMPASS);
@@ -56,6 +60,7 @@ public final class CompassBuilder extends AbstractItemBuilder<CompassBuilder, Co
      * Gets the {@code Location} of the lodestone that this compass is tracking.
      *
      * @return the lodestone's location
+     * @since 1.0.0
      */
     public @Nullable Location lodestone() {
         return this.itemMeta.getLodestone();
@@ -66,6 +71,7 @@ public final class CompassBuilder extends AbstractItemBuilder<CompassBuilder, Co
      *
      * @param lodestone the lodestone's location
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull CompassBuilder lodestone(final @Nullable Location lodestone) {
         this.itemMeta.setLodestone(lodestone);
@@ -76,6 +82,7 @@ public final class CompassBuilder extends AbstractItemBuilder<CompassBuilder, Co
      * Gets whether the compass is tracking the lodestone.
      *
      * @return whether the compass is tracking the lodestone
+     * @since 1.0.0
      */
     public boolean lodestoneTracked() {
         return this.itemMeta.isLodestoneTracked();
@@ -86,6 +93,7 @@ public final class CompassBuilder extends AbstractItemBuilder<CompassBuilder, Co
      *
      * @param lodestoneTracked whether the compass is tracking the lodestone
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull CompassBuilder lodestoneTracked(final boolean lodestoneTracked) {
         this.itemMeta.setLodestoneTracked(lodestoneTracked);

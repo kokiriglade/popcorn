@@ -15,6 +15,7 @@ import java.util.List;
 
 /**
  * Modifies {@link ItemStack}s that have an {@code ItemMeta} of {@link PotionMeta}.
+ * @since 1.0.0
  */
 @SuppressWarnings("unused")
 public final class PotionBuilder extends AbstractItemBuilder<PotionBuilder, PotionMeta> {
@@ -29,6 +30,7 @@ public final class PotionBuilder extends AbstractItemBuilder<PotionBuilder, Poti
      * @param itemStack the {@code ItemStack} to base the builder off of
      * @return instance of {@code PotionBuilder}
      * @throws IllegalArgumentException if the {@code itemStack}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull PotionBuilder of(final @NonNull ItemStack itemStack) throws IllegalArgumentException {
         return new PotionBuilder(itemStack, castMeta(itemStack.getItemMeta(), PotionMeta.class));
@@ -41,15 +43,53 @@ public final class PotionBuilder extends AbstractItemBuilder<PotionBuilder, Poti
      * @return instance of {@code PotionBuilder}
      * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
      *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.0.0
      */
     public static @NonNull PotionBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return PotionBuilder.of(getItem(material));
     }
 
     /**
+     * Creates a {@code PotionBuilder} of type {@link Material#POTION}. A convenience method.
+     *
+     * @return instance of {@code PotionBuilder}
+     * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
+     *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.2.0
+     */
+    public static @NonNull PotionBuilder ofPotion() throws IllegalArgumentException {
+        return ofType(Material.POTION);
+    }
+
+    /**
+     * Creates a {@code PotionBuilder} of type {@link Material#SPLASH_POTION}. A convenience method.
+     *
+     * @return instance of {@code PotionBuilder}
+     * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
+     *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.2.0
+     */
+    public static @NonNull PotionBuilder ofSplashPotion() throws IllegalArgumentException {
+        return ofType(Material.SPLASH_POTION);
+    }
+
+    /**
+     * Creates a {@code PotionBuilder} of type {@link Material#LINGERING_POTION}. A convenience method.
+     *
+     * @return instance of {@code PotionBuilder}
+     * @throws IllegalArgumentException if the {@code material} is not an obtainable item,
+     *                                  or if the {@code material}'s {@code ItemMeta} is not the correct type
+     * @since 1.2.0
+     */
+    public static @NonNull PotionBuilder ofLingeringPotion() throws IllegalArgumentException {
+        return ofType(Material.LINGERING_POTION);
+    }
+
+    /**
      * Gets the custom effects.
      *
      * @return the custom effects
+     * @since 1.0.0
      */
     public @NonNull List<@NonNull PotionEffect> customEffects() {
         return this.itemMeta.getCustomEffects();
@@ -60,6 +100,7 @@ public final class PotionBuilder extends AbstractItemBuilder<PotionBuilder, Poti
      *
      * @param customEffects custom effects
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull PotionBuilder customEffects(final @Nullable List<@NonNull PotionEffect> customEffects) {
         this.itemMeta.clearCustomEffects();
@@ -77,6 +118,7 @@ public final class PotionBuilder extends AbstractItemBuilder<PotionBuilder, Poti
      * @param customEffect the custom effect to add
      * @param overwrite    whether to overwrite {@code PotionEffect}s of the same type
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull PotionBuilder addCustomEffect(final @NonNull PotionEffect customEffect, final boolean overwrite) {
         this.itemMeta.addCustomEffect(customEffect, overwrite);
@@ -88,6 +130,7 @@ public final class PotionBuilder extends AbstractItemBuilder<PotionBuilder, Poti
      *
      * @param customEffectType the custom effect type to remove
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull PotionBuilder removeCustomEffect(final @NonNull PotionEffectType... customEffectType) {
         for (final PotionEffectType item : customEffectType) {
@@ -101,6 +144,7 @@ public final class PotionBuilder extends AbstractItemBuilder<PotionBuilder, Poti
      *
      * @param customEffectType the custom effect type
      * @return the builder
+     * @since 1.0.0
      */
     public boolean hasCustomEffect(final @NonNull PotionEffectType customEffectType) {
         return this.itemMeta.hasCustomEffect(customEffectType);
@@ -110,6 +154,7 @@ public final class PotionBuilder extends AbstractItemBuilder<PotionBuilder, Poti
      * Gets the {@code Color}.
      *
      * @return the {@code Color}
+     * @since 1.0.0
      */
     public @Nullable Color color() {
         return this.itemMeta.getColor();
@@ -120,6 +165,7 @@ public final class PotionBuilder extends AbstractItemBuilder<PotionBuilder, Poti
      *
      * @param color the {@code Color}
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull PotionBuilder color(final @Nullable Color color) {
         this.itemMeta.setColor(color);
@@ -130,6 +176,7 @@ public final class PotionBuilder extends AbstractItemBuilder<PotionBuilder, Poti
      * Gets the base {@code PotionData}.
      *
      * @return the base {@code PotionData}
+     * @since 1.0.0
      */
     public @Nullable PotionType basePotionData() {
         return this.itemMeta.getBasePotionType();
@@ -140,6 +187,7 @@ public final class PotionBuilder extends AbstractItemBuilder<PotionBuilder, Poti
      *
      * @param basePotionData the base {@code PotionData}
      * @return the builder
+     * @since 1.0.0
      */
     public @NonNull PotionBuilder basePotionData(final @NonNull PotionType basePotionData) {
         this.itemMeta.setBasePotionType(basePotionData);

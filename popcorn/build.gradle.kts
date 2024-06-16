@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:${properties["mcVersion"]}-R0.1-SNAPSHOT")
 }
 
 java {
@@ -22,6 +22,10 @@ java {
 configure<JavaPluginExtension> {
     withJavadocJar()
     withSourcesJar()
+}
+
+tasks.javadoc {
+    (options as StandardJavadocDocletOptions).links("https://jd.papermc.io/paper/${properties["mcVersion"]}/")
 }
 
 configure<PublishingExtension> {

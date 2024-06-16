@@ -1,7 +1,7 @@
-name: corn_test
+name: popcorn_test
 version: ${version}
 main: dev.kokiriglade.testplugin.TestPlugin
-description: Corn Test Plugin
+description: Popcorn Test Plugin
 authors:
   - kokiriglade
   - broccolai

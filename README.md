@@ -5,7 +5,7 @@
 ![GitHub License](https://img.shields.io/github/license/celerry/popcorn)
 
 
-started off as a fork of [corn](https://github.com/broccolai/corn), but just their `ItemBuilder` component. now aiming to write general builder patterns for the [paper](https://github.com/PaperMC/paper) API.
+started off as a fork of [corn](https://github.com/broccolai/corn), but just their `ItemBuilder` component. now aiming to write general utils & builders for the [paper](https://github.com/PaperMC/paper) API.
 
 ## usage
 

@@ -17,6 +17,7 @@ import org.bukkit.inventory.meta.components.JukeboxPlayableComponent;
 import org.bukkit.persistence.PersistentDataType;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
+import org.checkerframework.common.value.qual.IntRange;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -475,7 +476,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * @return the builder
      * @since 1.0.0
      */
-    public @NonNull B rarity(final ItemRarity rarity) {
+    public @NonNull B rarity(final @Nullable ItemRarity rarity) {
         itemMeta.setRarity(rarity);
         return (B) this;
     }
@@ -500,7 +501,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * @return the builder
      * @since 1.0.0
      */
-    public B maxStackSize(@Nullable Integer maxStackSize) {
+    public B maxStackSize(@Nullable @IntRange(from = 1, to = 99) Integer maxStackSize) {
         itemMeta.setMaxStackSize(maxStackSize);
         return (B) this;
     }

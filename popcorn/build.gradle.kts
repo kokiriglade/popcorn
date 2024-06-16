@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "dev.kokiriglade"
-version = "2.0.0"
+version = "2.1.0"
 
 repositories {
     mavenCentral()
@@ -25,7 +25,11 @@ configure<JavaPluginExtension> {
 }
 
 tasks.javadoc {
-    (options as StandardJavadocDocletOptions).links("https://jd.papermc.io/paper/${properties["mcVersion"]}/")
+    (options as StandardJavadocDocletOptions).links(
+            "https://jd.papermc.io/paper/${properties["mcVersion"]}/",
+            "https://jd.advntr.dev/api/4.17.0/",
+            "https://guava.dev/releases/32.1.2-jre/api/docs/"
+    )
 }
 
 configure<PublishingExtension> {

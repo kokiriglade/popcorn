@@ -58,7 +58,7 @@ public class ShapelessRecipeBuilder extends AbstractCraftingRecipeBuilder<Shapel
      * @param count the quantity
      * @param item  the ingredient
      * @return the builder
-     * @since 2.10
+     * @since 2.1.0
      */
     public @NonNull ShapelessRecipeBuilder addIngredient(int count, @NonNull ItemStack item) {
         recipe.addIngredient(count, item);
@@ -70,7 +70,7 @@ public class ShapelessRecipeBuilder extends AbstractCraftingRecipeBuilder<Shapel
      *
      * @param item the ingredient
      * @return the builder
-     * @since 2.10
+     * @since 2.1.0
      */
     public @NonNull ShapelessRecipeBuilder addIngredient(@NonNull ItemStack item) {
         recipe.addIngredient(item);
@@ -82,7 +82,7 @@ public class ShapelessRecipeBuilder extends AbstractCraftingRecipeBuilder<Shapel
      *
      * @param ingredient the ingredient
      * @return the builder
-     * @since 2.10
+     * @since 2.1.0
      */
     public @NonNull ShapelessRecipeBuilder addIngredient(@NonNull Material ingredient) {
         recipe.addIngredient(ingredient);
@@ -94,7 +94,7 @@ public class ShapelessRecipeBuilder extends AbstractCraftingRecipeBuilder<Shapel
      *
      * @param ingredient the ingredient
      * @return the builder
-     * @since 2.10
+     * @since 2.1.0
      */
     public @NonNull ShapelessRecipeBuilder addIngredient(@NonNull RecipeChoice ingredient) {
         recipe.addIngredient(ingredient);
@@ -106,7 +106,7 @@ public class ShapelessRecipeBuilder extends AbstractCraftingRecipeBuilder<Shapel
      *
      * @param ingredient the ingredient
      * @return the builder
-     * @since 2.10
+     * @since 2.1.0
      */
     public @NonNull ShapelessRecipeBuilder removeIngredient(@NonNull Material ingredient) {
         recipe.removeIngredient(ingredient);
@@ -119,7 +119,7 @@ public class ShapelessRecipeBuilder extends AbstractCraftingRecipeBuilder<Shapel
      * @param count      the quantity
      * @param ingredient the ingredient
      * @return the builder
-     * @since 2.10
+     * @since 2.1.0
      */
     public @NonNull ShapelessRecipeBuilder removeIngredient(int count, @NonNull Material ingredient) {
         recipe.removeIngredient(count, ingredient);
@@ -132,7 +132,7 @@ public class ShapelessRecipeBuilder extends AbstractCraftingRecipeBuilder<Shapel
      * @param count the quantity
      * @param item  the ingredient
      * @return the builder
-     * @since 2.10
+     * @since 2.1.0
      */
     public @NonNull ShapelessRecipeBuilder removeIngredient(int count, @NonNull ItemStack item) {
         recipe.removeIngredient(count, item);
@@ -144,7 +144,7 @@ public class ShapelessRecipeBuilder extends AbstractCraftingRecipeBuilder<Shapel
      *
      * @param item the ingredient
      * @return the builder
-     * @since 2.10
+     * @since 2.1.0
      */
     public @NonNull ShapelessRecipeBuilder removeIngredient(@NonNull ItemStack item) {
         recipe.removeIngredient(item);
@@ -156,7 +156,7 @@ public class ShapelessRecipeBuilder extends AbstractCraftingRecipeBuilder<Shapel
      *
      * @param ingredient the ingredient
      * @return the builder
-     * @since 2.10
+     * @since 2.1.0
      */
     public @NonNull ShapelessRecipeBuilder removeIngredient(@NonNull RecipeChoice ingredient) {
         recipe.removeIngredient(ingredient);

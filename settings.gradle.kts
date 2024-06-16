@@ -1,3 +1,3 @@
 rootProject.name = "popcorn"
-include("core")
+include("popcorn")
 include("test-plugin")

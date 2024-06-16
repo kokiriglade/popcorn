@@ -13,12 +13,15 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
-    implementation(project(":core"))
+    implementation(project(":popcorn"))
 }
 
 tasks {
     build {
         dependsOn(shadowJar)
+    }
+    javadoc {
+        enabled = false
     }
     processResources {
         val apiVersion = rootProject.providers.gradleProperty("mcVersion").get()

@@ -12,6 +12,8 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemRarity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.components.FoodComponent;
+import org.bukkit.inventory.meta.components.JukeboxPlayableComponent;
 import org.bukkit.persistence.PersistentDataType;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -555,6 +557,109 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
         }
         return (B) this;
     }
+
+    /**
+     * Gets the enchantment glint override.
+     *
+     * @return the enchantment glint override
+     */
+    public @NonNull Boolean enchantmentGlintOverride() {
+        return this.itemMeta.getEnchantmentGlintOverride();
+    }
+
+    /**
+     * Sets the enchantment glint override.
+     *
+     * @param enchantmentGlintOverride the enchantment glint override
+     * @return the builder
+     */
+    public @NonNull B enchantmentGlintOverride(final @NonNull Boolean enchantmentGlintOverride) {
+        this.itemMeta.setEnchantmentGlintOverride(enchantmentGlintOverride);
+        return (B) this;
+    }
+
+    /**
+     * Gets the jukebox playable component.
+     *
+     * @return the jukebox playable component
+     */
+    @SuppressWarnings("UnstableApiUsage")
+    public @Nullable JukeboxPlayableComponent jukeboxPlayable() {
+        return this.itemMeta.getJukeboxPlayable();
+    }
+
+    /**
+     * Checks if the item has a jukebox playable component.
+     *
+     * @return {@code true} if the item has a jukebox playable component, {@code false} otherwise
+     */
+    public boolean hasJukeboxPlayable() {
+        return this.itemMeta.hasJukeboxPlayable();
+    }
+
+    /**
+     * Sets the jukebox playable component.
+     *
+     * @param jukeboxPlayableComponent the jukebox playable component
+     * @return the builder
+     */
+    @SuppressWarnings("UnstableApiUsage")
+    public @NonNull B jukeboxPlayable(final @Nullable JukeboxPlayableComponent jukeboxPlayableComponent) {
+        this.itemMeta.setJukeboxPlayable(jukeboxPlayableComponent);
+        return (B) this;
+    }
+
+    /**
+     * Gets the food component.
+     *
+     * @return the food component
+     */
+    @SuppressWarnings("UnstableApiUsage")
+    public @NonNull FoodComponent food() {
+        return this.itemMeta.getFood();
+    }
+
+    /**
+     * Checks if the item has a food component.
+     *
+     * @return {@code true} if the item has a food component, {@code false} otherwise
+     */
+    public boolean hasFood() {
+        return this.itemMeta.hasFood();
+    }
+
+    /**
+     * Sets the food component.
+     *
+     * @param food the food component
+     * @return the builder
+     */
+    @SuppressWarnings("UnstableApiUsage")
+    public @NonNull B food(final @Nullable FoodComponent food) {
+        this.itemMeta.setFood(food);
+        return (B) this;
+    }
+
+    /**
+     * Checks if the item is fire resistant.
+     *
+     * @return {@code true} if the item is fire resistant, {@code false} otherwise
+     */
+    public boolean fireResistant() {
+        return this.itemMeta.isFireResistant();
+    }
+
+    /**
+     * Sets whether the item is fire resistant.
+     *
+     * @param fireResistant whether the item is fire resistant
+     * @return the builder
+     */
+    public B fireResistant(boolean fireResistant) {
+        this.itemMeta.setFireResistant(fireResistant);
+        return (B) this;
+    }
+
 
     /**
      * Builds the {@code ItemStack} from the set properties.

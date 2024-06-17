@@ -1,6 +1,5 @@
 package dev.kokiriglade.popcorn.permission;
 
-import org.bukkit.inventory.Recipe;
 import org.bukkit.permissions.Permissible;
 import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionDefault;
@@ -101,7 +100,7 @@ public class PermissionBuilder {
      * Add a child to the permission.
      *
      * @param string the child
-     * @param value the value
+     * @param value  the value
      * @return the builder
      * @since 2.2.0
      */

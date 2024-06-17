@@ -1,6 +1,5 @@
 package dev.kokiriglade.popcorn.entity.projectile.throwable;
 
-import dev.kokiriglade.popcorn.entity.projectile.AbstractThrowableProjectileBuilder;
 import org.bukkit.Location;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.inventory.meta.PotionMeta;

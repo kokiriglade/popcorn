@@ -1,6 +1,6 @@
 package dev.kokiriglade.popcorn.entity.projectile.arrow;
 
-import dev.kokiriglade.popcorn.entity.projectile.ThrowableProjectileBuilder;
+import dev.kokiriglade.popcorn.entity.projectile.throwable.ThrowableProjectileBuilder;
 import org.bukkit.Location;
 import org.bukkit.entity.ThrowableProjectile;
 import org.bukkit.entity.Trident;

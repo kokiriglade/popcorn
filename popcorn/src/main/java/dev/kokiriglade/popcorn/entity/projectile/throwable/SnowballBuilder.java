@@ -1,6 +1,5 @@
 package dev.kokiriglade.popcorn.entity.projectile.throwable;
 
-import dev.kokiriglade.popcorn.entity.projectile.AbstractThrowableProjectileBuilder;
 import org.bukkit.Location;
 import org.bukkit.entity.Snowball;
 import org.checkerframework.checker.nullness.qual.NonNull;

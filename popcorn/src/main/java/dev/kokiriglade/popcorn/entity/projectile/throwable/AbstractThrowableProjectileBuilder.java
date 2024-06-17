@@ -1,5 +1,7 @@
-package dev.kokiriglade.popcorn.entity.projectile;
+package dev.kokiriglade.popcorn.entity.projectile.throwable;
 
+import dev.kokiriglade.popcorn.entity.projectile.AbstractProjectileBuilder;
+import dev.kokiriglade.popcorn.entity.projectile.throwable.ThrowableProjectileBuilder;
 import org.bukkit.Location;
 import org.bukkit.entity.ThrowableProjectile;
 import org.bukkit.inventory.ItemStack;

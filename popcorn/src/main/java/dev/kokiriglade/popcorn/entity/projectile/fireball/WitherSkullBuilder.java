@@ -18,7 +18,7 @@ public final class WitherSkullBuilder extends AbstractFireballBuilder<WitherSkul
     private WitherSkullBuilder(final @NonNull Location location) {
         super(WitherSkull.class, location);
         this.consumers.add(witherSkull -> {
-            if(charged != null) {
+            if (charged != null) {
                 witherSkull.setCharged(charged);
             }
         });

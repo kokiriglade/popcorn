@@ -1,9 +1,7 @@
 package dev.kokiriglade.popcorn.entity.projectile.fireball.sized;
 
-import dev.kokiriglade.popcorn.entity.projectile.fireball.sized.AbstractSizedFireballBuilder;
 import org.bukkit.Location;
 import org.bukkit.entity.LargeFireball;
-import org.bukkit.entity.WindCharge;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**

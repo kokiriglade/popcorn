@@ -1,9 +1,7 @@
 package dev.kokiriglade.popcorn.entity.projectile.fireball.sized;
 
-import dev.kokiriglade.popcorn.entity.projectile.AbstractProjectileBuilder;
 import dev.kokiriglade.popcorn.entity.projectile.fireball.AbstractFireballBuilder;
 import org.bukkit.Location;
-import org.bukkit.entity.AbstractWindCharge;
 import org.bukkit.entity.SizedFireball;
 import org.bukkit.inventory.ItemStack;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -22,7 +20,7 @@ public class AbstractSizedFireballBuilder<B extends AbstractFireballBuilder<B, T
     protected AbstractSizedFireballBuilder(@NonNull Class<T> entityClass, @NonNull Location location) {
         super(entityClass, location);
         this.consumers.add(sizedFireball -> {
-            if(displayItem != null) {
+            if (displayItem != null) {
                 sizedFireball.setDisplayItem(displayItem);
             }
         });

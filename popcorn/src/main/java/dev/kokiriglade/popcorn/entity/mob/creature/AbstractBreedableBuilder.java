@@ -10,7 +10,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @param <B> the builder type
  * @param <T> the entity type
- * @since 2.3.0
+ * @since 2.2.2
  */
 @SuppressWarnings({"unchecked", "unused"})
 public abstract class AbstractBreedableBuilder<B extends AbstractAgeableBuilder<B, T>, T extends Breedable> extends AbstractAgeableBuilder<B, T> {
@@ -34,7 +34,7 @@ public abstract class AbstractBreedableBuilder<B extends AbstractAgeableBuilder<
      * Gets whether the {@code Entity} can breed.
      *
      * @return the ability to breed
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable Boolean breed() {
         return this.breed;
@@ -45,7 +45,7 @@ public abstract class AbstractBreedableBuilder<B extends AbstractAgeableBuilder<
      *
      * @param breed the ability to breed
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B breed(@Nullable Boolean breed) {
         this.breed = breed;
@@ -56,7 +56,7 @@ public abstract class AbstractBreedableBuilder<B extends AbstractAgeableBuilder<
      * Gets whether the {@code Entity}'s age is locked.
      *
      * @return the age lock
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable Boolean ageLock() {
         return this.ageLock;
@@ -67,7 +67,7 @@ public abstract class AbstractBreedableBuilder<B extends AbstractAgeableBuilder<
      *
      * @param lock the age lock
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B ageLock(@Nullable Boolean lock) {
         this.ageLock = lock;

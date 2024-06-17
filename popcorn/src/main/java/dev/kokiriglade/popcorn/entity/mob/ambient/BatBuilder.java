@@ -9,7 +9,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 /**
  * Modifies {@link Bat}s
  *
- * @since 2.3.0
+ * @since 2.2.2
  */
 @SuppressWarnings("unused")
 public final class BatBuilder extends AbstractLivingEntityBuilder<BatBuilder, Bat> {
@@ -32,7 +32,7 @@ public final class BatBuilder extends AbstractLivingEntityBuilder<BatBuilder, Ba
      *
      * @param location the {@code Location} to spawn the Bat at
      * @return instance of {@code BatBuilder}
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public static @NonNull BatBuilder create(final @NonNull Location location) {
         return new BatBuilder(location);
@@ -42,9 +42,9 @@ public final class BatBuilder extends AbstractLivingEntityBuilder<BatBuilder, Ba
      * Gets whether the {@code Bat}'s is awake.
      *
      * @return the waking state
-     * @since 2.3.0
+     * @since 2.2.2
      */
-    public Boolean awake() {
+    public @Nullable Boolean awake() {
         return awake;
     }
 
@@ -53,7 +53,7 @@ public final class BatBuilder extends AbstractLivingEntityBuilder<BatBuilder, Ba
      *
      * @param awake the waking state
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public BatBuilder awake(final @Nullable Boolean awake) {
         this.awake = awake;
@@ -64,7 +64,7 @@ public final class BatBuilder extends AbstractLivingEntityBuilder<BatBuilder, Ba
      * Gets the {@code Location} the {@code Bat} will try to move towards.
      *
      * @return the target location
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable Location targetLocation() {
         return targetLocation;
@@ -75,7 +75,7 @@ public final class BatBuilder extends AbstractLivingEntityBuilder<BatBuilder, Ba
      *
      * @param targetLocation the target location
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull BatBuilder targetLocation(final @Nullable Location targetLocation) {
         this.targetLocation = targetLocation;

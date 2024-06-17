@@ -1,0 +1,4 @@
+/**
+ * Builders specific to {@link org.bukkit.entity.SizedFireball}s
+ */
+package dev.kokiriglade.popcorn.entity.projectile.fireball.sized;

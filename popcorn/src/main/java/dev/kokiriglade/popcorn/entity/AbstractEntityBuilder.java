@@ -18,7 +18,7 @@ import java.util.function.Consumer;
  *
  * @param <B> the builder type
  * @param <T> the {@link Entity}
- * @since 2.3.0
+ * @since 2.2.2
  */
 @SuppressWarnings({"unchecked", "unused"})
 public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T>, T extends Entity> {
@@ -51,7 +51,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param entityClass the entity
      * @param location    the entity's spawn location
-     * @since 2.3.0
+     * @since 2.2.2
      */
     protected AbstractEntityBuilder(
         final @NonNull Class<T> entityClass,
@@ -94,7 +94,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param ticks the number of freeze ticks
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B freezeTicks(final int ticks) {
         this.freezeTicks = ticks;
@@ -105,7 +105,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets the number of freeze ticks for the {@code Entity}.
      *
      * @return the number of freeze ticks
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public int freezeTicks() {
         return this.freezeTicks;
@@ -116,7 +116,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param ticks the number of fire ticks
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B fireTicks(final int ticks) {
         this.fireTicks = ticks;
@@ -127,7 +127,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets the number of fire ticks for the {@code Entity}.
      *
      * @return the number of fire ticks
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public int fireTicks() {
         return this.fireTicks;
@@ -138,7 +138,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param distance the fall distance
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B fallDistance(final float distance) {
         this.fallDistance = distance;
@@ -149,7 +149,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets the fall distance for the {@code Entity}.
      *
      * @return the fall distance
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public float fallDistance() {
         return this.fallDistance;
@@ -160,7 +160,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param pose the pose
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B pose(final @NonNull Pose pose) {
         this.pose = pose;
@@ -171,7 +171,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets the pose for the {@code Entity}.
      *
      * @return the pose
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @MonotonicNonNull Pose pose() {
         return this.pose;
@@ -182,7 +182,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param velocity the velocity
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B velocity(final @NonNull Vector velocity) {
         this.velocity = velocity;
@@ -193,7 +193,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets the velocity for the {@code Entity}.
      *
      * @return the velocity
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @MonotonicNonNull Vector velocity() {
         return this.velocity;
@@ -204,7 +204,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param flag whether the {@code Entity} is visible by default
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B visibleByDefault(boolean flag) {
         this.visibleByDefault = flag;
@@ -215,7 +215,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets whether the {@code Entity} is visible by default.
      *
      * @return whether the {@code Entity} is visible by default
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean visibleByDefault() {
         return this.visibleByDefault;
@@ -226,7 +226,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param locked whether the freeze ticks are locked
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B lockFreezeTicks(boolean locked) {
         this.lockFreezeTicks = locked;
@@ -237,7 +237,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets whether the {@code Entity}'s freeze ticks are locked.
      *
      * @return whether the freeze ticks are locked
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean lockFreezeTicks() {
         return this.lockFreezeTicks;
@@ -248,7 +248,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param flag whether the {@code Entity} has no physics
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B noPhysics(boolean flag) {
         this.noPhysics = flag;
@@ -259,7 +259,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets whether the {@code Entity} has no physics.
      *
      * @return whether the {@code Entity} has no physics
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean noPhysics() {
         return this.noPhysics;
@@ -270,7 +270,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param flag whether the {@code Entity} has visual fire
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B visualFire(boolean flag) {
         this.visualFire = flag;
@@ -281,7 +281,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets whether the {@code Entity} has visual fire.
      *
      * @return whether the {@code Entity} has visual fire
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean visualFire() {
         return this.visualFire;
@@ -292,7 +292,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param flag whether the custom name is visible
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B customNameVisible(boolean flag) {
         this.customNameVisible = flag;
@@ -303,7 +303,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets whether the {@code Entity}'s custom name is visible.
      *
      * @return whether the custom name is visible
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean customNameVisible() {
         return this.customNameVisible;
@@ -314,7 +314,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param flag whether the {@code Entity} is glowing
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B glowing(boolean flag) {
         this.glowing = flag;
@@ -325,7 +325,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets whether the {@code Entity} is glowing.
      *
      * @return whether the {@code Entity} is glowing
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean glowing() {
         return this.glowing;
@@ -336,7 +336,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param flag whether the {@code Entity} is invisible
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B invisible(boolean flag) {
         this.invisible = flag;
@@ -347,7 +347,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets whether the {@code Entity} is invisible.
      *
      * @return whether the {@code Entity} is invisible
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean invisible() {
         return this.invisible;
@@ -358,7 +358,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param flag whether the {@code Entity} is invulnerable
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B invulnerable(boolean flag) {
         this.invulnerable = flag;
@@ -369,7 +369,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets whether the {@code Entity} is invulnerable.
      *
      * @return whether the {@code Entity} is invulnerable
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean invulnerable() {
         return this.invulnerable;
@@ -380,7 +380,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param flag whether the {@code Entity} is affected by gravity
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B gravity(boolean flag) {
         this.gravity = flag;
@@ -391,7 +391,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets whether the {@code Entity} is affected by gravity.
      *
      * @return whether the {@code Entity} is affected by gravity
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean gravity() {
         return this.gravity;
@@ -402,7 +402,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param flag whether the {@code Entity} is persistent
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B persistent(boolean flag) {
         this.persistent = flag;
@@ -413,7 +413,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets whether the {@code Entity} is persistent.
      *
      * @return whether the {@code Entity} is persistent
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean persistent() {
         return this.persistent;
@@ -424,7 +424,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param flag whether the {@code Entity} is silent
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B silent(boolean flag) {
         this.silent = flag;
@@ -435,7 +435,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets whether the {@code Entity} is silent.
      *
      * @return whether the {@code Entity} is silent
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean silent() {
         return this.silent;
@@ -446,7 +446,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param flag whether the {@code Entity} is sneaking
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B sneaking(boolean flag) {
         this.sneaking = flag;
@@ -457,7 +457,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets whether the {@code Entity} is sneaking.
      *
      * @return whether the {@code Entity} is sneaking
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean sneaking() {
         return this.sneaking;
@@ -469,7 +469,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param entity the passenger
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B addPassenger(final @NonNull Entity entity) {
         this.passengers.add(entity);
@@ -481,7 +481,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param entity the passenger
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B removePassenger(final @NonNull Entity entity) {
         this.passengers.remove(entity);
@@ -492,7 +492,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets the passengers for the {@code Entity}.
      *
      * @return the passengers
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull List<Entity> passengers() {
         return this.passengers;
@@ -503,7 +503,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param location the location where the {@code Entity} will be spawned
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B location(final @NonNull Location location) {
         this.location = location;
@@ -514,7 +514,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets the current spawn {@code Location}.
      *
      * @return the current spawn {@code Location}
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull Location location() {
         return this.location;
@@ -525,7 +525,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param customName the custom name
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B customName(final @Nullable Component customName) {
         this.customName = customName;
@@ -536,7 +536,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets the custom name for the {@code Entity}.
      *
      * @return the custom name
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable Component customName() {
         return this.customName;
@@ -546,7 +546,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Gets the list of consumers that will be run when the {@code Entity} is built (spawned).
      *
      * @return the consumers
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull List<Consumer<T>> consumers() {
         return this.consumers;
@@ -557,7 +557,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      *
      * @param consumer the consumer
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B addConsumer(@NonNull Consumer<T> consumer) {
         this.consumers.add(consumer);
@@ -568,7 +568,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * Builds the {@code Entity} from the set properties and spawns it into the world.
      *
      * @return the built {@code Entity}
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public T build() {
         Consumer<T> finalConsumer = entity -> {

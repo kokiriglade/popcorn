@@ -1,6 +1,7 @@
 package dev.kokiriglade.testplugin;
 
 import com.mojang.brigadier.Command;
+import dev.kokiriglade.popcorn.entity.mob.creature.animal.AxolotlBuilder;
 import dev.kokiriglade.popcorn.item.ItemBuilder;
 import dev.kokiriglade.popcorn.recipe.crafting.ShapedRecipeBuilder;
 import io.papermc.paper.command.brigadier.Commands;
@@ -13,12 +14,12 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
-import org.bukkit.inventory.meta.components.JukeboxPlayableComponent;
 import org.bukkit.plugin.java.JavaPlugin;
 
-@SuppressWarnings("UnstableApiUsage")
+@SuppressWarnings({"UnstableApiUsage", "unused"})
 public final class TestPlugin extends JavaPlugin {
 
     @Override
@@ -53,6 +54,25 @@ public final class TestPlugin extends JavaPlugin {
             Commands commands = event.registrar();
 
             commands.register(
+                Commands.literal("spawn")
+                    .then(Commands.literal("axolotl")
+                        .executes(context -> {
+                            Player player = (Player) context.getSource().getSender();
+
+                            Axolotl axolotl = AxolotlBuilder
+                                .create(player.getLocation().add(0, 1, 0))
+                                .build();
+
+                            player.sendRichMessage("<green>spawned an axolotl</green>");
+
+                            return Command.SINGLE_SUCCESS;
+                        })
+                    )
+                    .requires(commandSourceStack -> commandSourceStack.getSender().isOp() && commandSourceStack.getSender() instanceof Player)
+                    .build()
+            );
+
+            commands.register(
                 Commands.literal("get")
                     .then(Commands.literal("dirt")
                         .executes(context -> {
@@ -82,8 +102,8 @@ public final class TestPlugin extends JavaPlugin {
                             return Command.SINGLE_SUCCESS;
                         })
                     )
-                .requires(commandSourceStack -> commandSourceStack.getSender().isOp() && commandSourceStack.getSender() instanceof Player)
-                .build()
+                    .requires(commandSourceStack -> commandSourceStack.getSender().isOp() && commandSourceStack.getSender() instanceof Player)
+                    .build()
             );
         });
     }

@@ -11,7 +11,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @param <B> the builder type
  * @param <T> the {@link LivingEntity}
- * @since 2.3.0
+ * @since 2.2.2
  */
 @SuppressWarnings({"unchecked", "unused"})
 public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntityBuilder<B, T>, T extends LivingEntity> extends AbstractEntityBuilder<B, T> {
@@ -60,7 +60,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      * Gets the {@code LivingEntity}'s remaining air ticks.
      *
      * @return the remaining air ticks
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable Integer remainingAirTicks() {
         return remainingAirTicks;
@@ -71,7 +71,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      *
      * @param remainingAirTicks the remaining air ticks
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B remainingAirTicks(final @Nullable Integer remainingAirTicks) {
         this.remainingAirTicks = remainingAirTicks;
@@ -82,7 +82,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      * Gets the {@code LivingEntity}'s no damage ticks.
      *
      * @return the no damage ticks
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable Integer noDamageTicks() {
         return noDamageTicks;
@@ -93,7 +93,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      *
      * @param noDamageTicks the no damage ticks
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B noDamageTicks(final @Nullable Integer noDamageTicks) {
         this.noDamageTicks = noDamageTicks;
@@ -104,7 +104,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      * Gets the {@code LivingEntity}'s max no damage ticks.
      *
      * @return the max no damage ticks
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable Integer maxNoDamageTicks() {
         return maxNoDamageTicks;
@@ -115,9 +115,9 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      *
      * @param maxNoDamageTicks the max no damage ticks
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
-    public B maxNoDamageTicks(final @Nullable Integer maxNoDamageTicks) {
+    public @NonNull B maxNoDamageTicks(final @Nullable Integer maxNoDamageTicks) {
         this.maxNoDamageTicks = maxNoDamageTicks;
         return (B) this;
     }
@@ -126,7 +126,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      * Gets the {@code LivingEntity}'s max air ticks.
      *
      * @return the max air ticks
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable Integer maxAirTicks() {
         return maxAirTicks;
@@ -137,9 +137,9 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      *
      * @param maxAirTicks the max air ticks
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
-    public B maxAirTicks(final @Nullable Integer maxAirTicks) {
+    public @NonNull B maxAirTicks(final @Nullable Integer maxAirTicks) {
         this.maxAirTicks = maxAirTicks;
         return (B) this;
     }
@@ -148,7 +148,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      * Gets the {@code LivingEntity}'s leash holder.
      *
      * @return the leash holder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable Entity leashHolder() {
         return leashHolder;
@@ -159,9 +159,9 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      *
      * @param leashHolder the leash holder
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
-    public B leashHolder(final @Nullable Entity leashHolder) {
+    public @NonNull B leashHolder(final @Nullable Entity leashHolder) {
         this.leashHolder = leashHolder;
         return (B) this;
     }
@@ -170,7 +170,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      * Gets whether the {@code LivingEntity} is jumping.
      *
      * @return whether the {@code LivingEntity} is jumping
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean jumping() {
         return this.gliding;
@@ -181,7 +181,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      *
      * @param flag whether the {@code LivingEntity} is jumping
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B jumping(final boolean flag) {
         this.jumping = flag;
@@ -192,7 +192,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      * Gets whether the {@code LivingEntity} is gliding.
      *
      * @return whether the {@code LivingEntity} is gliding
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean gliding() {
         return this.gliding;
@@ -203,7 +203,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      *
      * @param flag whether the {@code LivingEntity} is gliding
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B gliding(final boolean flag) {
         this.gliding = flag;
@@ -214,7 +214,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      * Gets whether the {@code LivingEntity} is collidable.
      *
      * @return whether the {@code LivingEntity} is collidable
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean collidable() {
         return this.collidable;
@@ -225,7 +225,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      *
      * @param flag whether the {@code LivingEntity} is collidable
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B collidable(final boolean flag) {
         this.collidable = flag;
@@ -236,7 +236,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      * Gets whether the {@code LivingEntity} can pick up items.
      *
      * @return whether the {@code LivingEntity} can pick up items
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean canPickupItems() {
         return this.canPickupItems;
@@ -247,7 +247,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      *
      * @param flag whether the {@code LivingEntity} can pick up items
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B canPickupItems(final boolean flag) {
         this.canPickupItems = flag;
@@ -258,7 +258,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      * Gets whether the {@code LivingEntity} will have AI.
      *
      * @return whether the {@code LivingEntity} will have AI
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public boolean ai() {
         return this.ai;
@@ -269,7 +269,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      *
      * @param flag whether the {@code LivingEntity} will have AI
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B ai(final boolean flag) {
         this.ai = flag;
@@ -280,7 +280,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      * Gets how many arrows will be in the {@code LivingEntity}'s body.
      *
      * @return quantity of arrows
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public int arrowsInBody() {
         return this.arrowsInBody;
@@ -291,7 +291,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      *
      * @param quantity how many bee stingers
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B beeStingersInBody(final int quantity) {
         this.beeStingersInBody = quantity;
@@ -302,7 +302,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      * Gets how many bee stingers will be in the {@code LivingEntity}'s body.
      *
      * @return quantity of bee stingers
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public int beeStingersInBody() {
         return this.beeStingersInBody;
@@ -312,7 +312,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      * Gets the {@code LivingEntity}'s body yaw.
      *
      * @return the body yaw
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable Float bodyYaw() {
         return bodyYaw;
@@ -323,7 +323,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      *
      * @param bodyYaw the body yaw
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B bodyYaw(final @Nullable Float bodyYaw) {
         this.bodyYaw = bodyYaw;
@@ -335,7 +335,7 @@ public abstract class AbstractLivingEntityBuilder<B extends AbstractLivingEntity
      *
      * @param quantity how many arrows
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B arrowsInBody(final int quantity) {
         this.arrowsInBody = quantity;

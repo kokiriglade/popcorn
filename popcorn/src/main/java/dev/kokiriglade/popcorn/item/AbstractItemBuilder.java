@@ -502,7 +502,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * @return the builder
      * @since 1.0.0
      */
-    public B maxStackSize(@Nullable @IntRange(from = 1, to = 99) Integer maxStackSize) {
+    public @NonNull B maxStackSize(@Nullable @IntRange(from = 1, to = 99) Integer maxStackSize) {
         itemMeta.setMaxStackSize(maxStackSize);
         return (B) this;
     }
@@ -708,7 +708,7 @@ public abstract class AbstractItemBuilder<B extends AbstractItemBuilder<B, M>, M
      * @return the builder
      * @since 1.1.0
      */
-    public B fireResistant(boolean fireResistant) {
+    public @NonNull B fireResistant(boolean fireResistant) {
         this.itemMeta.setFireResistant(fireResistant);
         return (B) this;
     }

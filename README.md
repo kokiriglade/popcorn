@@ -4,8 +4,8 @@
 ![GitHub Release](https://img.shields.io/github/v/release/celerry/popcorn)
 ![GitHub License](https://img.shields.io/github/license/celerry/popcorn)
 
-
-started off as a fork of [corn](https://github.com/broccolai/corn), but just their `ItemBuilder` component. now aiming to write general utils & builders for the [paper](https://github.com/PaperMC/paper) API.
+started off as a fork of [corn](https://github.com/broccolai/corn), but just their `ItemBuilder` component. now aiming
+to write general utils & builders for the [paper](https://github.com/PaperMC/paper) API.
 
 ## usage
 
@@ -37,6 +37,7 @@ repositories {
 ```
 
 ### step 2: include the dependency
+
 ```kotlin
 dependencies {
     implementation("dev.kokiriglade:popcorn:VERSION")
@@ -44,6 +45,7 @@ dependencies {
 ```
 
 ### step 3: relocate the dependency
+
 1. apply the `shadow` plugin:
     ```kotlin
     plugins {
@@ -60,8 +62,9 @@ dependencies {
     ```
 
 ### authenticate with GitHub Packages
+
 ensure you provide your GitHub username and a personal access token.
-store these in `~/.gradle/gradle.properties` for  convenience.
+store these in `~/.gradle/gradle.properties` for convenience.
 
 ```properties
 gpr.user=your_github_username

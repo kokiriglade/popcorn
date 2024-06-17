@@ -8,7 +8,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 /**
  * Modifies {@link Axolotl}s
  *
- * @since 2.3.0
+ * @since 2.2.2
  */
 @SuppressWarnings("unused")
 public final class AxolotlBuilder extends AbstractAnimalBuilder<AxolotlBuilder, Axolotl> {
@@ -31,9 +31,9 @@ public final class AxolotlBuilder extends AbstractAnimalBuilder<AxolotlBuilder, 
     /**
      * Creates an {@code AxolotlBuilder}.
      *
-     * @param location the {@code Location} to spawn the Armadillo at
+     * @param location the {@code Location} to spawn the Axolotl at
      * @return instance of {@code AxolotlBuilder}
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public static @NonNull AxolotlBuilder create(final @NonNull Location location) {
         return new AxolotlBuilder(location);
@@ -43,7 +43,7 @@ public final class AxolotlBuilder extends AbstractAnimalBuilder<AxolotlBuilder, 
      * Gets whether the {@code Axolotl} is playing dead.
      *
      * @return the playing dead state
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable Boolean playingDead() {
         return playingDead;
@@ -54,7 +54,7 @@ public final class AxolotlBuilder extends AbstractAnimalBuilder<AxolotlBuilder, 
      *
      * @param playingDead the playing dead state
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull AxolotlBuilder playingDead(final @Nullable Boolean playingDead) {
         this.playingDead = playingDead;
@@ -65,7 +65,7 @@ public final class AxolotlBuilder extends AbstractAnimalBuilder<AxolotlBuilder, 
      * Gets the {@code Axolotl}'s variant.
      *
      * @return the variant
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public Axolotl.@Nullable Variant variant() {
         return variant;
@@ -76,7 +76,7 @@ public final class AxolotlBuilder extends AbstractAnimalBuilder<AxolotlBuilder, 
      *
      * @param variant the variant
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull AxolotlBuilder variant(final Axolotl.@Nullable Variant variant) {
         this.variant = variant;

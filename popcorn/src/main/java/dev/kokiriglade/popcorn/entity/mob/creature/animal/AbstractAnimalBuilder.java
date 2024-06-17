@@ -13,7 +13,7 @@ import java.util.UUID;
  *
  * @param <B> the builder type
  * @param <T> the entity type
- * @since 2.3.0
+ * @since 2.2.2
  */
 @SuppressWarnings({"unchecked", "unused"})
 public abstract class AbstractAnimalBuilder<B extends AbstractBreedableBuilder<B, T>, T extends Animals> extends AbstractBreedableBuilder<B, T> {
@@ -35,7 +35,7 @@ public abstract class AbstractAnimalBuilder<B extends AbstractBreedableBuilder<B
      * Gets the ticks this {@code Animal} is in love mode.
      *
      * @return the ticks
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable Integer loveModeTicks() {
         return this.loveModeTicks;
@@ -46,7 +46,7 @@ public abstract class AbstractAnimalBuilder<B extends AbstractBreedableBuilder<B
      *
      * @param ticks the ticks
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B loveModeTicks(@Nullable Integer ticks) {
         this.loveModeTicks = ticks;
@@ -57,7 +57,7 @@ public abstract class AbstractAnimalBuilder<B extends AbstractBreedableBuilder<B
      * Gets the UUID of the entity that caused this {@code Animal} to be in love mode.
      *
      * @return the ticks
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable UUID breedCause() {
         return this.breedCause;
@@ -68,7 +68,7 @@ public abstract class AbstractAnimalBuilder<B extends AbstractBreedableBuilder<B
      *
      * @param uuid the uuid
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B breedCause(@Nullable UUID uuid) {
         this.breedCause = uuid;

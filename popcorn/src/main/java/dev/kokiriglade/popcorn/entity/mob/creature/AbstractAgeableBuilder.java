@@ -11,7 +11,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  *
  * @param <B> the builder type
  * @param <T> the entity type
- * @since 2.3.0
+ * @since 2.2.2
  */
 @SuppressWarnings({"unused", "unchecked"})
 public abstract class AbstractAgeableBuilder<B extends AbstractLivingEntityBuilder<B, T>, T extends Ageable> extends AbstractLivingEntityBuilder<B, T> {
@@ -39,7 +39,7 @@ public abstract class AbstractAgeableBuilder<B extends AbstractLivingEntityBuild
      * Gets the {@code Entity}'s age.
      *
      * @return the age
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable Integer age() {
         return this.age;
@@ -50,7 +50,7 @@ public abstract class AbstractAgeableBuilder<B extends AbstractLivingEntityBuild
      *
      * @param age the age
      * @return the builder
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B age(@Nullable Integer age) {
         this.age = age;
@@ -61,7 +61,7 @@ public abstract class AbstractAgeableBuilder<B extends AbstractLivingEntityBuild
      * Gets whether the {@code Entity} is an adult.
      *
      * @return the adult state
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable Boolean adult() {
         return this.adult;
@@ -71,7 +71,7 @@ public abstract class AbstractAgeableBuilder<B extends AbstractLivingEntityBuild
      * Sets the {@code Entity} to be an adult.
      *
      * @return the adult state
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B setAdult() {
         this.adult = true;
@@ -83,7 +83,7 @@ public abstract class AbstractAgeableBuilder<B extends AbstractLivingEntityBuild
      * Gets whether the {@code Entity} is a baby.
      *
      * @return the baby state
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @Nullable Boolean baby() {
         return this.baby;
@@ -93,7 +93,7 @@ public abstract class AbstractAgeableBuilder<B extends AbstractLivingEntityBuild
      * Sets the {@code Entity} to be a baby.
      *
      * @return the baby state
-     * @since 2.3.0
+     * @since 2.2.2
      */
     public @NonNull B setBaby() {
         this.baby = true;

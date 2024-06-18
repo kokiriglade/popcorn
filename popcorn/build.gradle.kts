@@ -49,5 +49,17 @@ configure<PublishingExtension> {
                 password = project.findProperty("gpr.token") as String? ?: System.getenv("GITHUB_TOKEN")
             }
         }
+        maven {
+            name = "celerry"
+            url = uri("https://repo.celerry.com/releases")
+            credentials {
+                username = project.findProperty("celerryUsername") as String? ?: System.getenv("CELERRY_NAME")
+                password = project.findProperty("celerryPassword") as String? ?: System.getenv("CELERRY_PASS")
+            }
+            credentials(PasswordCredentials::class)
+            authentication {
+                create<BasicAuthentication>("basic")
+            }
+        }
     }
 }

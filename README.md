@@ -1,6 +1,6 @@
 # popcorn
 
-[![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://celerry.github.io/popcorn/javadoc/)
+[![Javadoc](https://img.shields.io/badge/JavaDoc-Online-green)](https://repo.celerry.com/javadoc/releases/dev/kokiriglade/popcorn/latest)
 ![GitHub Release](https://img.shields.io/github/v/release/celerry/popcorn)
 ![GitHub License](https://img.shields.io/github/license/celerry/popcorn)
 
@@ -11,11 +11,11 @@ to write general utils & builders for the [paper](https://github.com/PaperMC/pap
 
 to use with gradle, follow these steps:
 
-1. add the GitHub Packages repository
+1. add the maven repository
 2. include the dependency
 3. relocate the dependency to avoid conflicts
 
-### step 1: add the GitHub Packages Repository
+### step 1: add the maven repo
 
 Configure your `build.gradle.kts` to include the GitHub Packages repository with authentication.
 
@@ -27,11 +27,7 @@ plugins {
 repositories {
     mavenCentral()
     maven {
-        url = uri("https://maven.pkg.github.com/celerry/popcorn")
-        credentials {
-            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
-            password = project.findProperty("gpr.token") ?: System.getenv("GITHUB_TOKEN")
-        }
+        url = uri("https://repo.celerry.com/releases")
     }
 }
 ```
@@ -39,8 +35,8 @@ repositories {
 ### step 2: include the dependency
 
 ```kotlin
-dependencies {
-    implementation("dev.kokiriglade:popcorn:VERSION")
+dependencies { 
+    implementation("dev.kokiriglade:popcorn:2.2.2")
 }
 ```
 
@@ -60,13 +56,3 @@ dependencies {
         }
     }
     ```
-
-### authenticate with GitHub Packages
-
-ensure you provide your GitHub username and a personal access token.
-store these in `~/.gradle/gradle.properties` for convenience.
-
-```properties
-gpr.user=your_github_username
-gpr.token=your_github_token
-```

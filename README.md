@@ -36,7 +36,7 @@ repositories {
 
 ```kotlin
 dependencies { 
-    implementation("dev.kokiriglade:popcorn:2.2.2")
+    implementation("dev.kokiriglade:popcorn:2.2.3")
 }
 ```
 

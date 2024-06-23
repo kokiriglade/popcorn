@@ -21,7 +21,7 @@ import java.util.Locale;
 import java.util.Set;
 
 /**
- * Replaces text with the "small caps" font.
+ * Replaces text inside the tag with the "small caps" font.
  *
  * @see SmallFont
  * @since 3.0.0

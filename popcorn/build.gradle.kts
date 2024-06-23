@@ -51,7 +51,7 @@ configure<PublishingExtension> {
         }*/
         maven {
             name = "celerry"
-            url = uri("https://repo.celerry.com/releases")
+            url = uri("https://repo.celerry.com/snapshots")
             credentials {
                 username = project.findProperty("celerryUsername") as String? ?: System.getenv("CELERRY_NAME")
                 password = project.findProperty("celerryPassword") as String? ?: System.getenv("CELERRY_PASS")

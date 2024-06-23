@@ -22,6 +22,7 @@ tasks {
         dependsOn(shadowJar)
     }
     javadoc {
+        options.encoding = Charsets.UTF_8.name()
         enabled = false
     }
     processResources {

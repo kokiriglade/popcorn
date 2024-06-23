@@ -32,10 +32,10 @@ public final class TestPlugin extends JavaPlugin {
                 Commands.literal("test")
                     .executes(context -> {
                         context.getSource().getSender().sendMessage(
-                            Popcorn.miniMessage().deserialize("Test: <sm>Hello World <red>I am red</red></sm>")
+                            Popcorn.miniMessage().deserialize("Test: <sm>Hello World <red>I am red</red></sm>", context.getSource().getSender())
                         );
                         context.getSource().getSender().sendMessage(
-                            Popcorn.miniMessage().deserialize("Yo, check out <a:'https://www.youtube.com/watch?v=dQw4w9WgXcQ'>this cool video I just found</a>")
+                            Popcorn.miniMessage().deserialize("Yo, check out <a:'https://www.youtube.com/watch?v=dQw4w9WgXcQ'>this cool video I just found</a>", context.getSource().getSender())
                         );
 
                             return Command.SINGLE_SUCCESS;

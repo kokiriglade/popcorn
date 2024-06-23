@@ -13,9 +13,11 @@ import net.kyori.adventure.text.minimessage.tag.Tag;
 import net.kyori.adventure.text.minimessage.tag.resolver.ArgumentQueue;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.minimessage.tree.Node;
+import org.bukkit.command.ConsoleCommandSender;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
+import java.util.Locale;
 import java.util.Set;
 
 /**
@@ -25,6 +27,12 @@ import java.util.Set;
  * @since 3.0.0
  */
 class SmallTag implements Modifying {
+
+    private final boolean console;
+
+    private SmallTag(boolean console) {
+        this.console = console;
+    }
 
     private static final ComponentFlattener LENGTH_CALCULATOR = ComponentFlattener.builder()
         .mapper(TextComponent.class, TextComponent::content)
@@ -37,7 +45,13 @@ class SmallTag implements Modifying {
     private int size = 0;
 
     static Tag create(final ArgumentQueue args, final Context ctx) {
-        return new SmallTag();
+        if (ctx.target() != null) {
+            if (ctx.target() instanceof ConsoleCommandSender) {
+                return new SmallTag(true);
+            }
+        }
+
+        return new SmallTag(false);
     }
 
     protected final int size() {
@@ -70,7 +84,12 @@ class SmallTag implements Modifying {
     public Component apply(@NotNull Component current, int depth) {
         if (current instanceof TextComponent textComponent && ((TextComponent) current).content().length() > 0) {
             final String content = textComponent.content();
-            current = Component.text(SmallFont.convert(content));
+
+            if(!console) {
+                current = Component.text(SmallFont.convert(content));
+            } else {
+                current = Component.text(content.toUpperCase(Locale.ROOT));
+            }
 
             return current;
         } else if (!(current instanceof TextComponent)) {

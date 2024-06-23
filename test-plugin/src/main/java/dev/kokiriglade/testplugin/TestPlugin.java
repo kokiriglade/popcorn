@@ -1,9 +1,9 @@
 package dev.kokiriglade.testplugin;
 
 import com.mojang.brigadier.Command;
-import dev.kokiriglade.popcorn.entity.mob.creature.animal.AxolotlBuilder;
-import dev.kokiriglade.popcorn.item.ItemBuilder;
-import dev.kokiriglade.popcorn.recipe.crafting.ShapedRecipeBuilder;
+import dev.kokiriglade.popcorn.builder.entity.mob.creature.animal.AxolotlBuilder;
+import dev.kokiriglade.popcorn.builder.item.ItemBuilder;
+import dev.kokiriglade.popcorn.builder.recipe.crafting.ShapedRecipeBuilder;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import net.kyori.adventure.text.Component;

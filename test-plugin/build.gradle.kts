@@ -1,6 +1,7 @@
 plugins {
     id("java")
     id("io.github.goooler.shadow") version "8.1.7"
+    id("xyz.jpenilla.run-paper") version "2.3.0"
 }
 
 group = "dev.kokiriglade"
@@ -36,6 +37,12 @@ tasks {
     }
     shadowJar {
         relocate("dev.kokiriglade.popcorn", "dev.kokiriglade.testplugin.corn")
+    }
+    runServer {
+        minecraftVersion(rootProject.providers.gradleProperty("mcVersion").get())
+        downloadPlugins {
+            url("https://github.com/PaperMC/Debuggery/releases/download/v1.5.1/debuggery-bukkit-1.5.1.jar")
+        }
     }
 }
 

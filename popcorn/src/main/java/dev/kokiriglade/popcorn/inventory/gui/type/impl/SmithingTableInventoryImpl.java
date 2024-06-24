@@ -32,7 +32,6 @@ import org.jetbrains.annotations.Contract;
  *
  * @since 3.0.0
  */
-@SuppressWarnings("DuplicatedCode")
 public class SmithingTableInventoryImpl extends SmithingTableInventory {
 
     public SmithingTableInventoryImpl(@NonNull InventoryHolder inventoryHolder) {
@@ -40,7 +39,7 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
     }
 
     @Override
-    public void openInventory(@NonNull Player player, net.kyori.adventure.text.@NonNull Component title,
+    public Inventory openInventory(@NonNull Player player, net.kyori.adventure.text.@NonNull Component title,
                                    @Nullable org.bukkit.inventory.ItemStack[] items) {
         int itemAmount = items.length;
 
@@ -73,6 +72,8 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
         serverPlayer.connection.send(new ClientboundOpenScreenPacket(containerId, MenuType.SMITHING, message));
         serverPlayer.containerMenu = containerSmithingTable;
         serverPlayer.initMenu(containerSmithingTable);
+
+        return inventory;
     }
 
     @Override

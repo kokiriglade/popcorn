@@ -31,7 +31,7 @@ import java.util.logging.Level;
  *
  * @since 3.0.0
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused"})
 public class AnvilGui extends NamedGui implements InventoryBased {
 
     /**
@@ -202,6 +202,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
 
     @NonNull
     @Contract(pure = true)
+    @Override
     public Inventory createInventory() {
         return Bukkit.createInventory(this, InventoryType.ANVIL, getTitle());
     }

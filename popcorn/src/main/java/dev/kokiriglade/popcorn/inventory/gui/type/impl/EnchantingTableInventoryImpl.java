@@ -31,7 +31,6 @@ import java.lang.reflect.Field;
  *
  * @since 3.0.0
  */
-@SuppressWarnings("DuplicatedCode")
 public class EnchantingTableInventoryImpl extends EnchantingTableInventory {
 
     public EnchantingTableInventoryImpl(@NonNull InventoryHolder inventoryHolder) {

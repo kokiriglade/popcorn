@@ -1,6 +1,6 @@
 # 🍿 popcorn <a href="https://repo.celerry.com/javadoc/releases/dev/kokiriglade/popcorn/latest"><img align="right" src="https://img.shields.io/badge/JavaDoc-Online-green"></a> <a href="https://github.com/kokiriglade/popcorn/releases/latest"><img src="https://img.shields.io/github/v/release/kokiriglade/popcorn" align="right"></a> <a href="https://github.com/kokiriglade/popcorn/blob/main/LICENSE"><img src="https://img.shields.io/github/license/kokiriglade/popcorn" align="right"></a>
 
-Started off as a  fork of [corn](https://github.com/broccolai/corn), but just their `ItemBuilder` component. Now aiming to write general utilities for the [Paper](https://github.com/PaperMC/paper) API. As of `3.0.0`, popcorn also contains a slightly modified version of [IF](https://github.com/stefvanschie/IF).
+Started off as a  fork of [corn](https://github.com/broccolai/corn), but just their `ItemBuilder` component. Now aiming to write general utilities for the [Paper](https://github.com/PaperMC/paper) API. As of `3.0.0`, popcorn also contains a slightly modified version of [IF](https://github.com/stefvanschie/IF) that only supports [Adventure components](https://docs.advntr.dev/text.html), and has no XML functionality.
 
 Popcorn **only** ever supports the **latest** version of Minecraft, and thus Paper.
 

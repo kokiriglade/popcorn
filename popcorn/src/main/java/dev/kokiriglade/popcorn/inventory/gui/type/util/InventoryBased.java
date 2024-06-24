@@ -1,6 +1,9 @@
 package dev.kokiriglade.popcorn.inventory.gui.type.util;
 
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.Contract;
 
 public interface InventoryBased extends InventoryHolder {
 
@@ -10,5 +13,8 @@ public interface InventoryBased extends InventoryHolder {
      * @return the new inventory
      * @since 3.0.0
      */
+    @NonNull
+    @Contract(pure = true)
+    Inventory createInventory();
 
 }

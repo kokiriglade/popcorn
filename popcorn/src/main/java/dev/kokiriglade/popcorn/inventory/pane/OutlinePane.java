@@ -16,7 +16,7 @@ import java.util.*;
 /**
  * A pane for items that should be outlined
  */
-@SuppressWarnings({"unused", "DuplicatedCode"})
+@SuppressWarnings({"unused"})
 public class OutlinePane extends Pane implements Flippable, Orientable, Rotatable {
 
     /**

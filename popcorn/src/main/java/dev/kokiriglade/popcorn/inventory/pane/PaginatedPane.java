@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 /**
  * A pane for panes that should be spread out over multiple pages
  */
-@SuppressWarnings({"DuplicatedCode", "unused"})
+@SuppressWarnings({"unused"})
 public class PaginatedPane extends Pane {
 
     /**

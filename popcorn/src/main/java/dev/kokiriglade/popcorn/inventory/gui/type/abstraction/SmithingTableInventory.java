@@ -39,7 +39,7 @@ public abstract class SmithingTableInventory {
      * @param items the top items
      * @since 3.0.0
      */
-    public abstract void openInventory(@NonNull Player player, @NonNull Component title, @Nullable ItemStack[] items);
+    public abstract Inventory openInventory(@NonNull Player player, @NonNull Component title, @Nullable ItemStack[] items);
 
     /**
      * Sends the top items to the inventory for the specified player.

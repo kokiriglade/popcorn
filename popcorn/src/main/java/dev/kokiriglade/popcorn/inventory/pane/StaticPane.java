@@ -25,7 +25,7 @@ import java.util.function.Consumer;
  * the same pane. It's recommended to only use one of these systems per pane and to not mix them.
  * </p>
  */
-@SuppressWarnings({"unused", "DuplicatedCode"})
+@SuppressWarnings({"unused"})
 public class StaticPane extends Pane implements Flippable, Rotatable {
 
     /**

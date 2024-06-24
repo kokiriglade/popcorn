@@ -1,4 +1,4 @@
-# popcorn <a href="https://repo.celerry.com/javadoc/releases/dev/kokiriglade/popcorn/latest"><img align="right" src="https://img.shields.io/badge/JavaDoc-Online-green"></a> <a href="https://github.com/celerry/popcorn/releases/latest"><img src="https://img.shields.io/github/v/release/celerry/popcorn" align="right"></a> <a href="https://github.com/celerry/popcorn/blob/main/LICENSE"><img src="https://img.shields.io/github/license/celerry/popcorn" align="right"></a>
+# popcorn <a href="https://repo.celerry.com/javadoc/releases/dev/kokiriglade/popcorn/latest"><img align="right" src="https://img.shields.io/badge/JavaDoc-Online-green"></a> <a href="https://github.com/kokiriglade/popcorn/releases/latest"><img src="https://img.shields.io/github/v/release/kokiriglade/popcorn" align="right"></a> <a href="https://github.com/kokiriglade/popcorn/blob/main/LICENSE"><img src="https://img.shields.io/github/license/kokiriglade/popcorn" align="right"></a>
 
 Started off as a  fork of [corn](https://github.com/broccolai/corn), but just their `ItemBuilder` component. now aiming
 to write general utilities & builders for the [Paper](https://github.com/PaperMC/paper) API.

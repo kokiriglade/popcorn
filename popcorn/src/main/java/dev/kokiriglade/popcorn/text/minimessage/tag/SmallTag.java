@@ -20,6 +20,8 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.Set;
 
+import static net.kyori.adventure.text.Component.text;
+
 /**
  * Replaces text inside the tag with the "small caps" font.
  *
@@ -86,9 +88,9 @@ class SmallTag implements Modifying {
             final String content = textComponent.content();
 
             if(!console) {
-                current = Component.text(SmallFont.convert(content));
+                current = text(SmallFont.convert(content));
             } else {
-                current = Component.text(content.toUpperCase(Locale.ROOT));
+                current = text(content.toUpperCase(Locale.ROOT));
             }
 
             return current;

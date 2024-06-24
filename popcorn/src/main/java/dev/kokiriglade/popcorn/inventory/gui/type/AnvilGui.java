@@ -18,7 +18,6 @@ import org.bukkit.plugin.Plugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -74,7 +73,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
     /**
      * The viewers of this gui
      */
-    @NotNull
+    @NonNull
     private final Collection<HumanEntity> viewers = new HashSet<>();
 
     /**
@@ -83,7 +82,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @param title the title/name of this gui.
      * @since 3.0.0
      */
-    public AnvilGui(@NotNull Component title) {
+    public AnvilGui(@NonNull Component title) {
         super(title);
 
         this.anvilInventory.subscribeToNameInputChanges(this::callOnRename);
@@ -97,14 +96,14 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @see #AnvilGui(Component)
      * @since 3.0.0
      */
-    public AnvilGui(@NotNull Component title, @NotNull Plugin plugin) {
+    public AnvilGui(@NonNull Component title, @NonNull Plugin plugin) {
         super(title, plugin);
 
         this.anvilInventory.subscribeToNameInputChanges(this::callOnRename);
     }
 
     @Override
-    public void show(@NotNull HumanEntity humanEntity) {
+    public void show(@NonNull HumanEntity humanEntity) {
         if (!(humanEntity instanceof Player)) {
             throw new IllegalArgumentException("Anvils can only be opened by players");
         }
@@ -139,7 +138,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
         this.viewers.add(humanEntity);
     }
 
-    @NotNull
+    @NonNull
     @Contract(pure = true)
     @Override
     public AnvilGui copy() {
@@ -160,7 +159,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
     }
 
     @Override
-    public void click(@NotNull InventoryClickEvent event) {
+    public void click(@NonNull InventoryClickEvent event) {
         int rawSlot = event.getRawSlot();
 
         if (rawSlot == 0) {
@@ -174,7 +173,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
         }
     }
 
-    @NotNull
+    @NonNull
     @Override
     public Inventory getInventory() {
         if (this.inventory == null) {
@@ -201,7 +200,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
         this.anvilInventory.setCost(cost);
     }
 
-    @NotNull
+    @NonNull
     @Contract(pure = true)
     public Inventory createInventory() {
         return Bukkit.createInventory(this, InventoryType.ANVIL, getTitle());
@@ -214,7 +213,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @since 3.0.0
      * @see org.bukkit.inventory.AnvilInventory#getRenameText()
      */
-    @NotNull
+    @NonNull
     @Contract(pure = true)
     public String getRenameText() {
         return anvilInventory.getRenameText();
@@ -232,7 +231,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
         return this.viewers.size();
     }
 
-    @NotNull
+    @NonNull
     @Contract(pure = true)
     @Override
     public List<HumanEntity> getViewers() {
@@ -247,7 +246,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @deprecated no longer used internally
      */
     @Deprecated
-    public void handleClickEvent(@NotNull InventoryClickEvent event) {
+    public void handleClickEvent(@NonNull InventoryClickEvent event) {
         int slot = event.getRawSlot();
         Player player = (Player) event.getWhoClicked();
 
@@ -282,7 +281,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @param humanEntity the human entity closing the gui
      * @since 3.0.0
      */
-    public void handleClose(@NotNull HumanEntity humanEntity) {
+    public void handleClose(@NonNull HumanEntity humanEntity) {
         this.viewers.remove(humanEntity);
     }
 
@@ -294,7 +293,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @param onNameInputChanged the consumer to call when the rename input is changed
      * @since 3.0.0
      */
-    public void setOnNameInputChanged(@NotNull Consumer<? super String> onNameInputChanged) {
+    public void setOnNameInputChanged(@NonNull Consumer<? super String> onNameInputChanged) {
         this.onNameInputChanged = onNameInputChanged;
     }
 
@@ -305,7 +304,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @param newInput the new rename input
      * @since 3.0.0
      */
-    private void callOnRename(@NotNull String newInput) {
+    private void callOnRename(@NonNull String newInput) {
         try {
             this.onNameInputChanged.accept(newInput);
         } catch (Throwable throwable) {
@@ -321,7 +320,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @return the first item component
      * @since 3.0.0
      */
-    @NotNull
+    @NonNull
     @Contract(pure = true)
     public InventoryComponent getFirstItemComponent() {
         return firstItemComponent;
@@ -333,7 +332,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @return the second item component
      * @since 3.0.0
      */
-    @NotNull
+    @NonNull
     @Contract(pure = true)
     public InventoryComponent getSecondItemComponent() {
         return secondItemComponent;
@@ -345,7 +344,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @return the result component
      * @since 3.0.0
      */
-    @NotNull
+    @NonNull
     @Contract(pure = true)
     public InventoryComponent getResultComponent() {
         return resultComponent;
@@ -357,7 +356,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @return the player inventory component
      * @since 3.0.0
      */
-    @NotNull
+    @NonNull
     @Contract(pure = true)
     public InventoryComponent getPlayerInventoryComponent() {
         return playerInventoryComponent;

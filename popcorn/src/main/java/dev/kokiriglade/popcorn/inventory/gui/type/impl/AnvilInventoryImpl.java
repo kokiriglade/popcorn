@@ -28,6 +28,11 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.Contract;
 
+/**
+ * Internal anvil inventory
+ *
+ * @since 3.0.0
+ */
 public class AnvilInventoryImpl extends AnvilInventory {
 
     public AnvilInventoryImpl(@NonNull InventoryHolder inventoryHolder) {

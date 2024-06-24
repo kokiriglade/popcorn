@@ -40,7 +40,7 @@ public class AnvilInventoryImpl extends AnvilInventory {
     }
 
     @Override
-    public Inventory openInventory(@NonNull Player player, @NonNull Component title, @Nullable org.bukkit.inventory.ItemStack[] items) {
+    public Inventory openInventory(@NonNull Player player, @NonNull Component title, org.bukkit.inventory.@Nullable ItemStack[] items) {
         int itemAmount = items.length;
 
         if (itemAmount != 3) {
@@ -75,7 +75,7 @@ public class AnvilInventoryImpl extends AnvilInventory {
     }
 
     @Override
-    public void sendItems(@NonNull Player player, @Nullable org.bukkit.inventory.ItemStack[] items) {
+    public void sendItems(@NonNull Player player, org.bukkit.inventory.@Nullable ItemStack[] items) {
         NonNullList<ItemStack> nmsItems = CustomInventoryUtil.convertToNMSItems(items);
         ServerPlayer serverPlayer = getServerPlayer(player);
         int containerId = serverPlayer.containerMenu.containerId;

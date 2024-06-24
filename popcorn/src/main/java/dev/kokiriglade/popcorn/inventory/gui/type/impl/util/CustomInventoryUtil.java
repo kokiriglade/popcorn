@@ -29,7 +29,7 @@ public final class CustomInventoryUtil {
      */
     @NonNull
     @Contract(pure = true)
-    public static NonNullList<ItemStack> convertToNMSItems(@Nullable org.bukkit.inventory.ItemStack @NonNull [] items) {
+    public static NonNullList<ItemStack> convertToNMSItems(org.bukkit.inventory.@Nullable ItemStack @NonNull [] items) {
         NonNullList<ItemStack> nmsItems = NonNullList.create();
 
         for (org.bukkit.inventory.ItemStack item : items) {

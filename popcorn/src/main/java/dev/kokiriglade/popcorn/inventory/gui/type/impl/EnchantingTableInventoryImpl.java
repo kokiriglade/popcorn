@@ -39,7 +39,7 @@ public class EnchantingTableInventoryImpl extends EnchantingTableInventory {
 
     @Override
     public void openInventory(@NonNull Player player, net.kyori.adventure.text.@NonNull Component title,
-                              @Nullable org.bukkit.inventory.ItemStack[] items) {
+                              org.bukkit.inventory.@Nullable ItemStack[] items) {
         int itemAmount = items.length;
 
         if (itemAmount != 2) {
@@ -64,7 +64,7 @@ public class EnchantingTableInventoryImpl extends EnchantingTableInventory {
     }
 
     @Override
-    public void sendItems(@NonNull Player player, @Nullable org.bukkit.inventory.ItemStack[] items) {
+    public void sendItems(@NonNull Player player, org.bukkit.inventory.@Nullable ItemStack[] items) {
         NonNullList<ItemStack> nmsItems = NonNullList.of(
             ItemStack.EMPTY,
             CraftItemStack.asNMSCopy(items[0]),
@@ -153,7 +153,7 @@ public class EnchantingTableInventoryImpl extends EnchantingTableInventory {
         private final Field enchantSlotsField;
 
         public ContainerEnchantingTableImpl(@NonNull ServerPlayer serverPlayer,
-                                            @Nullable org.bukkit.inventory.ItemStack[] items,
+                                            org.bukkit.inventory.@Nullable ItemStack[] items,
                                             @NonNull Component title) {
             super(serverPlayer.nextContainerCounter(), serverPlayer.getInventory());
 

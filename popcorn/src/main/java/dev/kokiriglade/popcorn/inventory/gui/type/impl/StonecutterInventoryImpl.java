@@ -39,7 +39,7 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
 
     @Override
     public void openInventory(@NonNull Player player, net.kyori.adventure.text.@NonNull Component title,
-                              @Nullable org.bukkit.inventory.ItemStack[] items) {
+                              org.bukkit.inventory.@Nullable ItemStack[] items) {
         int itemAmount = items.length;
 
         if (itemAmount != 2) {
@@ -63,7 +63,7 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
     }
 
     @Override
-    public void sendItems(@NonNull Player player, @Nullable org.bukkit.inventory.ItemStack[] items) {
+    public void sendItems(@NonNull Player player, org.bukkit.inventory.@Nullable ItemStack[] items) {
         NonNullList<ItemStack> nmsItems = NonNullList.of(
             ItemStack.EMPTY,
             CraftItemStack.asNMSCopy(items[0]),
@@ -151,7 +151,7 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
         private final Field resultContainerField;
 
         public ContainerStonecutterImpl(@NonNull ServerPlayer entityPlayer,
-                                        @Nullable org.bukkit.inventory.ItemStack[] items, @NonNull Component title) {
+                                        org.bukkit.inventory.@Nullable ItemStack[] items, @NonNull Component title) {
             super(entityPlayer.nextContainerCounter(), entityPlayer.getInventory());
 
             this.player = entityPlayer.getBukkitEntity();

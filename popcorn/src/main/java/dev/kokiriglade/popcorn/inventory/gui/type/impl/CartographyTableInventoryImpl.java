@@ -40,7 +40,7 @@ public class CartographyTableInventoryImpl extends CartographyTableInventory {
 
     @Override
     public void openInventory(@NonNull Player player, net.kyori.adventure.text.@NonNull Component title,
-                              @Nullable org.bukkit.inventory.ItemStack[] items) {
+                              org.bukkit.inventory.@Nullable ItemStack[] items) {
         int itemAmount = items.length;
 
         if (itemAmount != 3) {
@@ -67,7 +67,7 @@ public class CartographyTableInventoryImpl extends CartographyTableInventory {
     }
 
     @Override
-    public void sendItems(@NonNull Player player, @Nullable org.bukkit.inventory.ItemStack[] items) {
+    public void sendItems(@NonNull Player player, org.bukkit.inventory.@Nullable ItemStack[] items) {
         NonNullList<ItemStack> nmsItems = CustomInventoryUtil.convertToNMSItems(items);
         ServerPlayer serverPlayer = getServerPlayer(player);
         int containerId = getContainerId(serverPlayer);
@@ -150,7 +150,7 @@ public class CartographyTableInventoryImpl extends CartographyTableInventory {
         private final Field resultContainerField;
 
         public ContainerCartographyTableImpl(@NonNull ServerPlayer serverPlayer,
-                                             @Nullable org.bukkit.inventory.ItemStack[] items,
+                                             org.bukkit.inventory.@Nullable ItemStack[] items,
                                              @NonNull Component title) {
             super(serverPlayer.nextContainerCounter(), serverPlayer.getInventory());
 

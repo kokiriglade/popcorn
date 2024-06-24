@@ -40,7 +40,7 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
 
     @Override
     public Inventory openInventory(@NonNull Player player, net.kyori.adventure.text.@NonNull Component title,
-                                   @Nullable org.bukkit.inventory.ItemStack[] items) {
+                                   org.bukkit.inventory.@Nullable ItemStack[] items) {
         int itemAmount = items.length;
 
         if (itemAmount != 4) {
@@ -77,7 +77,7 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
     }
 
     @Override
-    public void sendItems(@NonNull Player player, @Nullable org.bukkit.inventory.ItemStack[] items,
+    public void sendItems(@NonNull Player player, org.bukkit.inventory.@Nullable ItemStack[] items,
                           org.bukkit.inventory.@Nullable ItemStack cursor) {
         NonNullList<ItemStack> nmsItems = CustomInventoryUtil.convertToNMSItems(items);
         ServerPlayer serverPlayer = getServerPlayer(player);

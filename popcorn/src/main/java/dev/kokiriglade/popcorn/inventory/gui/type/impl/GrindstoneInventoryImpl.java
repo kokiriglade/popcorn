@@ -38,7 +38,7 @@ public class GrindstoneInventoryImpl extends GrindstoneInventory {
 
     @Override
     public Inventory openInventory(@NonNull Player player, net.kyori.adventure.text.@NonNull Component title,
-                                   @Nullable org.bukkit.inventory.ItemStack[] items) {
+                                   org.bukkit.inventory.@Nullable ItemStack[] items) {
         int itemAmount = items.length;
 
         if (itemAmount != 3) {
@@ -74,7 +74,7 @@ public class GrindstoneInventoryImpl extends GrindstoneInventory {
     }
 
     @Override
-    public void sendItems(@NonNull Player player, @Nullable org.bukkit.inventory.ItemStack[] items,
+    public void sendItems(@NonNull Player player, org.bukkit.inventory.@Nullable ItemStack[] items,
                           org.bukkit.inventory.@NonNull ItemStack cursor) {
 
         NonNullList<ItemStack> nmsItems = CustomInventoryUtil.convertToNMSItems(items);

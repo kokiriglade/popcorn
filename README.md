@@ -1,9 +1,13 @@
 # popcorn <a href="https://repo.celerry.com/javadoc/releases/dev/kokiriglade/popcorn/latest"><img align="right" src="https://img.shields.io/badge/JavaDoc-Online-green"></a> <a href="https://github.com/kokiriglade/popcorn/releases/latest"><img src="https://img.shields.io/github/v/release/kokiriglade/popcorn" align="right"></a> <a href="https://github.com/kokiriglade/popcorn/blob/main/LICENSE"><img src="https://img.shields.io/github/license/kokiriglade/popcorn" align="right"></a>
 
-Started off as a  fork of [corn](https://github.com/broccolai/corn), but just their `ItemBuilder` component. now aiming
-to write general utilities & builders for the [Paper](https://github.com/PaperMC/paper) API.
+Started off as a  fork of [corn](https://github.com/broccolai/corn), but just their `ItemBuilder` component. now aiming to write general utilities for the [Paper](https://github.com/PaperMC/paper) API.
 
-## Gradle dependency
+Popcorn **only** ever supports the **latest** version of Minecraft, and thus Paper.
+
+## Usage
+
+<details>
+<summary><strong>Gradle dependency instructions</strong></summary>
 
 To add this project as a dependency for your Gradle project, make sure your dependencies section of your `build.gradle.kts` looks like the following:
 
@@ -41,7 +45,8 @@ tasks {
     }
 }
 ```
+</details>
 
-## Dependency via plugin.yml
+### Dependency via plugin.yml
 
 popcorn does not support declaring the dependency via the libraries section in the plugin.yml. Please make use of a build tool as described above to use popcorn as a dependency.

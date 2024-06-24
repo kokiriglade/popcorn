@@ -1,10 +1,13 @@
 plugins {
     id("java")
     `maven-publish`
+    id("io.papermc.paperweight.userdev") version "1.7.1"
 }
 
 group = "dev.kokiriglade"
 version = "3.0.0"
+
+paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.REOBF_PRODUCTION
 
 repositories {
     mavenCentral()
@@ -12,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:${properties["mcVersion"]}-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("${properties["mcVersion"]}-R0.1-SNAPSHOT")
 }
 
 java {

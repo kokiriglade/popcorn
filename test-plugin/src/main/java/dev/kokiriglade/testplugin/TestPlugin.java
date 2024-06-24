@@ -5,6 +5,10 @@ import dev.kokiriglade.popcorn.Popcorn;
 import dev.kokiriglade.popcorn.builder.entity.mob.creature.animal.AxolotlBuilder;
 import dev.kokiriglade.popcorn.builder.item.ItemBuilder;
 import dev.kokiriglade.popcorn.builder.recipe.crafting.ShapedRecipeBuilder;
+import dev.kokiriglade.popcorn.inventory.gui.GuiItem;
+import dev.kokiriglade.popcorn.inventory.gui.type.ChestGui;
+import dev.kokiriglade.popcorn.inventory.pane.OutlinePane;
+import dev.kokiriglade.popcorn.inventory.pane.Pane;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import net.kyori.adventure.text.Component;
@@ -18,6 +22,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
 
 @SuppressWarnings({"UnstableApiUsage", "unused"})
@@ -25,21 +30,60 @@ public final class TestPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
-            Commands commands = event.registrar();
+        getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, lifecycleEvent -> {
+            Commands commands = lifecycleEvent.registrar();
 
             commands.register(
                 Commands.literal("test")
                     .executes(context -> {
-                        context.getSource().getSender().sendMessage(
-                            Popcorn.miniMessage().deserialize("Test: <sm>Hello World <red>I am red</red></sm>", context.getSource().getSender())
-                        );
-                        context.getSource().getSender().sendMessage(
-                            Popcorn.miniMessage().deserialize("Yo, check out <a:'https://www.youtube.com/watch?v=dQw4w9WgXcQ'>this cool video I just found</a>", context.getSource().getSender())
-                        );
+                        Player sender = (Player) context.getSource().getSender();
 
-                            return Command.SINGLE_SUCCESS;
+                        ChestGui gui = new ChestGui(3, Component.text("Navigator"));
+
+                        gui.setOnGlobalClick(event -> event.setCancelled(true));
+
+                        OutlinePane background = new OutlinePane(0, 0, 9, 3, Pane.Priority.LOWEST);
+                        background.addItem(new GuiItem(new ItemStack(Material.BLACK_STAINED_GLASS_PANE)));
+                        background.setRepeat(true);
+
+                        gui.addPane(background);
+
+                        OutlinePane navigationPane = new OutlinePane(3, 1, 3, 1);
+
+                        ItemStack shop = new ItemStack(Material.CHEST);
+                        ItemMeta shopMeta = shop.getItemMeta();
+                        shopMeta.displayName(Component.text("Shop"));
+                        shop.setItemMeta(shopMeta);
+
+                        navigationPane.addItem(new GuiItem(shop, event -> {
+                            //navigate to the shop
+                        }));
+
+                        ItemStack beacon = new ItemStack(Material.BEACON);
+                        ItemMeta beaconMeta = beacon.getItemMeta();
+                        beaconMeta.displayName(Component.text("Spawn"));
+                        beacon.setItemMeta(beaconMeta);
+
+                        navigationPane.addItem(new GuiItem(beacon, event -> {
+                            //navigate to spawn
+                        }));
+
+                        ItemStack bed = new ItemStack(Material.RED_BED);
+                        ItemMeta bedMeta = bed.getItemMeta();
+                        bedMeta.displayName(Component.text("Home"));
+                        bed.setItemMeta(bedMeta);
+
+                        navigationPane.addItem(new GuiItem(bed, event -> {
+                            //navigate to home
+                        }));
+
+                        gui.addPane(navigationPane);
+
+                        gui.show(sender);
+
+                        return Command.SINGLE_SUCCESS;
                     })
+                    .requires(commandSourceStack -> commandSourceStack.getSender() instanceof Player)
                     .build()
             );
         });

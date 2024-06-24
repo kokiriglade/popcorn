@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Contract;
 import java.util.Arrays;
 
 /**
- * A mask for {@link OutlinePane}s that specifies in which positions the items should be placed. Objects of this class
+ * A mask for {@link dev.kokiriglade.popcorn.inventory.pane.OutlinePane}s that specifies in which positions the items should be placed. Objects of this class
  * are immutable.
  *
  * @since 3.0.0

@@ -122,7 +122,7 @@ public class InventoryComponent {
      * This will make each pane in this component render their items in this inventory component. The panes are
      * displayed according to their priority, with the lowest priority rendering first and the highest priority (note:
      * highest priority, not {@link Pane.Priority#HIGHEST} priority) rendering last. The items displayed in this
-     * inventory component will be put into the inventory found in {@link InventoryBased#getInventory()}. The slots will
+     * inventory component will be put into the inventory found in {@link dev.kokiriglade.popcorn.inventory.gui.type.util.InventoryBased#getInventory()}. The slots will
      * be placed from the top-right to the bottom-left, continuing from left-to-right, top-to-bottom plus the specified
      * offset. This ordering is different from the normal ordering of the indices of a {@link PlayerInventory}. See for
      * the normal ordering of a {@link PlayerInventory}'s slots its documentation.

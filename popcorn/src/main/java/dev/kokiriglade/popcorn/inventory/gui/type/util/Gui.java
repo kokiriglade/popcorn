@@ -2,6 +2,7 @@ package dev.kokiriglade.popcorn.inventory.gui.type.util;
 
 import dev.kokiriglade.popcorn.inventory.HumanEntityCache;
 import dev.kokiriglade.popcorn.inventory.gui.GuiListener;
+import dev.kokiriglade.popcorn.inventory.pane.Pane;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -142,7 +143,7 @@ public abstract class Gui {
 
     /**
      * Makes a copy of this gui and returns it. This makes a deep copy of the gui. This entails that the underlying
-     * panes will be copied as per their {@link Pane#copy} and miscellaneous data will be copied. The copy of this gui,
+     * panes will be copied as per their {@link Pane#copy()} and miscellaneous data will be copied. The copy of this gui,
      * will however have no viewers even if this gui currently has viewers. With this, cache data for viewers will also
      * be non-existent for the copied gui. The original owning plugin of the gui is preserved, but the plugin will not
      * be deeply copied. The returned gui will never be reference equal to the current gui.

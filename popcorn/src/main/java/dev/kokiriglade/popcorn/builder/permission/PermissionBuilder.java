@@ -156,6 +156,34 @@ public class PermissionBuilder {
     }
 
     /**
+     * Add the permission to the specified parent permission..
+     *
+     * @param string the parent
+     * @param value  the value
+     * @return the builder
+     * @since 3.0.1
+     */
+    public @NonNull PermissionBuilder addParent(final @NonNull String string, final boolean value) {
+        this.permission.addParent(string, value);
+        this.permission.recalculatePermissibles();
+        return this;
+    }
+
+    /**
+     * Add the permission to the specified parent permission..
+     *
+     * @param permission the parent
+     * @param value  the value
+     * @return the builder
+     * @since 3.0.1
+     */
+    public @NonNull PermissionBuilder addParent(final @NonNull Permission permission, final boolean value) {
+        this.permission.addParent(permission, value);
+        this.permission.recalculatePermissibles();
+        return this;
+    }
+
+    /**
      * Builds the {@code Permission} from the set properties.
      *
      * @return the built {@code Permission}

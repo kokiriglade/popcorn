@@ -17,8 +17,7 @@ public abstract class CartographyTableInventory {
     /**
      * The inventory holder
      */
-    @NonNull
-    protected InventoryHolder inventoryHolder;
+    protected @NonNull InventoryHolder inventoryHolder;
 
     /**
      * Creates a new cartography table inventory for the specified inventory holder
@@ -26,7 +25,7 @@ public abstract class CartographyTableInventory {
      * @param inventoryHolder the inventory holder
      * @since 3.0.0
      */
-    public CartographyTableInventory(@NonNull InventoryHolder inventoryHolder) {
+    public CartographyTableInventory(final @NonNull InventoryHolder inventoryHolder) {
         this.inventoryHolder = inventoryHolder;
     }
 
@@ -34,20 +33,20 @@ public abstract class CartographyTableInventory {
      * Opens the inventory for the specified player
      *
      * @param player the player to open the inventory for
-     * @param title the title of the inventory
-     * @param items the top items of the inventory
+     * @param title  the title of the inventory
+     * @param items  the top items of the inventory
      * @since 3.0.0
      */
-    public abstract void openInventory(@NonNull Player player, @NonNull Component title, @Nullable ItemStack[] items);
+    public abstract void openInventory(final @NonNull Player player, final @NonNull Component title, final @Nullable ItemStack @NonNull [] items);
 
     /**
      * Sends the top items to the inventory for the specified player.
      *
      * @param player the player for which to open the cartography table
-     * @param items the top items of the inventory
+     * @param items  the top items of the inventory
      * @since 3.0.0
      */
-    public abstract void sendItems(@NonNull Player player, @Nullable ItemStack[] items);
+    public abstract void sendItems(final @NonNull Player player, final @Nullable ItemStack @NonNull [] items);
 
     /**
      * Clears the cursor of the specified player
@@ -55,5 +54,6 @@ public abstract class CartographyTableInventory {
      * @param player the player to clear the cursor of
      * @since 3.0.0
      */
-    public abstract void clearCursor(@NonNull Player player);
+    public abstract void clearCursor(final @NonNull Player player);
+
 }

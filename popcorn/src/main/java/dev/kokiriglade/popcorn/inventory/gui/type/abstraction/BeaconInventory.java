@@ -16,8 +16,7 @@ public abstract class BeaconInventory {
     /**
      * The inventory holder
      */
-    @NonNull
-    protected InventoryHolder inventoryHolder;
+    protected @NonNull InventoryHolder inventoryHolder;
 
     /**
      * Creates a new beacon inventory for the specified inventory holder
@@ -25,7 +24,7 @@ public abstract class BeaconInventory {
      * @param inventoryHolder the inventory holder
      * @since 3.0.0
      */
-    public BeaconInventory(@NonNull InventoryHolder inventoryHolder) {
+    public BeaconInventory(final @NonNull InventoryHolder inventoryHolder) {
         this.inventoryHolder = inventoryHolder;
     }
 
@@ -33,7 +32,7 @@ public abstract class BeaconInventory {
      * Opens the inventory for the specified player
      *
      * @param player the player to open the inventory for
-     * @param item the item to send
+     * @param item   the item to send
      * @since 3.0.0
      */
     public abstract void openInventory(@NonNull Player player, @Nullable ItemStack item);
@@ -42,7 +41,7 @@ public abstract class BeaconInventory {
      * Sends the top item to the inventory for the specified player.
      *
      * @param player the player for which to open the beacon
-     * @param item the item to send
+     * @param item   the item to send
      * @since 3.0.0
      */
     public abstract void sendItem(@NonNull Player player, @Nullable ItemStack item);
@@ -54,4 +53,5 @@ public abstract class BeaconInventory {
      * @since 3.0.0
      */
     public abstract void clearCursor(@NonNull Player player);
+
 }

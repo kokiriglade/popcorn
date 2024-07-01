@@ -29,10 +29,10 @@ public final class HumanEntityCache {
      * @param humanEntity the human entity to keep in the cache
      * @since 3.0.0
      */
-    public void storeAndClear(@NonNull HumanEntity humanEntity) {
+    public void storeAndClear(final @NonNull HumanEntity humanEntity) {
         store(humanEntity);
 
-        Inventory inventory = humanEntity.getInventory();
+        final Inventory inventory = humanEntity.getInventory();
         for (int i = 0; i < 36; i++) {
             inventory.clear(i);
         }
@@ -45,7 +45,7 @@ public final class HumanEntityCache {
      * @param humanEntity the human entity to restore its cache for
      * @since 3.0.0
      */
-    public void restoreAndForget(@NonNull HumanEntity humanEntity) {
+    public void restoreAndForget(final @NonNull HumanEntity humanEntity) {
         restore(humanEntity);
         clearCache(humanEntity);
     }
@@ -70,13 +70,13 @@ public final class HumanEntityCache {
      * never go over the maximum stack size.
      *
      * @param humanEntity the human entity to add the item to
-     * @param item the item to add to the cached inventory
+     * @param item        the item to add to the cached inventory
      * @return the amount of leftover items that couldn't be fit in the cached inventory
      * @throws IllegalStateException if the human entity's inventory is not cached
      * @since 3.0.0
      */
-    public int add(@NonNull HumanEntity humanEntity, @NonNull ItemStack item) {
-        ItemStack[] items = inventories.get(humanEntity);
+    public int add(final @NonNull HumanEntity humanEntity, final @NonNull ItemStack item) {
+        final ItemStack[] items = inventories.get(humanEntity);
 
         if (items == null) {
             throw new IllegalStateException("The human entity '%s' does not have a cached inventory".formatted(humanEntity.getUniqueId()));
@@ -85,7 +85,7 @@ public final class HumanEntityCache {
         int amountPutIn = 0;
 
         for (int i = 0; i < items.length; i++) {
-            ItemStack itemStack = items[i];
+            final ItemStack itemStack = items[i];
 
             if (itemStack == null) {
                 items[i] = item.clone();
@@ -98,7 +98,7 @@ public final class HumanEntityCache {
                 continue;
             }
 
-            int additionalAmount = Math.min(itemStack.getMaxStackSize() - itemStack.getAmount(), item.getAmount());
+            final int additionalAmount = Math.min(itemStack.getMaxStackSize() - itemStack.getAmount(), item.getAmount());
 
             itemStack.setAmount(itemStack.getAmount() + additionalAmount);
             amountPutIn += additionalAmount;
@@ -117,10 +117,10 @@ public final class HumanEntityCache {
      * @param humanEntity the human entity to keep in the cache
      * @since 3.0.0
      */
-    public void store(@NonNull HumanEntity humanEntity) {
-        ItemStack[] items = new ItemStack[36];
+    public void store(final @NonNull HumanEntity humanEntity) {
+        final ItemStack[] items = new ItemStack[36];
 
-        for (int i = 0 ; i < 36; i++) {
+        for (int i = 0; i < 36; i++) {
             items[i] = humanEntity.getInventory().getItem(i);
         }
 
@@ -134,8 +134,8 @@ public final class HumanEntityCache {
      * @param humanEntity the human entity to restore its cache for
      * @since 3.0.0
      */
-    private void restore(@NonNull HumanEntity humanEntity) {
-        ItemStack[] items = inventories.get(humanEntity);
+    private void restore(final @NonNull HumanEntity humanEntity) {
+        final ItemStack[] items = inventories.get(humanEntity);
 
         if (items == null) {
             return;
@@ -162,7 +162,7 @@ public final class HumanEntityCache {
      * @return true if the human entity is in the cache, false otherwise
      * @since 3.0.0
      */
-    public boolean contains(@NonNull HumanEntity humanEntity) {
+    public boolean contains(final @NonNull HumanEntity humanEntity) {
         return this.inventories.containsKey(humanEntity);
     }
 
@@ -172,7 +172,7 @@ public final class HumanEntityCache {
      * @param humanEntity the human entity to clear the cache for
      * @since 3.0.0
      */
-    public void clearCache(@NonNull HumanEntity humanEntity) {
+    public void clearCache(final @NonNull HumanEntity humanEntity) {
         inventories.remove(humanEntity);
     }
 

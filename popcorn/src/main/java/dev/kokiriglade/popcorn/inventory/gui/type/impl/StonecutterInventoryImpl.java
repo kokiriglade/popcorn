@@ -33,14 +33,19 @@ import java.lang.reflect.Field;
  */
 public class StonecutterInventoryImpl extends StonecutterInventory {
 
-    public StonecutterInventoryImpl(@NonNull InventoryHolder inventoryHolder) {
+    /**
+     * Create a stonecutter inventory
+     * @param inventoryHolder the {@code InventoryHolder}
+     * @since 3.0.0
+     */
+    public StonecutterInventoryImpl(final @NonNull InventoryHolder inventoryHolder) {
         super(inventoryHolder);
     }
 
     @Override
-    public void openInventory(@NonNull Player player, net.kyori.adventure.text.@NonNull Component title,
-                              org.bukkit.inventory.@Nullable ItemStack[] items) {
-        int itemAmount = items.length;
+    public void openInventory(final @NonNull Player player, final net.kyori.adventure.text.@NonNull Component title,
+                              final org.bukkit.inventory.@Nullable ItemStack[] items) {
+        final int itemAmount = items.length;
 
         if (itemAmount != 2) {
             throw new IllegalArgumentException(
@@ -48,14 +53,14 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
             );
         }
 
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        Component message = PaperAdventure.asVanilla(title);
-        ContainerStonecutterImpl containerEnchantmentTable = new ContainerStonecutterImpl(serverPlayer, items, message);
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final Component message = PaperAdventure.asVanilla(title);
+        final ContainerStonecutterImpl containerEnchantmentTable = new ContainerStonecutterImpl(serverPlayer, items, message);
 
         serverPlayer.containerMenu = containerEnchantmentTable;
 
-        int id = containerEnchantmentTable.containerId;
-        ClientboundOpenScreenPacket packet = new ClientboundOpenScreenPacket(id, MenuType.STONECUTTER, message);
+        final int id = containerEnchantmentTable.containerId;
+        final ClientboundOpenScreenPacket packet = new ClientboundOpenScreenPacket(id, MenuType.STONECUTTER, message);
 
         serverPlayer.connection.send(packet);
 
@@ -63,26 +68,26 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
     }
 
     @Override
-    public void sendItems(@NonNull Player player, org.bukkit.inventory.@Nullable ItemStack[] items) {
-        NonNullList<ItemStack> nmsItems = NonNullList.of(
+    public void sendItems(final @NonNull Player player, final org.bukkit.inventory.@Nullable ItemStack[] items) {
+        final NonNullList<ItemStack> nmsItems = NonNullList.of(
             ItemStack.EMPTY,
             CraftItemStack.asNMSCopy(items[0]),
             CraftItemStack.asNMSCopy(items[1])
         );
 
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        int containerId = getContainerId(serverPlayer);
-        int state = serverPlayer.containerMenu.incrementStateId();
-        ItemStack cursor = CraftItemStack.asNMSCopy(player.getItemOnCursor());
-        ServerPlayerConnection playerConnection = getPlayerConnection(serverPlayer);
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final int containerId = getContainerId(serverPlayer);
+        final int state = serverPlayer.containerMenu.incrementStateId();
+        final ItemStack cursor = CraftItemStack.asNMSCopy(player.getItemOnCursor());
+        final ServerPlayerConnection playerConnection = getPlayerConnection(serverPlayer);
 
         playerConnection.send(new ClientboundContainerSetContentPacket(containerId, state, nmsItems, cursor));
     }
 
     @Override
-    public void clearCursor(@NonNull Player player) {
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        int state = serverPlayer.containerMenu.incrementStateId();
+    public void clearCursor(final @NonNull Player player) {
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final int state = serverPlayer.containerMenu.incrementStateId();
 
         getPlayerConnection(serverPlayer).send(new ClientboundContainerSetSlotPacket(-1, state, -1, ItemStack.EMPTY));
     }
@@ -95,7 +100,7 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
      * @since 3.0.0
      */
     @Contract(pure = true)
-    private int getContainerId(net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
+    private int getContainerId(final net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
         return nmsPlayer.containerMenu.containerId;
     }
 
@@ -106,9 +111,8 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
      * @return the player connection
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    private ServerPlayerConnection getPlayerConnection(@NonNull ServerPlayer serverPlayer) {
+    private @NonNull ServerPlayerConnection getPlayerConnection(final @NonNull ServerPlayer serverPlayer) {
         return serverPlayer.connection;
     }
 
@@ -119,9 +123,8 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
      * @return the server player
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    private ServerPlayer getServerPlayer(@NonNull Player player) {
+    private @NonNull ServerPlayer getServerPlayer(final @NonNull Player player) {
         return ((CraftPlayer) player).getHandle();
     }
 
@@ -135,23 +138,18 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
         /**
          * The player for this enchanting table container
          */
-        @NonNull
-        private final Player player;
-
-        /**
-         * The internal bukkit entity for this container enchanting table
-         */
-        @Nullable
-        private CraftInventoryView bukkitEntity;
-
+        private final @NonNull Player player;
         /**
          * Field for accessing the result inventory field
          */
-        @NonNull
-        private final Field resultContainerField;
+        private final @NonNull Field resultContainerField;
+        /**
+         * The internal bukkit entity for this container enchanting table
+         */
+        private @Nullable CraftInventoryView bukkitEntity;
 
-        public ContainerStonecutterImpl(@NonNull ServerPlayer entityPlayer,
-                                        org.bukkit.inventory.@Nullable ItemStack[] items, @NonNull Component title) {
+        public ContainerStonecutterImpl(final @NonNull ServerPlayer entityPlayer,
+                                        final org.bukkit.inventory.@Nullable ItemStack[] items, final @NonNull Component title) {
             super(entityPlayer.nextContainerCounter(), entityPlayer.getInventory());
 
             this.player = entityPlayer.getBukkitEntity();
@@ -162,7 +160,7 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
                 //noinspection JavaReflectionMemberAccess
                 this.resultContainerField = StonecutterMenu.class.getDeclaredField("A"); //resultContainer
                 this.resultContainerField.setAccessible(true);
-            } catch (NoSuchFieldException exception) {
+            } catch (final NoSuchFieldException exception) {
                 throw new RuntimeException(exception);
             }
 
@@ -170,15 +168,13 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
             getResultInventory().setItem(0, CraftItemStack.asNMSCopy(items[1]));
         }
 
-        @NonNull
         @Override
-        public CraftInventoryView getBukkitView() {
+        public @NonNull CraftInventoryView getBukkitView() {
             if (bukkitEntity == null) {
-                CraftInventory inventory = new CraftInventoryStonecutter(this.container, getResultInventory()) {
-                    @NonNull
+                final CraftInventory inventory = new CraftInventoryStonecutter(this.container, getResultInventory()) {
                     @Contract(pure = true)
                     @Override
-                    public InventoryHolder getHolder() {
+                    public @NonNull InventoryHolder getHolder() {
                         return inventoryHolder;
                     }
                 };
@@ -191,15 +187,17 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
 
         @Contract(pure = true, value = "_ -> true")
         @Override
-        public boolean stillValid(net.minecraft.world.entity.player.@Nullable Player nmsPlayer) {
+        public boolean stillValid(final net.minecraft.world.entity.player.@Nullable Player nmsPlayer) {
             return true;
         }
 
         @Override
-        public void slotsChanged(@NonNull Container container) {}
+        public void slotsChanged(final @NonNull Container container) {
+        }
 
         @Override
-        public void removed(net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {}
+        public void removed(final net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
+        }
 
         /**
          * Gets the result inventory
@@ -207,14 +205,15 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
          * @return the result inventory
          * @since 3.0.0
          */
-        @NonNull
         @Contract(pure = true)
-        public Container getResultInventory() {
+        public @NonNull Container getResultInventory() {
             try {
                 return (Container) resultContainerField.get(this);
-            } catch (IllegalAccessException exception) {
+            } catch (final IllegalAccessException exception) {
                 throw new RuntimeException(exception);
             }
         }
+
     }
+
 }

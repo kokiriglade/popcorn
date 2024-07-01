@@ -22,7 +22,7 @@ public class AbstractFireballBuilder<B extends AbstractProjectileBuilder<B, T>, 
     protected @Nullable Boolean isIncendiary;
     protected @Nullable Vector acceleration;
 
-    protected AbstractFireballBuilder(@NonNull Class<T> entityClass, @NonNull Location location) {
+    protected AbstractFireballBuilder(final @NonNull Class<T> entityClass, final @NonNull Location location) {
         super(entityClass, location);
         this.consumers.add(fireball -> {
             if (yield != null) {
@@ -54,7 +54,7 @@ public class AbstractFireballBuilder<B extends AbstractProjectileBuilder<B, T>, 
     }
 
     @Override
-    public @NonNull B isIncendiary(@Nullable Boolean isIncendiary) {
+    public @NonNull B isIncendiary(final @Nullable Boolean isIncendiary) {
         this.isIncendiary = isIncendiary;
         return (B) this;
     }
@@ -80,4 +80,5 @@ public class AbstractFireballBuilder<B extends AbstractProjectileBuilder<B, T>, 
         this.acceleration = acceleration;
         return (B) this;
     }
+
 }

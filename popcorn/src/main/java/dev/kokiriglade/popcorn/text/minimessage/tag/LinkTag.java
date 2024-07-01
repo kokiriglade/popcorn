@@ -19,10 +19,10 @@ import java.util.Set;
  *
  * @since 3.0.0
  */
-final class LinkTag {
+public final class LinkTag {
 
-    private static final String LINK = "link";
-    private static final String A = "a";
+    static final String LINK = "link";
+    static final String A = "a";
 
     static final TagResolver RESOLVER = TagResolver.resolver(Set.of(LINK, A), LinkTag::create);
 
@@ -37,7 +37,7 @@ final class LinkTag {
                 ClickEvent.openUrl(link),
                 HoverEvent.showText(Component.text("Open " + uri.getHost() + uri.getRawPath()))
             );
-        } catch (URISyntaxException e) {
+        } catch (final URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }

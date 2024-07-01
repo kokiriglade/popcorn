@@ -21,7 +21,7 @@ public abstract class AbstractProjectileBuilder<B extends AbstractEntityBuilder<
     protected boolean hasLeftShooter = true;
     protected @Nullable ProjectileSource projectileSource;
 
-    protected AbstractProjectileBuilder(@NonNull Class<T> entityClass, @NonNull Location location) {
+    protected AbstractProjectileBuilder(final @NonNull Class<T> entityClass, final @NonNull Location location) {
         super(entityClass, location);
         this.consumers.add(projectile -> {
             projectile.setHasBeenShot(hasBeenShot);
@@ -95,4 +95,5 @@ public abstract class AbstractProjectileBuilder<B extends AbstractEntityBuilder<
         this.projectileSource = projectileSource;
         return (B) this;
     }
+
 }

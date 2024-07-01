@@ -6,13 +6,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.Contract;
 
+/**
+ * A Gui with a name
+ *
+ * @since 3.0.0
+ */
 public abstract class NamedGui extends Gui {
 
     /**
      * The title of this gui
      */
-    @NonNull
-    private Component title;
+    private @NonNull Component title;
 
     /**
      * Whether the title is dirty i.e., has changed
@@ -25,33 +29,22 @@ public abstract class NamedGui extends Gui {
      * @param title the title/name of this gui
      * @since 3.0.0
      */
-    public NamedGui(@NonNull Component title) {
+    public NamedGui(final @NonNull Component title) {
         this(title, JavaPlugin.getProvidingPlugin(NamedGui.class));
     }
 
     /**
      * Constructs a new gui with a title for the given {@code plugin}.
      *
-     * @param title the title/name of this gui
+     * @param title  the title/name of this gui
      * @param plugin the owning plugin of this gui
      * @see #NamedGui(Component)
      * @since 3.0.0
      */
-    public NamedGui(@NonNull Component title, @NonNull Plugin plugin) {
+    public NamedGui(final @NonNull Component title, final @NonNull Plugin plugin) {
         super(plugin);
 
         this.title = title;
-    }
-
-    /**
-     * Sets the title for this inventory.
-     *
-     * @param title the title
-     * @since 3.0.0
-     */
-    public void setTitle(@NonNull Component title) {
-        this.title = title;
-        this.dirty = true;
     }
 
     /**
@@ -60,10 +53,20 @@ public abstract class NamedGui extends Gui {
      * @return the title
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public Component getTitle() {
+    public @NonNull Component getTitle() {
         return title;
+    }
+
+    /**
+     * Sets the title for this inventory.
+     *
+     * @param title the title
+     * @since 3.0.0
+     */
+    public void setTitle(final @NonNull Component title) {
+        this.title = title;
+        this.dirty = true;
     }
 
     /**
@@ -86,4 +89,5 @@ public abstract class NamedGui extends Gui {
     public void markChanges() {
         this.dirty = false;
     }
+
 }

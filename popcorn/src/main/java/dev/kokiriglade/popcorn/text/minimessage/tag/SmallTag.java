@@ -14,6 +14,7 @@ import net.kyori.adventure.text.minimessage.tag.resolver.ArgumentQueue;
 import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.minimessage.tree.Node;
 import org.bukkit.command.ConsoleCommandSender;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -28,23 +29,22 @@ import static net.kyori.adventure.text.Component.text;
  * @see SmallFont
  * @since 3.0.0
  */
-class SmallTag implements Modifying {
-
-    private final boolean console;
-
-    private SmallTag(boolean console) {
-        this.console = console;
-    }
+public final class SmallTag implements Modifying {
 
     private static final ComponentFlattener LENGTH_CALCULATOR = ComponentFlattener.builder()
         .mapper(TextComponent.class, TextComponent::content)
         .unknownMapper(x -> "_") // every unknown component gets a single colour
         .build();
-    private static final String SMALL = "small";
-    private static final String SM = "sm";
+    static final String SMALL = "small";
+    static final String SM = "sm";
     static final TagResolver RESOLVER = TagResolver.resolver(Set.of(SMALL, SM), SmallTag::create);
+    private final boolean console;
     private boolean visited;
     private int size = 0;
+
+    private SmallTag(final boolean console) {
+        this.console = console;
+    }
 
     static Tag create(final ArgumentQueue args, final Context ctx) {
         if (ctx.target() != null) {
@@ -61,7 +61,7 @@ class SmallTag implements Modifying {
     }
 
     @Override
-    public void visit(@NotNull Node current, int depth) {
+    public void visit(final @NonNull Node current, final int depth) {
         if (this.visited) {
             throw new IllegalStateException("Small tag instances cannot be re-used, return a new one for each resolve");
         }
@@ -83,11 +83,11 @@ class SmallTag implements Modifying {
     }
 
     @Override
-    public Component apply(@NotNull Component current, int depth) {
+    public Component apply(@NonNull Component current, final int depth) {
         if (current instanceof TextComponent textComponent && ((TextComponent) current).content().length() > 0) {
             final String content = textComponent.content();
 
-            if(!console) {
+            if (!console) {
                 current = text(SmallFont.convert(content));
             } else {
                 current = text(content.toUpperCase(Locale.ROOT));
@@ -101,4 +101,5 @@ class SmallTag implements Modifying {
 
         return Component.empty().mergeStyle(current);
     }
+
 }

@@ -29,21 +29,21 @@ public class Mask {
      *
      * @param mask a var-arg of strings that represent this mask
      * @throws IllegalArgumentException when a string contains an illegal character or when strings have different
-     * lengths
+     *                                  lengths
      * @since 3.0.0
      */
-    public Mask(@NonNull String... mask) {
+    public Mask(final @NonNull String... mask) {
         this.mask = new boolean[mask.length][mask.length == 0 ? 0 : mask[0].length()];
 
         for (int row = 0; row < mask.length; row++) {
-            int length = mask[row].length();
+            final int length = mask[row].length();
 
             if (length != this.mask[row].length) {
                 throw new IllegalArgumentException("Lengths of each string should be equal");
             }
 
             for (int column = 0; column < length; column++) {
-                char character = mask[row].charAt(column);
+                final char character = mask[row].charAt(column);
 
                 if (character == '0') {
                     this.mask[row][column] = false;
@@ -64,64 +64,8 @@ public class Mask {
      * @param mask a two-dimensional boolean array of booleans that represent this mask
      * @since 3.0.0
      */
-    private Mask(boolean[][] mask) {
+    private Mask(final boolean[][] mask) {
         this.mask = mask;
-    }
-
-    /**
-     * Creates a new maks with the specified height. If the new height is smaller than the previous height, the excess
-     * values will be truncated. If the new height is longer than the previous height, additional values will be added
-     * which are enabled. If the height is the same as the previous mask, this will simply return a new mask identical
-     * to this one.
-     *
-     * @param height the new height of the mask
-     * @return a new mask with the specified height
-     * @since 3.0.0
-     */
-    @NonNull
-    @Contract(pure = true)
-    public Mask setHeight(int height) {
-        boolean[][] newRows = new boolean[height][getLength()];
-
-        for (int index = 0; index < Math.min(height, getHeight()); index++) {
-            System.arraycopy(mask[index], 0, newRows[index], 0, mask[index].length);
-        }
-
-        for (int index = Math.min(height, getHeight()); index < height; index++) {
-            newRows[index] = new boolean[getLength()];
-
-            Arrays.fill(newRows[index], true);
-        }
-
-        return new Mask(newRows);
-    }
-
-    /**
-     * Creates a new maks with the specified length. If the new length is smaller than the previous length, the excess
-     * values will be truncated. If the new length is longer than the previous length, additional values will be added
-     * which are enabled. If the length is the same as the previous mask, this will simply return a new mask identical
-     * to this one.
-     *
-     * @param length the new length of the mask
-     * @return a new mask with the specified length
-     * @since 3.0.0
-     */
-    @NonNull
-    @Contract(pure = true)
-    public Mask setLength(int length) {
-        boolean[][] newRows = new boolean[getHeight()][length];
-
-        for (int index = 0; index < mask.length; index++) {
-            boolean[] newRow = new boolean[length];
-
-            System.arraycopy(mask[index], 0, newRow, 0, Math.min(length, mask[index].length));
-
-            Arrays.fill(newRow, Math.min(length, mask[index].length), newRow.length, true);
-
-            newRows[index] = newRow;
-        }
-
-        return new Mask(newRows);
     }
 
     /**
@@ -133,8 +77,8 @@ public class Mask {
     public int amountOfEnabledSlots() {
         int amount = 0;
 
-        for (boolean[] row : mask) {
-            for (boolean cell : row) {
+        for (final boolean[] row : mask) {
+            for (final boolean cell : row) {
                 if (cell) {
                     amount++;
                 }
@@ -153,8 +97,8 @@ public class Mask {
      * @return the column of this mask
      * @since 3.0.0
      */
-    public boolean[] getColumn(int index) {
-        boolean[] column = new boolean[mask.length];
+    public boolean[] getColumn(final int index) {
+        final boolean[] column = new boolean[mask.length];
 
         for (int i = 0; i < getHeight(); i++) {
             column[i] = mask[i][index];
@@ -172,8 +116,8 @@ public class Mask {
      * @return the row of this mask
      * @since 3.0.0
      */
-    public boolean[] getRow(int index) {
-        boolean[] row = mask[index];
+    public boolean[] getRow(final int index) {
+        final boolean[] row = mask[index];
 
         return Arrays.copyOf(row, row.length);
     }
@@ -187,7 +131,7 @@ public class Mask {
      * @return whether the slot is enabled or not
      * @since 3.0.0
      */
-    public boolean isEnabled(int x, int y) {
+    public boolean isEnabled(final int x, final int y) {
         return mask[y][x];
     }
 
@@ -202,6 +146,33 @@ public class Mask {
     }
 
     /**
+     * Creates a new maks with the specified length. If the new length is smaller than the previous length, the excess
+     * values will be truncated. If the new length is longer than the previous length, additional values will be added
+     * which are enabled. If the length is the same as the previous mask, this will simply return a new mask identical
+     * to this one.
+     *
+     * @param length the new length of the mask
+     * @return a new mask with the specified length
+     * @since 3.0.0
+     */
+    @Contract(pure = true)
+    public @NonNull Mask setLength(final int length) {
+        final boolean[][] newRows = new boolean[getHeight()][length];
+
+        for (int index = 0; index < mask.length; index++) {
+            final boolean[] newRow = new boolean[length];
+
+            System.arraycopy(mask[index], 0, newRow, 0, Math.min(length, mask[index].length));
+
+            Arrays.fill(newRow, Math.min(length, mask[index].length), newRow.length, true);
+
+            newRows[index] = newRow;
+        }
+
+        return new Mask(newRows);
+    }
+
+    /**
      * Gets the height of this mask
      *
      * @return the height
@@ -211,8 +182,35 @@ public class Mask {
         return mask.length;
     }
 
+    /**
+     * Creates a new maks with the specified height. If the new height is smaller than the previous height, the excess
+     * values will be truncated. If the new height is longer than the previous height, additional values will be added
+     * which are enabled. If the height is the same as the previous mask, this will simply return a new mask identical
+     * to this one.
+     *
+     * @param height the new height of the mask
+     * @return a new mask with the specified height
+     * @since 3.0.0
+     */
+    @Contract(pure = true)
+    public @NonNull Mask setHeight(final int height) {
+        final boolean[][] newRows = new boolean[height][getLength()];
+
+        for (int index = 0; index < Math.min(height, getHeight()); index++) {
+            System.arraycopy(mask[index], 0, newRows[index], 0, mask[index].length);
+        }
+
+        for (int index = Math.min(height, getHeight()); index < height; index++) {
+            newRows[index] = new boolean[getLength()];
+
+            Arrays.fill(newRows[index], true);
+        }
+
+        return new Mask(newRows);
+    }
+
     @Override
-    public boolean equals(Object object) {
+    public boolean equals(final Object object) {
         if (this == object) {
             return true;
         }
@@ -221,7 +219,7 @@ public class Mask {
             return false;
         }
 
-        Mask mask = (Mask) object;
+        final Mask mask = (Mask) object;
 
         return Arrays.deepEquals(this.mask, mask.mask);
     }
@@ -237,4 +235,5 @@ public class Mask {
             "mask=" + Arrays.deepToString(mask) +
             '}';
     }
+
 }

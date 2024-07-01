@@ -23,100 +23,75 @@ import java.util.function.Consumer;
 
 /**
  * The base class of all GUIs
+ * @since 3.0.0
  */
 @SuppressWarnings("unused")
 public abstract class Gui {
-
-    /**
-     * The plugin that owns this gui
-     */
-    @NonNull
-    protected final Plugin plugin;
-
-    /**
-     * The inventory of this gui
-     */
-    protected Inventory inventory;
-
-    /**
-     * A player cache for storing player's inventories
-     */
-    @NonNull
-    protected final HumanEntityCache humanEntityCache = new HumanEntityCache();
-
-    /**
-     * The consumer that will be called once a players clicks in the top-half of the gui
-     */
-    @Nullable
-    protected Consumer<InventoryClickEvent> onTopClick;
-
-    /**
-     * The consumer that will be called once a players clicks in the bottom-half of the gui
-     */
-    @Nullable
-    protected Consumer<InventoryClickEvent> onBottomClick;
-
-    /**
-     * The consumer that will be called once a players clicks in the gui or in their inventory
-     */
-    @Nullable
-    protected Consumer<InventoryClickEvent> onGlobalClick;
-
-    /**
-     * The consumer that will be called once a player clicks outside of the gui screen
-     */
-    @Nullable
-    protected Consumer<InventoryClickEvent> onOutsideClick;
-
-    /**
-     * The consumer that will be called once a player drags in the top-half of the gui
-     */
-    @Nullable
-    protected Consumer<InventoryDragEvent> onTopDrag;
-
-    /**
-     * The consumer that will be called once a player drags in the bottom-half of the gui
-     */
-    @Nullable
-    protected Consumer<InventoryDragEvent> onBottomDrag;
-
-    /**
-     * The consumer that will be called once a player drags in the gui or their inventory
-     */
-    @Nullable
-    protected Consumer<InventoryDragEvent> onGlobalDrag;
-
-    /**
-     * The consumer that will be called once a player closes the gui
-     */
-    @Nullable
-    protected Consumer<InventoryCloseEvent> onClose;
-
-    /**
-     * Whether this gui is updating (as invoked by {@link #update()}), true if this is the case, false otherwise. This
-     * is used to indicate that inventory close events due to updating should be ignored.
-     */
-    boolean updating = false;
-
-    /**
-     * The parent gui. This gui will be navigated to once a player closes this gui. If this is null, the player will not
-     * be redirected to another gui once they close this gui.
-     */
-    @Nullable
-    private Gui parent;
 
     /**
      * A map containing the relations between inventories and their respective gui. This is needed because Bukkit and
      * Spigot ignore inventory holders for beacons, brewing stands, dispensers, droppers, furnaces and hoppers. The
      * inventory holder for beacons is already being set properly via NMS, but this contains the other inventory types.
      */
-    @NonNull
-    private static final Map<Inventory, Gui> GUI_INVENTORIES = new WeakHashMap<>();
-
+    private static final @NonNull Map<Inventory, Gui> GUI_INVENTORIES = new WeakHashMap<>();
     /**
      * Whether listeners have been registered by some gui
      */
     private static boolean hasRegisteredListeners;
+    /**
+     * The plugin that owns this gui
+     */
+    protected final @NonNull Plugin plugin;
+    /**
+     * A player cache for storing player's inventories
+     */
+    protected final @NonNull HumanEntityCache humanEntityCache = new HumanEntityCache();
+    /**
+     * The inventory of this gui
+     */
+    protected Inventory inventory;
+    /**
+     * The consumer that will be called once a players clicks in the top-half of the gui
+     */
+    protected @Nullable Consumer<InventoryClickEvent> onTopClick;
+    /**
+     * The consumer that will be called once a players clicks in the bottom-half of the gui
+     */
+    protected @Nullable Consumer<InventoryClickEvent> onBottomClick;
+    /**
+     * The consumer that will be called once a players clicks in the gui or in their inventory
+     */
+    protected @Nullable Consumer<InventoryClickEvent> onGlobalClick;
+    /**
+     * The consumer that will be called once a player clicks outside of the gui screen
+     */
+    protected @Nullable Consumer<InventoryClickEvent> onOutsideClick;
+    /**
+     * The consumer that will be called once a player drags in the top-half of the gui
+     */
+    protected @Nullable Consumer<InventoryDragEvent> onTopDrag;
+    /**
+     * The consumer that will be called once a player drags in the bottom-half of the gui
+     */
+    protected @Nullable Consumer<InventoryDragEvent> onBottomDrag;
+    /**
+     * The consumer that will be called once a player drags in the gui or their inventory
+     */
+    protected @Nullable Consumer<InventoryDragEvent> onGlobalDrag;
+    /**
+     * The consumer that will be called once a player closes the gui
+     */
+    protected @Nullable Consumer<InventoryCloseEvent> onClose;
+    /**
+     * Whether this gui is updating (as invoked by {@link #update()}), true if this is the case, false otherwise. This
+     * is used to indicate that inventory close events due to updating should be ignored.
+     */
+    boolean updating = false;
+    /**
+     * The parent gui. This gui will be navigated to once a player closes this gui. If this is null, the player will not
+     * be redirected to another gui once they close this gui.
+     */
+    private @Nullable Gui parent;
 
     /**
      * Constructs a new gui with the provided plugin.
@@ -124,7 +99,7 @@ public abstract class Gui {
      * @param plugin the plugin
      * @since 3.0.0
      */
-    public Gui(@NonNull Plugin plugin) {
+    public Gui(final @NonNull Plugin plugin) {
         this.plugin = plugin;
 
         if (!hasRegisteredListeners) {
@@ -135,11 +110,25 @@ public abstract class Gui {
     }
 
     /**
+     * Gets a gui from the specified inventory. Only guis of type beacon, brewing stand, dispenser, dropper, furnace and
+     * hopper can be retrieved.
+     *
+     * @param inventory the inventory to get the gui from
+     * @return the gui or null if the inventory doesn't have an accompanying gui
+     * @since 3.0.0
+     */
+    @Contract(pure = true)
+    public static @Nullable Gui getGui(final @NonNull Inventory inventory) {
+        return GUI_INVENTORIES.get(inventory);
+    }
+
+    /**
      * Shows a gui to a player
      *
      * @param humanEntity the human entity to show the gui to
+     * @since 3.0.0
      */
-    public abstract void show(@NonNull HumanEntity humanEntity);
+    public abstract void show(final @NonNull HumanEntity humanEntity);
 
     /**
      * Makes a copy of this gui and returns it. This makes a deep copy of the gui. This entails that the underlying
@@ -151,9 +140,8 @@ public abstract class Gui {
      * @return a copy of the gui
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public abstract Gui copy();
+    public abstract @NonNull Gui copy();
 
     /**
      * This should delegate the provided inventory click event to the right pane, which can then handle this click event
@@ -162,7 +150,7 @@ public abstract class Gui {
      * @param event the event to delegate
      * @since 3.0.0
      */
-    public abstract void click(@NonNull InventoryClickEvent event);
+    public abstract void click(final @NonNull InventoryClickEvent event);
 
     /**
      * Gets whether the player inventory is currently in use. This means whether the player inventory currently has an
@@ -190,18 +178,18 @@ public abstract class Gui {
      * @see #getViewerCount()
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public abstract List<HumanEntity> getViewers();
+    public abstract @NonNull List<HumanEntity> getViewers();
 
     /**
      * Update the gui for everyone
+     * @since 3.0.0
      */
     public void update() {
         updating = true;
 
-        for (HumanEntity viewer : getViewers()) {
-            ItemStack cursor = viewer.getItemOnCursor();
+        for (final HumanEntity viewer : getViewers()) {
+            final ItemStack cursor = viewer.getItemOnCursor();
             viewer.setItemOnCursor(null); // TODO set to air if this fails
 
             show(viewer);
@@ -209,8 +197,9 @@ public abstract class Gui {
             viewer.setItemOnCursor(cursor);
         }
 
-        if (!updating)
+        if (!updating) {
             throw new AssertionError("Gui#isUpdating became false before Gui#update finished");
+        }
 
         updating = false;
     }
@@ -219,25 +208,11 @@ public abstract class Gui {
      * Adds the specified inventory and gui, so we can properly intercept clicks.
      *
      * @param inventory the inventory for the specified gui
-     * @param gui the gui belonging to the specified inventory
+     * @param gui       the gui belonging to the specified inventory
      * @since 3.0.0
      */
-    protected void addInventory(@NonNull Inventory inventory, @NonNull Gui gui) {
+    protected void addInventory(final @NonNull Inventory inventory, final @NonNull Gui gui) {
         GUI_INVENTORIES.put(inventory, gui);
-    }
-
-    /**
-     * Gets a gui from the specified inventory. Only guis of type beacon, brewing stand, dispenser, dropper, furnace and
-     * hopper can be retrieved.
-     *
-     * @param inventory the inventory to get the gui from
-     * @return the gui or null if the inventory doesn't have an accompanying gui
-     * @since 3.0.0
-     */
-    @Nullable
-    @Contract(pure = true)
-    public static Gui getGui(@NonNull Inventory inventory) {
-        return GUI_INVENTORIES.get(inventory);
     }
 
     /**
@@ -247,9 +222,8 @@ public abstract class Gui {
      * @see HumanEntityCache
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public HumanEntityCache getHumanEntityCache() {
+    public @NonNull HumanEntityCache getHumanEntityCache() {
         return humanEntityCache;
     }
 
@@ -257,8 +231,9 @@ public abstract class Gui {
      * Set the consumer that should be called whenever this gui is clicked in.
      *
      * @param onTopClick the consumer that gets called
+     * @since 3.0.0
      */
-    public void setOnTopClick(@Nullable Consumer<InventoryClickEvent> onTopClick) {
+    public void setOnTopClick(final @Nullable Consumer<InventoryClickEvent> onTopClick) {
         this.onTopClick = onTopClick;
     }
 
@@ -270,7 +245,7 @@ public abstract class Gui {
      * @param event the event to handle
      * @since 3.0.0
      */
-    public void callOnTopClick(@NonNull InventoryClickEvent event) {
+    public void callOnTopClick(final @NonNull InventoryClickEvent event) {
         callCallback(onTopClick, event, "onTopClick");
     }
 
@@ -278,8 +253,9 @@ public abstract class Gui {
      * Set the consumer that should be called whenever the inventory is clicked in.
      *
      * @param onBottomClick the consumer that gets called
+     * @since 3.0.0
      */
-    public void setOnBottomClick(@Nullable Consumer<InventoryClickEvent> onBottomClick) {
+    public void setOnBottomClick(final @Nullable Consumer<InventoryClickEvent> onBottomClick) {
         this.onBottomClick = onBottomClick;
     }
 
@@ -291,7 +267,7 @@ public abstract class Gui {
      * @param event the event to handle
      * @since 3.0.0
      */
-    public void callOnBottomClick(@NonNull InventoryClickEvent event) {
+    public void callOnBottomClick(final @NonNull InventoryClickEvent event) {
         callCallback(onBottomClick, event, "onBottomClick");
     }
 
@@ -299,8 +275,9 @@ public abstract class Gui {
      * Set the consumer that should be called whenever this gui or inventory is clicked in.
      *
      * @param onGlobalClick the consumer that gets called
+     * @since 3.0.0
      */
-    public void setOnGlobalClick(@Nullable Consumer<InventoryClickEvent> onGlobalClick) {
+    public void setOnGlobalClick(final @Nullable Consumer<InventoryClickEvent> onGlobalClick) {
         this.onGlobalClick = onGlobalClick;
     }
 
@@ -312,7 +289,7 @@ public abstract class Gui {
      * @param event the event to handle
      * @since 3.0.0
      */
-    public void callOnGlobalClick(@NonNull InventoryClickEvent event) {
+    public void callOnGlobalClick(final @NonNull InventoryClickEvent event) {
         callCallback(onGlobalClick, event, "onGlobalClick");
     }
 
@@ -322,7 +299,7 @@ public abstract class Gui {
      * @param onOutsideClick the consumer that gets called
      * @since 3.0.0
      */
-    public void setOnOutsideClick(@Nullable Consumer<InventoryClickEvent> onOutsideClick) {
+    public void setOnOutsideClick(final @Nullable Consumer<InventoryClickEvent> onOutsideClick) {
         this.onOutsideClick = onOutsideClick;
     }
 
@@ -334,7 +311,7 @@ public abstract class Gui {
      * @param event the event to handle
      * @since 3.0.0
      */
-    public void callOnOutsideClick(@NonNull InventoryClickEvent event) {
+    public void callOnOutsideClick(final @NonNull InventoryClickEvent event) {
         callCallback(onOutsideClick, event, "onOutsideClick");
     }
 
@@ -344,7 +321,7 @@ public abstract class Gui {
      * @param onTopDrag the consumer that gets called
      * @since 3.0.0
      */
-    public void setOnTopDrag(@Nullable Consumer<InventoryDragEvent> onTopDrag) {
+    public void setOnTopDrag(final @Nullable Consumer<InventoryDragEvent> onTopDrag) {
         this.onTopDrag = onTopDrag;
     }
 
@@ -356,7 +333,7 @@ public abstract class Gui {
      * @param event the event to handle
      * @since 3.0.0
      */
-    public void callOnTopDrag(@NonNull InventoryDragEvent event) {
+    public void callOnTopDrag(final @NonNull InventoryDragEvent event) {
         callCallback(onTopDrag, event, "onTopDrag");
     }
 
@@ -366,7 +343,7 @@ public abstract class Gui {
      * @param onBottomDrag the consumer that gets called
      * @since 3.0.0
      */
-    public void setOnBottomDrag(@Nullable Consumer<InventoryDragEvent> onBottomDrag) {
+    public void setOnBottomDrag(final @Nullable Consumer<InventoryDragEvent> onBottomDrag) {
         this.onBottomDrag = onBottomDrag;
     }
 
@@ -378,7 +355,7 @@ public abstract class Gui {
      * @param event the event to handle
      * @since 3.0.0
      */
-    public void callOnBottomDrag(@NonNull InventoryDragEvent event) {
+    public void callOnBottomDrag(final @NonNull InventoryDragEvent event) {
         callCallback(onBottomDrag, event, "onBottomDrag");
     }
 
@@ -388,7 +365,7 @@ public abstract class Gui {
      * @param onGlobalDrag the consumer that gets called
      * @since 3.0.0
      */
-    public void setOnGlobalDrag(@Nullable Consumer<InventoryDragEvent> onGlobalDrag) {
+    public void setOnGlobalDrag(final @Nullable Consumer<InventoryDragEvent> onGlobalDrag) {
         this.onGlobalDrag = onGlobalDrag;
     }
 
@@ -400,7 +377,7 @@ public abstract class Gui {
      * @param event the event to handle
      * @since 3.0.0
      */
-    public void callOnGlobalDrag(@NonNull InventoryDragEvent event) {
+    public void callOnGlobalDrag(final @NonNull InventoryDragEvent event) {
         callCallback(onGlobalDrag, event, "onGlobalDrag");
     }
 
@@ -408,8 +385,9 @@ public abstract class Gui {
      * Set the consumer that should be called whenever this gui is closed.
      *
      * @param onClose the consumer that gets called
+     * @since 3.0.0
      */
-    public void setOnClose(@Nullable Consumer<InventoryCloseEvent> onClose) {
+    public void setOnClose(final @Nullable Consumer<InventoryCloseEvent> onClose) {
         this.onClose = onClose;
     }
 
@@ -421,7 +399,7 @@ public abstract class Gui {
      * @param event the event to handle
      * @since 3.0.0
      */
-    public void callOnClose(@NonNull InventoryCloseEvent event) {
+    public void callOnClose(final @NonNull InventoryCloseEvent event) {
         callCallback(onClose, event, "onClose");
     }
 
@@ -429,20 +407,21 @@ public abstract class Gui {
      * Calls the specified consumer (if it's not null) with the specified parameter,
      * catching and logging all exceptions it might throw.
      *
-     * @param callback the consumer to call if it isn't null
-     * @param event the value the consumer should accept
+     * @param callback     the consumer to call if it isn't null
+     * @param event        the value the consumer should accept
      * @param callbackName the name of the action, used for logging
-     * @param <T> the type of the value the consumer is accepting
+     * @param <T>          the type of the value the consumer is accepting
+     * @since 3.0.0
      */
-    protected <T extends InventoryEvent> void callCallback(@Nullable Consumer<? super T> callback,
-                                                           @NonNull T event, @NonNull String callbackName) {
+    protected <T extends InventoryEvent> void callCallback(final @Nullable Consumer<? super T> callback,
+                                                           final @NonNull T event, final @NonNull String callbackName) {
         if (callback == null) {
             return;
         }
 
         try {
             callback.accept(event);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             String message = "Exception while handling %s".formatted(callbackName);
             if (event instanceof InventoryClickEvent clickEvent) {
                 message += ", slot=%s".formatted(clickEvent.getSlot());
@@ -459,7 +438,7 @@ public abstract class Gui {
      * @param humanEntity the human entity to redirect
      * @since 3.0.0
      */
-    public void navigateToParent(@NonNull HumanEntity humanEntity) {
+    public void navigateToParent(final @NonNull HumanEntity humanEntity) {
         if (this.parent == null) {
             return;
         }
@@ -475,7 +454,7 @@ public abstract class Gui {
      * @param gui the new parent gui
      * @since 3.0.0
      */
-    public void setParent(@NonNull Gui gui) {
+    public void setParent(final @NonNull Gui gui) {
         this.parent = gui;
     }
 

@@ -27,20 +27,17 @@ public class CraftingTableGui extends NamedGui implements InventoryBased {
     /**
      * Represents the inventory component for the input
      */
-    @NonNull
-    private InventoryComponent inputComponent = new InventoryComponent(3, 3);
+    private @NonNull InventoryComponent inputComponent = new InventoryComponent(3, 3);
 
     /**
      * Represents the inventory component for the output
      */
-    @NonNull
-    private InventoryComponent outputComponent = new InventoryComponent(1, 1);
+    private @NonNull InventoryComponent outputComponent = new InventoryComponent(1, 1);
 
     /**
      * Represents the inventory component for the player inventory
      */
-    @NonNull
-    private InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
+    private @NonNull InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
 
     /**
      * Constructs a new GUI
@@ -48,24 +45,24 @@ public class CraftingTableGui extends NamedGui implements InventoryBased {
      * @param title the title/name of this gui.
      * @since 3.0.0
      */
-    public CraftingTableGui(@NonNull Component title) {
+    public CraftingTableGui(final @NonNull Component title) {
         super(title);
     }
 
     /**
      * Constructs a new crafting table gui for the given {@code plugin}.
      *
-     * @param title the title/name of this gui.
+     * @param title  the title/name of this gui.
      * @param plugin the owning plugin of this gui
      * @see #CraftingTableGui(Component)
      * @since 3.0.0
      */
-    public CraftingTableGui(@NonNull Component title, @NonNull Plugin plugin) {
+    public CraftingTableGui(final @NonNull Component title, final @NonNull Plugin plugin) {
         super(title, plugin);
     }
 
     @Override
-    public void show(@NonNull HumanEntity humanEntity) {
+    public void show(final @NonNull HumanEntity humanEntity) {
         if (isDirty()) {
             this.inventory = createInventory();
             markChanges();
@@ -78,7 +75,7 @@ public class CraftingTableGui extends NamedGui implements InventoryBased {
         getPlayerInventoryComponent().display();
 
         if (getPlayerInventoryComponent().hasItem()) {
-            HumanEntityCache humanEntityCache = getHumanEntityCache();
+            final HumanEntityCache humanEntityCache = getHumanEntityCache();
 
             if (humanEntityCache.contains(humanEntity)) {
                 humanEntityCache.storeAndClear(humanEntity);
@@ -90,11 +87,10 @@ public class CraftingTableGui extends NamedGui implements InventoryBased {
         humanEntity.openInventory(getInventory());
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public CraftingTableGui copy() {
-        CraftingTableGui gui = new CraftingTableGui(getTitle(), super.plugin);
+    public @NonNull CraftingTableGui copy() {
+        final CraftingTableGui gui = new CraftingTableGui(getTitle(), super.plugin);
 
         gui.inputComponent = inputComponent.copy();
         gui.outputComponent = outputComponent.copy();
@@ -110,8 +106,8 @@ public class CraftingTableGui extends NamedGui implements InventoryBased {
     }
 
     @Override
-    public void click(@NonNull InventoryClickEvent event) {
-        int rawSlot = event.getRawSlot();
+    public void click(final @NonNull InventoryClickEvent event) {
+        final int rawSlot = event.getRawSlot();
 
         if (rawSlot == 0) {
             getOutputComponent().click(this, event, 0);
@@ -122,9 +118,8 @@ public class CraftingTableGui extends NamedGui implements InventoryBased {
         }
     }
 
-    @NonNull
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (this.inventory == null) {
             this.inventory = createInventory();
         }
@@ -138,10 +133,9 @@ public class CraftingTableGui extends NamedGui implements InventoryBased {
         return getPlayerInventoryComponent().hasItem();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public Inventory createInventory() {
+    public @NonNull Inventory createInventory() {
         return Bukkit.createInventory(this, InventoryType.WORKBENCH, getTitle());
     }
 
@@ -151,10 +145,9 @@ public class CraftingTableGui extends NamedGui implements InventoryBased {
         return getInventory().getViewers().size();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public List<HumanEntity> getViewers() {
+    public @NonNull List<HumanEntity> getViewers() {
         return new ArrayList<>(getInventory().getViewers());
     }
 
@@ -164,9 +157,8 @@ public class CraftingTableGui extends NamedGui implements InventoryBased {
      * @return the input component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getInputComponent() {
+    public @NonNull InventoryComponent getInputComponent() {
         return inputComponent;
     }
 
@@ -176,9 +168,8 @@ public class CraftingTableGui extends NamedGui implements InventoryBased {
      * @return the output component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getOutputComponent() {
+    public @NonNull InventoryComponent getOutputComponent() {
         return outputComponent;
     }
 
@@ -188,9 +179,9 @@ public class CraftingTableGui extends NamedGui implements InventoryBased {
      * @return the player inventory component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getPlayerInventoryComponent() {
+    public @NonNull InventoryComponent getPlayerInventoryComponent() {
         return playerInventoryComponent;
     }
+
 }

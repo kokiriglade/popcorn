@@ -30,34 +30,25 @@ import java.util.List;
 public class CartographyTableGui extends NamedGui implements InventoryBased {
 
     /**
+     * An internal cartography table inventory
+     */
+    private final @NonNull CartographyTableInventory cartographyTableInventory = new CartographyTableInventoryImpl(this);
+    /**
      * Represents the inventory component for the map
      */
-    @NonNull
-    private InventoryComponent mapComponent = new InventoryComponent(1, 1);
-
+    private @NonNull InventoryComponent mapComponent = new InventoryComponent(1, 1);
     /**
      * Represents the inventory component for the paper
      */
-    @NonNull
-    private InventoryComponent paperComponent = new InventoryComponent(1, 1);
-
+    private @NonNull InventoryComponent paperComponent = new InventoryComponent(1, 1);
     /**
      * Represents the inventory component for the output
      */
-    @NonNull
-    private InventoryComponent outputComponent = new InventoryComponent(1, 1);
-
+    private @NonNull InventoryComponent outputComponent = new InventoryComponent(1, 1);
     /**
      * Represents the inventory component for the player inventory
      */
-    @NonNull
-    private InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
-
-    /**
-     * An internal cartography table inventory
-     */
-    @NonNull
-    private final CartographyTableInventory cartographyTableInventory = new CartographyTableInventoryImpl(this);
+    private @NonNull InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
 
     /**
      * Constructs a new GUI
@@ -65,24 +56,24 @@ public class CartographyTableGui extends NamedGui implements InventoryBased {
      * @param title the title/name of this gui.
      * @since 3.0.0
      */
-    public CartographyTableGui(@NonNull Component title) {
+    public CartographyTableGui(final @NonNull Component title) {
         super(title);
     }
 
     /**
      * Constructs a new cartography table gui for the given {@code plugin}.
      *
-     * @param title the title/name of this gui.
+     * @param title  the title/name of this gui.
      * @param plugin the owning plugin of this gui
      * @see #CartographyTableGui(Component)
      * @since 3.0.0
      */
-    public CartographyTableGui(@NonNull Component title, @NonNull Plugin plugin) {
+    public CartographyTableGui(final @NonNull Component title, final @NonNull Plugin plugin) {
         super(title, plugin);
     }
 
     @Override
-    public void show(@NonNull HumanEntity humanEntity) {
+    public void show(final @NonNull HumanEntity humanEntity) {
         if (!(humanEntity instanceof Player)) {
             throw new IllegalArgumentException("Cartography tables can only be opened by players");
         }
@@ -100,7 +91,7 @@ public class CartographyTableGui extends NamedGui implements InventoryBased {
         getPlayerInventoryComponent().display();
 
         if (getPlayerInventoryComponent().hasItem()) {
-            HumanEntityCache humanEntityCache = getHumanEntityCache();
+            final HumanEntityCache humanEntityCache = getHumanEntityCache();
 
             if (humanEntityCache.contains(humanEntity)) {
                 humanEntityCache.storeAndClear(humanEntity);
@@ -115,11 +106,10 @@ public class CartographyTableGui extends NamedGui implements InventoryBased {
         cartographyTableInventory.openInventory((Player) humanEntity, getTitle(), getTopItems());
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public CartographyTableGui copy() {
-        CartographyTableGui gui = new CartographyTableGui(getTitle(), super.plugin);
+    public @NonNull CartographyTableGui copy() {
+        final CartographyTableGui gui = new CartographyTableGui(getTitle(), super.plugin);
 
         gui.mapComponent = mapComponent.copy();
         gui.paperComponent = paperComponent.copy();
@@ -136,8 +126,8 @@ public class CartographyTableGui extends NamedGui implements InventoryBased {
     }
 
     @Override
-    public void click(@NonNull InventoryClickEvent event) {
-        int rawSlot = event.getRawSlot();
+    public void click(final @NonNull InventoryClickEvent event) {
+        final int rawSlot = event.getRawSlot();
 
         if (rawSlot == 0) {
             getMapComponent().click(this, event, 0);
@@ -150,9 +140,8 @@ public class CartographyTableGui extends NamedGui implements InventoryBased {
         }
     }
 
-    @NonNull
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (this.inventory == null) {
             this.inventory = createInventory();
         }
@@ -166,10 +155,9 @@ public class CartographyTableGui extends NamedGui implements InventoryBased {
         return getPlayerInventoryComponent().hasItem();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public Inventory createInventory() {
+    public @NonNull Inventory createInventory() {
         return Bukkit.createInventory(this, InventoryType.CARTOGRAPHY, getTitle());
     }
 
@@ -179,10 +167,9 @@ public class CartographyTableGui extends NamedGui implements InventoryBased {
         return getInventory().getViewers().size();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public List<HumanEntity> getViewers() {
+    public @NonNull List<HumanEntity> getViewers() {
         return new ArrayList<>(getInventory().getViewers());
     }
 
@@ -192,9 +179,9 @@ public class CartographyTableGui extends NamedGui implements InventoryBased {
      * @param event the event to handle
      * @since 3.0.0
      */
-    public void handleClickEvent(@NonNull InventoryClickEvent event) {
-        int slot = event.getRawSlot();
-        Player player = (Player) event.getWhoClicked();
+    public void handleClickEvent(final @NonNull InventoryClickEvent event) {
+        final int slot = event.getRawSlot();
+        final Player player = (Player) event.getWhoClicked();
 
         if (slot >= 3 && slot <= 38) {
             cartographyTableInventory.sendItems(player, getTopItems());
@@ -215,9 +202,8 @@ public class CartographyTableGui extends NamedGui implements InventoryBased {
      * @return the map component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getMapComponent() {
+    public @NonNull InventoryComponent getMapComponent() {
         return mapComponent;
     }
 
@@ -227,9 +213,8 @@ public class CartographyTableGui extends NamedGui implements InventoryBased {
      * @return the paper component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getPaperComponent() {
+    public @NonNull InventoryComponent getPaperComponent() {
         return paperComponent;
     }
 
@@ -239,9 +224,8 @@ public class CartographyTableGui extends NamedGui implements InventoryBased {
      * @return the output component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getOutputComponent() {
+    public @NonNull InventoryComponent getOutputComponent() {
         return outputComponent;
     }
 
@@ -251,9 +235,8 @@ public class CartographyTableGui extends NamedGui implements InventoryBased {
      * @return the player inventory component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getPlayerInventoryComponent() {
+    public @NonNull InventoryComponent getPlayerInventoryComponent() {
         return playerInventoryComponent;
     }
 
@@ -263,10 +246,9 @@ public class CartographyTableGui extends NamedGui implements InventoryBased {
      * @return the top items
      * @since 3.0.0
      */
-    @Nullable
     @Contract(pure = true)
-    private ItemStack[] getTopItems() {
-        return new ItemStack[] {
+    private @Nullable ItemStack[] getTopItems() {
+        return new ItemStack[]{
             getMapComponent().getItem(0, 0),
             getPaperComponent().getItem(0, 0),
             getOutputComponent().getItem(0, 0)

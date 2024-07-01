@@ -82,4 +82,5 @@ public final class AxolotlBuilder extends AbstractAnimalBuilder<AxolotlBuilder, 
         this.variant = variant;
         return this;
     }
+
 }

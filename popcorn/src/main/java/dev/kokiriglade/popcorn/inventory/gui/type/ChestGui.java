@@ -34,8 +34,7 @@ public class ChestGui extends NamedGui implements MergedGui, InventoryBased {
     /**
      * Represents the inventory component for the entire gui
      */
-    @NonNull
-    private InventoryComponent inventoryComponent;
+    private @NonNull InventoryComponent inventoryComponent;
 
     /**
      * Whether the amount of rows is dirty i.e. has been changed
@@ -45,24 +44,24 @@ public class ChestGui extends NamedGui implements MergedGui, InventoryBased {
     /**
      * Constructs a new chest GUI
      *
-     * @param rows the amount of rows this gui should contain, in range 1..6.
+     * @param rows  the amount of rows this gui should contain, in range 1..6.
      * @param title the title/name of this gui.
      * @since 3.0.0
      */
-    public ChestGui(int rows, @NonNull Component title) {
+    public ChestGui(final int rows, final @NonNull Component title) {
         this(rows, title, JavaPlugin.getProvidingPlugin(ChestGui.class));
     }
 
     /**
      * Constructs a new chest gui for the given {@code plugin}.
      *
-     * @param rows the amount of rows this gui should contain, in range 1..6.
-     * @param title the title/name of this gui.
+     * @param rows   the amount of rows this gui should contain, in range 1..6.
+     * @param title  the title/name of this gui.
      * @param plugin the owning plugin of this gui
      * @see #ChestGui(int, Component)
      * @since 3.0.0
      */
-    public ChestGui(int rows, @NonNull Component title, @NonNull Plugin plugin) {
+    public ChestGui(final int rows, final @NonNull Component title, final @NonNull Plugin plugin) {
         super(title, plugin);
 
         if (!(rows >= 1 && rows <= 6)) {
@@ -73,7 +72,7 @@ public class ChestGui extends NamedGui implements MergedGui, InventoryBased {
     }
 
     @Override
-    public void show(@NonNull HumanEntity humanEntity) {
+    public void show(final @NonNull HumanEntity humanEntity) {
         if (isDirty() || dirtyRows) {
             this.inventory = createInventory();
             this.dirtyRows = false;
@@ -83,17 +82,17 @@ public class ChestGui extends NamedGui implements MergedGui, InventoryBased {
 
         getInventory().clear();
 
-        int height = getInventoryComponent().getHeight();
+        final int height = getInventoryComponent().getHeight();
 
         getInventoryComponent().display();
 
-        InventoryComponent topComponent = getInventoryComponent().excludeRows(height - 4, height - 1);
-        InventoryComponent bottomComponent = getInventoryComponent().excludeRows(0, height - 5);
+        final InventoryComponent topComponent = getInventoryComponent().excludeRows(height - 4, height - 1);
+        final InventoryComponent bottomComponent = getInventoryComponent().excludeRows(0, height - 5);
 
         topComponent.placeItems(getInventory(), 0);
 
         if (bottomComponent.hasItem()) {
-            HumanEntityCache humanEntityCache = getHumanEntityCache();
+            final HumanEntityCache humanEntityCache = getHumanEntityCache();
 
             if (!humanEntityCache.contains(humanEntity)) {
                 humanEntityCache.storeAndClear(humanEntity);
@@ -105,11 +104,10 @@ public class ChestGui extends NamedGui implements MergedGui, InventoryBased {
         humanEntity.openInventory(getInventory());
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public ChestGui copy() {
-        ChestGui gui = new ChestGui(getRows(), getTitle(), super.plugin);
+    public @NonNull ChestGui copy() {
+        final ChestGui gui = new ChestGui(getRows(), getTitle(), super.plugin);
 
         gui.inventoryComponent = inventoryComponent.copy();
 
@@ -123,7 +121,7 @@ public class ChestGui extends NamedGui implements MergedGui, InventoryBased {
     }
 
     @Override
-    public void click(@NonNull InventoryClickEvent event) {
+    public void click(final @NonNull InventoryClickEvent event) {
         getInventoryComponent().click(this, event, event.getRawSlot());
     }
 
@@ -133,32 +131,8 @@ public class ChestGui extends NamedGui implements MergedGui, InventoryBased {
         return getInventoryComponent().excludeRows(0, getInventoryComponent().getHeight() - 5).hasItem();
     }
 
-    /**
-     * Sets the amount of rows for this inventory.
-     * This will (unlike most other methods) directly update itself in order to ensure all viewers will still be viewing
-     * the new inventory as well.
-     *
-     * @param rows the amount of rows in range 1..6.
-     * @since 3.0.0
-     */
-    public void setRows(int rows) {
-        if (!(rows >= 1 && rows <= 6)) {
-            throw new IllegalArgumentException("Rows should be between 1 and 6");
-        }
-
-        InventoryComponent inventoryComponent = new InventoryComponent(9, rows + 4);
-
-        for (Pane pane : this.inventoryComponent.getPanes()) {
-            inventoryComponent.addPane(pane);
-        }
-
-        this.inventoryComponent = inventoryComponent;
-        this.dirtyRows = true;
-    }
-
-    @NonNull
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (this.inventory == null) {
             this.inventory = createInventory();
         }
@@ -166,29 +140,26 @@ public class ChestGui extends NamedGui implements MergedGui, InventoryBased {
         return inventory;
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public List<Pane> getPanes() {
+    public @NonNull List<Pane> getPanes() {
         return this.inventoryComponent.getPanes();
     }
 
     @Override
-    public void addPane(@NonNull Pane pane) {
+    public void addPane(final @NonNull Pane pane) {
         this.inventoryComponent.addPane(pane);
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public Collection<GuiItem> getItems() {
+    public @NonNull Collection<GuiItem> getItems() {
         return getPanes().stream().flatMap(pane -> pane.getItems().stream()).collect(Collectors.toSet());
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public Inventory createInventory() {
+    public @NonNull Inventory createInventory() {
         return Bukkit.createInventory(this, getRows() * 9, getTitle());
     }
 
@@ -203,23 +174,44 @@ public class ChestGui extends NamedGui implements MergedGui, InventoryBased {
         return getInventoryComponent().getHeight() - 4;
     }
 
+    /**
+     * Sets the amount of rows for this inventory.
+     * This will (unlike most other methods) directly update itself in order to ensure all viewers will still be viewing
+     * the new inventory as well.
+     *
+     * @param rows the amount of rows in range 1..6.
+     * @since 3.0.0
+     */
+    public void setRows(final int rows) {
+        if (!(rows >= 1 && rows <= 6)) {
+            throw new IllegalArgumentException("Rows should be between 1 and 6");
+        }
+
+        final InventoryComponent inventoryComponent = new InventoryComponent(9, rows + 4);
+
+        for (final Pane pane : this.inventoryComponent.getPanes()) {
+            inventoryComponent.addPane(pane);
+        }
+
+        this.inventoryComponent = inventoryComponent;
+        this.dirtyRows = true;
+    }
+
     @Contract(pure = true)
     @Override
     public int getViewerCount() {
         return getInventory().getViewers().size();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public List<HumanEntity> getViewers() {
+    public @NonNull List<HumanEntity> getViewers() {
         return new ArrayList<>(getInventory().getViewers());
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public InventoryComponent getInventoryComponent() {
+    public @NonNull InventoryComponent getInventoryComponent() {
         return inventoryComponent;
     }
 

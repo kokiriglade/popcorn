@@ -17,8 +17,7 @@ public abstract class StonecutterInventory {
     /**
      * The inventory holder
      */
-    @NonNull
-    protected InventoryHolder inventoryHolder;
+    protected @NonNull InventoryHolder inventoryHolder;
 
     /**
      * Creates a new stonecutter inventory for the specified stonecutter gui
@@ -26,7 +25,7 @@ public abstract class StonecutterInventory {
      * @param inventoryHolder the inventory holder
      * @since 3.0.0
      */
-    public StonecutterInventory(@NonNull InventoryHolder inventoryHolder) {
+    public StonecutterInventory(final @NonNull InventoryHolder inventoryHolder) {
         this.inventoryHolder = inventoryHolder;
     }
 
@@ -34,8 +33,8 @@ public abstract class StonecutterInventory {
      * Opens the inventory for the specified player
      *
      * @param player the player to open the inventory for
-     * @param title the title of the inventory
-     * @param items the top items
+     * @param title  the title of the inventory
+     * @param items  the top items
      * @since 3.0.0
      */
     public abstract void openInventory(@NonNull Player player, @NonNull Component title, @Nullable ItemStack[] items);
@@ -44,7 +43,7 @@ public abstract class StonecutterInventory {
      * Sends the top items to the inventory for the specified player.
      *
      * @param player the player for which to open the stonecutter
-     * @param items the items to send
+     * @param items  the items to send
      * @since 3.0.0
      */
     public abstract void sendItems(@NonNull Player player, @Nullable ItemStack[] items);
@@ -56,4 +55,5 @@ public abstract class StonecutterInventory {
      * @since 3.0.0
      */
     public abstract void clearCursor(@NonNull Player player);
+
 }

@@ -33,7 +33,7 @@ public class AbstractDisplayBuilder<B extends AbstractEntityBuilder<B, T>, T ext
     protected @Nullable Matrix4f transformationMatrix;
     protected @Nullable Float viewRange;
 
-    protected AbstractDisplayBuilder(@NonNull Class<T> entityClass, @NonNull Location location) {
+    protected AbstractDisplayBuilder(final @NonNull Class<T> entityClass, final @NonNull Location location) {
         super(entityClass, location);
         this.consumers.add(display -> {
             if (billboard != null) {

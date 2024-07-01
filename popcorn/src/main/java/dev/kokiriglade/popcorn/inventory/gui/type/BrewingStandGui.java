@@ -27,38 +27,32 @@ public class BrewingStandGui extends NamedGui implements InventoryBased {
     /**
      * Represents the inventory component for the first bottle
      */
-    @NonNull
-    private InventoryComponent firstBottleComponent = new InventoryComponent(1, 1);
+    private @NonNull InventoryComponent firstBottleComponent = new InventoryComponent(1, 1);
 
     /**
      * Represents the inventory component for the second bottle
      */
-    @NonNull
-    private InventoryComponent secondBottleComponent = new InventoryComponent(1, 1);
+    private @NonNull InventoryComponent secondBottleComponent = new InventoryComponent(1, 1);
 
     /**
      * Represents the inventory component for the third bottle
      */
-    @NonNull
-    private InventoryComponent thirdBottleComponent = new InventoryComponent(1, 1);
+    private @NonNull InventoryComponent thirdBottleComponent = new InventoryComponent(1, 1);
 
     /**
      * Represents the inventory component for the potion ingredient
      */
-    @NonNull
-    private InventoryComponent potionIngredientComponent = new InventoryComponent(1, 1);
+    private @NonNull InventoryComponent potionIngredientComponent = new InventoryComponent(1, 1);
 
     /**
      * Represents the inventory component for the blaze powder
      */
-    @NonNull
-    private InventoryComponent blazePowderComponent = new InventoryComponent(1, 1);
+    private @NonNull InventoryComponent blazePowderComponent = new InventoryComponent(1, 1);
 
     /**
      * Represents the inventory component for the player inventory
      */
-    @NonNull
-    private InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
+    private @NonNull InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
 
     /**
      * Constructs a new GUI
@@ -66,24 +60,24 @@ public class BrewingStandGui extends NamedGui implements InventoryBased {
      * @param title the title/name of this gui.
      * @since 3.0.0
      */
-    public BrewingStandGui(@NonNull Component title) {
+    public BrewingStandGui(final @NonNull Component title) {
         super(title);
     }
 
     /**
      * Constructs a new brewing stand gui for the given {@code plugin}.
      *
-     * @param title the title/name of this gui.
+     * @param title  the title/name of this gui.
      * @param plugin the owning plugin of this gui
      * @see #BrewingStandGui(Component)
      * @since 3.0.0
      */
-    public BrewingStandGui(@NonNull Component title, @NonNull Plugin plugin) {
+    public BrewingStandGui(final @NonNull Component title, final @NonNull Plugin plugin) {
         super(title, plugin);
     }
 
     @Override
-    public void show(@NonNull HumanEntity humanEntity) {
+    public void show(final @NonNull HumanEntity humanEntity) {
         if (isDirty()) {
             this.inventory = createInventory();
             markChanges();
@@ -99,7 +93,7 @@ public class BrewingStandGui extends NamedGui implements InventoryBased {
         getPlayerInventoryComponent().display();
 
         if (getPlayerInventoryComponent().hasItem()) {
-            HumanEntityCache humanEntityCache = getHumanEntityCache();
+            final HumanEntityCache humanEntityCache = getHumanEntityCache();
 
             if (!humanEntityCache.contains(humanEntity)) {
                 humanEntityCache.storeAndClear(humanEntity);
@@ -111,11 +105,10 @@ public class BrewingStandGui extends NamedGui implements InventoryBased {
         humanEntity.openInventory(getInventory());
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public BrewingStandGui copy() {
-        BrewingStandGui gui = new BrewingStandGui(getTitle(), super.plugin);
+    public @NonNull BrewingStandGui copy() {
+        final BrewingStandGui gui = new BrewingStandGui(getTitle(), super.plugin);
 
         gui.firstBottleComponent = firstBottleComponent.copy();
         gui.secondBottleComponent = secondBottleComponent.copy();
@@ -134,8 +127,8 @@ public class BrewingStandGui extends NamedGui implements InventoryBased {
     }
 
     @Override
-    public void click(@NonNull InventoryClickEvent event) {
-        int rawSlot = event.getRawSlot();
+    public void click(final @NonNull InventoryClickEvent event) {
+        final int rawSlot = event.getRawSlot();
 
         if (rawSlot == 0) {
             getFirstBottleComponent().click(this, event, 0);
@@ -158,9 +151,8 @@ public class BrewingStandGui extends NamedGui implements InventoryBased {
         return getPlayerInventoryComponent().hasItem();
     }
 
-    @NonNull
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (this.inventory == null) {
             this.inventory = createInventory();
         }
@@ -168,11 +160,10 @@ public class BrewingStandGui extends NamedGui implements InventoryBased {
         return inventory;
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public Inventory createInventory() {
-        Inventory inventory = Bukkit.createInventory(this, InventoryType.BREWING, getTitle());
+    public @NonNull Inventory createInventory() {
+        final Inventory inventory = Bukkit.createInventory(this, InventoryType.BREWING, getTitle());
 
         addInventory(inventory, this);
 
@@ -185,10 +176,9 @@ public class BrewingStandGui extends NamedGui implements InventoryBased {
         return getInventory().getViewers().size();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public List<HumanEntity> getViewers() {
+    public @NonNull List<HumanEntity> getViewers() {
         return new ArrayList<>(getInventory().getViewers());
     }
 
@@ -198,9 +188,8 @@ public class BrewingStandGui extends NamedGui implements InventoryBased {
      * @return the first bottle component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getFirstBottleComponent() {
+    public @NonNull InventoryComponent getFirstBottleComponent() {
         return firstBottleComponent;
     }
 
@@ -210,9 +199,8 @@ public class BrewingStandGui extends NamedGui implements InventoryBased {
      * @return the second bottle component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getSecondBottleComponent() {
+    public @NonNull InventoryComponent getSecondBottleComponent() {
         return secondBottleComponent;
     }
 
@@ -222,9 +210,8 @@ public class BrewingStandGui extends NamedGui implements InventoryBased {
      * @return the third bottle component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getThirdBottleComponent() {
+    public @NonNull InventoryComponent getThirdBottleComponent() {
         return thirdBottleComponent;
     }
 
@@ -234,9 +221,8 @@ public class BrewingStandGui extends NamedGui implements InventoryBased {
      * @return the potion ingredient component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getPotionIngredientComponent() {
+    public @NonNull InventoryComponent getPotionIngredientComponent() {
         return potionIngredientComponent;
     }
 
@@ -246,9 +232,8 @@ public class BrewingStandGui extends NamedGui implements InventoryBased {
      * @return the blaze powder component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getBlazePowderComponent() {
+    public @NonNull InventoryComponent getBlazePowderComponent() {
         return blazePowderComponent;
     }
 
@@ -258,9 +243,8 @@ public class BrewingStandGui extends NamedGui implements InventoryBased {
      * @return the player inventory component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getPlayerInventoryComponent() {
+    public @NonNull InventoryComponent getPlayerInventoryComponent() {
         return playerInventoryComponent;
     }
 

@@ -1,8 +1,8 @@
 package dev.kokiriglade.popcorn.inventory.gui.type;
 
 import dev.kokiriglade.popcorn.inventory.HumanEntityCache;
-import dev.kokiriglade.popcorn.inventory.gui.type.abstraction.AnvilInventory;
 import dev.kokiriglade.popcorn.inventory.gui.InventoryComponent;
+import dev.kokiriglade.popcorn.inventory.gui.type.abstraction.AnvilInventory;
 import dev.kokiriglade.popcorn.inventory.gui.type.impl.AnvilInventoryImpl;
 import dev.kokiriglade.popcorn.inventory.gui.type.util.InventoryBased;
 import dev.kokiriglade.popcorn.inventory.gui.type.util.NamedGui;
@@ -35,46 +35,34 @@ import java.util.logging.Level;
 public class AnvilGui extends NamedGui implements InventoryBased {
 
     /**
-     * Called whenever the name input is changed.
-     */
-    @NonNull
-    private Consumer<? super String> onNameInputChanged = (name) -> {};
-
-    /**
-     * Represents the inventory component for the first item
-     */
-    @NonNull
-    private InventoryComponent firstItemComponent = new InventoryComponent(1, 1);
-
-    /**
-     * Represents the inventory component for the second item
-     */
-    @NonNull
-    private InventoryComponent secondItemComponent = new InventoryComponent(1, 1);
-
-    /**
-     * Represents the inventory component for the result
-     */
-    @NonNull
-    private InventoryComponent resultComponent = new InventoryComponent(1, 1);
-
-    /**
-     * Represents the inventory component for the player inventory
-     */
-    @NonNull
-    private InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
-
-    /**
      * An internal anvil inventory
      */
-    @NonNull
-    private final AnvilInventory anvilInventory = new AnvilInventoryImpl(this);
-
+    private final @NonNull AnvilInventory anvilInventory = new AnvilInventoryImpl(this);
     /**
      * The viewers of this gui
      */
-    @NonNull
-    private final Collection<HumanEntity> viewers = new HashSet<>();
+    private final @NonNull Collection<HumanEntity> viewers = new HashSet<>();
+    /**
+     * Called whenever the name input is changed.
+     */
+    private @NonNull Consumer<? super String> onNameInputChanged = (name) -> {
+    };
+    /**
+     * Represents the inventory component for the first item
+     */
+    private @NonNull InventoryComponent firstItemComponent = new InventoryComponent(1, 1);
+    /**
+     * Represents the inventory component for the second item
+     */
+    private @NonNull InventoryComponent secondItemComponent = new InventoryComponent(1, 1);
+    /**
+     * Represents the inventory component for the result
+     */
+    private @NonNull InventoryComponent resultComponent = new InventoryComponent(1, 1);
+    /**
+     * Represents the inventory component for the player inventory
+     */
+    private @NonNull InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
 
     /**
      * Constructs a new anvil gui
@@ -82,7 +70,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @param title the title/name of this gui.
      * @since 3.0.0
      */
-    public AnvilGui(@NonNull Component title) {
+    public AnvilGui(final @NonNull Component title) {
         super(title);
 
         this.anvilInventory.subscribeToNameInputChanges(this::callOnRename);
@@ -91,19 +79,19 @@ public class AnvilGui extends NamedGui implements InventoryBased {
     /**
      * Constructs a new anvil gui for the given {@code plugin}.
      *
-     * @param title the title/name of this gui.
+     * @param title  the title/name of this gui.
      * @param plugin the owning plugin of this gui
      * @see #AnvilGui(Component)
      * @since 3.0.0
      */
-    public AnvilGui(@NonNull Component title, @NonNull Plugin plugin) {
+    public AnvilGui(final @NonNull Component title, final @NonNull Plugin plugin) {
         super(title, plugin);
 
         this.anvilInventory.subscribeToNameInputChanges(this::callOnRename);
     }
 
     @Override
-    public void show(@NonNull HumanEntity humanEntity) {
+    public void show(final @NonNull HumanEntity humanEntity) {
         if (!(humanEntity instanceof Player)) {
             throw new IllegalArgumentException("Anvils can only be opened by players");
         }
@@ -122,7 +110,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
         getPlayerInventoryComponent().display();
 
         if (getPlayerInventoryComponent().hasItem()) {
-            HumanEntityCache humanEntityCache = getHumanEntityCache();
+            final HumanEntityCache humanEntityCache = getHumanEntityCache();
 
             if (!humanEntityCache.contains(humanEntity)) {
                 humanEntityCache.storeAndClear(humanEntity);
@@ -131,18 +119,17 @@ public class AnvilGui extends NamedGui implements InventoryBased {
             getPlayerInventoryComponent().placeItems(humanEntity.getInventory(), 0);
         }
 
-        Inventory inventory = anvilInventory.openInventory((Player) humanEntity, getTitle(), getTopItems());
+        final Inventory inventory = anvilInventory.openInventory((Player) humanEntity, getTitle(), getTopItems());
 
         addInventory(inventory, this);
 
         this.viewers.add(humanEntity);
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public AnvilGui copy() {
-        AnvilGui gui = new AnvilGui(getTitle(), super.plugin);
+    public @NonNull AnvilGui copy() {
+        final AnvilGui gui = new AnvilGui(getTitle(), super.plugin);
 
         gui.firstItemComponent = firstItemComponent.copy();
         gui.secondItemComponent = secondItemComponent.copy();
@@ -159,8 +146,8 @@ public class AnvilGui extends NamedGui implements InventoryBased {
     }
 
     @Override
-    public void click(@NonNull InventoryClickEvent event) {
-        int rawSlot = event.getRawSlot();
+    public void click(final @NonNull InventoryClickEvent event) {
+        final int rawSlot = event.getRawSlot();
 
         if (rawSlot == 0) {
             getFirstItemComponent().click(this, event, 0);
@@ -173,9 +160,8 @@ public class AnvilGui extends NamedGui implements InventoryBased {
         }
     }
 
-    @NonNull
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (this.inventory == null) {
             this.inventory = createInventory();
         }
@@ -189,21 +175,20 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * even if the player does not have the specified amount of levels. The cost must be a non-negative number.
      *
      * @param cost the cost
-     * @since 3.0.0
      * @throws IllegalArgumentException when the cost is less than zero
+     * @since 3.0.0
      */
-    public void setCost(short cost) {
-        if (cost < 0){
+    public void setCost(final short cost) {
+        if (cost < 0) {
             throw new IllegalArgumentException("Cost must be non-negative");
         }
 
         this.anvilInventory.setCost(cost);
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public Inventory createInventory() {
+    public @NonNull Inventory createInventory() {
         return Bukkit.createInventory(this, InventoryType.ANVIL, getTitle());
     }
 
@@ -211,12 +196,11 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * Gets the rename text currently specified in the anvil.
      *
      * @return the rename text
-     * @since 3.0.0
      * @see org.bukkit.inventory.AnvilInventory#getRenameText()
+     * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public String getRenameText() {
+    public @NonNull String getRenameText() {
         return anvilInventory.getRenameText();
     }
 
@@ -232,10 +216,9 @@ public class AnvilGui extends NamedGui implements InventoryBased {
         return this.viewers.size();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public List<HumanEntity> getViewers() {
+    public @NonNull List<HumanEntity> getViewers() {
         return new ArrayList<>(this.viewers);
     }
 
@@ -247,9 +230,9 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @deprecated no longer used internally
      */
     @Deprecated
-    public void handleClickEvent(@NonNull InventoryClickEvent event) {
-        int slot = event.getRawSlot();
-        Player player = (Player) event.getWhoClicked();
+    public void handleClickEvent(final @NonNull InventoryClickEvent event) {
+        final int slot = event.getRawSlot();
+        final Player player = (Player) event.getWhoClicked();
 
         if (slot >= 3 && slot <= 38) {
             anvilInventory.sendItems(player, getTopItems());
@@ -268,7 +251,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
         } else if (slot == 2 && !event.isCancelled()) {
             anvilInventory.clearResultItem(player);
 
-            ItemStack resultItem = getResultComponent().getItem(0, 0);
+            final ItemStack resultItem = getResultComponent().getItem(0, 0);
 
             if (resultItem != null) {
                 anvilInventory.setCursor(player, resultItem);
@@ -282,7 +265,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @param humanEntity the human entity closing the gui
      * @since 3.0.0
      */
-    public void handleClose(@NonNull HumanEntity humanEntity) {
+    public void handleClose(final @NonNull HumanEntity humanEntity) {
         this.viewers.remove(humanEntity);
     }
 
@@ -294,7 +277,7 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @param onNameInputChanged the consumer to call when the rename input is changed
      * @since 3.0.0
      */
-    public void setOnNameInputChanged(@NonNull Consumer<? super String> onNameInputChanged) {
+    public void setOnNameInputChanged(final @NonNull Consumer<? super String> onNameInputChanged) {
         this.onNameInputChanged = onNameInputChanged;
     }
 
@@ -305,11 +288,11 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @param newInput the new rename input
      * @since 3.0.0
      */
-    private void callOnRename(@NonNull String newInput) {
+    private void callOnRename(final @NonNull String newInput) {
         try {
             this.onNameInputChanged.accept(newInput);
-        } catch (Throwable throwable) {
-            String message = "Exception while handling onRename, newInput='" + newInput + "'";
+        } catch (final Throwable throwable) {
+            final String message = "Exception while handling onRename, newInput='" + newInput + "'";
 
             this.plugin.getLogger().log(Level.SEVERE, message, throwable);
         }
@@ -321,9 +304,8 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @return the first item component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getFirstItemComponent() {
+    public @NonNull InventoryComponent getFirstItemComponent() {
         return firstItemComponent;
     }
 
@@ -333,9 +315,8 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @return the second item component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getSecondItemComponent() {
+    public @NonNull InventoryComponent getSecondItemComponent() {
         return secondItemComponent;
     }
 
@@ -345,9 +326,8 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @return the result component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getResultComponent() {
+    public @NonNull InventoryComponent getResultComponent() {
         return resultComponent;
     }
 
@@ -357,9 +337,8 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @return the player inventory component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getPlayerInventoryComponent() {
+    public @NonNull InventoryComponent getPlayerInventoryComponent() {
         return playerInventoryComponent;
     }
 
@@ -369,10 +348,9 @@ public class AnvilGui extends NamedGui implements InventoryBased {
      * @return the top items
      * @since 3.0.0
      */
-    @Nullable
     @Contract(pure = true)
-    private ItemStack[] getTopItems() {
-        return new ItemStack[] {
+    private @Nullable ItemStack[] getTopItems() {
+        return new ItemStack[]{
             getFirstItemComponent().getItem(0, 0),
             getSecondItemComponent().getItem(0, 0),
             getResultComponent().getItem(0, 0)

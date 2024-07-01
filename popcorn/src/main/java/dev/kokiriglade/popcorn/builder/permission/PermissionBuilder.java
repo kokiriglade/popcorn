@@ -15,7 +15,7 @@ import java.util.Set;
  * @since 2.2.0
  */
 @SuppressWarnings("unused")
-public class PermissionBuilder {
+public final class PermissionBuilder {
 
     /**
      * The {@code Permission} to modify during building.
@@ -27,7 +27,7 @@ public class PermissionBuilder {
      *
      * @since 2.2.0
      */
-    private PermissionBuilder(String name) {
+    private PermissionBuilder(final @NonNull String name) {
         this.permission = new Permission(name);
     }
 
@@ -117,7 +117,7 @@ public class PermissionBuilder {
      * @return the builder
      * @since 2.2.0
      */
-    public @NonNull PermissionBuilder removeChild(@NonNull String string) {
+    public @NonNull PermissionBuilder removeChild(final @NonNull String string) {
         this.permission.getChildren().remove(string);
         this.permission.recalculatePermissibles();
         return this;
@@ -140,7 +140,7 @@ public class PermissionBuilder {
      * @return the builder
      * @since 2.2.0
      */
-    public @NonNull PermissionBuilder permissionDefault(@NonNull PermissionDefault defaultValue) {
+    public @NonNull PermissionBuilder permissionDefault(final @NonNull PermissionDefault defaultValue) {
         this.permission.setDefault(defaultValue);
         return this;
     }
@@ -173,7 +173,7 @@ public class PermissionBuilder {
      * Add the permission to the specified parent permission..
      *
      * @param permission the parent
-     * @param value  the value
+     * @param value      the value
      * @return the builder
      * @since 3.0.1
      */

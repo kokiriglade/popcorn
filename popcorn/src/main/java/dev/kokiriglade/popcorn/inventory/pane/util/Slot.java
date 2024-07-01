@@ -15,26 +15,6 @@ import java.util.Objects;
 public interface Slot {
 
     /**
-     * Gets the x coordinate of this slot.
-     *
-     * @param length the length of the parent container
-     * @return the x coordinate of this slot
-     * @since 3.0.0
-     */
-    @Contract(pure = true)
-    int getX(int length);
-
-    /**
-     * Gets the y coordinate of this slot.
-     *
-     * @param length the length of the parent container
-     * @return the y coordinate of this slot
-     * @since 3.0.0
-     */
-    @Contract(pure = true)
-    int getY(int length);
-
-    /**
      * Creates a new slot based on an (x, y) coordinate pair.
      *
      * @param x the x coordinate
@@ -42,9 +22,8 @@ public interface Slot {
      * @return the slot representing this position
      * @since 3.0.0
      */
-    @NonNull
     @Contract(value = "_, _ -> new", pure = true)
-    static Slot fromXY(int x, int y) {
+    static @NonNull Slot fromXY(final int x, final int y) {
         return new XY(x, y);
     }
 
@@ -55,18 +34,37 @@ public interface Slot {
      * @return the slot representing this relative position
      * @since 3.0.0
      */
-    @NonNull
     @Contract("_ -> new")
-    static Slot fromIndex(int index) {
+    static @NonNull Slot fromIndex(final int index) {
         return new Indexed(index);
     }
+
+    /**
+     * Gets the x coordinate of this slot.
+     *
+     * @param length the length of the parent container
+     * @return the x coordinate of this slot
+     * @since 3.0.0
+     */
+    @Contract(pure = true)
+    int getX(final int length);
+
+    /**
+     * Gets the y coordinate of this slot.
+     *
+     * @param length the length of the parent container
+     * @return the y coordinate of this slot
+     * @since 3.0.0
+     */
+    @Contract(pure = true)
+    int getY(final int length);
 
     /**
      * A class representing a slot based on an (x, y) coordinate pair.
      *
      * @since 3.0.0
      */
-    class XY implements Slot {
+    final class XY implements Slot {
 
         /**
          * The (x, y) coordinate pair
@@ -80,23 +78,23 @@ public interface Slot {
          * @param y the y coordinate
          * @since 3.0.0
          */
-        private XY(int x, int y) {
+        private XY(final int x, final int y) {
             this.x = x;
             this.y = y;
         }
 
         @Override
-        public int getX(int length) {
+        public int getX(final int length) {
             return this.x;
         }
 
         @Override
-        public int getY(int length) {
+        public int getY(final int length) {
             return this.y;
         }
 
         @Override
-        public boolean equals(@Nullable Object object) {
+        public boolean equals(final @Nullable Object object) {
             if (this == object) {
                 return true;
             }
@@ -105,7 +103,7 @@ public interface Slot {
                 return false;
             }
 
-            XY xy = (XY) object;
+            final XY xy = (XY) object;
 
             return x == xy.x && y == xy.y;
         }
@@ -114,6 +112,7 @@ public interface Slot {
         public int hashCode() {
             return Objects.hash(x, y);
         }
+
     }
 
     /**
@@ -121,7 +120,7 @@ public interface Slot {
      *
      * @since 3.0.0
      */
-    class Indexed implements Slot {
+    final class Indexed implements Slot {
 
         /**
          * The index of this slot.
@@ -134,13 +133,13 @@ public interface Slot {
          * @param index the index of this slot
          * @since 3.0.0
          */
-        private Indexed(int index) {
+        private Indexed(final int index) {
             this.index = index;
         }
 
         /**
          * {@inheritDoc}
-         *
+         * <p>
          * If {@code length} is zero, this will throw an {@link IllegalArgumentException}.
          *
          * @param length {@inheritDoc}
@@ -149,7 +148,7 @@ public interface Slot {
          */
         @Override
         @Contract(pure = true)
-        public int getX(int length) {
+        public int getX(final int length) {
             if (length == 0) {
                 throw new IllegalArgumentException("Length may not be zero");
             }
@@ -159,7 +158,7 @@ public interface Slot {
 
         /**
          * {@inheritDoc}
-         *
+         * <p>
          * If {@code length} is zero, this will throw an {@link IllegalArgumentException}.
          *
          * @param length {@inheritDoc}
@@ -168,7 +167,7 @@ public interface Slot {
          */
         @Override
         @Contract(pure = true)
-        public int getY(int length) {
+        public int getY(final int length) {
             if (length == 0) {
                 throw new IllegalArgumentException("Length may not be zero");
             }
@@ -177,7 +176,7 @@ public interface Slot {
         }
 
         @Override
-        public boolean equals(@Nullable Object object) {
+        public boolean equals(final @Nullable Object object) {
             if (this == object) {
                 return true;
             }
@@ -186,7 +185,7 @@ public interface Slot {
                 return false;
             }
 
-            Indexed indexed = (Indexed) object;
+            final Indexed indexed = (Indexed) object;
 
             return index == indexed.index;
         }
@@ -195,6 +194,7 @@ public interface Slot {
         public int hashCode() {
             return index;
         }
+
     }
 
 }

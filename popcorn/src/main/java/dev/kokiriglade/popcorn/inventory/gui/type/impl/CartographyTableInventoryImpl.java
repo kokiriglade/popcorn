@@ -34,14 +34,19 @@ import java.lang.reflect.Field;
  */
 public class CartographyTableInventoryImpl extends CartographyTableInventory {
 
-    public CartographyTableInventoryImpl(@NonNull InventoryHolder inventoryHolder) {
+    /**
+     * Create an internal cartography table inventory
+     * @param inventoryHolder the {@code InventoryHolder}
+     * @since 3.0.0
+     */
+    public CartographyTableInventoryImpl(final @NonNull InventoryHolder inventoryHolder) {
         super(inventoryHolder);
     }
 
     @Override
-    public void openInventory(@NonNull Player player, net.kyori.adventure.text.@NonNull Component title,
-                              org.bukkit.inventory.@Nullable ItemStack[] items) {
-        int itemAmount = items.length;
+    public void openInventory(final @NonNull Player player, final net.kyori.adventure.text.@NonNull Component title,
+                              final org.bukkit.inventory.@Nullable ItemStack[] items) {
+        final int itemAmount = items.length;
 
         if (itemAmount != 3) {
             throw new IllegalArgumentException(
@@ -50,16 +55,16 @@ public class CartographyTableInventoryImpl extends CartographyTableInventory {
         }
 
 
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        Component message = PaperAdventure.asVanilla(title);
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final Component message = PaperAdventure.asVanilla(title);
 
-        ContainerCartographyTableImpl containerCartographyTable = new ContainerCartographyTableImpl(
+        final ContainerCartographyTableImpl containerCartographyTable = new ContainerCartographyTableImpl(
             serverPlayer, items, message
         );
 
         serverPlayer.containerMenu = containerCartographyTable;
 
-        int id = containerCartographyTable.containerId;
+        final int id = containerCartographyTable.containerId;
 
         serverPlayer.connection.send(new ClientboundOpenScreenPacket(id, MenuType.CARTOGRAPHY_TABLE, message));
 
@@ -67,21 +72,21 @@ public class CartographyTableInventoryImpl extends CartographyTableInventory {
     }
 
     @Override
-    public void sendItems(@NonNull Player player, org.bukkit.inventory.@Nullable ItemStack[] items) {
-        NonNullList<ItemStack> nmsItems = CustomInventoryUtil.convertToNMSItems(items);
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        int containerId = getContainerId(serverPlayer);
-        int state = serverPlayer.containerMenu.incrementStateId();
-        ItemStack cursor = CraftItemStack.asNMSCopy(player.getItemOnCursor());
-        ServerPlayerConnection playerConnection = getPlayerConnection(serverPlayer);
+    public void sendItems(final @NonNull Player player, final org.bukkit.inventory.@Nullable ItemStack[] items) {
+        final NonNullList<ItemStack> nmsItems = CustomInventoryUtil.convertToNMSItems(items);
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final int containerId = getContainerId(serverPlayer);
+        final int state = serverPlayer.containerMenu.incrementStateId();
+        final ItemStack cursor = CraftItemStack.asNMSCopy(player.getItemOnCursor());
+        final ServerPlayerConnection playerConnection = getPlayerConnection(serverPlayer);
 
         playerConnection.send(new ClientboundContainerSetContentPacket(containerId, state, nmsItems, cursor));
     }
 
     @Override
-    public void clearCursor(@NonNull Player player) {
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        int state = serverPlayer.containerMenu.incrementStateId();
+    public void clearCursor(final @NonNull Player player) {
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final int state = serverPlayer.containerMenu.incrementStateId();
 
         getPlayerConnection(serverPlayer).send(new ClientboundContainerSetSlotPacket(-1, state, -1, ItemStack.EMPTY));
     }
@@ -94,7 +99,7 @@ public class CartographyTableInventoryImpl extends CartographyTableInventory {
      * @since 3.0.0
      */
     @Contract(pure = true)
-    private int getContainerId(net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
+    private int getContainerId(final net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
         return nmsPlayer.containerMenu.containerId;
     }
 
@@ -105,9 +110,8 @@ public class CartographyTableInventoryImpl extends CartographyTableInventory {
      * @return the player connection
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    private ServerPlayerConnection getPlayerConnection(@NonNull ServerPlayer serverPlayer) {
+    private @NonNull ServerPlayerConnection getPlayerConnection(final @NonNull ServerPlayer serverPlayer) {
         return serverPlayer.connection;
     }
 
@@ -118,9 +122,8 @@ public class CartographyTableInventoryImpl extends CartographyTableInventory {
      * @return the server player
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    private ServerPlayer getServerPlayer(@NonNull Player player) {
+    private @NonNull ServerPlayer getServerPlayer(final @NonNull Player player) {
         return ((CraftPlayer) player).getHandle();
     }
 
@@ -134,24 +137,19 @@ public class CartographyTableInventoryImpl extends CartographyTableInventory {
         /**
          * The player for this cartography table container
          */
-        @NonNull
-        private final Player player;
-
-        /**
-         * The internal bukkit entity for this container cartography table
-         */
-        @Nullable
-        private CraftInventoryView bukkitEntity;
-
+        private final @NonNull Player player;
         /**
          * Field for accessing the result inventory field
          */
-        @NonNull
-        private final Field resultContainerField;
+        private final @NonNull Field resultContainerField;
+        /**
+         * The internal bukkit entity for this container cartography table
+         */
+        private @Nullable CraftInventoryView bukkitEntity;
 
-        public ContainerCartographyTableImpl(@NonNull ServerPlayer serverPlayer,
-                                             org.bukkit.inventory.@Nullable ItemStack[] items,
-                                             @NonNull Component title) {
+        public ContainerCartographyTableImpl(final @NonNull ServerPlayer serverPlayer,
+                                             final org.bukkit.inventory.@Nullable ItemStack[] items,
+                                             final @NonNull Component title) {
             super(serverPlayer.nextContainerCounter(), serverPlayer.getInventory());
 
             this.player = serverPlayer.getBukkitEntity();
@@ -162,7 +160,7 @@ public class CartographyTableInventoryImpl extends CartographyTableInventory {
                 //noinspection JavaReflectionMemberAccess
                 this.resultContainerField = CartographyTableMenu.class.getDeclaredField("u"); //resultContainer
                 this.resultContainerField.setAccessible(true);
-            } catch (NoSuchFieldException exception) {
+            } catch (final NoSuchFieldException exception) {
                 throw new RuntimeException(exception);
             }
 
@@ -172,15 +170,13 @@ public class CartographyTableInventoryImpl extends CartographyTableInventory {
             getResultInventory().setItem(0, CraftItemStack.asNMSCopy(items[2]));
         }
 
-        @NonNull
         @Override
-        public CraftInventoryView getBukkitView() {
+        public @NonNull CraftInventoryView getBukkitView() {
             if (bukkitEntity == null) {
-                CraftInventory inventory = new CraftInventoryCartography(super.container, getResultInventory()) {
-                    @NonNull
+                final CraftInventory inventory = new CraftInventoryCartography(super.container, getResultInventory()) {
                     @Contract(pure = true)
                     @Override
-                    public InventoryHolder getHolder() {
+                    public @NonNull InventoryHolder getHolder() {
                         return inventoryHolder;
                     }
                 };
@@ -193,25 +189,27 @@ public class CartographyTableInventoryImpl extends CartographyTableInventory {
 
         @Contract(pure = true, value = "_ -> true")
         @Override
-        public boolean stillValid(net.minecraft.world.entity.player.@Nullable Player nmsPlayer) {
+        public boolean stillValid(final net.minecraft.world.entity.player.@Nullable Player nmsPlayer) {
             return true;
         }
 
         @Override
-        public void slotsChanged(@NonNull Container container) {}
+        public void slotsChanged(final @NonNull Container container) {
+        }
 
         @Override
-        public void removed(net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {}
+        public void removed(final net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
+        }
 
-        @NonNull
         @Contract(pure = true)
-        private Container getResultInventory() {
+        private @NonNull Container getResultInventory() {
             try {
                 return (Container) resultContainerField.get(this);
-            } catch (IllegalAccessException exception) {
+            } catch (final IllegalAccessException exception) {
                 throw new RuntimeException(exception);
             }
         }
 
     }
+
 }

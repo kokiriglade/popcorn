@@ -18,8 +18,7 @@ public abstract class GrindstoneInventory {
     /**
      * The inventory holder
      */
-    @NonNull
-    protected InventoryHolder inventoryHolder;
+    protected @NonNull InventoryHolder inventoryHolder;
 
     /**
      * Creates a new grindstone inventory for the specified inventory holder
@@ -27,7 +26,7 @@ public abstract class GrindstoneInventory {
      * @param inventoryHolder the inventory holder
      * @since 3.0.0
      */
-    public GrindstoneInventory(@NonNull InventoryHolder inventoryHolder) {
+    public GrindstoneInventory(final @NonNull InventoryHolder inventoryHolder) {
         this.inventoryHolder = inventoryHolder;
     }
 
@@ -35,8 +34,8 @@ public abstract class GrindstoneInventory {
      * Opens the inventory for the specified player
      *
      * @param player the player to open the inventory for
-     * @param title the title of the inventory
-     * @param items the top items
+     * @param title  the title of the inventory
+     * @param items  the top items
      * @since 3.0.0
      */
     public abstract Inventory openInventory(@NonNull Player player, @NonNull Component title, @Nullable ItemStack[] items);
@@ -45,7 +44,7 @@ public abstract class GrindstoneInventory {
      * Sends the top items to the inventory for the specified player.
      *
      * @param player the player for which to open the grindstone
-     * @param items the items to send
+     * @param items  the items to send
      * @param cursor the cursor item
      * @since 3.0.0
      */
@@ -58,4 +57,5 @@ public abstract class GrindstoneInventory {
      * @since 3.0.0
      */
     public abstract void clearCursor(@NonNull Player player);
+
 }

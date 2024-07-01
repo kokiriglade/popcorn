@@ -28,7 +28,7 @@ public abstract class AbstractArrowBuilder<B extends AbstractProjectileBuilder<B
     protected @ApiStatus.Experimental
     @Nullable ItemStack weapon;
 
-    protected AbstractArrowBuilder(@NonNull Class<T> entityClass, @NonNull Location location) {
+    protected AbstractArrowBuilder(final @NonNull Class<T> entityClass, final @NonNull Location location) {
         super(entityClass, location);
         this.consumers.add(abstractArrow -> {
             if (critical != null) {

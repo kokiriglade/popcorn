@@ -34,14 +34,19 @@ import org.jetbrains.annotations.Contract;
  */
 public class SmithingTableInventoryImpl extends SmithingTableInventory {
 
-    public SmithingTableInventoryImpl(@NonNull InventoryHolder inventoryHolder) {
+    /**
+     * Create a smithing table inventory
+     * @param inventoryHolder the {@code InventoryHolder}
+     * @since 3.0.0
+     */
+    public SmithingTableInventoryImpl(final @NonNull InventoryHolder inventoryHolder) {
         super(inventoryHolder);
     }
 
     @Override
-    public Inventory openInventory(@NonNull Player player, net.kyori.adventure.text.@NonNull Component title,
-                                   org.bukkit.inventory.@Nullable ItemStack[] items) {
-        int itemAmount = items.length;
+    public Inventory openInventory(final @NonNull Player player, final net.kyori.adventure.text.@NonNull Component title,
+                                   final org.bukkit.inventory.@Nullable ItemStack[] items) {
+        final int itemAmount = items.length;
 
         if (itemAmount != 4) {
             throw new IllegalArgumentException(
@@ -49,7 +54,7 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
             );
         }
 
-        ServerPlayer serverPlayer = getServerPlayer(player);
+        final ServerPlayer serverPlayer = getServerPlayer(player);
 
         //ignore deprecation: superseding method is only available on Paper
         //noinspection deprecation
@@ -57,17 +62,17 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
 
         serverPlayer.containerMenu = serverPlayer.inventoryMenu;
 
-        Component message = PaperAdventure.asVanilla(title);
-        ContainerSmithingTableImpl containerSmithingTable = new ContainerSmithingTableImpl(serverPlayer, message);
+        final Component message = PaperAdventure.asVanilla(title);
+        final ContainerSmithingTableImpl containerSmithingTable = new ContainerSmithingTableImpl(serverPlayer, message);
 
-        Inventory inventory = containerSmithingTable.getBukkitView().getTopInventory();
+        final Inventory inventory = containerSmithingTable.getBukkitView().getTopInventory();
 
         inventory.setItem(0, items[0]);
         inventory.setItem(1, items[1]);
         inventory.setItem(2, items[2]);
         inventory.setItem(3, items[3]);
 
-        int containerId = containerSmithingTable.getContainerId();
+        final int containerId = containerSmithingTable.getContainerId();
 
         serverPlayer.connection.send(new ClientboundOpenScreenPacket(containerId, MenuType.SMITHING, message));
         serverPlayer.containerMenu = containerSmithingTable;
@@ -77,57 +82,57 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
     }
 
     @Override
-    public void sendItems(@NonNull Player player, org.bukkit.inventory.@Nullable ItemStack[] items,
-                          org.bukkit.inventory.@Nullable ItemStack cursor) {
-        NonNullList<ItemStack> nmsItems = CustomInventoryUtil.convertToNMSItems(items);
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        int containerId = getContainerId(serverPlayer);
-        int state = serverPlayer.containerMenu.incrementStateId();
-        ItemStack nmsCursor = CraftItemStack.asNMSCopy(cursor);
-        ServerPlayerConnection playerConnection = getPlayerConnection(serverPlayer);
+    public void sendItems(final @NonNull Player player, final org.bukkit.inventory.@Nullable ItemStack[] items,
+                          final org.bukkit.inventory.@Nullable ItemStack cursor) {
+        final NonNullList<ItemStack> nmsItems = CustomInventoryUtil.convertToNMSItems(items);
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final int containerId = getContainerId(serverPlayer);
+        final int state = serverPlayer.containerMenu.incrementStateId();
+        final ItemStack nmsCursor = CraftItemStack.asNMSCopy(cursor);
+        final ServerPlayerConnection playerConnection = getPlayerConnection(serverPlayer);
 
         playerConnection.send(new ClientboundContainerSetContentPacket(containerId, state, nmsItems, nmsCursor));
     }
 
     @Override
-    public void sendFirstItem(@NonNull Player player, org.bukkit.inventory.@Nullable ItemStack item) {
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
-        int containerId = getContainerId(serverPlayer);
-        int state = serverPlayer.containerMenu.incrementStateId();
+    public void sendFirstItem(final @NonNull Player player, final org.bukkit.inventory.@Nullable ItemStack item) {
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
+        final int containerId = getContainerId(serverPlayer);
+        final int state = serverPlayer.containerMenu.incrementStateId();
 
         getPlayerConnection(serverPlayer).send(new ClientboundContainerSetSlotPacket(containerId, state, 0, nmsItem));
     }
 
     @Override
-    public void sendSecondItem(@NonNull Player player, org.bukkit.inventory.@Nullable ItemStack item) {
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
-        int containerId = getContainerId(serverPlayer);
-        int state = serverPlayer.containerMenu.incrementStateId();
+    public void sendSecondItem(final @NonNull Player player, final org.bukkit.inventory.@Nullable ItemStack item) {
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final ItemStack nmsItem = CraftItemStack.asNMSCopy(item);
+        final int containerId = getContainerId(serverPlayer);
+        final int state = serverPlayer.containerMenu.incrementStateId();
 
         getPlayerConnection(serverPlayer).send(new ClientboundContainerSetSlotPacket(containerId, state, 1, nmsItem));
     }
 
     @Override
-    public void sendResultItem(@NonNull Player player, org.bukkit.inventory.@Nullable ItemStack item) {
+    public void sendResultItem(final @NonNull Player player, final org.bukkit.inventory.@Nullable ItemStack item) {
         sendResultItem(player, CraftItemStack.asNMSCopy(item));
     }
 
     @Override
-    public void clearResultItem(@NonNull Player player) {
+    public void clearResultItem(final @NonNull Player player) {
         sendResultItem(player, ItemStack.EMPTY);
     }
 
     @Override
-    public void setCursor(@NonNull Player player, org.bukkit.inventory.@NonNull ItemStack item) {
+    public void setCursor(final @NonNull Player player, final org.bukkit.inventory.@NonNull ItemStack item) {
         setCursor(player, CraftItemStack.asNMSCopy(item));
     }
 
     @Override
-    public void clearCursor(@NonNull Player player) {
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        int state = serverPlayer.containerMenu.incrementStateId();
+    public void clearCursor(final @NonNull Player player) {
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final int state = serverPlayer.containerMenu.incrementStateId();
 
         getPlayerConnection(serverPlayer).send(new ClientboundContainerSetSlotPacket(-1, state, -1, ItemStack.EMPTY));
     }
@@ -136,14 +141,14 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
      * Sets the cursor of the given player
      *
      * @param player the player to set the cursor
-     * @param item the item to set the cursor to
+     * @param item   the item to set the cursor to
      * @since 3.0.0
      * @deprecated no longer used internally
      */
     @Deprecated
-    private void setCursor(@NonNull Player player, @NonNull ItemStack item) {
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        int state = serverPlayer.containerMenu.incrementStateId();
+    private void setCursor(final @NonNull Player player, final @NonNull ItemStack item) {
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final int state = serverPlayer.containerMenu.incrementStateId();
 
         getPlayerConnection(serverPlayer).send(new ClientboundContainerSetSlotPacket(-1, state, -1, item));
     }
@@ -152,15 +157,15 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
      * Sends the result item to the specified player with the given item
      *
      * @param player the player to send the result item to
-     * @param item the result item
+     * @param item   the result item
      * @since 3.0.0
      * @deprecated no longer used internally
      */
     @Deprecated
-    private void sendResultItem(@NonNull Player player, @NonNull ItemStack item) {
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        int containerId = getContainerId(serverPlayer);
-        int state = serverPlayer.containerMenu.incrementStateId();
+    private void sendResultItem(final @NonNull Player player, final @NonNull ItemStack item) {
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final int containerId = getContainerId(serverPlayer);
+        final int state = serverPlayer.containerMenu.incrementStateId();
 
         getPlayerConnection(serverPlayer).send(new ClientboundContainerSetSlotPacket(containerId, state, 2, item));
     }
@@ -175,7 +180,7 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
      */
     @Contract(pure = true)
     @Deprecated
-    private int getContainerId(net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
+    private int getContainerId(final net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
         return nmsPlayer.containerMenu.containerId;
     }
 
@@ -187,10 +192,9 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
      * @since 3.0.0
      * @deprecated no longer used internally
      */
-    @NonNull
     @Contract(pure = true)
     @Deprecated
-    private ServerPlayerConnection getPlayerConnection(@NonNull ServerPlayer serverPlayer) {
+    private @NonNull ServerPlayerConnection getPlayerConnection(final @NonNull ServerPlayer serverPlayer) {
         return serverPlayer.connection;
     }
 
@@ -201,9 +205,8 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
      * @return the server player
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    private ServerPlayer getServerPlayer(@NonNull Player player) {
+    private @NonNull ServerPlayer getServerPlayer(final @NonNull Player player) {
         return ((CraftPlayer) player).getHandle();
     }
 
@@ -218,10 +221,10 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
          * Creates a new custom smithing table container for the specified player
          *
          * @param serverPlayer the player for whom this anvil container is
-         * @param title the title of the inventory
+         * @param title        the title of the inventory
          * @since 3.0.0
          */
-        public ContainerSmithingTableImpl(@NonNull ServerPlayer serverPlayer, @NonNull Component title) {
+        public ContainerSmithingTableImpl(final @NonNull ServerPlayer serverPlayer, final @NonNull Component title) {
             super(serverPlayer.nextContainerCounter(), serverPlayer.getInventory(),
                 ContainerLevelAccess.create(serverPlayer.getCommandSenderWorld(), new BlockPos(0, 0, 0)));
 
@@ -229,55 +232,55 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
 
             this.checkReachable = false;
 
-            Slot slotOne = this.slots.get(0);
-            Slot slotTwo = this.slots.get(1);
-            Slot slotThree = this.slots.get(2);
-            Slot slotFour = this.slots.get(3);
+            final Slot slotOne = this.slots.get(0);
+            final Slot slotTwo = this.slots.get(1);
+            final Slot slotThree = this.slots.get(2);
+            final Slot slotFour = this.slots.get(3);
 
             this.slots.set(0, new Slot(slotOne.container, slotOne.index, slotOne.x, slotOne.y) {
                 @Override
-                public boolean mayPlace(@NonNull ItemStack stack) {
+                public boolean mayPlace(final @NonNull ItemStack stack) {
                     return true;
                 }
 
                 @Override
-                public void onTake(net.minecraft.world.entity.player.@NonNull Player player, @NonNull ItemStack stack) {
+                public void onTake(final net.minecraft.world.entity.player.@NonNull Player player, final @NonNull ItemStack stack) {
                     slotOne.onTake(player, stack);
                 }
             });
 
             this.slots.set(1, new Slot(slotTwo.container, slotTwo.index, slotTwo.x, slotTwo.y) {
                 @Override
-                public boolean mayPlace(@NonNull ItemStack stack) {
+                public boolean mayPlace(final @NonNull ItemStack stack) {
                     return true;
                 }
 
                 @Override
-                public void onTake(net.minecraft.world.entity.player.@NonNull Player player, @NonNull ItemStack stack) {
+                public void onTake(final net.minecraft.world.entity.player.@NonNull Player player, final @NonNull ItemStack stack) {
                     slotTwo.onTake(player, stack);
                 }
             });
 
             this.slots.set(2, new Slot(slotThree.container, slotThree.index, slotThree.x, slotThree.y) {
                 @Override
-                public boolean mayPlace(@NonNull ItemStack stack) {
+                public boolean mayPlace(final @NonNull ItemStack stack) {
                     return true;
                 }
 
                 @Override
-                public void onTake(net.minecraft.world.entity.player.@NonNull Player player, @NonNull ItemStack stack) {
+                public void onTake(final net.minecraft.world.entity.player.@NonNull Player player, final @NonNull ItemStack stack) {
                     slotThree.onTake(player, stack);
                 }
             });
 
             this.slots.set(3, new Slot(slotFour.container, slotFour.index, slotFour.x, slotFour.y) {
                 @Override
-                public boolean mayPlace(@NonNull ItemStack stack) {
+                public boolean mayPlace(final @NonNull ItemStack stack) {
                     return true;
                 }
 
                 @Override
-                public void onTake(net.minecraft.world.entity.player.@NonNull Player player, @NonNull ItemStack stack) {
+                public void onTake(final net.minecraft.world.entity.player.@NonNull Player player, final @NonNull ItemStack stack) {
                     slotFour.onTake(player, stack);
                 }
             });
@@ -285,29 +288,35 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
 
         @Contract(pure = true, value = "_ -> true")
         @Override
-        public boolean stillValid(net.minecraft.world.entity.player.@Nullable Player nmsPlayer) {
+        public boolean stillValid(final net.minecraft.world.entity.player.@Nullable Player nmsPlayer) {
             return true;
         }
 
         @Override
-        public void slotsChanged(@NonNull Container container) {}
+        public void slotsChanged(final @NonNull Container container) {
+        }
 
         @Override
-        public void removed(net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {}
+        public void removed(final net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
+        }
 
         @Override
-        public void createResult() {}
+        public void createResult() {
+        }
 
         @Override
-        protected void onTake(net.minecraft.world.entity.player.@NonNull Player player, @NonNull ItemStack stack) {}
+        protected void onTake(final net.minecraft.world.entity.player.@NonNull Player player, final @NonNull ItemStack stack) {
+        }
 
         @Override
-        protected boolean mayPickup(net.minecraft.world.entity.player.@NonNull Player player, boolean present) {
+        protected boolean mayPickup(final net.minecraft.world.entity.player.@NonNull Player player, final boolean present) {
             return true;
         }
 
         public int getContainerId() {
             return this.containerId;
         }
+
     }
+
 }

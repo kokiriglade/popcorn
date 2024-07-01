@@ -32,19 +32,24 @@ import java.lang.reflect.Field;
  */
 public class BeaconInventoryImpl extends BeaconInventory {
 
-    public BeaconInventoryImpl(@NonNull InventoryHolder inventoryHolder) {
+    /**
+     * Create an internal beacon inventory
+     * @param inventoryHolder the {@code InventoryHolder}
+     * @since 3.0.0
+     */
+    public BeaconInventoryImpl(final @NonNull InventoryHolder inventoryHolder) {
         super(inventoryHolder);
     }
 
     @Override
-    public void openInventory(@NonNull Player player, org.bukkit.inventory.@Nullable ItemStack item) {
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        ContainerBeaconImpl containerBeacon = new ContainerBeaconImpl(serverPlayer, item);
+    public void openInventory(final @NonNull Player player, final org.bukkit.inventory.@Nullable ItemStack item) {
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final ContainerBeaconImpl containerBeacon = new ContainerBeaconImpl(serverPlayer, item);
 
         serverPlayer.containerMenu = containerBeacon;
 
-        int id = containerBeacon.containerId;
-        Component beacon = Component.literal("Beacon");
+        final int id = containerBeacon.containerId;
+        final Component beacon = Component.literal("Beacon");
 
         serverPlayer.connection.send(new ClientboundOpenScreenPacket(id, MenuType.BEACON, beacon));
 
@@ -52,25 +57,25 @@ public class BeaconInventoryImpl extends BeaconInventory {
     }
 
     @Override
-    public void sendItem(@NonNull Player player, org.bukkit.inventory.@Nullable ItemStack item) {
-        NonNullList<ItemStack> items = NonNullList.of(
+    public void sendItem(final @NonNull Player player, final org.bukkit.inventory.@Nullable ItemStack item) {
+        final NonNullList<ItemStack> items = NonNullList.of(
             ItemStack.EMPTY, //the first item doesn't count for some reason, so send a dummy item
             CraftItemStack.asNMSCopy(item)
         );
 
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        int containerId = getContainerId(serverPlayer);
-        int state = serverPlayer.containerMenu.incrementStateId();
-        ItemStack cursor = CraftItemStack.asNMSCopy(player.getItemOnCursor());
-        ServerPlayerConnection playerConnection = getPlayerConnection(serverPlayer);
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final int containerId = getContainerId(serverPlayer);
+        final int state = serverPlayer.containerMenu.incrementStateId();
+        final ItemStack cursor = CraftItemStack.asNMSCopy(player.getItemOnCursor());
+        final ServerPlayerConnection playerConnection = getPlayerConnection(serverPlayer);
 
         playerConnection.send(new ClientboundContainerSetContentPacket(containerId, state, items, cursor));
     }
 
     @Override
-    public void clearCursor(@NonNull Player player) {
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        int state = serverPlayer.containerMenu.incrementStateId();
+    public void clearCursor(final @NonNull Player player) {
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final int state = serverPlayer.containerMenu.incrementStateId();
 
         getPlayerConnection(serverPlayer).send(new ClientboundContainerSetSlotPacket(-1, state, -1, ItemStack.EMPTY));
     }
@@ -83,7 +88,7 @@ public class BeaconInventoryImpl extends BeaconInventory {
      * @since 3.0.0
      */
     @Contract(pure = true)
-    private int getContainerId(net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
+    private int getContainerId(final net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
         return nmsPlayer.containerMenu.containerId;
     }
 
@@ -94,9 +99,8 @@ public class BeaconInventoryImpl extends BeaconInventory {
      * @return the player connection
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    private ServerPlayerConnection getPlayerConnection(@NonNull ServerPlayer serverPlayer) {
+    private @NonNull ServerPlayerConnection getPlayerConnection(final @NonNull ServerPlayer serverPlayer) {
         return serverPlayer.connection;
     }
 
@@ -107,9 +111,8 @@ public class BeaconInventoryImpl extends BeaconInventory {
      * @return the server player
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    private ServerPlayer getServerPlayer(@NonNull Player player) {
+    private @NonNull ServerPlayer getServerPlayer(final @NonNull Player player) {
         return ((CraftPlayer) player).getHandle();
     }
 
@@ -123,22 +126,17 @@ public class BeaconInventoryImpl extends BeaconInventory {
         /**
          * The player for this beacon container
          */
-        @NonNull
-        private final Player player;
-
-        /**
-         * The internal bukkit entity for this container beacon
-         */
-        @Nullable
-        private CraftInventoryView bukkitEntity;
-
+        private final @NonNull Player player;
         /**
          * Field for accessing the beacon field
          */
-        @NonNull
-        private final Field beaconField;
+        private final @NonNull Field beaconField;
+        /**
+         * The internal bukkit entity for this container beacon
+         */
+        private @Nullable CraftInventoryView bukkitEntity;
 
-        public ContainerBeaconImpl(@NonNull ServerPlayer serverPlayer, org.bukkit.inventory.@Nullable ItemStack item) {
+        public ContainerBeaconImpl(final @NonNull ServerPlayer serverPlayer, final org.bukkit.inventory.@Nullable ItemStack item) {
             super(serverPlayer.nextContainerCounter(), serverPlayer.getInventory());
 
             this.player = serverPlayer.getBukkitEntity();
@@ -148,35 +146,33 @@ public class BeaconInventoryImpl extends BeaconInventory {
                 //noinspection JavaReflectionMemberAccess
                 this.beaconField = BeaconMenu.class.getDeclaredField("s"); //beacon
                 this.beaconField.setAccessible(true);
-            } catch (NoSuchFieldException exception) {
+            } catch (final NoSuchFieldException exception) {
                 throw new RuntimeException(exception);
             }
 
             try {
-                ItemStack itemStack = CraftItemStack.asNMSCopy(item);
+                final ItemStack itemStack = CraftItemStack.asNMSCopy(item);
 
                 ((Container) beaconField.get(this)).setItem(0, itemStack);
-            } catch (IllegalAccessException exception) {
+            } catch (final IllegalAccessException exception) {
                 throw new RuntimeException(exception);
             }
         }
 
-        @NonNull
         @Override
-        public CraftInventoryView getBukkitView() {
+        public @NonNull CraftInventoryView getBukkitView() {
             if (bukkitEntity == null) {
                 try {
-                    CraftInventory inventory = new CraftInventoryBeacon((Container) beaconField.get(this)) {
-                        @NonNull
+                    final CraftInventory inventory = new CraftInventoryBeacon((Container) beaconField.get(this)) {
                         @Contract(pure = true)
                         @Override
-                        public InventoryHolder getHolder() {
+                        public @NonNull InventoryHolder getHolder() {
                             return inventoryHolder;
                         }
                     };
 
                     bukkitEntity = new CraftInventoryView(player, inventory, this);
-                } catch (IllegalAccessException exception) {
+                } catch (final IllegalAccessException exception) {
                     throw new RuntimeException(exception);
                 }
             }
@@ -186,15 +182,18 @@ public class BeaconInventoryImpl extends BeaconInventory {
 
         @Contract(pure = true, value = "_ -> true")
         @Override
-        public boolean stillValid(net.minecraft.world.entity.player.@Nullable Player nmsPlayer) {
+        public boolean stillValid(final net.minecraft.world.entity.player.@Nullable Player nmsPlayer) {
             return true;
         }
 
         @Override
-        public void slotsChanged(@NonNull Container container) {}
+        public void slotsChanged(final @NonNull Container container) {
+        }
 
         @Override
-        public void removed(net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {}
+        public void removed(final net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
+        }
 
     }
+
 }

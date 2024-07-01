@@ -15,7 +15,8 @@ import java.util.Map;
  * @since 2.1.0
  */
 @SuppressWarnings("unused")
-public class ShapedRecipeBuilder extends AbstractCraftingRecipeBuilder<ShapedRecipeBuilder, ShapedRecipe> {
+public final class ShapedRecipeBuilder extends AbstractCraftingRecipeBuilder<ShapedRecipeBuilder, ShapedRecipe> {
+
     /**
      * Create a new ShapedRecipeBuilder
      *
@@ -23,7 +24,7 @@ public class ShapedRecipeBuilder extends AbstractCraftingRecipeBuilder<ShapedRec
      * @param result the {@code ItemStack} result
      * @since 2.1.0
      */
-    private ShapedRecipeBuilder(@NonNull NamespacedKey key, @NonNull ItemStack result) {
+    private ShapedRecipeBuilder(final @NonNull NamespacedKey key, final @NonNull ItemStack result) {
         super(new ShapedRecipe(key, result));
     }
 
@@ -69,7 +70,7 @@ public class ShapedRecipeBuilder extends AbstractCraftingRecipeBuilder<ShapedRec
      * @return the builder
      * @since 2.1.0
      */
-    public @NonNull ShapedRecipeBuilder shape(@NonNull String... shape) {
+    public @NonNull ShapedRecipeBuilder shape(final @NonNull String... shape) {
         recipe.shape(shape);
         return this;
     }
@@ -82,7 +83,7 @@ public class ShapedRecipeBuilder extends AbstractCraftingRecipeBuilder<ShapedRec
      * @return the builder
      * @since 2.1.0
      */
-    public @NonNull ShapedRecipeBuilder ingredient(char key, @NonNull Material ingredient) {
+    public @NonNull ShapedRecipeBuilder ingredient(final char key, final @NonNull Material ingredient) {
         recipe.setIngredient(key, ingredient);
         return this;
     }
@@ -95,7 +96,7 @@ public class ShapedRecipeBuilder extends AbstractCraftingRecipeBuilder<ShapedRec
      * @return the builder
      * @since 2.1.0
      */
-    public @NonNull ShapedRecipeBuilder ingredient(char key, @NonNull ItemStack ingredient) {
+    public @NonNull ShapedRecipeBuilder ingredient(final char key, final @NonNull ItemStack ingredient) {
         recipe.setIngredient(key, ingredient);
         return this;
     }
@@ -108,7 +109,7 @@ public class ShapedRecipeBuilder extends AbstractCraftingRecipeBuilder<ShapedRec
      * @return the builder
      * @since 2.1.0
      */
-    public @NonNull ShapedRecipeBuilder ingredient(char key, @NonNull RecipeChoice ingredient) {
+    public @NonNull ShapedRecipeBuilder ingredient(final char key, final @NonNull RecipeChoice ingredient) {
         recipe.setIngredient(key, ingredient);
         return this;
     }

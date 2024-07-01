@@ -1,6 +1,8 @@
 package dev.kokiriglade.popcorn.persistence;
+
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataType;
+import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.ByteBuffer;
@@ -23,35 +25,34 @@ public final class UUIDTagType implements PersistentDataType<byte[], UUID> {
     /**
      * A private constructor so that only a single instance of this class can exist.
      */
-    private UUIDTagType() {}
+    private UUIDTagType() {
+    }
 
-    @NotNull
+
     @Override
-    public Class<byte[]> getPrimitiveType() {
+    public @NonNull Class<byte[]> getPrimitiveType() {
         return byte[].class;
     }
 
-    @NotNull
     @Override
-    public Class<UUID> getComplexType() {
+    public @NonNull Class<UUID> getComplexType() {
         return UUID.class;
     }
 
-    @NotNull
     @Override
-    public byte[] toPrimitive(@NotNull UUID complex, @NotNull PersistentDataAdapterContext context) {
-        ByteBuffer buffer = ByteBuffer.wrap(new byte[16]);
+    public byte @NonNull [] toPrimitive(final @NonNull UUID complex, final @NonNull PersistentDataAdapterContext context) {
+        final ByteBuffer buffer = ByteBuffer.wrap(new byte[16]);
         buffer.putLong(complex.getMostSignificantBits());
         buffer.putLong(complex.getLeastSignificantBits());
         return buffer.array();
     }
 
-    @NotNull
     @Override
-    public UUID fromPrimitive(@NotNull byte[] primitive, @NotNull PersistentDataAdapterContext context) {
-        ByteBuffer buffer = ByteBuffer.wrap(primitive);
-        long most = buffer.getLong();
-        long least = buffer.getLong();
+    public @NonNull UUID fromPrimitive(final @NonNull byte[] primitive, final @NonNull PersistentDataAdapterContext context) {
+        final ByteBuffer buffer = ByteBuffer.wrap(primitive);
+        final  long most = buffer.getLong();
+        final long least = buffer.getLong();
         return new UUID(most, least);
     }
+
 }

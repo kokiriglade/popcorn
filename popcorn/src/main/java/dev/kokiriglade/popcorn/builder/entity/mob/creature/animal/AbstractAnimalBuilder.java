@@ -21,7 +21,7 @@ public abstract class AbstractAnimalBuilder<B extends AbstractBreedableBuilder<B
     protected @Nullable Integer loveModeTicks;
     protected @Nullable UUID breedCause;
 
-    protected AbstractAnimalBuilder(@NonNull Class<T> entityClass, @NonNull Location location) {
+    protected AbstractAnimalBuilder(final @NonNull Class<T> entityClass, final @NonNull Location location) {
         super(entityClass, location);
         this.consumers.add(animal -> {
             if (loveModeTicks != null) {
@@ -48,7 +48,7 @@ public abstract class AbstractAnimalBuilder<B extends AbstractBreedableBuilder<B
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B loveModeTicks(@Nullable Integer ticks) {
+    public @NonNull B loveModeTicks(final @Nullable Integer ticks) {
         this.loveModeTicks = ticks;
         return (B) this;
     }
@@ -70,7 +70,7 @@ public abstract class AbstractAnimalBuilder<B extends AbstractBreedableBuilder<B
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B breedCause(@Nullable UUID uuid) {
+    public @NonNull B breedCause(final @Nullable UUID uuid) {
         this.breedCause = uuid;
         return (B) this;
     }

@@ -13,7 +13,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 @SuppressWarnings({"unused", "UnstableApiUsage"})
 public class AbstractWindChargeBuilder<B extends AbstractProjectileBuilder<B, T>, T extends AbstractWindCharge> extends AbstractProjectileBuilder<B, T> {
 
-    protected AbstractWindChargeBuilder(@NonNull Class<T> entityClass, @NonNull Location location) {
+    protected AbstractWindChargeBuilder(final @NonNull Class<T> entityClass, final @NonNull Location location) {
         super(entityClass, location);
     }
 

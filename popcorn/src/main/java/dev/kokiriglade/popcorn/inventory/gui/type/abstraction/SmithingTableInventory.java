@@ -18,8 +18,7 @@ public abstract class SmithingTableInventory {
     /**
      * The inventory holder
      */
-    @NonNull
-    protected InventoryHolder inventoryHolder;
+    protected @NonNull InventoryHolder inventoryHolder;
 
     /**
      * Creates a new smithing table inventory for the specified inventory holder
@@ -27,7 +26,7 @@ public abstract class SmithingTableInventory {
      * @param inventoryHolder the inventory holder
      * @since 3.0.0
      */
-    public SmithingTableInventory(@NonNull InventoryHolder inventoryHolder) {
+    public SmithingTableInventory(final @NonNull InventoryHolder inventoryHolder) {
         this.inventoryHolder = inventoryHolder;
     }
 
@@ -35,8 +34,8 @@ public abstract class SmithingTableInventory {
      * Opens the inventory for the specified player
      *
      * @param player the player to open the inventory for
-     * @param title the title of the inventory
-     * @param items the top items
+     * @param title  the title of the inventory
+     * @param items  the top items
      * @since 3.0.0
      */
     public abstract Inventory openInventory(@NonNull Player player, @NonNull Component title, @Nullable ItemStack[] items);
@@ -45,7 +44,7 @@ public abstract class SmithingTableInventory {
      * Sends the top items to the inventory for the specified player.
      *
      * @param player the player for which to open the smithing table
-     * @param items the items to send
+     * @param items  the items to send
      * @param cursor the cursor item
      * @since 3.0.0
      */
@@ -55,7 +54,7 @@ public abstract class SmithingTableInventory {
      * Sends the result item to the specified player
      *
      * @param player the player to send the item to
-     * @param item the item to send
+     * @param item   the item to send
      * @since 3.0.0
      */
     public abstract void sendResultItem(@NonNull Player player, @Nullable ItemStack item);
@@ -64,7 +63,7 @@ public abstract class SmithingTableInventory {
      * Sends the first item to the specified player
      *
      * @param player the player to send the item to
-     * @param item the item to send
+     * @param item   the item to send
      * @since 3.0.0
      */
     public abstract void sendFirstItem(@NonNull Player player, @Nullable ItemStack item);
@@ -73,7 +72,7 @@ public abstract class SmithingTableInventory {
      * Sends the second item to the specified player
      *
      * @param player the player to send the item to
-     * @param item the item to send
+     * @param item   the item to send
      * @since 3.0.0
      */
     public abstract void sendSecondItem(@NonNull Player player, @Nullable ItemStack item);
@@ -82,7 +81,7 @@ public abstract class SmithingTableInventory {
      * Sets the cursor of the given player
      *
      * @param player the player to set the cursor
-     * @param item the item to set the cursor to
+     * @param item   the item to set the cursor to
      * @since 3.0.0
      */
     public abstract void setCursor(@NonNull Player player, @NonNull ItemStack item);
@@ -102,4 +101,5 @@ public abstract class SmithingTableInventory {
      * @since 3.0.0
      */
     public abstract void clearResultItem(@NonNull Player player);
+
 }

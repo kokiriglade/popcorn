@@ -20,7 +20,7 @@ public abstract class AbstractAgeableBuilder<B extends AbstractLivingEntityBuild
     protected @Nullable Boolean adult;
     protected @Nullable Boolean baby;
 
-    protected AbstractAgeableBuilder(@NonNull Class<T> entityClass, @NonNull Location location) {
+    protected AbstractAgeableBuilder(final @NonNull Class<T> entityClass, final @NonNull Location location) {
         super(entityClass, location);
         this.consumers.add(ageable -> {
             if (age != null) {
@@ -52,7 +52,7 @@ public abstract class AbstractAgeableBuilder<B extends AbstractLivingEntityBuild
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B age(@Nullable Integer age) {
+    public @NonNull B age(final @Nullable Integer age) {
         this.age = age;
         return (B) this;
     }
@@ -100,4 +100,5 @@ public abstract class AbstractAgeableBuilder<B extends AbstractLivingEntityBuild
         this.adult = false;
         return (B) this;
     }
+
 }

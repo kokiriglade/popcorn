@@ -16,9 +16,8 @@ public interface Orientable {
      * @return the orientation
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    Orientation getOrientation();
+    @NonNull Orientation getOrientation();
 
     /**
      * Sets the orientation of this outline pane
@@ -26,7 +25,7 @@ public interface Orientable {
      * @param orientation the new orientation
      * @since 3.0.0
      */
-    void setOrientation(@NonNull Orientation orientation);
+    void setOrientation(final @NonNull Orientation orientation);
 
     /**
      * An orientation for outline panes
@@ -49,4 +48,5 @@ public interface Orientable {
          */
         VERTICAL
     }
+
 }

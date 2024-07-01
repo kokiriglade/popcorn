@@ -56,4 +56,5 @@ public final class WitherSkullBuilder extends AbstractFireballBuilder<WitherSkul
         this.charged = charged;
         return this;
     }
+
 }

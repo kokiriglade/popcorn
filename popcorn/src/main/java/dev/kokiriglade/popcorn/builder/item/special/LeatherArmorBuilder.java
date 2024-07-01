@@ -49,6 +49,7 @@ public final class LeatherArmorBuilder extends AbstractItemBuilder<LeatherArmorB
      * Gets the color.
      *
      * @return the color
+     * @since 1.0.0
      */
     public @NonNull Color color() {
         return this.itemMeta.getColor();

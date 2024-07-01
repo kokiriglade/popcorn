@@ -14,7 +14,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @since 2.2.2
  */
 @SuppressWarnings("unused")
-public class TridentBuilder extends AbstractArrowBuilder<TridentBuilder, Trident> implements ThrowableProjectileBuilder<TridentBuilder> {
+public final class TridentBuilder extends AbstractArrowBuilder<TridentBuilder, Trident> implements ThrowableProjectileBuilder<TridentBuilder> {
 
     private @Nullable ItemStack itemStack;
     private @Nullable Boolean glint;
@@ -100,4 +100,5 @@ public class TridentBuilder extends AbstractArrowBuilder<TridentBuilder, Trident
         this.loyaltyLevel = loyaltyLevel;
         return this;
     }
+
 }

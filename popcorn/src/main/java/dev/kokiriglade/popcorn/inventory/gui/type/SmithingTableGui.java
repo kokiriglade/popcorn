@@ -32,34 +32,25 @@ import java.util.List;
 public class SmithingTableGui extends NamedGui implements InventoryBased {
 
     /**
-     * Represents the inventory component for the input
-     */
-    @NonNull
-    private InventoryComponent inputComponent = new InventoryComponent(3, 1);
-
-    /**
-     * Represents the inventory component for the result
-     */
-    @NonNull
-    private InventoryComponent resultComponent = new InventoryComponent(1, 1);
-
-    /**
-     * Represents the inventory component for the player inventory
-     */
-    @NonNull
-    private InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
-
-    /**
      * An internal smithing inventory
      */
-    @NonNull
-    private final SmithingTableInventory smithingTableInventory = new SmithingTableInventoryImpl(this);
-
+    private final @NonNull SmithingTableInventory smithingTableInventory = new SmithingTableInventoryImpl(this);
     /**
      * The viewers of this gui
      */
-    @NonNull
-    private final Collection<HumanEntity> viewers = new HashSet<>();
+    private final @NonNull Collection<HumanEntity> viewers = new HashSet<>();
+    /**
+     * Represents the inventory component for the input
+     */
+    private @NonNull InventoryComponent inputComponent = new InventoryComponent(3, 1);
+    /**
+     * Represents the inventory component for the result
+     */
+    private @NonNull InventoryComponent resultComponent = new InventoryComponent(1, 1);
+    /**
+     * Represents the inventory component for the player inventory
+     */
+    private @NonNull InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
 
     /**
      * Constructs a new GUI.
@@ -67,24 +58,24 @@ public class SmithingTableGui extends NamedGui implements InventoryBased {
      * @param title the title/name of this gui.
      * @since 3.0.0
      */
-    public SmithingTableGui(@NonNull Component title) {
+    public SmithingTableGui(final @NonNull Component title) {
         super(title);
     }
 
     /**
      * Constructs a new smithing table gui for the given {@code plugin}.
      *
-     * @param title the title/name of this gui.
+     * @param title  the title/name of this gui.
      * @param plugin the owning plugin of this gui
      * @see #SmithingTableGui(Component)
      * @since 3.0.0
      */
-    public SmithingTableGui(@NonNull Component title, @NonNull Plugin plugin) {
+    public SmithingTableGui(final @NonNull Component title, final @NonNull Plugin plugin) {
         super(title, plugin);
     }
 
     @Override
-    public void show(@NonNull HumanEntity humanEntity) {
+    public void show(final @NonNull HumanEntity humanEntity) {
         if (!(humanEntity instanceof Player)) {
             throw new IllegalArgumentException("Smithing tables can only be opened by players");
         }
@@ -101,7 +92,7 @@ public class SmithingTableGui extends NamedGui implements InventoryBased {
         getPlayerInventoryComponent().display();
 
         if (getPlayerInventoryComponent().hasItem()) {
-            HumanEntityCache humanEntityCache = getHumanEntityCache();
+            final HumanEntityCache humanEntityCache = getHumanEntityCache();
 
             if (!humanEntityCache.contains(humanEntity)) {
                 humanEntityCache.storeAndClear(humanEntity);
@@ -110,18 +101,17 @@ public class SmithingTableGui extends NamedGui implements InventoryBased {
             getPlayerInventoryComponent().placeItems(humanEntity.getInventory(), 0);
         }
 
-        Inventory inventory = smithingTableInventory.openInventory((Player) humanEntity, getTitle(),getTopItems());
+        final Inventory inventory = smithingTableInventory.openInventory((Player) humanEntity, getTitle(), getTopItems());
 
         addInventory(inventory, this);
 
         this.viewers.add(humanEntity);
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public SmithingTableGui copy() {
-        SmithingTableGui gui = new SmithingTableGui(getTitle(), super.plugin);
+    public @NonNull SmithingTableGui copy() {
+        final SmithingTableGui gui = new SmithingTableGui(getTitle(), super.plugin);
 
         gui.inputComponent = inputComponent.copy();
         gui.resultComponent = resultComponent.copy();
@@ -137,8 +127,8 @@ public class SmithingTableGui extends NamedGui implements InventoryBased {
     }
 
     @Override
-    public void click(@NonNull InventoryClickEvent event) {
-        int rawSlot = event.getRawSlot();
+    public void click(final @NonNull InventoryClickEvent event) {
+        final int rawSlot = event.getRawSlot();
 
         if (rawSlot >= 0 && rawSlot <= 2) {
             getInputComponent().click(this, event, rawSlot);
@@ -149,9 +139,8 @@ public class SmithingTableGui extends NamedGui implements InventoryBased {
         }
     }
 
-    @NonNull
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (this.inventory == null) {
             this.inventory = createInventory();
         }
@@ -165,10 +154,9 @@ public class SmithingTableGui extends NamedGui implements InventoryBased {
         return getPlayerInventoryComponent().hasItem();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public Inventory createInventory() {
+    public @NonNull Inventory createInventory() {
         return Bukkit.createInventory(this, InventoryType.SMITHING, getTitle());
     }
 
@@ -178,7 +166,7 @@ public class SmithingTableGui extends NamedGui implements InventoryBased {
      * @param humanEntity the human entity closing the gui
      * @since 3.0.0
      */
-    public void handleClose(@NonNull HumanEntity humanEntity) {
+    public void handleClose(final @NonNull HumanEntity humanEntity) {
         this.viewers.remove(humanEntity);
     }
 
@@ -188,10 +176,9 @@ public class SmithingTableGui extends NamedGui implements InventoryBased {
         return this.viewers.size();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public List<HumanEntity> getViewers() {
+    public @NonNull List<HumanEntity> getViewers() {
         return new ArrayList<>(this.viewers);
     }
 
@@ -201,9 +188,8 @@ public class SmithingTableGui extends NamedGui implements InventoryBased {
      * @return the input component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getInputComponent() {
+    public @NonNull InventoryComponent getInputComponent() {
         return inputComponent;
     }
 
@@ -213,9 +199,8 @@ public class SmithingTableGui extends NamedGui implements InventoryBased {
      * @return the result component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getResultComponent() {
+    public @NonNull InventoryComponent getResultComponent() {
         return resultComponent;
     }
 
@@ -225,9 +210,8 @@ public class SmithingTableGui extends NamedGui implements InventoryBased {
      * @return the player inventory component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getPlayerInventoryComponent() {
+    public @NonNull InventoryComponent getPlayerInventoryComponent() {
         return playerInventoryComponent;
     }
 
@@ -237,10 +221,9 @@ public class SmithingTableGui extends NamedGui implements InventoryBased {
      * @return the top items
      * @since 3.0.0
      */
-    @Nullable
     @Contract(pure = true)
-    private ItemStack[] getTopItems() {
-        return new ItemStack[] {
+    private @Nullable ItemStack[] getTopItems() {
+        return new ItemStack[]{
             getInputComponent().getItem(0, 0),
             getInputComponent().getItem(1, 0),
             getInputComponent().getItem(2, 0),

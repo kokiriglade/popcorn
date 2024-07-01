@@ -27,7 +27,7 @@ public final class ArrowBuilder extends AbstractProjectileBuilder<ArrowBuilder, 
     private ArrowBuilder(final @NonNull Location location) {
         super(Arrow.class, location);
         this.consumers.add(arrow -> {
-            for (PotionEffect effect : effects) {
+            for (final PotionEffect effect : effects) {
                 arrow.addCustomEffect(effect, true);
             }
             arrow.setBasePotionType(potionType);

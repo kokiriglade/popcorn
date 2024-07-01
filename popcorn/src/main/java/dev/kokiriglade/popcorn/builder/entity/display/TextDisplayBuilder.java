@@ -236,4 +236,5 @@ public final class TextDisplayBuilder extends AbstractDisplayBuilder<TextDisplay
         this.defaultBackground = defaultBackground;
         return this;
     }
+
 }

@@ -5,6 +5,11 @@ import org.bukkit.inventory.InventoryHolder;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.Contract;
 
+/**
+ * An inventory-based {@code InventoryHolder}.
+ *
+ * @since 3.0.0
+ */
 public interface InventoryBased extends InventoryHolder {
 
     /**
@@ -13,8 +18,7 @@ public interface InventoryBased extends InventoryHolder {
      * @return the new inventory
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    Inventory createInventory();
+    @NonNull Inventory createInventory();
 
 }

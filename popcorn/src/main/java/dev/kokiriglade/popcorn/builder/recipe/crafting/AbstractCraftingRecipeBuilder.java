@@ -23,7 +23,7 @@ public abstract class AbstractCraftingRecipeBuilder<B extends AbstractCraftingRe
      * @param recipe the {@code Recipe}
      * @since 2.1.0
      */
-    protected AbstractCraftingRecipeBuilder(@NonNull R recipe) {
+    protected AbstractCraftingRecipeBuilder(final @NonNull R recipe) {
         super(recipe);
     }
 

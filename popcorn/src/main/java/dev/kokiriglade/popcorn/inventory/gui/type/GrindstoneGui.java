@@ -30,28 +30,21 @@ import java.util.List;
 public class GrindstoneGui extends NamedGui implements InventoryBased {
 
     /**
+     * An internal grindstone inventory
+     */
+    private final @NonNull GrindstoneInventory grindstoneInventory = new GrindstoneInventoryImpl(this);
+    /**
      * Represents the inventory component for the items
      */
-    @NonNull
-    private InventoryComponent itemsComponent = new InventoryComponent(1, 2);
-
+    private @NonNull InventoryComponent itemsComponent = new InventoryComponent(1, 2);
     /**
      * Represents the inventory component for the result
      */
-    @NonNull
-    private InventoryComponent resultComponent = new InventoryComponent(1, 1);
-
+    private @NonNull InventoryComponent resultComponent = new InventoryComponent(1, 1);
     /**
      * Represents the inventory component for the player inventory
      */
-    @NonNull
-    private InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
-
-    /**
-     * An internal grindstone inventory
-     */
-    @NonNull
-    private final GrindstoneInventory grindstoneInventory = new GrindstoneInventoryImpl(this);
+    private @NonNull InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
 
     /**
      * Constructs a new GUI
@@ -59,24 +52,24 @@ public class GrindstoneGui extends NamedGui implements InventoryBased {
      * @param title the title/name of this gui.
      * @since 3.0.0
      */
-    public GrindstoneGui(@NonNull Component title) {
+    public GrindstoneGui(final @NonNull Component title) {
         super(title);
     }
 
     /**
      * Constructs a new grindstone gui for the given {@code plugin}.
      *
-     * @param title the title/name of this gui.
+     * @param title  the title/name of this gui.
      * @param plugin the owning plugin of this gui
      * @see #GrindstoneGui(Component)
      * @since 3.0.0
      */
-    public GrindstoneGui(@NonNull Component title, @NonNull Plugin plugin) {
+    public GrindstoneGui(final @NonNull Component title, final @NonNull Plugin plugin) {
         super(title, plugin);
     }
 
     @Override
-    public void show(@NonNull HumanEntity humanEntity) {
+    public void show(final @NonNull HumanEntity humanEntity) {
         if (!(humanEntity instanceof Player)) {
             throw new IllegalArgumentException("Grindstones can only be opened by players");
         }
@@ -93,7 +86,7 @@ public class GrindstoneGui extends NamedGui implements InventoryBased {
         getPlayerInventoryComponent().display();
 
         if (getPlayerInventoryComponent().hasItem()) {
-            HumanEntityCache humanEntityCache = getHumanEntityCache();
+            final HumanEntityCache humanEntityCache = getHumanEntityCache();
 
             if (!humanEntityCache.contains(humanEntity)) {
                 humanEntityCache.storeAndClear(humanEntity);
@@ -102,16 +95,15 @@ public class GrindstoneGui extends NamedGui implements InventoryBased {
             getPlayerInventoryComponent().placeItems(humanEntity.getInventory(), 0);
         }
 
-        Inventory inventory = grindstoneInventory.openInventory((Player) humanEntity, getTitle(), getTopItems());
+        final Inventory inventory = grindstoneInventory.openInventory((Player) humanEntity, getTitle(), getTopItems());
 
         addInventory(inventory, this);
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public GrindstoneGui copy() {
-        GrindstoneGui gui = new GrindstoneGui(getTitle(), super.plugin);
+    public @NonNull GrindstoneGui copy() {
+        final GrindstoneGui gui = new GrindstoneGui(getTitle(), super.plugin);
 
         gui.itemsComponent = itemsComponent.copy();
         gui.resultComponent = resultComponent.copy();
@@ -127,8 +119,8 @@ public class GrindstoneGui extends NamedGui implements InventoryBased {
     }
 
     @Override
-    public void click(@NonNull InventoryClickEvent event) {
-        int rawSlot = event.getRawSlot();
+    public void click(final @NonNull InventoryClickEvent event) {
+        final int rawSlot = event.getRawSlot();
 
         if (rawSlot >= 0 && rawSlot <= 1) {
             getItemsComponent().click(this, event, rawSlot);
@@ -139,9 +131,8 @@ public class GrindstoneGui extends NamedGui implements InventoryBased {
         }
     }
 
-    @NonNull
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (this.inventory == null) {
             this.inventory = createInventory();
         }
@@ -155,10 +146,9 @@ public class GrindstoneGui extends NamedGui implements InventoryBased {
         return getPlayerInventoryComponent().hasItem();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public Inventory createInventory() {
+    public @NonNull Inventory createInventory() {
         return Bukkit.createInventory(this, InventoryType.GRINDSTONE, getTitle());
     }
 
@@ -171,9 +161,9 @@ public class GrindstoneGui extends NamedGui implements InventoryBased {
      */
     @SuppressWarnings("DataFlowIssue")
     @Deprecated
-    public void handleClickEvent(@NonNull InventoryClickEvent event) {
-        int slot = event.getRawSlot();
-        Player player = (Player) event.getWhoClicked();
+    public void handleClickEvent(final @NonNull InventoryClickEvent event) {
+        final int slot = event.getRawSlot();
+        final Player player = (Player) event.getWhoClicked();
 
         if (slot >= 3 && slot <= 38) {
             grindstoneInventory.sendItems(player, getTopItems(), event.getCurrentItem());
@@ -192,10 +182,9 @@ public class GrindstoneGui extends NamedGui implements InventoryBased {
         return getInventory().getViewers().size();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public List<HumanEntity> getViewers() {
+    public @NonNull List<HumanEntity> getViewers() {
         return new ArrayList<>(getInventory().getViewers());
     }
 
@@ -205,9 +194,8 @@ public class GrindstoneGui extends NamedGui implements InventoryBased {
      * @return the items component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getItemsComponent() {
+    public @NonNull InventoryComponent getItemsComponent() {
         return itemsComponent;
     }
 
@@ -217,9 +205,8 @@ public class GrindstoneGui extends NamedGui implements InventoryBased {
      * @return the result component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getResultComponent() {
+    public @NonNull InventoryComponent getResultComponent() {
         return resultComponent;
     }
 
@@ -229,9 +216,8 @@ public class GrindstoneGui extends NamedGui implements InventoryBased {
      * @return the player inventory component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getPlayerInventoryComponent() {
+    public @NonNull InventoryComponent getPlayerInventoryComponent() {
         return playerInventoryComponent;
     }
 
@@ -241,10 +227,9 @@ public class GrindstoneGui extends NamedGui implements InventoryBased {
      * @return the top items
      * @since 3.0.0
      */
-    @Nullable
     @Contract(pure = true)
-    private ItemStack[] getTopItems() {
-        return new ItemStack[] {
+    private @Nullable ItemStack[] getTopItems() {
+        return new ItemStack[]{
             getItemsComponent().getItem(0, 0),
             getItemsComponent().getItem(0, 1),
             getResultComponent().getItem(0, 0)

@@ -19,14 +19,12 @@ public class ObservableValue<T> {
     /**
      * A collection of subscribers that should be notified on updates.
      */
-    @NonNull
-    private final Collection<Consumer<? super T>> subscribers = new HashSet<>();
+    private final @NonNull Collection<Consumer<? super T>> subscribers = new HashSet<>();
 
     /**
      * The current value
      */
-    @Nullable
-    private T value;
+    private @Nullable T value;
 
     /**
      * Creates a new observable value with the given default value.
@@ -34,7 +32,7 @@ public class ObservableValue<T> {
      * @param defaultValue the default value
      * @since 3.0.0
      */
-    public ObservableValue(@Nullable T defaultValue) {
+    public ObservableValue(final @Nullable T defaultValue) {
         this.value = defaultValue;
     }
 
@@ -46,8 +44,8 @@ public class ObservableValue<T> {
      * @param newValue the new value
      * @since 3.0.0
      */
-    public void set(T newValue) {
-        for (Consumer<? super T> subscriber : this.subscribers) {
+    public void set(final T newValue) {
+        for (final Consumer<? super T> subscriber : this.subscribers) {
             subscriber.accept(newValue);
         }
 
@@ -60,7 +58,7 @@ public class ObservableValue<T> {
      * @param consumer the consumer to call upon updates of this value
      * @since 3.0.0
      */
-    public void subscribe(@NonNull Consumer<? super T> consumer) {
+    public void subscribe(final @NonNull Consumer<? super T> consumer) {
         this.subscribers.add(consumer);
     }
 
@@ -71,9 +69,8 @@ public class ObservableValue<T> {
      * @return the current value
      * @since 3.0.0
      */
-    @Nullable
     @Contract(pure = true)
-    public T get() {
+    public @Nullable T get() {
         return this.value;
     }
 

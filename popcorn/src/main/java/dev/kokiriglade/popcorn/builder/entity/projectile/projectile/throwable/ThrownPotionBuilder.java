@@ -12,7 +12,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
  * @since 2.2.2
  */
 @SuppressWarnings("unused")
-public class ThrownPotionBuilder extends AbstractThrowableProjectileBuilder<ThrownPotionBuilder, ThrownPotion> {
+public final class ThrownPotionBuilder extends AbstractThrowableProjectileBuilder<ThrownPotionBuilder, ThrownPotion> {
 
     private @Nullable PotionMeta potionMeta;
 
@@ -57,4 +57,5 @@ public class ThrownPotionBuilder extends AbstractThrowableProjectileBuilder<Thro
     public @Nullable PotionMeta potionMeta() {
         return this.potionMeta;
     }
+
 }

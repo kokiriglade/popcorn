@@ -27,14 +27,12 @@ public class HopperGui extends NamedGui implements InventoryBased {
     /**
      * Represents the inventory component for the slots
      */
-    @NonNull
-    private InventoryComponent slotsComponent = new InventoryComponent(5, 1);
+    private @NonNull InventoryComponent slotsComponent = new InventoryComponent(5, 1);
 
     /**
      * Represents the inventory component for the player inventory
      */
-    @NonNull
-    private InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
+    private @NonNull InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
 
     /**
      * Constructs a new GUI
@@ -42,24 +40,24 @@ public class HopperGui extends NamedGui implements InventoryBased {
      * @param title the title/name of this gui.
      * @since 3.0.0
      */
-    public HopperGui(@NonNull Component title) {
+    public HopperGui(final @NonNull Component title) {
         super(title);
     }
 
     /**
      * Constructs a new hopper gui for the given {@code plugin}.
      *
-     * @param title the title/name of this gui.
+     * @param title  the title/name of this gui.
      * @param plugin the owning plugin of this gui
      * @see #HopperGui(Component)
      * @since 3.0.0
      */
-    public HopperGui(@NonNull Component title, @NonNull Plugin plugin) {
+    public HopperGui(final @NonNull Component title, final @NonNull Plugin plugin) {
         super(title, plugin);
     }
 
     @Override
-    public void show(@NonNull HumanEntity humanEntity) {
+    public void show(final @NonNull HumanEntity humanEntity) {
         if (isDirty()) {
             this.inventory = createInventory();
             markChanges();
@@ -71,7 +69,7 @@ public class HopperGui extends NamedGui implements InventoryBased {
         getPlayerInventoryComponent().display();
 
         if (getPlayerInventoryComponent().hasItem()) {
-            HumanEntityCache humanEntityCache = getHumanEntityCache();
+            final HumanEntityCache humanEntityCache = getHumanEntityCache();
 
             if (!humanEntityCache.contains(humanEntity)) {
                 humanEntityCache.storeAndClear(humanEntity);
@@ -83,11 +81,10 @@ public class HopperGui extends NamedGui implements InventoryBased {
         humanEntity.openInventory(getInventory());
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public HopperGui copy() {
-        HopperGui gui = new HopperGui(getTitle(), super.plugin);
+    public @NonNull HopperGui copy() {
+        final HopperGui gui = new HopperGui(getTitle(), super.plugin);
 
         gui.slotsComponent = slotsComponent.copy();
         gui.playerInventoryComponent = playerInventoryComponent.copy();
@@ -102,8 +99,8 @@ public class HopperGui extends NamedGui implements InventoryBased {
     }
 
     @Override
-    public void click(@NonNull InventoryClickEvent event) {
-        int rawSlot = event.getRawSlot();
+    public void click(final @NonNull InventoryClickEvent event) {
+        final int rawSlot = event.getRawSlot();
 
         if (rawSlot >= 0 && rawSlot <= 4) {
             getSlotsComponent().click(this, event, rawSlot);
@@ -112,9 +109,8 @@ public class HopperGui extends NamedGui implements InventoryBased {
         }
     }
 
-    @NonNull
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (this.inventory == null) {
             this.inventory = createInventory();
         }
@@ -128,11 +124,10 @@ public class HopperGui extends NamedGui implements InventoryBased {
         return getPlayerInventoryComponent().hasItem();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public Inventory createInventory() {
-        Inventory inventory = Bukkit.createInventory(this, InventoryType.HOPPER, getTitle());
+    public @NonNull Inventory createInventory() {
+        final Inventory inventory = Bukkit.createInventory(this, InventoryType.HOPPER, getTitle());
 
         addInventory(inventory, this);
 
@@ -145,10 +140,9 @@ public class HopperGui extends NamedGui implements InventoryBased {
         return getInventory().getViewers().size();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public List<HumanEntity> getViewers() {
+    public @NonNull List<HumanEntity> getViewers() {
         return new ArrayList<>(getInventory().getViewers());
     }
 
@@ -158,9 +152,8 @@ public class HopperGui extends NamedGui implements InventoryBased {
      * @return the slots component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getSlotsComponent() {
+    public @NonNull InventoryComponent getSlotsComponent() {
         return slotsComponent;
     }
 
@@ -170,9 +163,8 @@ public class HopperGui extends NamedGui implements InventoryBased {
      * @return the player inventory component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getPlayerInventoryComponent() {
+    public @NonNull InventoryComponent getPlayerInventoryComponent() {
         return playerInventoryComponent;
     }
 

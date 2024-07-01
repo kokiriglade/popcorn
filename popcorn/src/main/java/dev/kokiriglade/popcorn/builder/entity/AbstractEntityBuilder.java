@@ -60,7 +60,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
         this.entityClass = entityClass;
         this.location = location;
         this.consumers.add(entity -> {
-            for (Entity passenger : passengers) {
+            for (final Entity passenger : passengers) {
                 entity.addPassenger(passenger);
             }
             entity.customName(customName);
@@ -206,7 +206,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B visibleByDefault(boolean flag) {
+    public @NonNull B visibleByDefault(final boolean flag) {
         this.visibleByDefault = flag;
         return (B) this;
     }
@@ -228,7 +228,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B lockFreezeTicks(boolean locked) {
+    public @NonNull B lockFreezeTicks(final boolean locked) {
         this.lockFreezeTicks = locked;
         return (B) this;
     }
@@ -250,7 +250,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B noPhysics(boolean flag) {
+    public @NonNull B noPhysics(final boolean flag) {
         this.noPhysics = flag;
         return (B) this;
     }
@@ -272,7 +272,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B visualFire(boolean flag) {
+    public @NonNull B visualFire(final boolean flag) {
         this.visualFire = flag;
         return (B) this;
     }
@@ -294,7 +294,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B customNameVisible(boolean flag) {
+    public @NonNull B customNameVisible(final boolean flag) {
         this.customNameVisible = flag;
         return (B) this;
     }
@@ -316,7 +316,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B glowing(boolean flag) {
+    public @NonNull B glowing(final boolean flag) {
         this.glowing = flag;
         return (B) this;
     }
@@ -338,7 +338,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B invisible(boolean flag) {
+    public @NonNull B invisible(final boolean flag) {
         this.invisible = flag;
         return (B) this;
     }
@@ -360,7 +360,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B invulnerable(boolean flag) {
+    public @NonNull B invulnerable(final boolean flag) {
         this.invulnerable = flag;
         return (B) this;
     }
@@ -382,7 +382,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B gravity(boolean flag) {
+    public @NonNull B gravity(final boolean flag) {
         this.gravity = flag;
         return (B) this;
     }
@@ -404,7 +404,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B persistent(boolean flag) {
+    public @NonNull B persistent(final boolean flag) {
         this.persistent = flag;
         return (B) this;
     }
@@ -426,7 +426,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B silent(boolean flag) {
+    public @NonNull B silent(final boolean flag) {
         this.silent = flag;
         return (B) this;
     }
@@ -448,7 +448,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B sneaking(boolean flag) {
+    public @NonNull B sneaking(final boolean flag) {
         this.sneaking = flag;
         return (B) this;
     }
@@ -559,7 +559,7 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B addConsumer(@NonNull Consumer<T> consumer) {
+    public @NonNull B addConsumer(final @NonNull Consumer<T> consumer) {
         this.consumers.add(consumer);
         return (B) this;
     }
@@ -571,8 +571,8 @@ public abstract class AbstractEntityBuilder<B extends AbstractEntityBuilder<B, T
      * @since 2.2.2
      */
     public T build() {
-        Consumer<T> finalConsumer = entity -> {
-            for (Consumer<T> consumer : consumers) {
+        final Consumer<T> finalConsumer = entity -> {
+            for (final Consumer<T> consumer : consumers) {
                 consumer.accept(entity);
             }
         };

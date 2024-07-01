@@ -17,7 +17,7 @@ public class AbstractSizedFireballBuilder<B extends AbstractFireballBuilder<B, T
 
     protected @Nullable ItemStack displayItem;
 
-    protected AbstractSizedFireballBuilder(@NonNull Class<T> entityClass, @NonNull Location location) {
+    protected AbstractSizedFireballBuilder(final @NonNull Class<T> entityClass, final @NonNull Location location) {
         super(entityClass, location);
         this.consumers.add(sizedFireball -> {
             if (displayItem != null) {
@@ -47,4 +47,5 @@ public class AbstractSizedFireballBuilder<B extends AbstractFireballBuilder<B, T
         this.displayItem = displayItem;
         return (B) this;
     }
+
 }

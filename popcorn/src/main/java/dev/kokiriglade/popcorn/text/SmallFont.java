@@ -10,6 +10,7 @@ import java.util.Map;
  */
 @SuppressWarnings("unused")
 public final class SmallFont {
+
     /**
      * A map that holds the character mapping for converting normal characters to small font characters.
      *
@@ -57,9 +58,9 @@ public final class SmallFont {
      */
     public static String convert(String text) {
         text = text.toLowerCase();
-        StringBuilder result = new StringBuilder();
+        final StringBuilder result = new StringBuilder();
 
-        for (char character : text.toCharArray()) {
+        for (final char character : text.toCharArray()) {
             if (smallFontMap.containsKey(character)) {
                 result.append(smallFontMap.get(character));
             } else {
@@ -69,5 +70,6 @@ public final class SmallFont {
 
         return result.toString();
     }
+
 }
 

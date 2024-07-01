@@ -21,17 +21,13 @@ import java.util.function.Consumer;
 public abstract class AnvilInventory {
 
     /**
-     * The inventory holder
-     */
-    @NonNull
-    protected InventoryHolder inventoryHolder;
-
-    /**
      * The name input text.
      */
-    @NonNull
-    protected final ObservableValue<@NonNull String> observableText = new ObservableValue<>("");
-
+    protected final @NonNull ObservableValue<@NonNull String> observableText = new ObservableValue<>("");
+    /**
+     * The inventory holder
+     */
+    protected @NonNull InventoryHolder inventoryHolder;
     /**
      * The enchantment cost displayed
      */
@@ -43,7 +39,7 @@ public abstract class AnvilInventory {
      * @param inventoryHolder the inventory holder
      * @since 3.0.0
      */
-    public AnvilInventory(@NonNull InventoryHolder inventoryHolder) {
+    public AnvilInventory(final @NonNull InventoryHolder inventoryHolder) {
         this.inventoryHolder = inventoryHolder;
     }
 
@@ -53,11 +49,11 @@ public abstract class AnvilInventory {
      * even if the player does not have the specified amount of levels. The cost must be a non-negative number.
      *
      * @param cost the cost
-     * @since 3.0.0
      * @throws IllegalArgumentException when the cost is less than zero
+     * @since 3.0.0
      */
-    public void setCost(short cost) {
-        if (cost < 0){
+    public void setCost(final short cost) {
+        if (cost < 0) {
             throw new IllegalArgumentException("Cost must be non-negative");
         }
 
@@ -68,66 +64,66 @@ public abstract class AnvilInventory {
      * Opens the inventory for the specified player
      *
      * @param player the player to open the inventory for
-     * @param title the title of the inventory
-     * @param items the items to show
+     * @param title  the title of the inventory
+     * @param items  the items to show
      * @since 3.0.0
      */
-    public abstract Inventory openInventory(@NonNull Player player, @NonNull Component title, @Nullable ItemStack[] items);
+    public abstract Inventory openInventory(final @NonNull Player player, final @NonNull Component title, final @Nullable ItemStack @NonNull [] items);
 
     /**
      * Sends the top items to the inventory for the specified player.
      *
      * @param player the player for which to open the anvil
-     * @param items the items to send
+     * @param items  the items to send
      * @since 3.0.0
-     * @deprecated  no longer used internally
+     * @deprecated no longer used internally
      */
     @Deprecated
-    public abstract void sendItems(@NonNull Player player, @Nullable ItemStack[] items);
+    public abstract void sendItems(final @NonNull Player player, final @Nullable ItemStack @NonNull [] items);
 
     /**
      * Sends the result item to the specified player
      *
      * @param player the player to send the item to
-     * @param item the item to send
+     * @param item   the item to send
      * @since 3.0.0
      * @deprecated no longer used internally
      */
     @Deprecated
-    public abstract void sendResultItem(@NonNull Player player, @Nullable ItemStack item);
+    public abstract void sendResultItem(final @NonNull Player player, final @Nullable ItemStack item);
 
     /**
      * Sends the first item to the specified player
      *
      * @param player the player to send the item to
-     * @param item the item to send
+     * @param item   the item to send
      * @since 3.0.0
      * @deprecated no longer used internally
      */
     @Deprecated
-    public abstract void sendFirstItem(@NonNull Player player, @Nullable ItemStack item);
+    public abstract void sendFirstItem(final @NonNull Player player, final @Nullable ItemStack item);
 
     /**
      * Sends the second item to the specified player
      *
      * @param player the player to send the item to
-     * @param item the item to send
+     * @param item   the item to send
      * @since 3.0.0
      * @deprecated no longer used internally
      */
     @Deprecated
-    public abstract void sendSecondItem(@NonNull Player player, @Nullable ItemStack item);
+    public abstract void sendSecondItem(final @NonNull Player player, final @Nullable ItemStack item);
 
     /**
      * Sets the cursor of the given player
      *
      * @param player the player to set the cursor
-     * @param item the item to set the cursor to
+     * @param item   the item to set the cursor to
      * @since 3.0.0
      * @deprecated no longer used internally
      */
     @Deprecated
-    public abstract void setCursor(@NonNull Player player, @NonNull ItemStack item);
+    public abstract void setCursor(final @NonNull Player player, final @NonNull ItemStack item);
 
     /**
      * Clears the cursor of the specified player
@@ -137,7 +133,7 @@ public abstract class AnvilInventory {
      * @deprecated no longer used internally
      */
     @Deprecated
-    public abstract void clearCursor(@NonNull Player player);
+    public abstract void clearCursor(final @NonNull Player player);
 
     /**
      * Clears the result item for the specified player
@@ -147,7 +143,7 @@ public abstract class AnvilInventory {
      * @deprecated no longer used internally
      */
     @Deprecated
-    public abstract void clearResultItem(@NonNull Player player);
+    public abstract void clearResultItem(final @NonNull Player player);
 
     /**
      * Gets the text shown in the rename slot of the anvil
@@ -155,10 +151,9 @@ public abstract class AnvilInventory {
      * @return the rename text
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public String getRenameText() {
-        String text = observableText.get();
+    public @NonNull String getRenameText() {
+        final String text = observableText.get();
 
         if (text == null) {
             throw new IllegalStateException("Rename text is null");
@@ -173,7 +168,8 @@ public abstract class AnvilInventory {
      * @param onNameInputChanged the consumer to call when the name input changes
      * @since 3.0.0
      */
-    public void subscribeToNameInputChanges(@NonNull Consumer<? super String> onNameInputChanged) {
+    public void subscribeToNameInputChanges(final @NonNull Consumer<? super String> onNameInputChanged) {
         this.observableText.subscribe(onNameInputChanged);
     }
+
 }

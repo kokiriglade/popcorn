@@ -26,14 +26,12 @@ public class InventoryComponent {
      * A set of all panes in this inventory. This is guaranteed to be sorted in order of the pane's priorities, from the
      * lowest priority to the highest priority. The order of panes with the same priority is unspecified.
      */
-    @NonNull
-    protected final List<Pane> panes = new ArrayList<>();
+    protected final @NonNull List<@NonNull Pane> panes = new ArrayList<>();
 
     /**
      * The items this inventory component has, stored in row-major order. Slots that are empty are represented as null.
      */
-    @Nullable
-    private final ItemStack[][] items;
+    private final @Nullable ItemStack @NonNull [] @NonNull [] items;
 
     /**
      * The length and height of this inventory component
@@ -48,7 +46,7 @@ public class InventoryComponent {
      * @param height the height of the component
      * @since 3.0.0
      */
-    public InventoryComponent(int length, int height) {
+    public InventoryComponent(final int length, final int height) {
         if (length < 0 || height < 0) {
             throw new IllegalArgumentException("Sizes must be greater or equal to zero");
         }
@@ -65,8 +63,8 @@ public class InventoryComponent {
      * @param pane the pane to add
      * @since 3.0.0
      */
-    public void addPane(@NonNull Pane pane) {
-        int size = getPanes().size();
+    public void addPane(final @NonNull Pane pane) {
+        final int size = getPanes().size();
 
         if (size == 0) {
             getPanes().add(pane);
@@ -74,15 +72,15 @@ public class InventoryComponent {
             return;
         }
 
-        Pane.Priority priority = pane.getPriority();
+        final Pane.Priority priority = pane.getPriority();
 
         int left = 0;
         int right = size - 1;
 
         while (left <= right) {
-            int middle = (left + right) / 2;
+            final int middle = (left + right) / 2;
 
-            Pane.Priority middlePriority = getPane(middle).getPriority();
+            final Pane.Priority middlePriority = getPane(middle).getPriority();
 
             if (middlePriority == priority) {
                 getPanes().add(middle, pane);
@@ -108,11 +106,11 @@ public class InventoryComponent {
      * component's size + the offset specified.
      *
      * @param inventory the inventory to place the items in
-     * @param offset the offset from which to start counting the slots
-     * @since 3.0.0
+     * @param offset    the offset from which to start counting the slots
      * @see #display(PlayerInventory, int)
+     * @since 3.0.0
      */
-    public void display(@NonNull Inventory inventory, int offset) {
+    public void display(final @NonNull Inventory inventory, final int offset) {
         display();
 
         placeItems(inventory, offset);
@@ -128,11 +126,11 @@ public class InventoryComponent {
      * the normal ordering of a {@link PlayerInventory}'s slots its documentation.
      *
      * @param inventory the inventory to place the items in
-     * @param offset the offset from which to start counting the slots
-     * @since 3.0.0
+     * @param offset    the offset from which to start counting the slots
      * @see #display(Inventory, int)
+     * @since 3.0.0
      */
-    public void display(@NonNull PlayerInventory inventory, int offset) {
+    public void display(final @NonNull PlayerInventory inventory, final int offset) {
         display();
 
         placeItems(inventory, offset);
@@ -146,14 +144,14 @@ public class InventoryComponent {
      * contrast to {@link #display(PlayerInventory, int)} this does not render the panes of this component.
      *
      * @param inventory the inventory to place the items in
-     * @param offset the offset from which to start counting the slots
-     * @since 3.0.0
+     * @param offset    the offset from which to start counting the slots
      * @see #placeItems(Inventory, int)
+     * @since 3.0.0
      */
-    public void placeItems(@NonNull PlayerInventory inventory, int offset) {
+    public void placeItems(final @NonNull PlayerInventory inventory, final int offset) {
         for (int x = 0; x < getLength(); x++) {
             for (int y = 0; y < getHeight(); y++) {
-                int slot;
+                final int slot;
 
                 if (y == getHeight() - 1) {
                     slot = x + offset;
@@ -172,11 +170,11 @@ public class InventoryComponent {
      * {@link #display(Inventory, int)} this does not render the panes of this component.
      *
      * @param inventory the inventory to place the items in
-     * @param offset the offset from which to start counting the slots
-     * @since 3.0.0
+     * @param offset    the offset from which to start counting the slots
      * @see #placeItems(PlayerInventory, int)
+     * @since 3.0.0
      */
-    public void placeItems(@NonNull Inventory inventory, int offset) {
+    public void placeItems(final @NonNull Inventory inventory, final int offset) {
         for (int x = 0; x < getLength(); x++) {
             for (int y = 0; y < getHeight(); y++) {
                 inventory.setItem(y * getLength() + x + offset, getItem(x, y));
@@ -189,13 +187,13 @@ public class InventoryComponent {
      * {@link Pane#click(Gui, InventoryComponent, InventoryClickEvent, int, int, int, int, int)} on each pane until the
      * right item has been found.
      *
-     * @param gui the gui this inventory component belongs to
+     * @param gui   the gui this inventory component belongs to
      * @param event the event to delegate
-     * @param slot the slot that was clicked
+     * @param slot  the slot that was clicked
      * @since 3.0.0
      */
-    public void click(@NonNull Gui gui, @NonNull InventoryClickEvent event, int slot) {
-        List<Pane> panes = new ArrayList<>(getPanes());
+    public void click(final @NonNull Gui gui, final @NonNull InventoryClickEvent event, final int slot) {
+        final List<@NonNull Pane> panes = new ArrayList<>(getPanes());
 
         //loop panes in reverse, because the highest priority pane (last in list) is most likely to have the right item
         for (int i = panes.size() - 1; i >= 0; i--) {
@@ -215,14 +213,13 @@ public class InventoryComponent {
      * @return the new inventory component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent copy() {
-        InventoryComponent inventoryComponent = new InventoryComponent(getLength(), getHeight());
+    public @NonNull InventoryComponent copy() {
+        final InventoryComponent inventoryComponent = new InventoryComponent(getLength(), getHeight());
 
         for (int x = 0; x < getLength(); x++) {
             for (int y = 0; y < getHeight(); y++) {
-                ItemStack item = getItem(x, y);
+                final ItemStack item = getItem(x, y);
 
                 if (item == null) {
                     continue;
@@ -232,7 +229,7 @@ public class InventoryComponent {
             }
         }
 
-        for (Pane pane : getPanes()) {
+        for (final Pane pane : getPanes()) {
             inventoryComponent.addPane(pane.copy());
         }
 
@@ -250,22 +247,21 @@ public class InventoryComponent {
      * not included in this inventory component, and {@link IllegalArgumentException} will be thrown.
      *
      * @param from the starting index of the range
-     * @param end the ending index of the range
+     * @param end  the ending index of the range
      * @return the new, shrunk inventory component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent excludeRows(int from, int end) {
+    public @NonNull InventoryComponent excludeRows(final int from, final int end) {
         if (from < 0 || end >= getHeight()) {
             throw new IllegalArgumentException("Specified range includes non-existent rows");
         }
 
-        int newHeight = getHeight() - (end - from + 1);
+        final int newHeight = getHeight() - (end - from + 1);
 
-        InventoryComponent newInventoryComponent = new InventoryComponent(getLength(), newHeight);
+        final InventoryComponent newInventoryComponent = new InventoryComponent(getLength(), newHeight);
 
-        for (Pane pane : getPanes()) {
+        for (final Pane pane : getPanes()) {
             newInventoryComponent.addPane(pane);
         }
 
@@ -273,7 +269,7 @@ public class InventoryComponent {
             int newY = 0;
 
             for (int y = 0; y < getHeight(); y++) {
-                ItemStack item = getItem(x, y);
+                final ItemStack item = getItem(x, y);
 
                 if (y >= from && y <= end) {
                     continue;
@@ -314,13 +310,13 @@ public class InventoryComponent {
      * displayed according to their priority, with the lowest priority rendering first and the highest priority (note:
      * highest priority, not {@link Pane.Priority#HIGHEST} priority) rendering last.
      *
-     * @since 3.0.0
      * @see #display(Inventory, int)
+     * @since 3.0.0
      */
     public void display() {
         clearItems();
 
-        for (Pane pane : getPanes()) {
+        for (final Pane pane : getPanes()) {
             if (!pane.isVisible()) {
                 continue;
             }
@@ -336,11 +332,11 @@ public class InventoryComponent {
      * @param x the x coordinate
      * @param y the y coordinate
      * @return true if an item exists at the given coordinates, false otherwise
-     * @since 3.0.0
      * @throws IllegalArgumentException when the coordinates are out of bounds
+     * @since 3.0.0
      */
     @Contract(pure = true)
-    public boolean hasItem(int x, int y) {
+    public boolean hasItem(final int x, final int y) {
         return getItem(x, y) != null;
     }
 
@@ -351,12 +347,11 @@ public class InventoryComponent {
      * @param x the x coordinate
      * @param y the y coordinate
      * @return the item or null
-     * @since 3.0.0
      * @throws IllegalArgumentException when the coordinates are out of bounds
+     * @since 3.0.0
      */
-    @Nullable
     @Contract(pure = true)
-    public ItemStack getItem(int x, int y) {
+    public @Nullable ItemStack getItem(final int x, final int y) {
         if (!isInBounds(x, y)) {
             throw new IllegalArgumentException("Coordinates must be in-bounds: x = " + x + ", y = " + y +
                 "; should be below " + getLength() + " and " + getHeight());
@@ -373,9 +368,8 @@ public class InventoryComponent {
      * @return the panes this component has
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public List<Pane> getPanes() {
+    public @NonNull List<@NonNull Pane> getPanes() {
         return this.panes;
     }
 
@@ -385,17 +379,17 @@ public class InventoryComponent {
      * component, an {@link IllegalArgumentException} will be thrown.
      *
      * @param guiItem the item to place in this inventory component
-     * @param x the x coordinate of the item
-     * @param y the y coordinate of the item
+     * @param x       the x coordinate of the item
+     * @param y       the y coordinate of the item
      * @since 3.0.0
      */
-    public void setItem(@NonNull GuiItem guiItem, int x, int y) {
+    public void setItem(final @NonNull GuiItem guiItem, final int x, final int y) {
         if (!isInBounds(x, y)) {
             throw new IllegalArgumentException("Coordinates must be in-bounds: x = " + x + ", y = " + y +
                 "; should be below " + getLength() + " and " + getHeight());
         }
 
-        GuiItem copy = guiItem.copy();
+        final GuiItem copy = guiItem.copy();
         copy.applyUUID();
 
         this.items[x][y] = copy.getItem();
@@ -407,14 +401,14 @@ public class InventoryComponent {
      * component, an {@link IllegalArgumentException} will be thrown.
      *
      * @param item the item to place in this inventory component
-     * @param x the x coordinate of the item
-     * @param y the y coordinate of the item
+     * @param x    the x coordinate of the item
+     * @param y    the y coordinate of the item
      * @since 3.0.0
      * @deprecated usage of {@link #setItem(GuiItem, int, int)} is preferred so gui item's item meta can be freely
      * edited without losing important internal data
      */
     @Deprecated
-    public void setItem(@NonNull ItemStack item, int x, int y) {
+    public void setItem(final @NonNull ItemStack item, final int x, final int y) {
         if (!isInBounds(x, y)) {
             throw new IllegalArgumentException("Coordinates must be in-bounds: x = " + x + ", y = " + y +
                 "; should be below " + getLength() + " and " + getHeight());
@@ -462,7 +456,7 @@ public class InventoryComponent {
      * @since 3.0.0
      */
     private void clearItems() {
-        for (ItemStack[] items : this.items) {
+        for (final ItemStack @NonNull [] items : this.items) {
             Arrays.fill(items, null);
         }
     }
@@ -477,9 +471,9 @@ public class InventoryComponent {
      * @since 3.0.0
      */
     @Contract(pure = true)
-    private boolean isInBounds(int x, int y) {
-        boolean xBounds = isInBounds(0, getLength() - 1, x);
-        boolean yBounds = isInBounds(0, getHeight() - 1, y);
+    private boolean isInBounds(final int x, final int y) {
+        final boolean xBounds = isInBounds(0, getLength() - 1, x);
+        final boolean yBounds = isInBounds(0, getHeight() - 1, y);
 
         return xBounds && yBounds;
     }
@@ -491,9 +485,8 @@ public class InventoryComponent {
      * @return the pane
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    private Pane getPane(int index) {
+    private @NonNull Pane getPane(final int index) {
         if (!isInBounds(0, this.panes.size() - 1, index)) {
             throw new IllegalArgumentException("Index not in pane list");
         }
@@ -506,12 +499,12 @@ public class InventoryComponent {
      *
      * @param lowerBound the lower bound of the range
      * @param upperBound the upper bound of the range
-     * @param value the value to check
+     * @param value      the value to check
      * @return true if the value is within the bounds, false otherwise
      * @since 3.0.0
      */
     @Contract(pure = true)
-    private boolean isInBounds(int lowerBound, int upperBound, int value) {
+    private boolean isInBounds(final int lowerBound, final int upperBound, final int value) {
         return lowerBound <= value && value <= upperBound;
     }
 

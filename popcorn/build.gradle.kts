@@ -1,11 +1,14 @@
 plugins {
-    id("java")
+    idea
+    `java-library`
     `maven-publish`
+    checkstyle
     id("io.papermc.paperweight.userdev") version "1.7.1"
+    id("io.github.goooler.shadow") version "8.1.7"
 }
 
 group = "dev.kokiriglade"
-version = "3.0.1"
+version = "3.0.2"
 
 paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.REOBF_PRODUCTION
 
@@ -15,6 +18,8 @@ repositories {
 }
 
 dependencies {
+    checkstyle("ca.stellardrift:stylecheck:0.2.1")
+    api("dev.dejvokep:boosted-yaml:1.3.5")
     paperweight.paperDevBundle("${properties["mcVersion"]}-R0.1-SNAPSHOT")
 }
 
@@ -27,12 +32,32 @@ configure<JavaPluginExtension> {
     withSourcesJar()
 }
 
-tasks.javadoc {
-    (options as StandardJavadocDocletOptions).links(
-            "https://jd.papermc.io/paper/${properties["mcVersion"]}/",
-            "https://jd.advntr.dev/api/4.17.0/",
-            "https://guava.dev/releases/32.1.2-jre/api/docs/"
-    )
+tasks.withType<Checkstyle>().configureEach {
+    configFile = file("config/checkstyle/checkstyle.xml")
+}
+
+tasks {
+    build {
+        dependsOn(shadowJar)
+    }
+    javadoc {
+        dependsOn(check)
+        (options as StandardJavadocDocletOptions).apply {
+            encoding = Charsets.UTF_8.name()
+            addStringOption("tag", "implNote:a:Implementation Note")
+            addStringOption("tag", "apiNote:a:API Note")
+            links(
+                "https://jd.papermc.io/paper/${rootProject.properties["mcVersion"]}/",
+                "https://jd.advntr.dev/api/4.17.0/",
+                "https://guava.dev/releases/32.1.2-jre/api/docs/",
+                "https://javadoc.io/static/dev.dejvokep/boosted-yaml/1.3/",
+            )
+        }
+    }
+    shadowJar {
+        dependsOn(check)
+        relocate("dev.dejvokep.boostedyaml", "dev.kokiriglade.popcorn.lib.boostedyaml")
+    }
 }
 
 configure<PublishingExtension> {
@@ -44,14 +69,6 @@ configure<PublishingExtension> {
     }
     repositories {
         mavenLocal()
-        /*maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/celerry/popcorn")
-            credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_ACTOR")
-                password = project.findProperty("gpr.token") as String? ?: System.getenv("GITHUB_TOKEN")
-            }
-        }*/
         maven {
             name = "celerry"
             url = uri("https://repo.celerry.com/releases")

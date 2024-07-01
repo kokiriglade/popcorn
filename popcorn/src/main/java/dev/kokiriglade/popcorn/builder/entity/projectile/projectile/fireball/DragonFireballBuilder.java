@@ -26,4 +26,5 @@ public final class DragonFireballBuilder extends AbstractFireballBuilder<DragonF
     public static @NonNull DragonFireballBuilder create(final @NonNull Location location) {
         return new DragonFireballBuilder(location);
     }
+
 }

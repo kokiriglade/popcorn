@@ -26,43 +26,43 @@ import java.util.Optional;
 public class MerchantInventoryImpl extends MerchantInventory {
 
     @Override
-    public void sendMerchantOffers(@NonNull Player player,
-                                   @NonNull List<? extends Map.Entry<? extends MerchantRecipe, ? extends Integer>> trades,
-                                   int level, int experience) {
-        MerchantOffers offers = new MerchantOffers();
+    public void sendMerchantOffers(final @NonNull Player player,
+                                   final @NonNull List<? extends Map.Entry<? extends MerchantRecipe, ? extends Integer>> trades,
+                                   final int level, final int experience) {
+        final MerchantOffers offers = new MerchantOffers();
 
-        for (Map.Entry<? extends MerchantRecipe, ? extends Integer> entry : trades) {
-            MerchantRecipe recipe = entry.getKey();
-            List<ItemStack> ingredients = recipe.getIngredients();
+        for (final Map.Entry<? extends MerchantRecipe, ? extends Integer> entry : trades) {
+            final MerchantRecipe recipe = entry.getKey();
+            final List<ItemStack> ingredients = recipe.getIngredients();
 
             if (ingredients.isEmpty()) {
                 throw new IllegalStateException("Merchant recipe has no ingredients");
             }
 
-            ItemStack itemA = ingredients.get(0);
+            final ItemStack itemA = ingredients.get(0);
             ItemStack itemB = null;
 
             if (ingredients.size() >= 2) {
                 itemB = ingredients.get(1);
             }
 
-            net.minecraft.world.item.ItemStack nmsItemA = CraftItemStack.asNMSCopy(itemA);
+            final net.minecraft.world.item.ItemStack nmsItemA = CraftItemStack.asNMSCopy(itemA);
             net.minecraft.world.item.ItemStack nmsItemB = net.minecraft.world.item.ItemStack.EMPTY;
-            net.minecraft.world.item.ItemStack nmsItemResult = CraftItemStack.asNMSCopy(recipe.getResult());
+            final net.minecraft.world.item.ItemStack nmsItemResult = CraftItemStack.asNMSCopy(recipe.getResult());
 
             if (itemB != null) {
                 nmsItemB = CraftItemStack.asNMSCopy(itemB);
             }
 
-            ItemCost itemCostA = convertItemStackToItemCost(nmsItemA);
-            ItemCost itemCostB = convertItemStackToItemCost(nmsItemB);
+            final ItemCost itemCostA = convertItemStackToItemCost(nmsItemA);
+            final ItemCost itemCostB = convertItemStackToItemCost(nmsItemB);
 
-            int uses = recipe.getUses();
-            int maxUses = recipe.getMaxUses();
-            int exp = recipe.getVillagerExperience();
-            float multiplier = recipe.getPriceMultiplier();
+            final int uses = recipe.getUses();
+            final int maxUses = recipe.getMaxUses();
+            final int exp = recipe.getVillagerExperience();
+            final float multiplier = recipe.getPriceMultiplier();
 
-            MerchantOffer merchantOffer = new MerchantOffer(
+            final MerchantOffer merchantOffer = new MerchantOffer(
                 itemCostA, Optional.of(itemCostB), nmsItemResult, uses, maxUses, exp, multiplier
             );
             merchantOffer.setSpecialPriceDiff(entry.getValue());
@@ -70,8 +70,8 @@ public class MerchantInventoryImpl extends MerchantInventory {
             offers.add(merchantOffer);
         }
 
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        int containerId = getContainerId(serverPlayer);
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final int containerId = getContainerId(serverPlayer);
 
         serverPlayer.sendMerchantOffers(containerId, offers, level, experience, true, false);
     }
@@ -83,10 +83,9 @@ public class MerchantInventoryImpl extends MerchantInventory {
      * @return the item cost
      * @since 3.0.0
      */
-    @NonNull
     @Contract(value = "_ -> new", pure = true)
-    private ItemCost convertItemStackToItemCost(net.minecraft.world.item.@NonNull ItemStack itemStack) {
-        DataComponentPredicate predicate = DataComponentPredicate.allOf(itemStack.getComponents());
+    private @NonNull ItemCost convertItemStackToItemCost(final net.minecraft.world.item.@NonNull ItemStack itemStack) {
+        final DataComponentPredicate predicate = DataComponentPredicate.allOf(itemStack.getComponents());
 
         return new ItemCost(itemStack.getItemHolder(), itemStack.getCount(), predicate, itemStack);
     }
@@ -98,9 +97,8 @@ public class MerchantInventoryImpl extends MerchantInventory {
      * @return the server player
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    private ServerPlayer getServerPlayer(@NonNull Player player) {
+    private @NonNull ServerPlayer getServerPlayer(final @NonNull Player player) {
         return ((CraftPlayer) player).getHandle();
     }
 
@@ -112,7 +110,8 @@ public class MerchantInventoryImpl extends MerchantInventory {
      * @since 3.0.0
      */
     @Contract(pure = true)
-    private int getContainerId(net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
+    private int getContainerId(final net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
         return nmsPlayer.containerMenu.containerId;
     }
+
 }

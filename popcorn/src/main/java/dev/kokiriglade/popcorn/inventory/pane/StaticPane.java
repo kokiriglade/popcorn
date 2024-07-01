@@ -13,7 +13,11 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.jetbrains.annotations.Contract;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -24,6 +28,7 @@ import java.util.function.Consumer;
  * axis taking priority. There are nuances at play with regard to mixing these two types of positioning systems within
  * the same pane. It's recommended to only use one of these systems per pane and to not mix them.
  * </p>
+ * @since 3.0.0
  */
 @SuppressWarnings({"unused"})
 public class StaticPane extends Pane implements Flippable, Rotatable {
@@ -32,8 +37,7 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
      * A map of locations inside this pane and their item. The locations are stored in a way where the x coordinate is
      * the key and the y coordinate is the value.
      */
-    @NonNull
-    private final Map<Slot, GuiItem> items;
+    private final @NonNull Map<Slot, GuiItem> items;
 
     /**
      * The clockwise rotation of this pane in degrees
@@ -48,73 +52,102 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
     /**
      * Creates a new static pane.
      *
-     * @param slot the slot of the pane
-     * @param length the length of the pane
-     * @param height the height of the pane
+     * @param slot     the slot of the pane
+     * @param length   the length of the pane
+     * @param height   the height of the pane
      * @param priority the priority of the pane
      * @since 3.0.0
      */
-    public StaticPane(Slot slot, int length, int height, @NonNull Priority priority) {
+    public StaticPane(final @NonNull Slot slot, final int length, final int height, final @NonNull Priority priority) {
         super(slot, length, height, priority);
 
         this.items = new HashMap<>(length * height);
     }
 
-    public StaticPane(int x, int y, int length, int height, @NonNull Priority priority) {
+    /**
+     * Creates a new static pane.
+     *
+     * @param x      the x-axis of the pane
+     * @param y      the y-axis of the pane
+     * @param length   the length of the pane
+     * @param height   the height of the pane
+     * @param priority the priority of the pane
+     * @since 3.0.0
+     */
+    public StaticPane(final int x, final int y, final int length, final int height, final @NonNull Priority priority) {
         this(Slot.fromXY(x, y), length, height, priority);
     }
 
     /**
      * Creates a new static pane.
      *
-     * @param slot the slot of the pane
+     * @param slot   the slot of the pane
      * @param length the length of the pane
      * @param height the height of the pane
      * @since 3.0.0
      */
-    public StaticPane(Slot slot, int length, int height) {
+    public StaticPane(final @NonNull Slot slot, final int length, final int height) {
         this(slot, length, height, Priority.NORMAL);
     }
 
-    public StaticPane(int x, int y, int length, int height) {
+    /**
+     * Creates a new static pane.
+     *
+     * @param x      the x-axis of the pane
+     * @param y      the y-axis of the pane
+     * @param length the length of the pane
+     * @param height the height of the pane
+     * @since 3.0.0
+     */
+    public StaticPane(final int x, final int y, final int length, final int height) {
         this(x, y, length, height, Priority.NORMAL);
     }
 
-    public StaticPane(int length, int height) {
+    /**
+     * Creates a new static pane.
+     *
+     * @param length the length of the pane
+     * @param height the height of the pane
+     * @since 3.0.0
+     */
+    public StaticPane(final int length, final int height) {
         this(0, 0, length, height);
     }
 
     /**
      * {@inheritDoc}
-     *
+     * <p>
      * If there are multiple items in the same position when displaying the items, either one of those items may be
      * shown. In particular, there is no guarantee that a specific item will be shown.
      *
      * @param inventoryComponent {@inheritDoc}
-     * @param paneOffsetX {@inheritDoc}
-     * @param paneOffsetY {@inheritDoc}
-     * @param maxLength {@inheritDoc}
-     * @param maxHeight {@inheritDoc}
+     * @param paneOffsetX        {@inheritDoc}
+     * @param paneOffsetY        {@inheritDoc}
+     * @param maxLength          {@inheritDoc}
+     * @param maxHeight          {@inheritDoc}
+     * @since 3.0.0
      */
     @Override
-    public void display(@NonNull InventoryComponent inventoryComponent, int paneOffsetX, int paneOffsetY, int maxLength,
-                        int maxHeight) {
-        int length = Math.min(this.length, maxLength);
-        int height = Math.min(this.height, maxHeight);
+    public void display(final @NonNull InventoryComponent inventoryComponent, final int paneOffsetX, final int paneOffsetY, final int maxLength,
+                        final int maxHeight) {
+        final int length = Math.min(this.length, maxLength);
+        final int height = Math.min(this.height, maxHeight);
 
         items.entrySet().stream().filter(entry -> entry.getValue().isVisible()).forEach(entry -> {
-            Slot location = entry.getKey();
+            final Slot location = entry.getKey();
 
             int x = location.getX(getLength());
             int y = location.getY(getLength());
 
-            if (flipHorizontally)
+            if (flipHorizontally) {
                 x = length - x - 1;
+            }
 
-            if (flipVertically)
+            if (flipVertically) {
                 y = height - y - 1;
+            }
 
-            Map.Entry<Integer, Integer> coordinates = GeometryUtil.processClockwiseRotation(x, y, length, height,
+            final Map.Entry<Integer, Integer> coordinates = GeometryUtil.processClockwiseRotation(x, y, length, height,
                 rotation);
 
             x = coordinates.getKey();
@@ -124,11 +157,11 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
                 return;
             }
 
-            GuiItem item = entry.getValue();
+            final GuiItem item = entry.getValue();
 
-            Slot slot = getSlot();
-            int finalRow = slot.getY(maxLength) + y + paneOffsetY;
-            int finalColumn = slot.getX(maxLength) + x + paneOffsetX;
+            final Slot slot = getSlot();
+            final int finalRow = slot.getY(maxLength) + y + paneOffsetY;
+            final int finalColumn = slot.getX(maxLength) + x + paneOffsetX;
 
             inventoryComponent.setItem(item, finalColumn, finalRow);
         });
@@ -141,8 +174,9 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
      * @param item the item to set
      * @param x    the x coordinate of the position of the item
      * @param y    the y coordinate of the position of the item
+     * @since 3.0.0
      */
-    public void addItem(@NonNull GuiItem item, int x, int y) {
+    public void addItem(final @NonNull GuiItem item, final int x, final int y) {
         addItem(item, Slot.fromXY(x, y));
     }
 
@@ -157,7 +191,7 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
      * @param slot the position of the item
      * @since 3.0.0
      */
-    public void addItem(@NonNull GuiItem item, Slot slot) {
+    public void addItem(final @NonNull GuiItem item, final @NonNull Slot slot) {
         this.items.put(slot, item);
     }
 
@@ -167,7 +201,7 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
      * @param item the item to remove
      * @since 3.0.0
      */
-    public void removeItem(@NonNull GuiItem item) {
+    public void removeItem(final @NonNull GuiItem item) {
         items.values().removeIf(guiItem -> guiItem.equals(item));
     }
 
@@ -179,7 +213,7 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
      * @param y the y coordinate of the item to remove
      * @since 3.0.0
      */
-    public void removeItem(int x, int y) {
+    public void removeItem(final int x, final int y) {
         this.items.remove(Slot.fromXY(x, y));
     }
 
@@ -190,28 +224,28 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
      * @param slot the slot of the item to remove
      * @since 3.0.0
      */
-    public void removeItem(@NonNull Slot slot) {
+    public void removeItem(final @NonNull Slot slot) {
         this.items.remove(slot);
     }
 
     @Override
-    public boolean click(@NonNull Gui gui, @NonNull InventoryComponent inventoryComponent,
-                         @NonNull InventoryClickEvent event, int slot, int paneOffsetX, int paneOffsetY, int maxLength,
-                         int maxHeight) {
-        int length = Math.min(this.length, maxLength);
-        int height = Math.min(this.height, maxHeight);
+    public boolean click(final @NonNull Gui gui, final @NonNull InventoryComponent inventoryComponent,
+                         final @NonNull InventoryClickEvent event, final int slot, final int paneOffsetX, final int paneOffsetY, final int maxLength,
+                         final int maxHeight) {
+        final int length = Math.min(this.length, maxLength);
+        final int height = Math.min(this.height, maxHeight);
 
-        Slot paneSlot = getSlot();
+        final Slot paneSlot = getSlot();
 
-        int xPosition = paneSlot.getX(maxLength);
-        int yPosition = paneSlot.getY(maxLength);
+        final int xPosition = paneSlot.getX(maxLength);
+        final int yPosition = paneSlot.getY(maxLength);
 
-        int totalLength = inventoryComponent.getLength();
+        final int totalLength = inventoryComponent.getLength();
 
-        int adjustedSlot = slot - (xPosition + paneOffsetX) - totalLength * (yPosition + paneOffsetY);
+        final int adjustedSlot = slot - (xPosition + paneOffsetX) - totalLength * (yPosition + paneOffsetY);
 
-        int x = adjustedSlot % totalLength;
-        int y = adjustedSlot / totalLength;
+        final int x = adjustedSlot % totalLength;
+        final int y = adjustedSlot / totalLength;
 
         //this isn't our item
         if (x < 0 || x >= length || y < 0 || y >= height) {
@@ -220,13 +254,13 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
 
         callOnClick(event);
 
-        ItemStack itemStack = event.getCurrentItem();
+        final ItemStack itemStack = event.getCurrentItem();
 
         if (itemStack == null) {
             return false;
         }
 
-        GuiItem clickedItem = findMatchingItem(items.values(), itemStack);
+        final GuiItem clickedItem = findMatchingItem(items.values(), itemStack);
 
         if (clickedItem == null) {
             return false;
@@ -237,13 +271,12 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
         return true;
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public StaticPane copy() {
-        StaticPane staticPane = new StaticPane(getSlot(), length, height, getPriority());
+    public @NonNull StaticPane copy() {
+        final StaticPane staticPane = new StaticPane(getSlot(), length, height, getPriority());
 
-        for (Map.Entry<Slot, GuiItem> entry : items.entrySet()) {
+        for (final Map.Entry<Slot, GuiItem> entry : items.entrySet()) {
             staticPane.addItem(entry.getValue().copy(), entry.getKey());
         }
 
@@ -259,37 +292,25 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
         return staticPane;
     }
 
-    @Override
-    public void setRotation(int rotation) {
-        if (length != height) {
-            throw new UnsupportedOperationException("length and height are different");
-        }
-        if (rotation % 90 != 0) {
-            throw new IllegalArgumentException("rotation isn't divisible by 90");
-        }
-
-        this.rotation = rotation % 360;
-    }
-
     /**
      * Fills all empty space in the pane with the given {@code itemStack} and adds the given action
      *
      * @param itemStack The {@link ItemStack} to fill the empty space with
-     * @param action The action called whenever an interaction with the item happens
-     * @param plugin the plugin that will be the owner of the created items
+     * @param action    The action called whenever an interaction with the item happens
+     * @param plugin    the plugin that will be the owner of the created items
      * @see #fillWith(ItemStack, Consumer)
      * @since 3.0.0
      */
-    public void fillWith(@NonNull ItemStack itemStack, @Nullable Consumer<InventoryClickEvent> action,
-                         @NonNull Plugin plugin) {
+    public void fillWith(final @NonNull ItemStack itemStack, final @Nullable Consumer<InventoryClickEvent> action,
+                         final @NonNull Plugin plugin) {
         //The non-empty spots
-        Set<Slot> locations = this.items.keySet();
+        final Set<Slot> locations = this.items.keySet();
 
         for (int y = 0; y < this.getHeight(); y++) {
             for (int x = 0; x < this.getLength(); x++) {
                 boolean found = false;
 
-                for (Slot location : locations) {
+                for (final Slot location : locations) {
                     if (location.getX(getLength()) == x && location.getY(getLength()) == y) {
                         found = true;
                         break;
@@ -307,10 +328,10 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
      * Fills all empty space in the pane with the given {@code itemStack} and adds the given action
      *
      * @param itemStack The {@link ItemStack} to fill the empty space with
-     * @param action The action called whenever an interaction with the item happens
+     * @param action    The action called whenever an interaction with the item happens
      * @since 3.0.0
      */
-    public void fillWith(@NonNull ItemStack itemStack, @Nullable Consumer<InventoryClickEvent> action) {
+    public void fillWith(final @NonNull ItemStack itemStack, final @Nullable Consumer<InventoryClickEvent> action) {
         fillWith(itemStack, action, JavaPlugin.getProvidingPlugin(StaticPane.class));
     }
 
@@ -321,13 +342,12 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
      * @since 3.0.0
      */
     @Contract("_ -> fail")
-    public void fillWith(@NonNull ItemStack itemStack) {
+    public void fillWith(final @NonNull ItemStack itemStack) {
         this.fillWith(itemStack, null);
     }
 
-    @NonNull
     @Override
-    public Collection<GuiItem> getItems() {
+    public @NonNull Collection<GuiItem> getItems() {
         return items.values();
     }
 
@@ -336,20 +356,19 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
         items.clear();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public Collection<Pane> getPanes() {
+    public @NonNull Collection<Pane> getPanes() {
         return new HashSet<>();
     }
 
     @Override
-    public void flipHorizontally(boolean flipHorizontally) {
+    public void flipHorizontally(final boolean flipHorizontally) {
         this.flipHorizontally = flipHorizontally;
     }
 
     @Override
-    public void flipVertically(boolean flipVertically) {
+    public void flipVertically(final boolean flipVertically) {
         this.flipVertically = flipVertically;
     }
 
@@ -357,6 +376,18 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
     @Override
     public int getRotation() {
         return rotation;
+    }
+
+    @Override
+    public void setRotation(final int rotation) {
+        if (length != height) {
+            throw new UnsupportedOperationException("length and height are different");
+        }
+        if (rotation % 90 != 0) {
+            throw new IllegalArgumentException("rotation isn't divisible by 90");
+        }
+
+        this.rotation = rotation % 360;
     }
 
     @Contract(pure = true)

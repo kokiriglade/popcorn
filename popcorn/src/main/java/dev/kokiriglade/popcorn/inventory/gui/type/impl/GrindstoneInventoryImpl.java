@@ -32,14 +32,19 @@ import org.jetbrains.annotations.Contract;
  */
 public class GrindstoneInventoryImpl extends GrindstoneInventory {
 
-    public GrindstoneInventoryImpl(@NonNull InventoryHolder inventoryHolder) {
+    /**
+     * Create an internal grindstone inventory
+     * @param inventoryHolder the {@code InventoryHolder}
+     * @since 3.0.0
+     */
+    public GrindstoneInventoryImpl(final @NonNull InventoryHolder inventoryHolder) {
         super(inventoryHolder);
     }
 
     @Override
-    public Inventory openInventory(@NonNull Player player, net.kyori.adventure.text.@NonNull Component title,
-                                   org.bukkit.inventory.@Nullable ItemStack[] items) {
-        int itemAmount = items.length;
+    public Inventory openInventory(final @NonNull Player player, final net.kyori.adventure.text.@NonNull Component title,
+                                   final org.bukkit.inventory.@Nullable ItemStack[] items) {
+        final int itemAmount = items.length;
 
         if (itemAmount != 3) {
             throw new IllegalArgumentException(
@@ -47,7 +52,7 @@ public class GrindstoneInventoryImpl extends GrindstoneInventory {
             );
         }
 
-        ServerPlayer serverPlayer = getServerPlayer(player);
+        final ServerPlayer serverPlayer = getServerPlayer(player);
 
         //ignore deprecation: superseding method is only available on Paper
         //noinspection deprecation
@@ -55,16 +60,16 @@ public class GrindstoneInventoryImpl extends GrindstoneInventory {
 
         serverPlayer.containerMenu = serverPlayer.inventoryMenu;
 
-        Component message = PaperAdventure.asVanilla(title);
-        ContainerGrindstoneImpl containerGrindstone = new ContainerGrindstoneImpl(serverPlayer, message);
+        final Component message = PaperAdventure.asVanilla(title);
+        final ContainerGrindstoneImpl containerGrindstone = new ContainerGrindstoneImpl(serverPlayer, message);
 
-        Inventory inventory = containerGrindstone.getBukkitView().getTopInventory();
+        final Inventory inventory = containerGrindstone.getBukkitView().getTopInventory();
 
         inventory.setItem(0, items[0]);
         inventory.setItem(1, items[1]);
         inventory.setItem(2, items[2]);
 
-        int containerId = containerGrindstone.getContainerId();
+        final int containerId = containerGrindstone.getContainerId();
 
         serverPlayer.connection.send(new ClientboundOpenScreenPacket(containerId, MenuType.GRINDSTONE, message));
         serverPlayer.containerMenu = containerGrindstone;
@@ -74,23 +79,23 @@ public class GrindstoneInventoryImpl extends GrindstoneInventory {
     }
 
     @Override
-    public void sendItems(@NonNull Player player, org.bukkit.inventory.@Nullable ItemStack[] items,
-                          org.bukkit.inventory.@NonNull ItemStack cursor) {
+    public void sendItems(final @NonNull Player player, final org.bukkit.inventory.@Nullable ItemStack[] items,
+                          final org.bukkit.inventory.@NonNull ItemStack cursor) {
 
-        NonNullList<ItemStack> nmsItems = CustomInventoryUtil.convertToNMSItems(items);
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        int containerId = getContainerId(serverPlayer);
-        int state = serverPlayer.containerMenu.incrementStateId();
-        ItemStack nmsCursor = CraftItemStack.asNMSCopy(cursor);
-        ServerPlayerConnection playerConnection = getPlayerConnection(serverPlayer);
+        final NonNullList<ItemStack> nmsItems = CustomInventoryUtil.convertToNMSItems(items);
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final int containerId = getContainerId(serverPlayer);
+        final int state = serverPlayer.containerMenu.incrementStateId();
+        final ItemStack nmsCursor = CraftItemStack.asNMSCopy(cursor);
+        final ServerPlayerConnection playerConnection = getPlayerConnection(serverPlayer);
 
         playerConnection.send(new ClientboundContainerSetContentPacket(containerId, state, nmsItems, nmsCursor));
     }
 
     @Override
-    public void clearCursor(@NonNull Player player) {
-        ServerPlayer serverPlayer = getServerPlayer(player);
-        int state = serverPlayer.containerMenu.incrementStateId();
+    public void clearCursor(final @NonNull Player player) {
+        final ServerPlayer serverPlayer = getServerPlayer(player);
+        final int state = serverPlayer.containerMenu.incrementStateId();
 
         getPlayerConnection(serverPlayer).send(new ClientboundContainerSetSlotPacket(-1, state, -1, ItemStack.EMPTY));
     }
@@ -103,7 +108,7 @@ public class GrindstoneInventoryImpl extends GrindstoneInventory {
      * @since 3.0.0
      */
     @Contract(pure = true)
-    private int getContainerId(net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
+    private int getContainerId(final net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
         return nmsPlayer.containerMenu.containerId;
     }
 
@@ -114,9 +119,8 @@ public class GrindstoneInventoryImpl extends GrindstoneInventory {
      * @return the player connection
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    private ServerPlayerConnection getPlayerConnection(@NonNull ServerPlayer serverPlayer) {
+    private @NonNull ServerPlayerConnection getPlayerConnection(final @NonNull ServerPlayer serverPlayer) {
         return serverPlayer.connection;
     }
 
@@ -127,9 +131,8 @@ public class GrindstoneInventoryImpl extends GrindstoneInventory {
      * @return the server player
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    private ServerPlayer getServerPlayer(@NonNull Player player) {
+    private @NonNull ServerPlayer getServerPlayer(final @NonNull Player player) {
         return ((CraftPlayer) player).getHandle();
     }
 
@@ -144,17 +147,17 @@ public class GrindstoneInventoryImpl extends GrindstoneInventory {
          * Creates a new grindstone container
          *
          * @param serverPlayer the player for whom this container should be opened
-         * @param title the title of the gui
+         * @param title        the title of the gui
          * @since 3.0.0
          */
-        public ContainerGrindstoneImpl(@NonNull ServerPlayer serverPlayer, @NonNull Component title) {
+        public ContainerGrindstoneImpl(final @NonNull ServerPlayer serverPlayer, final @NonNull Component title) {
             super(serverPlayer.nextContainerCounter(), serverPlayer.getInventory());
 
             setTitle(title);
 
-            Slot firstSlot = this.slots.get(0);
-            Slot secondSlot = this.slots.get(1);
-            Slot thirdSlot = this.slots.get(2);
+            final Slot firstSlot = this.slots.get(0);
+            final Slot secondSlot = this.slots.get(1);
+            final Slot thirdSlot = this.slots.get(2);
 
             this.slots.set(0, new Slot(firstSlot.container, firstSlot.index, firstSlot.x, firstSlot.y) {
             });
@@ -165,24 +168,29 @@ public class GrindstoneInventoryImpl extends GrindstoneInventory {
             this.slots.set(2, new Slot(thirdSlot.container, thirdSlot.index, thirdSlot.x, thirdSlot.y) {
 
                 @Override
-                public void onTake(net.minecraft.world.entity.player.@NonNull Player player, @NonNull ItemStack stack) {}
+                public void onTake(final net.minecraft.world.entity.player.@NonNull Player player, final @NonNull ItemStack stack) {
+                }
             });
         }
 
         @Contract(pure = true, value = "_ -> true")
         @Override
-        public boolean stillValid(net.minecraft.world.entity.player.@Nullable Player nmsPlayer) {
+        public boolean stillValid(final net.minecraft.world.entity.player.@Nullable Player nmsPlayer) {
             return true;
         }
 
         @Override
-        public void slotsChanged(@NonNull Container container) {}
+        public void slotsChanged(final @NonNull Container container) {
+        }
 
         @Override
-        public void removed(net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {}
+        public void removed(final net.minecraft.world.entity.player.@NonNull Player nmsPlayer) {
+        }
 
         public int getContainerId() {
             return this.containerId;
         }
+
     }
+
 }

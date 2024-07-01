@@ -16,6 +16,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.jetbrains.annotations.Contract;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,22 +28,17 @@ import java.util.List;
 public class BeaconGui extends Gui implements InventoryBased {
 
     /**
+     * An internal beacon inventory
+     */
+    private final @NonNull BeaconInventory beaconInventory = new BeaconInventoryImpl(this);
+    /**
      * Represents the payment item inventory component
      */
-    @NonNull
-    private InventoryComponent paymentItemComponent = new InventoryComponent(1, 1);
-
+    private @NonNull InventoryComponent paymentItemComponent = new InventoryComponent(1, 1);
     /**
      * Represents the player inventory component
      */
-    @NonNull
-    private InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
-
-    /**
-     * An internal beacon inventory
-     */
-    @NonNull
-    private final BeaconInventory beaconInventory = new BeaconInventoryImpl(this);
+    private @NonNull InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
 
     /**
      * Constructs a new beacon gui.
@@ -60,12 +56,12 @@ public class BeaconGui extends Gui implements InventoryBased {
      * @see #BeaconGui()
      * @since 3.0.0
      */
-    public BeaconGui(@NonNull Plugin plugin) {
+    public BeaconGui(final @NonNull Plugin plugin) {
         super(plugin);
     }
 
     @Override
-    public void show(@NonNull HumanEntity humanEntity) {
+    public void show(final @NonNull HumanEntity humanEntity) {
         if (!(humanEntity instanceof Player)) {
             throw new IllegalArgumentException("Beacons can only be opened by players");
         }
@@ -76,7 +72,7 @@ public class BeaconGui extends Gui implements InventoryBased {
         getPlayerInventoryComponent().display();
 
         if (getPlayerInventoryComponent().hasItem()) {
-            HumanEntityCache humanEntityCache = getHumanEntityCache();
+            final HumanEntityCache humanEntityCache = getHumanEntityCache();
 
             if (!humanEntityCache.contains(humanEntity)) {
                 humanEntityCache.storeAndClear(humanEntity);
@@ -91,11 +87,10 @@ public class BeaconGui extends Gui implements InventoryBased {
         beaconInventory.openInventory((Player) humanEntity, getPaymentItemComponent().getItem(0, 0));
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public BeaconGui copy() {
-        BeaconGui gui = new BeaconGui(super.plugin);
+    public @NonNull BeaconGui copy() {
+        final BeaconGui gui = new BeaconGui(super.plugin);
 
         gui.paymentItemComponent = paymentItemComponent.copy();
         gui.playerInventoryComponent = playerInventoryComponent.copy();
@@ -110,8 +105,8 @@ public class BeaconGui extends Gui implements InventoryBased {
     }
 
     @Override
-    public void click(@NonNull InventoryClickEvent event) {
-        int rawSlot = event.getRawSlot();
+    public void click(final @NonNull InventoryClickEvent event) {
+        final int rawSlot = event.getRawSlot();
 
         if (rawSlot == 0) {
             getPaymentItemComponent().click(this, event, 0);
@@ -120,9 +115,8 @@ public class BeaconGui extends Gui implements InventoryBased {
         }
     }
 
-    @NonNull
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (this.inventory == null) {
             this.inventory = createInventory();
         }
@@ -136,10 +130,9 @@ public class BeaconGui extends Gui implements InventoryBased {
         return getPlayerInventoryComponent().hasItem();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public Inventory createInventory() {
+    public @NonNull Inventory createInventory() {
         return Bukkit.createInventory(this, InventoryType.BEACON);
     }
 
@@ -149,10 +142,9 @@ public class BeaconGui extends Gui implements InventoryBased {
         return getInventory().getViewers().size();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public List<HumanEntity> getViewers() {
+    public @NonNull List<HumanEntity> getViewers() {
         return new ArrayList<>(getInventory().getViewers());
     }
 
@@ -162,9 +154,9 @@ public class BeaconGui extends Gui implements InventoryBased {
      * @param event the event to handle
      * @since 3.0.0
      */
-    public void handleClickEvent(@NonNull InventoryClickEvent event) {
-        int slot = event.getRawSlot();
-        Player player = (Player) event.getWhoClicked();
+    public void handleClickEvent(final @NonNull InventoryClickEvent event) {
+        final int slot = event.getRawSlot();
+        final Player player = (Player) event.getWhoClicked();
 
         if (slot >= 1 && slot <= 36) {
             beaconInventory.sendItem(player, getPaymentItemComponent().getItem(0, 0));
@@ -181,9 +173,8 @@ public class BeaconGui extends Gui implements InventoryBased {
      * @return the payment item component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getPaymentItemComponent() {
+    public @NonNull InventoryComponent getPaymentItemComponent() {
         return paymentItemComponent;
     }
 
@@ -193,9 +184,8 @@ public class BeaconGui extends Gui implements InventoryBased {
      * @return the player inventory component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getPlayerInventoryComponent() {
+    public @NonNull InventoryComponent getPlayerInventoryComponent() {
         return playerInventoryComponent;
     }
 

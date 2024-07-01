@@ -27,14 +27,12 @@ public class CrafterGui extends NamedGui implements InventoryBased {
     /**
      * Represents the inventory component for the input
      */
-    @NonNull
-    private InventoryComponent inputComponent = new InventoryComponent(3, 3);
+    private @NonNull InventoryComponent inputComponent = new InventoryComponent(3, 3);
 
     /**
      * Represents the inventory component for the player inventory
      */
-    @NonNull
-    private InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
+    private @NonNull InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
 
     /**
      * Constructs a new crafter gui.
@@ -42,24 +40,24 @@ public class CrafterGui extends NamedGui implements InventoryBased {
      * @param title the title/name of this gui
      * @since 3.0.0
      */
-    public CrafterGui(@NonNull Component title) {
+    public CrafterGui(final @NonNull Component title) {
         super(title);
     }
 
     /**
      * Constructs a new crafter gui for the given {@code plugin}.
      *
-     * @param title the title/name of this gui
+     * @param title  the title/name of this gui
      * @param plugin the owning plugin of this gui
      * @see #CrafterGui(Component)
      * @since 3.0.0
      */
-    public CrafterGui(@NonNull Component title, @NonNull Plugin plugin) {
+    public CrafterGui(final @NonNull Component title, final @NonNull Plugin plugin) {
         super(title, plugin);
     }
 
     @Override
-    public void show(@NonNull HumanEntity humanEntity) {
+    public void show(final @NonNull HumanEntity humanEntity) {
         if (isDirty()) {
             this.inventory = createInventory();
             markChanges();
@@ -71,7 +69,7 @@ public class CrafterGui extends NamedGui implements InventoryBased {
         getPlayerInventoryComponent().display();
 
         if (getPlayerInventoryComponent().hasItem()) {
-            HumanEntityCache humanEntityCache = getHumanEntityCache();
+            final HumanEntityCache humanEntityCache = getHumanEntityCache();
 
             if (!humanEntityCache.contains(humanEntity)) {
                 humanEntityCache.storeAndClear(humanEntity);
@@ -83,11 +81,10 @@ public class CrafterGui extends NamedGui implements InventoryBased {
         humanEntity.openInventory(getInventory());
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public CrafterGui copy() {
-        CrafterGui gui = new CrafterGui(getTitle(), super.plugin);
+    public @NonNull CrafterGui copy() {
+        final CrafterGui gui = new CrafterGui(getTitle(), super.plugin);
 
         gui.inputComponent = inputComponent.copy();
         gui.playerInventoryComponent = playerInventoryComponent.copy();
@@ -102,8 +99,8 @@ public class CrafterGui extends NamedGui implements InventoryBased {
     }
 
     @Override
-    public void click(@NonNull InventoryClickEvent event) {
-        int rawSlot = event.getRawSlot();
+    public void click(final @NonNull InventoryClickEvent event) {
+        final int rawSlot = event.getRawSlot();
 
         if (rawSlot >= 0 && rawSlot <= 8) {
             getInputComponent().click(this, event, rawSlot);
@@ -112,9 +109,8 @@ public class CrafterGui extends NamedGui implements InventoryBased {
         }
     }
 
-    @NonNull
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (this.inventory == null) {
             this.inventory = createInventory();
         }
@@ -128,11 +124,10 @@ public class CrafterGui extends NamedGui implements InventoryBased {
         return getPlayerInventoryComponent().hasItem();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public Inventory createInventory() {
-        Inventory inventory = Bukkit.createInventory(this, InventoryType.CRAFTER, getTitle());
+    public @NonNull Inventory createInventory() {
+        final Inventory inventory = Bukkit.createInventory(this, InventoryType.CRAFTER, getTitle());
 
         addInventory(inventory, this);
 
@@ -145,10 +140,9 @@ public class CrafterGui extends NamedGui implements InventoryBased {
         return getInventory().getViewers().size();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public List<HumanEntity> getViewers() {
+    public @NonNull List<HumanEntity> getViewers() {
         return new ArrayList<>(getInventory().getViewers());
     }
 
@@ -158,9 +152,8 @@ public class CrafterGui extends NamedGui implements InventoryBased {
      * @return the input component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getInputComponent() {
+    public @NonNull InventoryComponent getInputComponent() {
         return inputComponent;
     }
 
@@ -170,9 +163,8 @@ public class CrafterGui extends NamedGui implements InventoryBased {
      * @return the player inventory component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getPlayerInventoryComponent() {
+    public @NonNull InventoryComponent getPlayerInventoryComponent() {
         return playerInventoryComponent;
     }
 

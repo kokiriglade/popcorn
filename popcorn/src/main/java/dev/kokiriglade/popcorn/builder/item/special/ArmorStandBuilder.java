@@ -13,6 +13,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  */
 @SuppressWarnings("unused")
 public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuilder, ArmorStandMeta> {
+
     private ArmorStandBuilder(final @NonNull ItemStack itemStack, final @NonNull ArmorStandMeta itemMeta) {
         super(itemStack, itemMeta);
     }
@@ -163,4 +164,5 @@ public final class ArmorStandBuilder extends AbstractItemBuilder<ArmorStandBuild
         this.itemMeta.setMarker(marker);
         return this;
     }
+
 }

@@ -57,4 +57,5 @@ public final class BlockDisplayBuilder extends AbstractDisplayBuilder<BlockDispl
         this.block = block;
         return this;
     }
+
 }

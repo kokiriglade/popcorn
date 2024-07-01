@@ -15,7 +15,8 @@ import java.util.Objects;
  * @since 1.0.0
  */
 @SuppressWarnings({"unused"})
-public class ItemBuilder extends AbstractItemBuilder<ItemBuilder, ItemMeta> {
+public final class ItemBuilder extends AbstractItemBuilder<ItemBuilder, ItemMeta> {
+
     private ItemBuilder(final @NonNull ItemStack itemStack, final @Nullable ItemMeta itemMeta) {
         super(itemStack, itemMeta != null
             ? itemMeta
@@ -46,4 +47,5 @@ public class ItemBuilder extends AbstractItemBuilder<ItemBuilder, ItemMeta> {
     public static @NonNull ItemBuilder ofType(final @NonNull Material material) throws IllegalArgumentException {
         return ItemBuilder.of(getItem(material));
     }
+
 }

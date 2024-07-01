@@ -81,4 +81,5 @@ public final class BatBuilder extends AbstractLivingEntityBuilder<BatBuilder, Ba
         this.targetLocation = targetLocation;
         return this;
     }
+
 }

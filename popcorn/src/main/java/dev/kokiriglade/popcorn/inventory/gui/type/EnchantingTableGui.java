@@ -30,22 +30,17 @@ import java.util.List;
 public class EnchantingTableGui extends NamedGui implements InventoryBased {
 
     /**
+     * An internal enchanting table inventory
+     */
+    private final @NonNull EnchantingTableInventory enchantingTableInventory = new EnchantingTableInventoryImpl(this);
+    /**
      * Represents the inventory component for the input
      */
-    @NonNull
-    private InventoryComponent inputComponent = new InventoryComponent(2, 1);
-
+    private @NonNull InventoryComponent inputComponent = new InventoryComponent(2, 1);
     /**
      * Represents the inventory component for the player inventory
      */
-    @NonNull
-    private InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
-
-    /**
-     * An internal enchanting table inventory
-     */
-    @NonNull
-    private final EnchantingTableInventory enchantingTableInventory = new EnchantingTableInventoryImpl(this);
+    private @NonNull InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
 
     /**
      * Constructs a new GUI
@@ -53,24 +48,24 @@ public class EnchantingTableGui extends NamedGui implements InventoryBased {
      * @param title the title/name of this gui.
      * @since 3.0.0
      */
-    public EnchantingTableGui(@NonNull Component title) {
+    public EnchantingTableGui(final @NonNull Component title) {
         super(title);
     }
 
     /**
      * Constructs a new enchanting table gui for the given {@code plugin}.
      *
-     * @param title the title/name of this gui.
+     * @param title  the title/name of this gui.
      * @param plugin the owning plugin of this gui
      * @see #EnchantingTableGui(Component)
      * @since 3.0.0
      */
-    public EnchantingTableGui(@NonNull Component title, @NonNull Plugin plugin) {
+    public EnchantingTableGui(final @NonNull Component title, final @NonNull Plugin plugin) {
         super(title, plugin);
     }
 
     @Override
-    public void show(@NonNull HumanEntity humanEntity) {
+    public void show(final @NonNull HumanEntity humanEntity) {
         if (!(humanEntity instanceof Player)) {
             throw new IllegalArgumentException("Enchanting tables can only be opened by players");
         }
@@ -86,7 +81,7 @@ public class EnchantingTableGui extends NamedGui implements InventoryBased {
         getPlayerInventoryComponent().display();
 
         if (getPlayerInventoryComponent().hasItem()) {
-            HumanEntityCache humanEntityCache = getHumanEntityCache();
+            final HumanEntityCache humanEntityCache = getHumanEntityCache();
 
             if (!humanEntityCache.contains(humanEntity)) {
                 humanEntityCache.storeAndClear(humanEntity);
@@ -101,11 +96,10 @@ public class EnchantingTableGui extends NamedGui implements InventoryBased {
         enchantingTableInventory.openInventory((Player) humanEntity, getTitle(), getTopItems());
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public EnchantingTableGui copy() {
-        EnchantingTableGui gui = new EnchantingTableGui(getTitle(), super.plugin);
+    public @NonNull EnchantingTableGui copy() {
+        final EnchantingTableGui gui = new EnchantingTableGui(getTitle(), super.plugin);
 
         gui.inputComponent = inputComponent.copy();
         gui.playerInventoryComponent = playerInventoryComponent.copy();
@@ -120,8 +114,8 @@ public class EnchantingTableGui extends NamedGui implements InventoryBased {
     }
 
     @Override
-    public void click(@NonNull InventoryClickEvent event) {
-        int rawSlot = event.getRawSlot();
+    public void click(final @NonNull InventoryClickEvent event) {
+        final int rawSlot = event.getRawSlot();
 
         if (rawSlot >= 0 && rawSlot <= 1) {
             getInputComponent().click(this, event, rawSlot);
@@ -130,9 +124,8 @@ public class EnchantingTableGui extends NamedGui implements InventoryBased {
         }
     }
 
-    @NonNull
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (this.inventory == null) {
             this.inventory = createInventory();
         }
@@ -146,10 +139,9 @@ public class EnchantingTableGui extends NamedGui implements InventoryBased {
         return getPlayerInventoryComponent().hasItem();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public Inventory createInventory() {
+    public @NonNull Inventory createInventory() {
         return Bukkit.createInventory(this, InventoryType.ENCHANTING, getTitle());
     }
 
@@ -159,9 +151,9 @@ public class EnchantingTableGui extends NamedGui implements InventoryBased {
      * @param event the event to handle
      * @since 3.0.0
      */
-    public void handleClickEvent(@NonNull InventoryClickEvent event) {
-        int slot = event.getRawSlot();
-        Player player = (Player) event.getWhoClicked();
+    public void handleClickEvent(final @NonNull InventoryClickEvent event) {
+        final int slot = event.getRawSlot();
+        final Player player = (Player) event.getWhoClicked();
 
         if (slot >= 2 && slot <= 37) {
             enchantingTableInventory.sendItems(player, getTopItems());
@@ -178,10 +170,9 @@ public class EnchantingTableGui extends NamedGui implements InventoryBased {
         return getInventory().getViewers().size();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public List<HumanEntity> getViewers() {
+    public @NonNull List<HumanEntity> getViewers() {
         return new ArrayList<>(getInventory().getViewers());
     }
 
@@ -191,9 +182,8 @@ public class EnchantingTableGui extends NamedGui implements InventoryBased {
      * @return the input component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getInputComponent() {
+    public @NonNull InventoryComponent getInputComponent() {
         return inputComponent;
     }
 
@@ -203,9 +193,8 @@ public class EnchantingTableGui extends NamedGui implements InventoryBased {
      * @return the player inventory component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getPlayerInventoryComponent() {
+    public @NonNull InventoryComponent getPlayerInventoryComponent() {
         return playerInventoryComponent;
     }
 
@@ -215,10 +204,9 @@ public class EnchantingTableGui extends NamedGui implements InventoryBased {
      * @return the top items
      * @since 3.0.0
      */
-    @Nullable
     @Contract(pure = true)
-    private ItemStack[] getTopItems() {
-        return new ItemStack[] {
+    private @Nullable ItemStack[] getTopItems() {
+        return new ItemStack[]{
             getInputComponent().getItem(0, 0),
             getInputComponent().getItem(1, 0)
         };

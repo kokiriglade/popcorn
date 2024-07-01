@@ -18,7 +18,7 @@ public abstract class AbstractBreedableBuilder<B extends AbstractAgeableBuilder<
     protected @Nullable Boolean breed;
     protected @Nullable Boolean ageLock;
 
-    protected AbstractBreedableBuilder(@NonNull Class<T> entityClass, @NonNull Location location) {
+    protected AbstractBreedableBuilder(final @NonNull Class<T> entityClass, final @NonNull Location location) {
         super(entityClass, location);
         this.consumers.add(breedable -> {
             if (breed != null) {
@@ -47,7 +47,7 @@ public abstract class AbstractBreedableBuilder<B extends AbstractAgeableBuilder<
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B breed(@Nullable Boolean breed) {
+    public @NonNull B breed(final @Nullable Boolean breed) {
         this.breed = breed;
         return (B) this;
     }
@@ -69,8 +69,9 @@ public abstract class AbstractBreedableBuilder<B extends AbstractAgeableBuilder<
      * @return the builder
      * @since 2.2.2
      */
-    public @NonNull B ageLock(@Nullable Boolean lock) {
+    public @NonNull B ageLock(final @Nullable Boolean lock) {
         this.ageLock = lock;
         return (B) this;
     }
+
 }

@@ -27,26 +27,22 @@ public class BlastFurnaceGui extends NamedGui implements InventoryBased {
     /**
      * Represents the inventory component for the ingredient
      */
-    @NonNull
-    private InventoryComponent ingredientComponent = new InventoryComponent(1, 1);
+    private @NonNull InventoryComponent ingredientComponent = new InventoryComponent(1, 1);
 
     /**
      * Represents the inventory component for the fuel
      */
-    @NonNull
-    private InventoryComponent fuelComponent = new InventoryComponent(1, 1);
+    private @NonNull InventoryComponent fuelComponent = new InventoryComponent(1, 1);
 
     /**
      * Represents the inventory component for the output
      */
-    @NonNull
-    private InventoryComponent outputComponent = new InventoryComponent(1, 1);
+    private @NonNull InventoryComponent outputComponent = new InventoryComponent(1, 1);
 
     /**
      * Represents the inventory component for the player inventory
      */
-    @NonNull
-    private InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
+    private @NonNull InventoryComponent playerInventoryComponent = new InventoryComponent(9, 4);
 
     /**
      * Constructs a new GUI
@@ -54,24 +50,24 @@ public class BlastFurnaceGui extends NamedGui implements InventoryBased {
      * @param title the title/name of this gui.
      * @since 3.0.0
      */
-    public BlastFurnaceGui(@NonNull Component title) {
+    public BlastFurnaceGui(final @NonNull Component title) {
         super(title);
     }
 
     /**
      * Constructs a new blast furnace gui for the given {@code plugin}.
      *
-     * @param title the title/name of this gui.
+     * @param title  the title/name of this gui.
      * @param plugin the owning plugin of this gui
      * @see #BlastFurnaceGui(Component)
      * @since 3.0.0
      */
-    public BlastFurnaceGui(@NonNull Component title, @NonNull Plugin plugin) {
+    public BlastFurnaceGui(final @NonNull Component title, final @NonNull Plugin plugin) {
         super(title, plugin);
     }
 
     @Override
-    public void show(@NonNull HumanEntity humanEntity) {
+    public void show(final @NonNull HumanEntity humanEntity) {
         if (isDirty()) {
             this.inventory = createInventory();
             markChanges();
@@ -85,7 +81,7 @@ public class BlastFurnaceGui extends NamedGui implements InventoryBased {
         getPlayerInventoryComponent().display();
 
         if (getPlayerInventoryComponent().hasItem()) {
-            HumanEntityCache humanEntityCache = getHumanEntityCache();
+            final HumanEntityCache humanEntityCache = getHumanEntityCache();
 
             if (!humanEntityCache.contains(humanEntity)) {
                 humanEntityCache.storeAndClear(humanEntity);
@@ -97,11 +93,10 @@ public class BlastFurnaceGui extends NamedGui implements InventoryBased {
         humanEntity.openInventory(getInventory());
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public BlastFurnaceGui copy() {
-        BlastFurnaceGui gui = new BlastFurnaceGui(getTitle(), super.plugin);
+    public @NonNull BlastFurnaceGui copy() {
+        final BlastFurnaceGui gui = new BlastFurnaceGui(getTitle(), super.plugin);
 
         gui.ingredientComponent = ingredientComponent.copy();
         gui.fuelComponent = fuelComponent.copy();
@@ -118,8 +113,8 @@ public class BlastFurnaceGui extends NamedGui implements InventoryBased {
     }
 
     @Override
-    public void click(@NonNull InventoryClickEvent event) {
-        int rawSlot = event.getRawSlot();
+    public void click(final @NonNull InventoryClickEvent event) {
+        final int rawSlot = event.getRawSlot();
 
         if (rawSlot == 0) {
             getIngredientComponent().click(this, event, 0);
@@ -132,9 +127,8 @@ public class BlastFurnaceGui extends NamedGui implements InventoryBased {
         }
     }
 
-    @NonNull
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (this.inventory == null) {
             this.inventory = createInventory();
         }
@@ -148,10 +142,9 @@ public class BlastFurnaceGui extends NamedGui implements InventoryBased {
         return getPlayerInventoryComponent().hasItem();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public Inventory createInventory() {
+    public @NonNull Inventory createInventory() {
         return Bukkit.createInventory(this, InventoryType.BLAST_FURNACE, getTitle());
     }
 
@@ -161,10 +154,9 @@ public class BlastFurnaceGui extends NamedGui implements InventoryBased {
         return getInventory().getViewers().size();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public List<HumanEntity> getViewers() {
+    public @NonNull List<HumanEntity> getViewers() {
         return new ArrayList<>(getInventory().getViewers());
     }
 
@@ -174,9 +166,8 @@ public class BlastFurnaceGui extends NamedGui implements InventoryBased {
      * @return the ingredient component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getIngredientComponent() {
+    public @NonNull InventoryComponent getIngredientComponent() {
         return ingredientComponent;
     }
 
@@ -186,9 +177,8 @@ public class BlastFurnaceGui extends NamedGui implements InventoryBased {
      * @return the fuel component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getFuelComponent() {
+    public @NonNull InventoryComponent getFuelComponent() {
         return fuelComponent;
     }
 
@@ -198,9 +188,8 @@ public class BlastFurnaceGui extends NamedGui implements InventoryBased {
      * @return the output component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getOutputComponent() {
+    public @NonNull InventoryComponent getOutputComponent() {
         return outputComponent;
     }
 
@@ -210,9 +199,8 @@ public class BlastFurnaceGui extends NamedGui implements InventoryBased {
      * @return the player inventory component
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public InventoryComponent getPlayerInventoryComponent() {
+    public @NonNull InventoryComponent getPlayerInventoryComponent() {
         return playerInventoryComponent;
     }
 

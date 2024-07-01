@@ -17,7 +17,8 @@ public final class CustomInventoryUtil {
     /**
      * A private constructor to prevent construction.
      */
-    private CustomInventoryUtil() {}
+    private CustomInventoryUtil() {
+    }
 
     /**
      * Converts an array of Bukkit items into a non-null list of NMS items. The returned list is modifiable. If no items
@@ -27,15 +28,15 @@ public final class CustomInventoryUtil {
      * @return a list of converted items
      * @since 3.0.0
      */
-    @NonNull
     @Contract(pure = true)
-    public static NonNullList<ItemStack> convertToNMSItems(org.bukkit.inventory.@Nullable ItemStack @NonNull [] items) {
-        NonNullList<ItemStack> nmsItems = NonNullList.create();
+    public static @NonNull NonNullList<ItemStack> convertToNMSItems(final org.bukkit.inventory.@Nullable ItemStack @NonNull [] items) {
+        final NonNullList<ItemStack> nmsItems = NonNullList.create();
 
-        for (org.bukkit.inventory.ItemStack item : items) {
+        for (final org.bukkit.inventory.ItemStack item : items) {
             nmsItems.add(CraftItemStack.asNMSCopy(item));
         }
 
         return nmsItems;
     }
+
 }

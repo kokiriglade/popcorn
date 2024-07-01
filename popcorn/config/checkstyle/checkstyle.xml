@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+    "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+    <property name="severity" value="error"/>
+    <module name="NewlineAtEndOfFile"/>
+    <module name="TreeWalker">
+        <module name="SuppressionCommentFilter"/>
+        <module name="NeedBraces"/>
+        <module name="AvoidStarImport"/>
+        <module name="CommentsIndentation"/>
+        <module name="FinalClass"/>
+        <module name="FinalLocalVariable">
+            <property name="tokens" value="PARAMETER_DEF, VARIABLE_DEF"/> <!-- add PARAMETER_DEF -->
+            <property name="validateEnhancedForLoopVariable" value="true"/>
+        </module>
+        <module name="IllegalImport">
+            <property name="illegalPkgs" value="sun, jdk, com.sun"/>
+        </module>
+        <module name="RequireThis">
+            <property name="validateOnlyOverlapping" value="true"/>
+        </module>
+        <module name="JavadocMethod">
+            <property name="allowMissingParamTags" value="true"/>
+            <property name="allowMissingReturnTag" value="true"/>
+        </module>
+        <module name="FilteringWriteTag">
+            <property name="tag" value="@since\s"/>
+            <property name="tagFormat" value="\d\.\d+\.\d+"/>
+            <property name="tagSeverity" value="ignore"/>
+            <property name="minimumScope" value="public"/>
+            <property name="tokens" value="INTERFACE_DEF, CLASS_DEF, ENUM_DEF, ANNOTATION_DEF, RECORD_DEF, METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, RECORD_DEF, COMPACT_CTOR_DEF"/>
+        </module>
+        <module name="AnnotationsCloseToType">
+            <property name="typeUseAnnotations" value="NotNull, NonNull, Nullable"/>
+        </module>
+        <module name="MatchXpath">
+            <property name="query" value="//ANNOTATION[./IDENT[@text='NotNull']]"/>
+            <message key="matchxpath.match" value="Avoid using @NotNull annotation. Use @NonNull instead."/>
+        </module>
+    </module>
+</module>

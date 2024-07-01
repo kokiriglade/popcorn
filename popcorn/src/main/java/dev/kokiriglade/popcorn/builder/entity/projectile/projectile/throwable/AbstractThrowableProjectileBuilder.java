@@ -19,7 +19,7 @@ public class AbstractThrowableProjectileBuilder<B extends AbstractProjectileBuil
 
     protected @Nullable ItemStack itemStack;
 
-    protected AbstractThrowableProjectileBuilder(@NonNull Class<T> entityClass, @NonNull Location location) {
+    protected AbstractThrowableProjectileBuilder(final @NonNull Class<T> entityClass, final @NonNull Location location) {
         super(entityClass, location);
         this.consumers.add(throwableProjectile -> {
             if (itemStack != null) {

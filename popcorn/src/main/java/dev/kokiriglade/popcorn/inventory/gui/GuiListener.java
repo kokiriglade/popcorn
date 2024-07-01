@@ -7,9 +7,20 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
-import org.bukkit.event.inventory.*;
+import org.bukkit.event.inventory.ClickType;
+import org.bukkit.event.inventory.DragType;
+import org.bukkit.event.inventory.InventoryAction;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.server.PluginDisableEvent;
-import org.bukkit.inventory.*;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.Plugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -32,14 +43,12 @@ public class GuiListener implements Listener {
     /**
      * The owning plugin of this listener.
      */
-    @NonNull
-    private final Plugin plugin;
+    private final @NonNull Plugin plugin;
 
     /**
      * A collection of all {@link Gui} instances that have at least one viewer.
      */
-    @NonNull
-    private final Set<Gui> activeGuiInstances = new HashSet<>();
+    private final @NonNull Set<@NonNull Gui> activeGuiInstances = new HashSet<>();
 
     /**
      * Creates a new listener for all guis for the provided {@code plugin}.
@@ -47,7 +56,7 @@ public class GuiListener implements Listener {
      * @param plugin the owning plugin of this listener
      * @since 3.0.0
      */
-    public GuiListener(@NonNull Plugin plugin) {
+    public GuiListener(final @NonNull Plugin plugin) {
         this.plugin = plugin;
     }
 
@@ -58,15 +67,15 @@ public class GuiListener implements Listener {
      * @since 3.0.0
      */
     @EventHandler(ignoreCancelled = true)
-    public void onInventoryClick(@NonNull InventoryClickEvent event) {
-        Gui gui = getGui(event.getInventory());
+    public void onInventoryClick(final @NonNull InventoryClickEvent event) {
+        final Gui gui = getGui(event.getInventory());
 
         if (gui == null) {
             return;
         }
 
-        InventoryView view = event.getView();
-        Inventory inventory = view.getInventory(event.getRawSlot());
+        final InventoryView view = event.getView();
+        final Inventory inventory = view.getInventory(event.getRawSlot());
 
         if (inventory == null) {
             gui.callOnOutsideClick(event);
@@ -90,23 +99,23 @@ public class GuiListener implements Listener {
      * @since 3.0.0
      */
     @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
-    public void onEntityPickupItem(@NonNull EntityPickupItemEvent event) {
+    public void onEntityPickupItem(final @NonNull EntityPickupItemEvent event) {
         if (!(event.getEntity() instanceof HumanEntity)) {
             return;
         }
 
-        Gui gui = getGui(((HumanEntity) event.getEntity()).getOpenInventory().getTopInventory());
+        final Gui gui = getGui(((HumanEntity) event.getEntity()).getOpenInventory().getTopInventory());
 
         if (gui == null || !gui.isPlayerInventoryUsed()) {
             return;
         }
 
-        int leftOver = gui.getHumanEntityCache().add((HumanEntity) event.getEntity(), event.getItem().getItemStack());
+        final int leftOver = gui.getHumanEntityCache().add((HumanEntity) event.getEntity(), event.getItem().getItemStack());
 
         if (leftOver == 0) {
             event.getItem().remove();
         } else {
-            ItemStack itemStack = event.getItem().getItemStack();
+            final ItemStack itemStack = event.getItem().getItemStack();
 
             itemStack.setAmount(leftOver);
 
@@ -123,21 +132,21 @@ public class GuiListener implements Listener {
      * @since 3.0.0
      */
     @EventHandler
-    public void onInventoryDrag(@NonNull InventoryDragEvent event) {
-        Gui gui = getGui(event.getInventory());
+    public void onInventoryDrag(final @NonNull InventoryDragEvent event) {
+        final Gui gui = getGui(event.getInventory());
 
         if (gui == null) {
             return;
         }
 
-        InventoryView view = event.getView();
-        Set<Integer> inventorySlots = event.getRawSlots();
+        final InventoryView view = event.getView();
+        final Set<@NonNull Integer> inventorySlots = event.getRawSlots();
 
         if (inventorySlots.size() > 1) {
             boolean top = false, bottom = false;
 
-            for (int inventorySlot : inventorySlots) {
-                Inventory inventory = view.getInventory(inventorySlot);
+            for (final int inventorySlot : inventorySlots) {
+                final Inventory inventory = view.getInventory(inventorySlot);
 
                 if (view.getTopInventory().equals(inventory)) {
                     top = true;
@@ -160,19 +169,19 @@ public class GuiListener implements Listener {
                 gui.callOnBottomDrag(event);
             }
         } else {
-            int index = inventorySlots.toArray(new Integer[0])[0];
-            InventoryType.SlotType slotType = view.getSlotType(index);
+            final int index = inventorySlots.toArray(new Integer[0])[0];
+            final InventoryType.@NonNull SlotType slotType = view.getSlotType(index);
 
-            boolean even = event.getType() == DragType.EVEN;
+            final boolean even = event.getType() == DragType.EVEN;
 
-            ClickType clickType = even ? ClickType.LEFT : ClickType.RIGHT;
-            InventoryAction inventoryAction = even ? InventoryAction.PLACE_SOME : InventoryAction.PLACE_ONE;
+            final ClickType clickType = even ? ClickType.LEFT : ClickType.RIGHT;
+            final InventoryAction inventoryAction = even ? InventoryAction.PLACE_SOME : InventoryAction.PLACE_ONE;
 
-            ItemStack previousViewCursor = view.getCursor();
+            final ItemStack previousViewCursor = view.getCursor();
             // Overwrite getCursor in inventory click event to mimic real event fired by Bukkit.
             view.setCursor(event.getOldCursor());
             //this is a fake click event, firing this may cause other plugins to function incorrectly, so keep it local
-            InventoryClickEvent inventoryClickEvent = new InventoryClickEvent(view, slotType, index, clickType,
+            final InventoryClickEvent inventoryClickEvent = new InventoryClickEvent(view, slotType, index, clickType,
                 inventoryAction);
 
             onInventoryClick(inventoryClickEvent);
@@ -192,15 +201,15 @@ public class GuiListener implements Listener {
      * @since 3.0.0
      */
     @EventHandler(ignoreCancelled = true)
-    public void onInventoryClose(@NonNull InventoryCloseEvent event) {
-        Gui gui = getGui(event.getInventory());
+    public void onInventoryClose(final @NonNull InventoryCloseEvent event) {
+        final Gui gui = getGui(event.getInventory());
 
         if (gui == null) {
             return;
         }
 
-        HumanEntity humanEntity = event.getPlayer();
-        PlayerInventory playerInventory = humanEntity.getInventory();
+        final HumanEntity humanEntity = event.getPlayer();
+        final PlayerInventory playerInventory = humanEntity.getInventory();
 
         //due to a client issue off-hand items appear as ghost items, this updates the off-hand correctly client-side
         playerInventory.setItemInOffHand(playerInventory.getItemInOffHand());
@@ -228,8 +237,8 @@ public class GuiListener implements Listener {
      * @since 3.0.0
      */
     @EventHandler(ignoreCancelled = true)
-    public void onInventoryOpen(@NonNull InventoryOpenEvent event) {
-        Gui gui = getGui(event.getInventory());
+    public void onInventoryOpen(final @NonNull InventoryOpenEvent event) {
+        final Gui gui = getGui(event.getInventory());
 
         if (gui == null) {
             return;
@@ -245,23 +254,23 @@ public class GuiListener implements Listener {
      * @since 3.0.0
      */
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
-    public void onPluginDisable(@NonNull PluginDisableEvent event) {
+    public void onPluginDisable(final @NonNull PluginDisableEvent event) {
         if (event.getPlugin() != this.plugin) {
             return;
         }
 
         int counter = 0; //callbacks might open GUIs, eg. in nested menus
-        int maxCount = 10;
+        final int maxCount = 10;
         while (!activeGuiInstances.isEmpty() && counter++ < maxCount) {
-            for (Gui gui : new ArrayList<>(activeGuiInstances)) {
-                for (HumanEntity viewer : gui.getViewers()) {
+            for (final Gui gui : new ArrayList<>(activeGuiInstances)) {
+                for (final HumanEntity viewer : gui.getViewers()) {
                     viewer.closeInventory();
                 }
             }
         }
 
         if (counter == maxCount) {
-            Logger logger = this.plugin.getLogger();
+            final Logger logger = this.plugin.getLogger();
 
             logger.warning(
                 "Unable to close GUIs on plugin disable: they keep getting opened (tried: " + maxCount + " times)"
@@ -276,16 +285,15 @@ public class GuiListener implements Listener {
      * @return the gui or null if the inventory doesn't have a gui
      * @since 3.0.0
      */
-    @Nullable
     @Contract(pure = true)
-    private Gui getGui(@NonNull Inventory inventory) {
-        Gui gui = Gui.getGui(inventory);
+    private @Nullable Gui getGui(final @NonNull Inventory inventory) {
+        final Gui gui = Gui.getGui(inventory);
 
         if (gui != null) {
             return gui;
         }
 
-        InventoryHolder holder = inventory.getHolder();
+        final InventoryHolder holder = inventory.getHolder();
 
         if (holder instanceof Gui guiInstance) {
             return guiInstance;

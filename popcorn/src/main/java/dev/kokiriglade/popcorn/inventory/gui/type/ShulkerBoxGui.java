@@ -32,8 +32,7 @@ public class ShulkerBoxGui extends NamedGui implements MergedGui, InventoryBased
     /**
      * Represents the inventory component for the entire gui
      */
-    @NonNull
-    private InventoryComponent inventoryComponent = new InventoryComponent(9, 7);
+    private @NonNull InventoryComponent inventoryComponent = new InventoryComponent(9, 7);
 
     /**
      * Constructs a new GUI
@@ -41,41 +40,41 @@ public class ShulkerBoxGui extends NamedGui implements MergedGui, InventoryBased
      * @param title the title/name of this gui.
      * @since 3.0.0
      */
-    public ShulkerBoxGui(@NonNull Component title) {
+    public ShulkerBoxGui(final @NonNull Component title) {
         super(title);
     }
 
     /**
      * Constructs a new shulker box gui for the given {@code plugin}.
      *
-     * @param title the title/name of this gui.
+     * @param title  the title/name of this gui.
      * @param plugin the owning plugin of this gui
      * @see #ShulkerBoxGui(Component)
      * @since 3.0.0
      */
-    public ShulkerBoxGui(@NonNull Component title, @NonNull Plugin plugin) {
+    public ShulkerBoxGui(final @NonNull Component title, final @NonNull Plugin plugin) {
         super(title, plugin);
     }
 
     @Override
-    public void show(@NonNull HumanEntity humanEntity) {
+    public void show(final @NonNull HumanEntity humanEntity) {
         if (isDirty()) {
             this.inventory = createInventory();
             markChanges();
         }
 
         getInventory().clear();
-        int height = getInventoryComponent().getHeight();
+        final int height = getInventoryComponent().getHeight();
 
         getInventoryComponent().display();
 
-        InventoryComponent topComponent = getInventoryComponent().excludeRows(height - 4, height - 1);
-        InventoryComponent bottomComponent = getInventoryComponent().excludeRows(0, height - 5);
+        final InventoryComponent topComponent = getInventoryComponent().excludeRows(height - 4, height - 1);
+        final InventoryComponent bottomComponent = getInventoryComponent().excludeRows(0, height - 5);
 
         topComponent.placeItems(getInventory(), 0);
 
         if (bottomComponent.hasItem()) {
-            HumanEntityCache humanEntityCache = getHumanEntityCache();
+            final HumanEntityCache humanEntityCache = getHumanEntityCache();
 
             if (!humanEntityCache.contains(humanEntity)) {
                 humanEntityCache.storeAndClear(humanEntity);
@@ -87,11 +86,10 @@ public class ShulkerBoxGui extends NamedGui implements MergedGui, InventoryBased
         humanEntity.openInventory(getInventory());
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public ShulkerBoxGui copy() {
-        ShulkerBoxGui gui = new ShulkerBoxGui(getTitle(), super.plugin);
+    public @NonNull ShulkerBoxGui copy() {
+        final ShulkerBoxGui gui = new ShulkerBoxGui(getTitle(), super.plugin);
 
         gui.inventoryComponent = inventoryComponent.copy();
 
@@ -104,9 +102,8 @@ public class ShulkerBoxGui extends NamedGui implements MergedGui, InventoryBased
         return gui;
     }
 
-    @NonNull
     @Override
-    public Inventory getInventory() {
+    public @NonNull Inventory getInventory() {
         if (this.inventory == null) {
             this.inventory = createInventory();
         }
@@ -121,33 +118,31 @@ public class ShulkerBoxGui extends NamedGui implements MergedGui, InventoryBased
     }
 
     @Override
-    public void click(@NonNull InventoryClickEvent event) {
+    public void click(final @NonNull InventoryClickEvent event) {
         getInventoryComponent().click(this, event, event.getRawSlot());
     }
 
     @Override
-    public void addPane(@NonNull Pane pane) {
+    public void addPane(final @NonNull Pane pane) {
         this.inventoryComponent.addPane(pane);
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public List<Pane> getPanes() {
+    public @NonNull List<Pane> getPanes() {
         return this.inventoryComponent.getPanes();
     }
 
-    @NonNull
+
     @Contract(pure = true)
     @Override
-    public Collection<GuiItem> getItems() {
+    public @NonNull Collection<GuiItem> getItems() {
         return getPanes().stream().flatMap(pane -> pane.getItems().stream()).collect(Collectors.toSet());
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public Inventory createInventory() {
+    public @NonNull Inventory createInventory() {
         return Bukkit.createInventory(this, InventoryType.SHULKER_BOX, getTitle());
     }
 
@@ -157,17 +152,15 @@ public class ShulkerBoxGui extends NamedGui implements MergedGui, InventoryBased
         return getInventory().getViewers().size();
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public List<HumanEntity> getViewers() {
+    public @NonNull List<HumanEntity> getViewers() {
         return new ArrayList<>(getInventory().getViewers());
     }
 
-    @NonNull
     @Contract(pure = true)
     @Override
-    public InventoryComponent getInventoryComponent() {
+    public @NonNull InventoryComponent getInventoryComponent() {
         return inventoryComponent;
     }
 

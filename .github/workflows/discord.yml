@@ -1,5 +1,8 @@
 name: Discord Webhook
-on: [push]
+on:
+    push:
+        branches:
+            - main
 jobs:
     discord_push_webhook:
         runs-on: ubuntu-latest

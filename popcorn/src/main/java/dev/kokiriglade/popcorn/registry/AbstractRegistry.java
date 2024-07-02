@@ -30,16 +30,14 @@ public abstract class AbstractRegistry<P extends JavaPlugin, K, T> {
      * The default constructor. Runs the initializer, waits 5 seconds,
      * and then prints the size of the registry
      *
-     * @apiNote Cannot be instantiated inside {@link JavaPlugin#onLoad()}
+     * @apiNote <strong>Cannot</strong> be instantiated inside {@link JavaPlugin#onLoad()}
      * @param plugin the plugin that owns the registry
      * @since 3.1.0
      */
     public AbstractRegistry(final @NonNull P plugin) {
         this.logger = new RegistryLogger<>(plugin, this);
         initialize(plugin);
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            logger.info("Loaded %d items.".formatted(registry.size()));
-        }, 20L * 5L);
+        Bukkit.getScheduler().runTaskLater(plugin, () -> logger.info("Loaded %d items.".formatted(registry.size())), 20L * 5L);
     }
 
     /**

@@ -15,7 +15,7 @@ To add this project as a dependency for your Gradle project, make sure your depe
 
 ```kotlin
 dependencies {
-    implementation("dev.kokiriglade:popcorn:3.2.0")
+    implementation("dev.kokiriglade:popcorn:[VERSION]")
     // ...
 }
 ```

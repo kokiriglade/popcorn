@@ -26,7 +26,6 @@ public class AbstractConfigurationManager<P extends JavaPlugin> {
     public AbstractConfigurationManager(final @NonNull P plugin, final @NonNull String fileName) {
         this.plugin = plugin;
         this.fileName = fileName;
-        reload();
     }
 
     /**

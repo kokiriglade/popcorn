@@ -17,11 +17,11 @@ public class AbstractConfigurationManager<P extends JavaPlugin> {
     private YamlDocument document;
 
     /**
-     * Create the manager
+     * Create the manager. Implementations likely want to call {@link #reload()}
+     * after calling the {@code super} constructor
      *
      * @param plugin   the plugin that owns the manager
      * @param fileName the file name
-     * @implNote Implementations likely want to call {@link #reload()} after calling the {@code super} constructor
      * @since 3.1.0
      */
     public AbstractConfigurationManager(final @NonNull P plugin, final @NonNull String fileName) {

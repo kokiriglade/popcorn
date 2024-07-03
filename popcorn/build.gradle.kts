@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "dev.kokiriglade"
-version = "3.2.2"
+version = "3.2.3"
 
 paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.REOBF_PRODUCTION
 
@@ -114,7 +114,7 @@ configure<PublishingExtension> {
     publications {
         register<MavenPublication>("maven") {
             artifactId = "popcorn"
-            from(components["java"])
+            artifact(tasks.named("shadowJar").get())
         }
     }
     repositories {

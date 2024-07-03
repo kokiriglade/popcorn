@@ -1,6 +1,7 @@
 package dev.kokiriglade.popcorn.config;
 
 import dev.kokiriglade.popcorn.builder.text.MessageBuilder;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -10,7 +11,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  * @param <P> the plugin instance
  * @since 3.1.0
  */
-public class MessageManager<P extends JavaPlugin> extends AbstractConfigurationManager<P> {
+public class MessageManager<P extends Plugin> extends AbstractConfigurationManager<P> {
 
     /**
      * Read the config file

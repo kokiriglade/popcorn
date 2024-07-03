@@ -2,6 +2,8 @@
 
 A very opinionated utility library for Paper. Started off as a  fork of [corn](https://github.com/broccolai/corn)'s ItemBuilder utilities. Popcorn also contains a slightly modified version of [IF](https://github.com/stefvanschie/IF) that only supports [Adventure components](https://docs.advntr.dev/text.html), and has no XML functionality.
 
+You can find builds to put inside your server's `plugins` folder on [Hangar](https://hangar.papermc.io/kokiriglade/popcorn).
+
 > [!NOTE]
 > Popcorn **only** ever supports the **latest** version of Minecraft, and thus Paper.
 

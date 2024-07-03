@@ -1,5 +1,6 @@
 package dev.kokiriglade.popcorn.registry;
 
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
  * @since 3.1.0
  */
 @SuppressWarnings("UnstableApiUsage")
-public final class RegistryLogger<P extends JavaPlugin> extends Logger {
+public final class RegistryLogger<P extends Plugin> extends Logger {
 
     private final String loggerName;
 

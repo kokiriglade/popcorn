@@ -20,7 +20,8 @@ public interface ThrowableProjectileBuilder<B> {
      * @return the builder
      * @since 2.2.2
      */
-    @NonNull B item(final @Nullable ItemStack itemStack);
+    @NonNull
+    B item(final @Nullable ItemStack itemStack);
 
     /**
      * Retrieves the item stack used by this {@code Projectile}.
@@ -28,7 +29,8 @@ public interface ThrowableProjectileBuilder<B> {
      * @return the ItemStack, or {@code null} if not set
      * @since 2.2.2
      */
-    @Nullable ItemStack item();
+    @Nullable
+    ItemStack item();
 
 
 }

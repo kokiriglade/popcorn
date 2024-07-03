@@ -7,15 +7,13 @@ A very opinionated utility library for Paper. Started off as a  fork of [corn](h
 
 ## Usage
 
-[//]: # (Gradle dependency instructions)
-<details>
-<summary><strong>Gradle dependency instructions</strong></summary>
+### Add to gradle build script
 
 To add this project as a dependency for your Gradle project, make sure your dependencies section of your `build.gradle.kts` looks like the following:
 
 ```kotlin
 dependencies {
-    implementation("dev.kokiriglade:popcorn:[VERSION]")
+    compileOnly("dev.kokiriglade:popcorn:[VERSION]")
     // ...
 }
 ```
@@ -29,26 +27,14 @@ repositories {
 }
 ```
 
-In order to include the project in your own project, you will need to use the `shadowJar` plugin. If you don't have it already, add the following to the top of your file:
+### Dependency via paper-plugin.yml
 
-```kotlin
-plugins {
-    // ...
-    id("io.github.goooler.shadow") version "8.1.7"
-}
+```yaml
+# ...
+dependencies:
+    server:
+        popcorn:
+            load: BEFORE
+            required: true
+            join-classpath: true
 ```
-
-To relocate the project's classes to your own namespace, add the following, with `[YOUR PACKAGE]` being the top-level package of your project:
-```kotlin
-tasks {
-    // ...
-    shadowJar {
-        relocate("dev.kokiriglade.popcorn", "[YOUR PACKAGE].popcorn")
-    }
-}
-```
-</details>
-
-### Dependency via plugin.yml
-
-popcorn does not support declaring the dependency via the libraries section in the plugin.yml. Please make use of a build tool as described above to use popcorn as a dependency.

@@ -9,7 +9,6 @@ import dev.kokiriglade.popcorn.inventory.pane.util.Slot;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -28,6 +27,7 @@ import java.util.stream.Collectors;
 
 /**
  * A pane for panes that should be spread out over multiple pages
+ *
  * @since 3.0.0
  */
 @SuppressWarnings({"unused"})
@@ -35,12 +35,14 @@ public class PaginatedPane extends Pane {
 
     /**
      * A set of panes for the different pages
+     *
      * @since 3.0.0
      */
     private @NonNull Map<Integer, List<Pane>> panes = new HashMap<>();
 
     /**
      * The current page
+     *
      * @since 3.0.0
      */
     private int page;
@@ -87,10 +89,10 @@ public class PaginatedPane extends Pane {
     /**
      * Creates a new paginated pane
      *
-     * @param x        x-axis of slot
-     * @param y        y-axis of slot
-     * @param length   the length of the pane
-     * @param height   the height of the pane
+     * @param x      x-axis of slot
+     * @param y      y-axis of slot
+     * @param length the length of the pane
+     * @param height the height of the pane
      * @since 3.0.0
      */
     public PaginatedPane(final int x, final int y, final int length, final int height) {
@@ -100,8 +102,8 @@ public class PaginatedPane extends Pane {
     /**
      * Creates a new paginated pane
      *
-     * @param length   the length of the pane
-     * @param height   the height of the pane
+     * @param length the length of the pane
+     * @param height the height of the pane
      * @since 3.0.0
      */
     public PaginatedPane(final int length, final int height) {

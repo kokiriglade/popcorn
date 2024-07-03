@@ -1,10 +1,9 @@
 package dev.kokiriglade.testplugin;
 
 import com.mojang.brigadier.Command;
-import dev.kokiriglade.popcorn.Popcorn;
-import dev.kokiriglade.popcorn.builder.entity.mob.creature.animal.AxolotlBuilder;
 import dev.kokiriglade.popcorn.builder.item.ItemBuilder;
 import dev.kokiriglade.popcorn.builder.recipe.crafting.ShapedRecipeBuilder;
+import dev.kokiriglade.popcorn.builder.recipe.crafting.ShapelessRecipeBuilder;
 import dev.kokiriglade.popcorn.inventory.gui.GuiItem;
 import dev.kokiriglade.popcorn.inventory.gui.type.ChestGui;
 import dev.kokiriglade.popcorn.inventory.pane.OutlinePane;
@@ -12,14 +11,9 @@ import dev.kokiriglade.popcorn.inventory.pane.Pane;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Axolotl;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.*;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -32,6 +26,14 @@ public final class TestPlugin extends JavaPlugin {
     public void onEnable() {
         getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, lifecycleEvent -> {
             Commands commands = lifecycleEvent.registrar();
+
+            Bukkit.addRecipe(
+                ShapedRecipeBuilder.create(new NamespacedKey(this, "poo"), ItemBuilder.ofType(Material.BROWN_DYE).itemName(Component.text("Poo")).build())
+                    .shape("DM", "MD")
+                    .ingredient('D', Material.DIRT)
+                    .ingredient('M', Material.MUD)
+                    .build()
+            );
 
             commands.register(
                 Commands.literal("test")

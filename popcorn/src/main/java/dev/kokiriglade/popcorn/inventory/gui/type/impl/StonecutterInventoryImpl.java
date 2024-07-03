@@ -35,6 +35,7 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
 
     /**
      * Create a stonecutter inventory
+     *
      * @param inventoryHolder the {@code InventoryHolder}
      * @since 3.0.0
      */
@@ -209,7 +210,8 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
         public @NonNull Container getResultInventory() {
             try {
                 return (Container) resultContainerField.get(this);
-            } catch (final IllegalAccessException exception) {
+            } catch (final
+            IllegalAccessException exception) {
                 throw new RuntimeException(exception);
             }
         }

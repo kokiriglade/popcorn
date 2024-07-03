@@ -37,6 +37,7 @@ public class AnvilInventoryImpl extends AnvilInventory {
 
     /**
      * Create an internal anvil inventory
+     *
      * @param inventoryHolder the {@code InventoryHolder}
      * @since 3.0.0
      */

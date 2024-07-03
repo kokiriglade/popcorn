@@ -32,7 +32,8 @@ public interface MergedGui {
      * @since 3.0.0
      */
     @Contract(pure = true)
-    @NonNull List<Pane> getPanes();
+    @NonNull
+    List<Pane> getPanes();
 
     /**
      * Gets all the items in all underlying panes
@@ -41,7 +42,8 @@ public interface MergedGui {
      * @since 3.0.0
      */
     @Contract(pure = true)
-    @NonNull Collection<GuiItem> getItems();
+    @NonNull
+    Collection<GuiItem> getItems();
 
     /**
      * Gets the inventory component for this gui
@@ -50,6 +52,7 @@ public interface MergedGui {
      * @since 3.0.0
      */
     @Contract(pure = true)
-    @NonNull InventoryComponent getInventoryComponent();
+    @NonNull
+    InventoryComponent getInventoryComponent();
 
 }

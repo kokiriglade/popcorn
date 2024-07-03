@@ -13,4 +13,5 @@ import java.util.Set;
  */
 @SuppressWarnings("UnstableApiUsage")
 public interface SubcommandSet<P> extends Command<Set<LiteralArgumentBuilder<CommandSourceStack>>, P> {
+
 }

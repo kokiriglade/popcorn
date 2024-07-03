@@ -8,6 +8,7 @@ import java.util.Map;
 
 /**
  * Utility methods for inventory geometry
+ *
  * @since 3.0.0
  */
 @SuppressWarnings("unused")

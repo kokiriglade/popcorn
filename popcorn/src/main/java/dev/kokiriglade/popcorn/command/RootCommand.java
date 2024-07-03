@@ -11,4 +11,5 @@ import io.papermc.paper.command.brigadier.CommandSourceStack;
  */
 @SuppressWarnings("UnstableApiUsage")
 public interface RootCommand<P> extends Command<LiteralCommandNode<CommandSourceStack>, P> {
+
 }

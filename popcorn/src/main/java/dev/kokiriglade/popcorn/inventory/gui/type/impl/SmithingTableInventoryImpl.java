@@ -36,6 +36,7 @@ public class SmithingTableInventoryImpl extends SmithingTableInventory {
 
     /**
      * Create a smithing table inventory
+     *
      * @param inventoryHolder the {@code InventoryHolder}
      * @since 3.0.0
      */

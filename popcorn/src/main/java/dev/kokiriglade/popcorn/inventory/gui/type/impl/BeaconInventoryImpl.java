@@ -34,6 +34,7 @@ public class BeaconInventoryImpl extends BeaconInventory {
 
     /**
      * Create an internal beacon inventory
+     *
      * @param inventoryHolder the {@code InventoryHolder}
      * @since 3.0.0
      */
@@ -154,7 +155,8 @@ public class BeaconInventoryImpl extends BeaconInventory {
                 final ItemStack itemStack = CraftItemStack.asNMSCopy(item);
 
                 ((Container) beaconField.get(this)).setItem(0, itemStack);
-            } catch (final IllegalAccessException exception) {
+            } catch (final
+            IllegalAccessException exception) {
                 throw new RuntimeException(exception);
             }
         }
@@ -172,7 +174,8 @@ public class BeaconInventoryImpl extends BeaconInventory {
                     };
 
                     bukkitEntity = new CraftInventoryView(player, inventory, this);
-                } catch (final IllegalAccessException exception) {
+                } catch (final
+                IllegalAccessException exception) {
                     throw new RuntimeException(exception);
                 }
             }

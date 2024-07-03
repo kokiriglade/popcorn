@@ -68,8 +68,8 @@ tasks {
     }
     shadowJar {
         dependsOn(check)
-        relocate("dev.dejvokep.boostedyaml", "dev.kokiriglade.popcorn.lib.boostedyaml")
         archiveFileName.set("${project.name}-${project.version}.jar")
+        relocate("dev.dejvokep.boostedyaml", "dev.kokiriglade.popcorn.lib.boostedyaml")
     }
 
     val copyToRunTaskPluginsDirectory by creating(Copy::class) {
@@ -113,8 +113,12 @@ hangarPublish {
 configure<PublishingExtension> {
     publications {
         register<MavenPublication>("maven") {
-            artifactId = "popcorn"
-            artifact(tasks.named("shadowJar").get())
+            artifact(tasks.shadowJar) {
+                artifactId = "popcorn"
+                classifier = ""
+            }
+            artifact(tasks["sourcesJar"])
+            artifact(tasks["javadocJar"])
         }
     }
     repositories {

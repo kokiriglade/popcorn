@@ -1,6 +1,7 @@
 package dev.kokiriglade.popcorn.registry;
 
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -20,7 +21,7 @@ import java.util.stream.Stream;
  * @param <T> the value type
  * @since 3.1.0
  */
-public abstract class AbstractRegistry<P extends JavaPlugin, K, T> {
+public abstract class AbstractRegistry<P extends Plugin, K, T> {
 
     private final @NonNull RegistryLogger<P> logger;
     private final @NonNull Map<@NonNull K, @NonNull T> registry = new HashMap<>();

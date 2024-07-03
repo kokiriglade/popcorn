@@ -1,6 +1,7 @@
 package dev.kokiriglade.popcorn.config;
 
 import dev.dejvokep.boostedyaml.YamlDocument;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -10,7 +11,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
  * @param <P> the plugin that owns the manager
  * @since 3.1.0
  */
-public class AbstractConfigurationManager<P extends JavaPlugin> {
+public class AbstractConfigurationManager<P extends Plugin> {
 
     protected final @NonNull P plugin;
     protected final @NonNull String fileName;

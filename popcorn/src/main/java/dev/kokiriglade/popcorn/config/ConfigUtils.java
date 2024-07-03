@@ -3,6 +3,7 @@ package dev.kokiriglade.popcorn.config;
 import dev.dejvokep.boostedyaml.YamlDocument;
 import dev.dejvokep.boostedyaml.dvs.versioning.BasicVersioning;
 import dev.dejvokep.boostedyaml.settings.updater.UpdaterSettings;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -26,7 +27,7 @@ public final class ConfigUtils {
      * @return the {@code YamlDocument}
      * @since 3.1.0
      */
-    public static <P extends JavaPlugin> @NonNull YamlDocument loadFile(final @NonNull P plugin, final @NonNull String fileName) {
+    public static <P extends Plugin> @NonNull YamlDocument loadFile(final @NonNull P plugin, final @NonNull String fileName) {
         try {
             final InputStream inputStream = plugin.getResource(fileName);
             if (inputStream == null) {
@@ -48,8 +49,8 @@ public final class ConfigUtils {
         throw new IllegalStateException("Plugin should be disabled, but isn't");
     }
 
-    private static <P extends JavaPlugin> void handleConfigurationError(final @NonNull P plugin, final @NonNull Exception exception, final @NonNull String fileName) {
-        plugin.getSLF4JLogger().error("Failed to load configuration file " + fileName + ": " + exception);
+    private static <P extends Plugin> void handleConfigurationError(final @NonNull P plugin, final @NonNull Exception exception, final @NonNull String fileName) {
+        plugin.getSLF4JLogger().error("Failed to load configuration file {}: {}", fileName, exception);
         plugin.getServer().getPluginManager().disablePlugin(plugin);
     }
 

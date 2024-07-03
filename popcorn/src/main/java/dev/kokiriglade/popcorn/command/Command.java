@@ -18,7 +18,6 @@ public interface Command<T, P> {
      * @return the command
      * @since 3.2.0
      */
-    @NonNull
-    T get(@NonNull P plugin);
+    @NonNull T get(@NonNull P plugin);
 
 }

@@ -66,8 +66,7 @@ public interface Popcorn extends Plugin {
      * @return the {@code ItemVault} instance
      * @since 3.2.0
      */
-    @NonNull
-    ItemVault getItemVault();
+    @NonNull ItemVault getItemVault();
 
     /**
      * Gets the {@code MessageManager} instance owned by Popcorn
@@ -75,7 +74,6 @@ public interface Popcorn extends Plugin {
      * @return the {@code MessageManager} instance
      * @since 3.2.0
      */
-    @NonNull
-    MessageManager<?> getMessageManager();
+    @NonNull MessageManager<?> getMessageManager();
 
 }

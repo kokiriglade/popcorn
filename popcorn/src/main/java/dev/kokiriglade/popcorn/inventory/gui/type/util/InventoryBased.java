@@ -19,7 +19,6 @@ public interface InventoryBased extends InventoryHolder {
      * @since 3.0.0
      */
     @Contract(pure = true)
-    @NonNull
-    Inventory createInventory();
+    @NonNull Inventory createInventory();
 
 }

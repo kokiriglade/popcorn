@@ -17,8 +17,7 @@ public interface Orientable {
      * @since 3.0.0
      */
     @Contract(pure = true)
-    @NonNull
-    Orientation getOrientation();
+    @NonNull Orientation getOrientation();
 
     /**
      * Sets the orientation of this outline pane

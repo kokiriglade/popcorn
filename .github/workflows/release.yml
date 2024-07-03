@@ -1,8 +1,8 @@
 name: Release builds
 on:
-    milestone:
-        types:
-            - closed
+    release:
+        types: [ created ]
+    workflow_dispatch:
 
 jobs:
     build:

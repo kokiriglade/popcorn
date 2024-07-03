@@ -14,7 +14,7 @@ public class AbstractConfigurationManager<P extends JavaPlugin> {
 
     protected final @NonNull P plugin;
     protected final @NonNull String fileName;
-    private YamlDocument document;
+    protected YamlDocument document;
 
     /**
      * Create the manager. Implementations likely want to call {@link #reload()}

@@ -5,6 +5,7 @@ plugins {
     checkstyle
     id("io.papermc.paperweight.userdev") version "1.7.1"
     id("io.github.goooler.shadow") version "8.1.7"
+    id("io.papermc.hangar-publish-plugin") version "0.1.2"
 }
 
 group = "dev.kokiriglade"
@@ -83,6 +84,26 @@ tasks {
             pluginsDir.listFiles()?.forEach { file ->
                 if (file.name.startsWith(project.name) && file.name.endsWith(".jar")) {
                     file.delete()
+                }
+            }
+        }
+    }
+}
+
+hangarPublish {
+    publications.register("plugin") {
+        version = project.version as String // use project version as publication version
+        id = "popcorn"
+        channel = "Release"
+
+        apiKey = project.findProperty("hangarAPIKey") as String? ?: System.getenv("HANGAR_KEY")
+
+        // register platforms
+        platforms {
+            paper {
+                jar = tasks.shadowJar.flatMap { it.archiveFile }
+                platformVersions = listOf(rootProject.properties["mcVersion"].toString())
+                dependencies {
                 }
             }
         }

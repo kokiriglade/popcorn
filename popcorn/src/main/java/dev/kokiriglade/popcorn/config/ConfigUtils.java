@@ -19,8 +19,9 @@ public final class ConfigUtils {
 
     /**
      * Load a config file, from the plugin's jar file if needed
-     * @param <P> the plugin instance
-     * @param plugin the plugin instance
+     *
+     * @param <P>      the plugin instance
+     * @param plugin   the plugin instance
      * @param fileName the file name
      * @return the {@code YamlDocument}
      * @since 3.1.0
@@ -40,7 +41,8 @@ public final class ConfigUtils {
             );
             yamlDocument.update();
             return yamlDocument;
-        } catch (IOException | IllegalStateException exception) {
+        } catch (IOException |
+                 IllegalStateException exception) {
             handleConfigurationError(plugin, exception, fileName);
         }
         throw new IllegalStateException("Plugin should be disabled, but isn't");

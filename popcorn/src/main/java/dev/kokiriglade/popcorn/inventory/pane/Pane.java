@@ -20,6 +20,7 @@ import java.util.function.Consumer;
 
 /**
  * The base class for all panes.
+ *
  * @since 3.0.0
  */
 @SuppressWarnings("unused")

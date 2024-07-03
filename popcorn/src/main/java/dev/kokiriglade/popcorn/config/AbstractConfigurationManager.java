@@ -6,6 +6,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * An abstract configuration file manager
+ *
  * @param <P> the plugin that owns the manager
  * @since 3.1.0
  */
@@ -17,7 +18,8 @@ public class AbstractConfigurationManager<P extends JavaPlugin> {
 
     /**
      * Create the manager
-     * @param plugin the plugin that owns the manager
+     *
+     * @param plugin   the plugin that owns the manager
      * @param fileName the file name
      * @since 3.1.0
      */
@@ -29,6 +31,7 @@ public class AbstractConfigurationManager<P extends JavaPlugin> {
 
     /**
      * Load the file from disk
+     *
      * @since 3.1.0
      */
     protected void load() {
@@ -37,6 +40,7 @@ public class AbstractConfigurationManager<P extends JavaPlugin> {
 
     /**
      * Reload the file
+     *
      * @since 3.1.0
      */
     public void reload() {
@@ -45,6 +49,7 @@ public class AbstractConfigurationManager<P extends JavaPlugin> {
 
     /**
      * Get the loaded document
+     *
      * @since 3.1.0
      */
     public @NonNull YamlDocument getDocument() {

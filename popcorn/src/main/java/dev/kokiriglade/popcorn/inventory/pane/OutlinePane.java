@@ -20,6 +20,7 @@ import java.util.Map;
 
 /**
  * A pane for items that should be outlined
+ *
  * @since 3.0.0
  */
 @SuppressWarnings({"unused"})
@@ -89,6 +90,7 @@ public class OutlinePane extends Pane implements Flippable, Orientable, Rotatabl
 
     /**
      * Creates a new outline pane
+     *
      * @param x        x-axis of slot
      * @param y        y-axis of slot
      * @param length   the length of the pane
@@ -115,10 +117,11 @@ public class OutlinePane extends Pane implements Flippable, Orientable, Rotatabl
 
     /**
      * Creates a new outline pane
-     * @param x        x-axis of slot
-     * @param y        y-axis of slot
-     * @param length   the length of the pane
-     * @param height   the height of the pane
+     *
+     * @param x      x-axis of slot
+     * @param y      y-axis of slot
+     * @param length the length of the pane
+     * @param height the height of the pane
      * @since 3.0.0
      */
     public OutlinePane(final int x, final int y, final int length, final int height) {
@@ -127,8 +130,9 @@ public class OutlinePane extends Pane implements Flippable, Orientable, Rotatabl
 
     /**
      * Creates a new outline pane
-     * @param length   the length of the pane
-     * @param height   the height of the pane
+     *
+     * @param length the length of the pane
+     * @param height the height of the pane
      * @since 3.0.0
      */
     public OutlinePane(final int length, final int height) {

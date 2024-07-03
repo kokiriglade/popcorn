@@ -36,6 +36,7 @@ public class CartographyTableInventoryImpl extends CartographyTableInventory {
 
     /**
      * Create an internal cartography table inventory
+     *
      * @param inventoryHolder the {@code InventoryHolder}
      * @since 3.0.0
      */
@@ -205,7 +206,8 @@ public class CartographyTableInventoryImpl extends CartographyTableInventory {
         private @NonNull Container getResultInventory() {
             try {
                 return (Container) resultContainerField.get(this);
-            } catch (final IllegalAccessException exception) {
+            } catch (final
+            IllegalAccessException exception) {
                 throw new RuntimeException(exception);
             }
         }

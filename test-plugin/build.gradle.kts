@@ -14,7 +14,7 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT")
-    implementation(project(":popcorn"))
+    compileOnly(project(":popcorn"))
 }
 
 tasks {
@@ -37,9 +37,10 @@ tasks {
         }
     }
     shadowJar {
-        relocate("dev.kokiriglade.popcorn", "dev.kokiriglade.testplugin.corn")
+        //relocate("dev.kokiriglade.popcorn", "dev.kokiriglade.testplugin.corn")
     }
     runServer {
+        dependsOn(project(":popcorn").tasks.named("copyToRunTaskPluginsDirectory"))
         minecraftVersion(rootProject.providers.gradleProperty("mcVersion").get())
         downloadPlugins {
             url("https://github.com/PaperMC/Debuggery/releases/download/v1.5.1/debuggery-bukkit-1.5.1.jar")

@@ -30,18 +30,19 @@ public abstract class AbstractRegistry<P extends JavaPlugin, K, T> {
      * The default constructor. Runs the initializer, waits 5 seconds,
      * and then prints the size of the registry
      *
-     * @apiNote <strong>Cannot</strong> be instantiated inside {@link JavaPlugin#onLoad()}
      * @param plugin the plugin that owns the registry
+     * @apiNote <strong>Cannot</strong> be instantiated inside {@link JavaPlugin#onLoad()}
      * @since 3.1.0
      */
     public AbstractRegistry(final @NonNull P plugin) {
         this.logger = new RegistryLogger<>(plugin, this);
         initialize(plugin);
-        Bukkit.getScheduler().runTaskLater(plugin, () -> logger.info("Loaded %d items.".formatted(registry.size())), 20L * 5L);
+        Bukkit.getScheduler().runTaskLater(plugin, () -> logger.info("Registered %d entries.".formatted(registry.size())), 20L * 5L);
     }
 
     /**
      * Initialize the registry with its default values
+     *
      * @param plugin the plugin that owns the registry
      * @since 3.1.0
      */
@@ -70,6 +71,16 @@ public abstract class AbstractRegistry<P extends JavaPlugin, K, T> {
      */
     public @Nullable T get(final @NonNull K key) {
         return unmodifiableRegistry.get(key);
+    }
+
+    /**
+     * Unregister a value with the given key.
+     *
+     * @param key the key to unregister
+     * @since 3.2.0
+     */
+    protected void unregister(final @NonNull K key) {
+        registry.remove(key);
     }
 
     /**

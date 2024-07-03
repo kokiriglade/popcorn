@@ -13,10 +13,12 @@ public interface Command<T, P> {
 
     /**
      * Get the type of command
+     *
      * @param plugin the plugin
      * @return the command
      * @since 3.2.0
      */
-    @NonNull T get(@NonNull P plugin);
+    @NonNull
+    T get(@NonNull P plugin);
 
 }

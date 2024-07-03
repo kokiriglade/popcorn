@@ -28,6 +28,7 @@ import java.util.function.Consumer;
  * axis taking priority. There are nuances at play with regard to mixing these two types of positioning systems within
  * the same pane. It's recommended to only use one of these systems per pane and to not mix them.
  * </p>
+ *
  * @since 3.0.0
  */
 @SuppressWarnings({"unused"})
@@ -67,8 +68,8 @@ public class StaticPane extends Pane implements Flippable, Rotatable {
     /**
      * Creates a new static pane.
      *
-     * @param x      the x-axis of the pane
-     * @param y      the y-axis of the pane
+     * @param x        the x-axis of the pane
+     * @param y        the y-axis of the pane
      * @param length   the length of the pane
      * @param height   the height of the pane
      * @param priority the priority of the pane

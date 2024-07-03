@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "dev.kokiriglade"
-version = "3.1.0"
+version = "3.2.0"
 
 paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.REOBF_PRODUCTION
 
@@ -54,9 +54,38 @@ tasks {
             )
         }
     }
+    processResources {
+        val apiVersion = rootProject.providers.gradleProperty("mcVersion").get()
+        val props = mapOf(
+            "version" to project.version,
+            "apiversion" to "\"$apiVersion\"",
+        )
+        inputs.properties(props)
+        filesMatching("paper-plugin.yml") {
+            expand(props)
+        }
+    }
     shadowJar {
         dependsOn(check)
         relocate("dev.dejvokep.boostedyaml", "dev.kokiriglade.popcorn.lib.boostedyaml")
+        archiveFileName.set("${project.name}-${project.version}.jar")
+    }
+
+    val copyToRunTaskPluginsDirectory by creating(Copy::class) {
+        val pluginsDir = file("../test-plugin/run/plugins")
+        dependsOn(shadowJar)
+
+        from(shadowJar.get().archiveFile)
+        into(pluginsDir)
+
+        doFirst {
+            file(pluginsDir).mkdirs()
+            pluginsDir.listFiles()?.forEach { file ->
+                if (file.name.startsWith(project.name) && file.name.endsWith(".jar")) {
+                    file.delete()
+                }
+            }
+        }
     }
 }
 

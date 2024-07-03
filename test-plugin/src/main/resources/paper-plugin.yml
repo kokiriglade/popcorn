@@ -6,3 +6,9 @@ authors:
   - kokiriglade
 api-version: ${apiversion}
 load: STARTUP
+dependencies:
+    server:
+        popcorn:
+            load: BEFORE
+            required: true
+            join-classpath: true

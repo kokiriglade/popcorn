@@ -6,6 +6,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Manages the messages configuration file
+ *
  * @param <P> the plugin instance
  * @since 3.1.0
  */
@@ -13,6 +14,7 @@ public class MessageManager<P extends JavaPlugin> extends AbstractConfigurationM
 
     /**
      * Read the config file
+     *
      * @param plugin plugin instance
      * @since 3.1.0
      */
@@ -29,6 +31,7 @@ public class MessageManager<P extends JavaPlugin> extends AbstractConfigurationM
 
     /**
      * Get a string from the file
+     *
      * @param key the key
      * @return the string
      * @since 3.1.0
@@ -39,6 +42,7 @@ public class MessageManager<P extends JavaPlugin> extends AbstractConfigurationM
 
     /**
      * Get a string from the file
+     *
      * @param key the key
      * @param def the default if the string isn't found
      * @return the string

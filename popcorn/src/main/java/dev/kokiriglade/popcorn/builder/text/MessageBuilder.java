@@ -4,29 +4,34 @@ import dev.kokiriglade.popcorn.Popcorn;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.entity.Entity;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static net.kyori.adventure.text.Component.translatable;
+
 /**
  * A builder for text messages.
+ *
  * @since 3.1.0
  */
 @SuppressWarnings("unused")
 public final class MessageBuilder {
 
-    private static final @NonNull Map<JavaPlugin, String> PREFIXES = new HashMap<>();
-    private static final @NonNull Map<JavaPlugin, String> ERRORS = new HashMap<>();
-    private final @NonNull JavaPlugin plugin;
+    private static final @NonNull Map<Plugin, String> PREFIXES = new HashMap<>();
+    private static final @NonNull Map<Plugin, String> ERRORS = new HashMap<>();
+    private final @NonNull Plugin plugin;
     private final @NonNull String message;
     private final @NonNull Audience audience;
     private final @NonNull Map<String, String> placeholders = new HashMap<>();
     private boolean prefix = false;
     private boolean error = false;
 
-    private MessageBuilder(final @NonNull JavaPlugin plugin, final @NonNull String message, final @NonNull Audience audience) {
+    private MessageBuilder(final @NonNull Plugin plugin, final @NonNull String message, final @NonNull Audience audience) {
         this.plugin = plugin;
         this.message = message;
         this.audience = audience;
@@ -34,12 +39,13 @@ public final class MessageBuilder {
 
     /**
      * Reload prefix and error tags
+     *
      * @param plugin the plugin setting its prefix and error strings
      * @param prefix prefix tag
-     * @param error error tag
+     * @param error  error tag
      * @since 3.1.0
      */
-    public static void reload(final @NonNull JavaPlugin plugin, final @NonNull String prefix, final @NonNull String error) {
+    public static void reload(final @NonNull Plugin plugin, final @NonNull String prefix, final @NonNull String error) {
         PREFIXES.put(plugin, prefix);
         ERRORS.put(plugin, error);
     }
@@ -53,20 +59,69 @@ public final class MessageBuilder {
      * @return The created MessageBuilder instance
      * @since 3.1.0
      */
-    public static @NonNull MessageBuilder of(final @NonNull JavaPlugin plugin, final @NonNull String message, final @NonNull Audience audience) {
+    public static @NonNull MessageBuilder of(final @NonNull Plugin plugin, final @NonNull String message, final @NonNull Audience audience) {
         return new MessageBuilder(plugin, message, audience);
     }
 
     /**
      * Creates a new MessageBuilder instance
      *
-     * @param plugin   The plugin building the message
+     * @param plugin  The plugin building the message
      * @param message The message
      * @return The created MessageBuilder instance
      * @since 3.1.0
      */
-    public static @NonNull MessageBuilder of(final @NonNull JavaPlugin plugin, final @NonNull String message) {
+    public static @NonNull MessageBuilder of(final @NonNull Plugin plugin, final @NonNull String message) {
         return new MessageBuilder(plugin, message, Audience.empty());
+    }
+
+    /**
+     * Sets a placeholder value in the message
+     *
+     * @param placeholder The placeholder key
+     * @param string      The value to replace the placeholder with
+     * @return The builder instance
+     * @since 3.2.0
+     */
+    public @NonNull MessageBuilder set(final @NonNull String placeholder, final @NonNull String string) {
+        placeholders.put(placeholder, new MessageBuilder(plugin, string, audience).string());
+        return this;
+    }
+
+    /**
+     * Sets a placeholder value in the message
+     *
+     * @param placeholder The placeholder key
+     * @param component   The value to replace the placeholder with
+     * @return The builder instance
+     * @since 3.2.0
+     */
+    public @NonNull MessageBuilder set(final @NonNull String placeholder, final @NonNull Component component) {
+        return set(placeholder, Popcorn.miniMessage().serialize(component));
+    }
+
+    /**
+     * Sets a placeholder value in the message
+     *
+     * @param placeholder The placeholder key
+     * @param itemStack   The value to replace the placeholder with
+     * @return The builder instance
+     * @since 3.2.0
+     */
+    public @NonNull MessageBuilder set(final @NonNull String placeholder, final @NonNull ItemStack itemStack) {
+        return set(placeholder, translatable("chat.square_brackets", itemStack.getItemMeta().itemName()).hoverEvent(itemStack.asHoverEvent()));
+    }
+
+    /**
+     * Sets a placeholder value in the message
+     *
+     * @param placeholder The placeholder key
+     * @param entity      The value to replace the placeholder with
+     * @return The builder instance
+     * @since 3.2.0
+     */
+    public @NonNull MessageBuilder set(final @NonNull String placeholder, final @NonNull Entity entity) {
+        return set(placeholder, entity.name().hoverEvent(entity.asHoverEvent()));
     }
 
     /**
@@ -79,15 +134,7 @@ public final class MessageBuilder {
      * @since 3.1.0
      */
     public <T> @NonNull MessageBuilder set(final @NonNull String placeholder, final @NonNull T value) {
-        if (value instanceof Component) {
-            placeholders.put(placeholder, Popcorn.miniMessage().serialize((Component) value));
-        }
-        if (value instanceof String string) {
-            placeholders.put(placeholder, new MessageBuilder(plugin, string, audience).string());
-        } else {
-            placeholders.put(placeholder, String.valueOf(value));
-        }
-        return this;
+        return set(placeholder, String.valueOf(value));
     }
 
     /**

@@ -15,7 +15,6 @@ import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.text.minimessage.tree.Node;
 import org.bukkit.command.ConsoleCommandSender;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.Locale;
@@ -31,13 +30,13 @@ import static net.kyori.adventure.text.Component.text;
  */
 public final class SmallTag implements Modifying {
 
+    static final String SMALL = "small";
+    static final String SM = "sm";
+    static final TagResolver RESOLVER = TagResolver.resolver(Set.of(SMALL, SM), SmallTag::create);
     private static final ComponentFlattener LENGTH_CALCULATOR = ComponentFlattener.builder()
         .mapper(TextComponent.class, TextComponent::content)
         .unknownMapper(x -> "_") // every unknown component gets a single colour
         .build();
-    static final String SMALL = "small";
-    static final String SM = "sm";
-    static final TagResolver RESOLVER = TagResolver.resolver(Set.of(SMALL, SM), SmallTag::create);
     private final boolean console;
     private boolean visited;
     private int size = 0;
@@ -56,7 +55,7 @@ public final class SmallTag implements Modifying {
         return new SmallTag(false);
     }
 
-    protected final int size() {
+    private int size() {
         return this.size;
     }
 
@@ -78,7 +77,7 @@ public final class SmallTag implements Modifying {
     }
 
     @Override
-    public final void postVisit() {
+    public void postVisit() {
         this.visited = true;
     }
 

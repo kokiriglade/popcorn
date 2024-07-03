@@ -3,7 +3,6 @@ package dev.kokiriglade.popcorn.persistence;
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataType;
 import org.checkerframework.checker.nullness.qual.NonNull;
-import org.jetbrains.annotations.NotNull;
 
 import java.nio.ByteBuffer;
 import java.util.UUID;
@@ -50,7 +49,7 @@ public final class UUIDTagType implements PersistentDataType<byte[], UUID> {
     @Override
     public @NonNull UUID fromPrimitive(final @NonNull byte[] primitive, final @NonNull PersistentDataAdapterContext context) {
         final ByteBuffer buffer = ByteBuffer.wrap(primitive);
-        final  long most = buffer.getLong();
+        final long most = buffer.getLong();
         final long least = buffer.getLong();
         return new UUID(most, least);
     }

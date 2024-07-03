@@ -23,6 +23,7 @@ import java.util.function.Consumer;
 
 /**
  * The base class of all GUIs
+ *
  * @since 3.0.0
  */
 @SuppressWarnings("unused")
@@ -183,6 +184,7 @@ public abstract class Gui {
 
     /**
      * Update the gui for everyone
+     *
      * @since 3.0.0
      */
     public void update() {

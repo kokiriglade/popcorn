@@ -18,7 +18,8 @@ public interface ExplosiveEntityBuilder<B> {
      * @return the yield
      * @since 2.2.2
      */
-    @Nullable Float yield();
+    @Nullable
+    Float yield();
 
     /**
      * Sets the radius or yield to be used by this {@code Explosive}'s explosion.
@@ -27,7 +28,8 @@ public interface ExplosiveEntityBuilder<B> {
      * @return the builder
      * @since 2.2.2
      */
-    @NonNull B yield(final @Nullable Float yield);
+    @NonNull
+    B yield(final @Nullable Float yield);
 
     /**
      * Gets whether the {@code Explosive}'s explosion causes fire.
@@ -35,7 +37,8 @@ public interface ExplosiveEntityBuilder<B> {
      * @return whether to cause fire
      * @since 2.2.2
      */
-    @Nullable Boolean isIncendiary();
+    @Nullable
+    Boolean isIncendiary();
 
     /**
      * Sets whether the {@code Explosive}'s explosion causes fire.
@@ -44,6 +47,7 @@ public interface ExplosiveEntityBuilder<B> {
      * @return the builder
      * @since 2.2.2
      */
-    @NonNull B isIncendiary(final @Nullable Boolean isIncendiary);
+    @NonNull
+    B isIncendiary(final @Nullable Boolean isIncendiary);
 
 }

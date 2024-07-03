@@ -25,7 +25,7 @@ public final class RegistryLogger<P extends JavaPlugin> extends Logger {
      * Creates a new RegistryLogger that extracts the name from the plugin
      * that owns the registry and the registry itself.
      *
-     * @param plugin the plugin that owns the registry
+     * @param plugin   the plugin that owns the registry
      * @param registry the registry that the logger is being made for
      * @since 3.1.0
      */

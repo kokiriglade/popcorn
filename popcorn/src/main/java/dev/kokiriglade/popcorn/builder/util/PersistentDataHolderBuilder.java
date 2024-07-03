@@ -69,7 +69,8 @@ public interface PersistentDataHolderBuilder<B> {
      * @return the builder
      * @since 2.2.1
      */
-    @NonNull B removeData(
+    @NonNull
+    B removeData(
         final @NonNull NamespacedKey key
     );
 

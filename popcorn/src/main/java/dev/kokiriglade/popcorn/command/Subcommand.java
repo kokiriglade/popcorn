@@ -11,4 +11,5 @@ import io.papermc.paper.command.brigadier.CommandSourceStack;
  */
 @SuppressWarnings("UnstableApiUsage")
 public interface Subcommand<P> extends Command<LiteralArgumentBuilder<CommandSourceStack>, P> {
+
 }

@@ -35,6 +35,7 @@ public class EnchantingTableInventoryImpl extends EnchantingTableInventory {
 
     /**
      * Create an internal enchanting table inventory
+     *
      * @param inventoryHolder the {@code InventoryHolder}
      * @since 3.0.0
      */
@@ -190,7 +191,8 @@ public class EnchantingTableInventoryImpl extends EnchantingTableInventory {
                     };
 
                     bukkitEntity = new CraftInventoryView(player, inventory, this);
-                } catch (final IllegalAccessException exception) {
+                } catch (final
+                IllegalAccessException exception) {
                     exception.printStackTrace();
                 }
             }

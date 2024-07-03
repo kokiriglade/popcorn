@@ -34,6 +34,7 @@ public class GrindstoneInventoryImpl extends GrindstoneInventory {
 
     /**
      * Create an internal grindstone inventory
+     *
      * @param inventoryHolder the {@code InventoryHolder}
      * @since 3.0.0
      */

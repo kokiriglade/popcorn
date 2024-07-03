@@ -26,8 +26,12 @@ jobs:
         run: chmod +x ./gradlew
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
-      - name: Publish
+      - name: Publish to Repository
         run: ./gradlew publish
         env:
           CELERRY_PASS: ${{ secrets.CELERRY_PASS }}
           CELERRY_NAME: ${{ secrets.CELERRY_NAME }}
+      - name: Publish to Hangar
+        run: ./gradlew publishPluginPublicationToHangar
+        env:
+            HANGAR_KEY: ${{ secrets.HANGAR_KEY }}

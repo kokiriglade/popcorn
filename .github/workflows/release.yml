@@ -31,4 +31,4 @@ jobs:
                 with:
                     name: popcorn
                     overwrite: true
-                    path: build/libs/popcorn-*.jar
+                    path: popcorn/build/libs/popcorn-*.jar

@@ -9,6 +9,8 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Spliterator;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -72,6 +74,22 @@ public abstract class AbstractRegistry<P extends Plugin, K, T> {
      */
     public @Nullable T get(final @NonNull K key) {
         return unmodifiableRegistry.get(key);
+    }
+
+    /**
+     * Retrieves the key associated with the given value
+     *
+     * @param value the value
+     * @return the {@link K key} associated with the value
+     * @throws NoSuchElementException if the value isn't registered
+     * @since 3.2.5
+     */
+    public @NonNull K resolveKey(final @NonNull T value) throws NoSuchElementException {
+        return stream()
+            .filter(entry -> Objects.equals(entry.getValue(), value))
+            .map(Map.Entry::getKey)
+            .findFirst()
+            .orElseThrow(NoSuchElementException::new);
     }
 
     /**

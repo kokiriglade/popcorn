@@ -43,6 +43,11 @@ tasks {
     }
     javadoc {
         dependsOn(check)
+
+        doLast() {
+            destinationDir!!.resolve("element-list").copyTo(destinationDir!!.resolve("package-list"))
+        }
+
         (options as StandardJavadocDocletOptions).apply {
             encoding = Charsets.UTF_8.name()
             addStringOption("tag", "implNote:a:Implementation Note")

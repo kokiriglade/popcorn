@@ -44,10 +44,6 @@ tasks {
     javadoc {
         dependsOn(check)
 
-        doLast() {
-            destinationDir!!.resolve("element-list").copyTo(destinationDir!!.resolve("package-list"))
-        }
-
         (options as StandardJavadocDocletOptions).apply {
             encoding = Charsets.UTF_8.name()
             addStringOption("tag", "implNote:a:Implementation Note")
@@ -57,6 +53,7 @@ tasks {
                 "https://jd.advntr.dev/api/4.17.0/",
                 "https://guava.dev/releases/32.1.2-jre/api/docs/",
                 "https://javadoc.io/static/dev.dejvokep/boosted-yaml/1.3/",
+                "https://repo.celerry.com/javadoc/mirror/com/mojang/brigadier/1.2.9/raw/"
             )
         }
     }

@@ -23,6 +23,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.plugin.Plugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.Iterator;
 import java.util.List;
@@ -41,10 +42,12 @@ public class ItemVault extends AbstractRegistry<PopcornPlugin, NamespacedKey, Re
      * @param plugin the internal popcorn plugin
      * @since 3.2.0
      */
+    @ApiStatus.Internal
     public ItemVault(final @NonNull PopcornPlugin plugin) {
         super(plugin);
     }
 
+    @ApiStatus.Internal
     @Override
     protected void initialize(final @NonNull PopcornPlugin plugin) {
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, this::registerCustomRecipes);

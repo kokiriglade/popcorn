@@ -174,7 +174,7 @@ public final class MessageBuilder {
      * @since 3.1.0
      */
     public String string() {
-        return formatMessage();
+        return Popcorn.miniMessage().serialize(formatMessage());
     }
 
     /**
@@ -184,28 +184,28 @@ public final class MessageBuilder {
      * @since 3.1.0
      */
     public Component component() {
-        return Popcorn.miniMessage().deserialize(string(), placeholders.toArray(new TagResolver[0]));
+        return formatMessage();
     }
 
     /**
-     * Formats the message string with placeholders replaced.
+     * Formats the message string with prefix and errors added inside.
      *
      * @return The formatted message string.
      * @since 3.1.0
      */
-    private String formatMessage() {
-        String formatted = message;
+    private Component formatMessage() {
+        Component formatted = Popcorn.miniMessage().deserialize(message, placeholders.toArray(new TagResolver[0]));
 
         if (error) {
-            formatted = new MessageBuilder(plugin, ERRORS.getOrDefault(plugin, "error %message%"), audience)
+            formatted = new MessageBuilder(plugin, ERRORS.getOrDefault(plugin, "error <message>"), audience)
                 .set("message", formatted)
-                .string();
+                .component();
         }
 
         if (prefix) {
-            formatted = new MessageBuilder(plugin, PREFIXES.getOrDefault(plugin, "prefix %message%"), audience)
+            formatted = new MessageBuilder(plugin, PREFIXES.getOrDefault(plugin, "prefix <message>"), audience)
                 .set("message", formatted)
-                .string();
+                .component();
         }
 
         return formatted;

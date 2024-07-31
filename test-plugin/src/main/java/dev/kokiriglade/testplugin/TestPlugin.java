@@ -38,6 +38,13 @@ public final class TestPlugin extends JavaPlugin {
                             .component()
                         );
 
+
+                        sender.sendMessage(MessageBuilder.of(this, "Hello <player>!", sender)
+                            .set("player", sender.getName())
+                            .prefix(true)
+                            .component()
+                        );
+
                         return Command.SINGLE_SUCCESS;
                     })
                     .requires(commandSourceStack -> commandSourceStack.getSender() instanceof Player)

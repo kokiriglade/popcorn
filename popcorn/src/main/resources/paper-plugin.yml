@@ -1,7 +1,7 @@
 name: popcorn
 version: ${version}
 main: dev.kokiriglade.popcorn.PopcornPlugin
-description: An opinionated utility library for Paper servers
+description: A utility library for Paper servers
 authors:
     - kokiriglade
 api-version: ${apiversion}

@@ -4,13 +4,18 @@ import dev.kokiriglade.popcorn.Popcorn;
 import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import net.kyori.adventure.text.minimessage.tag.TagPattern;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import static net.kyori.adventure.text.Component.translatable;
 
@@ -27,7 +32,7 @@ public final class MessageBuilder {
     private final @NonNull Plugin plugin;
     private final @NonNull String message;
     private final @NonNull Audience audience;
-    private final @NonNull Map<String, String> placeholders = new HashMap<>();
+    private final @NonNull Set<TagResolver> placeholders = new HashSet<>();
     private boolean prefix = false;
     private boolean error = false;
 
@@ -83,8 +88,8 @@ public final class MessageBuilder {
      * @return The builder instance
      * @since 3.2.0
      */
-    public @NonNull MessageBuilder set(final @NonNull String placeholder, final @NonNull String string) {
-        placeholders.put(placeholder, new MessageBuilder(plugin, string, audience).string());
+    public @NonNull MessageBuilder set(final @TagPattern @NonNull String placeholder, final @NonNull String string) {
+        placeholders.add(Placeholder.component(placeholder, new MessageBuilder(plugin, string, audience).component()));
         return this;
     }
 
@@ -96,8 +101,9 @@ public final class MessageBuilder {
      * @return The builder instance
      * @since 3.2.0
      */
-    public @NonNull MessageBuilder set(final @NonNull String placeholder, final @NonNull Component component) {
-        return set(placeholder, Popcorn.miniMessage().serialize(component));
+    public @NonNull MessageBuilder set(final @TagPattern @NonNull String placeholder, final @NonNull Component component) {
+        placeholders.add(Placeholder.component(placeholder, component));
+        return this;
     }
 
     /**
@@ -108,7 +114,7 @@ public final class MessageBuilder {
      * @return The builder instance
      * @since 3.2.0
      */
-    public @NonNull MessageBuilder set(final @NonNull String placeholder, final @NonNull ItemStack itemStack) {
+    public @NonNull MessageBuilder set(final @TagPattern @NonNull String placeholder, final @NonNull ItemStack itemStack) {
         return set(placeholder, translatable("chat.square_brackets", itemStack.getItemMeta().itemName()).hoverEvent(itemStack.asHoverEvent()));
     }
 
@@ -120,7 +126,7 @@ public final class MessageBuilder {
      * @return The builder instance
      * @since 3.2.0
      */
-    public @NonNull MessageBuilder set(final @NonNull String placeholder, final @NonNull Entity entity) {
+    public @NonNull MessageBuilder set(final @TagPattern@NonNull String placeholder, final @NonNull Entity entity) {
         return set(placeholder, entity.name().hoverEvent(entity.asHoverEvent()));
     }
 
@@ -133,7 +139,7 @@ public final class MessageBuilder {
      * @return The builder instance.
      * @since 3.1.0
      */
-    public <T> @NonNull MessageBuilder set(final @NonNull String placeholder, final @NonNull T value) {
+    public <T> @NonNull MessageBuilder set(final @TagPattern @NonNull String placeholder, final @NonNull T value) {
         return set(placeholder, String.valueOf(value));
     }
 
@@ -178,7 +184,7 @@ public final class MessageBuilder {
      * @since 3.1.0
      */
     public Component component() {
-        return Popcorn.miniMessage().deserialize(string());
+        return Popcorn.miniMessage().deserialize(string(), placeholders.toArray(new TagResolver[0]));
     }
 
     /**
@@ -189,12 +195,6 @@ public final class MessageBuilder {
      */
     private String formatMessage() {
         String formatted = message;
-
-        for (final Map.Entry<String, String> entry : placeholders.entrySet()) {
-            if (entry.getValue() != null) {
-                formatted = formatted.replaceAll("%%%s%%".formatted(entry.getKey()), entry.getValue());
-            }
-        }
 
         if (error) {
             formatted = new MessageBuilder(plugin, ERRORS.getOrDefault(plugin, "error %message%"), audience)

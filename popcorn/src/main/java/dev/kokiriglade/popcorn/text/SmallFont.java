@@ -46,7 +46,24 @@ public final class SmallFont {
         smallFontMap.put('x', 'x');
         smallFontMap.put('y', 'ʏ');
         smallFontMap.put('z', 'ᴢ');
+
+        smallFontMap.put('-', '⁻');
+        smallFontMap.put('+', '⁺');
+        smallFontMap.put('⁼', '=');
         smallFontMap.put('~', '˜');
+        smallFontMap.put('(', '₍');
+        smallFontMap.put(')', '₎');
+
+        smallFontMap.put('0', '₀');
+        smallFontMap.put('1', '₁');
+        smallFontMap.put('2', '₂');
+        smallFontMap.put('3', '₃');
+        smallFontMap.put('4', '₄');
+        smallFontMap.put('5', '₅');
+        smallFontMap.put('6', '₆');
+        smallFontMap.put('7', '₇');
+        smallFontMap.put('8', '₈');
+        smallFontMap.put('9', '₉');
     }
 
     /**

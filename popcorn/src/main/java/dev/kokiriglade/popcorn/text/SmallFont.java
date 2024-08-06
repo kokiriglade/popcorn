@@ -3,6 +3,12 @@ package dev.kokiriglade.popcorn.text;
 import java.util.HashMap;
 import java.util.Map;
 
+//
+// I am pretty sure this class was originally sourced from this project:
+// https://github.com/Manered/Utils/blob/main/src/main/java/dev/manere/utils/text/font/SmallFont.java
+// MIT Licensed!
+//
+
 /**
  * A utility class for converting text to a small font representation using a character mapping.
  *

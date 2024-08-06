@@ -40,7 +40,6 @@ public abstract class AbstractRegistry<P extends Plugin, K, T> {
     public AbstractRegistry(final @NonNull P plugin) {
         this.logger = new RegistryLogger<>(plugin, this);
         initialize(plugin);
-        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, () -> logger.info("Registered %d entries.".formatted(registry.size())));
     }
 
     /**

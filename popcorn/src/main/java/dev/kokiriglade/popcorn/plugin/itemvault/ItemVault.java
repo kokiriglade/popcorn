@@ -2,11 +2,14 @@ package dev.kokiriglade.popcorn.plugin.itemvault;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import dev.kokiriglade.popcorn.Popcorn;
 import dev.kokiriglade.popcorn.PopcornPlugin;
 import dev.kokiriglade.popcorn.builder.text.MessageBuilder;
 import dev.kokiriglade.popcorn.plugin.itemvault.api.RegisteredItem;
 import dev.kokiriglade.popcorn.registry.AbstractRegistry;
+import io.papermc.paper.command.brigadier.CommandSourceStack;
 import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.command.brigadier.argument.ArgumentTypes;
 import io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver;
@@ -60,30 +63,9 @@ public class ItemVault extends AbstractRegistry<PopcornPlugin, NamespacedKey, Re
                 Commands.literal("iv")
                     .then(Commands.argument("player", ArgumentTypes.player())
                         .then(Commands.argument("item", Popcorn.registeredItemArgument())
+                            .executes(this::handleGiveCommand)
                             .then(Commands.argument("amount", IntegerArgumentType.integer(1, 99))
-                                .executes(context -> {
-                                    final RegisteredItem registeredItem = context.getArgument("item", RegisteredItem.class);
-                                    final Player player = context.getArgument("player", PlayerSelectorArgumentResolver.class).resolve(context.getSource()).getFirst();
-                                    int amount = context.getArgument("amount", Integer.class);
-
-
-                                    final ItemStack itemStack = registeredItem.apply(player);
-                                    itemStack.setAmount(Math.min(itemStack.getMaxStackSize(), amount));
-                                    amount = itemStack.getAmount();
-
-                                    player.getInventory().addItem(itemStack);
-
-                                    context.getSource().getSender().sendMessage(
-                                        MessageBuilder.of(Popcorn.get(), Popcorn.get().getMessageManager().get("command.iv.give"))
-                                            .set("amount", amount)
-                                            .set("item", itemStack)
-                                            .set("player", player)
-                                            .prefix(true)
-                                            .component()
-                                    );
-
-                                    return Command.SINGLE_SUCCESS;
-                                })
+                                .executes(this::handleGiveCommand)
                             )
                         )
                     )
@@ -92,6 +74,39 @@ public class ItemVault extends AbstractRegistry<PopcornPlugin, NamespacedKey, Re
                 List.of("itemvault")
             );
         });
+    }
+
+    int handleGiveCommand(final @NonNull CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        final RegisteredItem registeredItem = context.getArgument("item", RegisteredItem.class);
+        final Player player = context.getArgument("player", PlayerSelectorArgumentResolver.class).resolve(context.getSource()).getFirst();
+
+        int amount;
+
+        try {
+            amount = context.getArgument("amount",
+                Integer.class
+            );
+        } catch(final @NonNull Exception e) {
+            amount = 1;
+        }
+
+
+        final ItemStack itemStack = registeredItem.apply(player);
+        itemStack.setAmount(Math.min(itemStack.getMaxStackSize(), amount));
+        amount = itemStack.getAmount();
+
+        player.getInventory().addItem(itemStack);
+
+        context.getSource().getSender().sendMessage(
+            MessageBuilder.of(Popcorn.get(), Popcorn.get().getMessageManager().get("command.iv.give"))
+                .set("amount", amount)
+                .set("item", itemStack)
+                .set("player", player)
+                .prefix(true)
+                .component()
+        );
+
+        return Command.SINGLE_SUCCESS;
     }
 
     @EventHandler

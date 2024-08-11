@@ -30,13 +30,15 @@ public final class MessageBuilder {
     private static final @NonNull Map<Plugin, String> PREFIXES = new HashMap<>();
     private static final @NonNull Map<Plugin, String> ERRORS = new HashMap<>();
     private final @NonNull Plugin plugin;
-    private final @NonNull String message;
+    private @NonNull String message;
     private final @NonNull Audience audience;
     private final @NonNull Set<TagResolver> placeholders = new HashSet<>();
     private boolean prefix = false;
     private boolean error = false;
 
-    private MessageBuilder(final @NonNull Plugin plugin, final @NonNull String message, final @NonNull Audience audience) {
+    private MessageBuilder(final @NonNull Plugin plugin,
+                           final @NonNull String message,
+                           final @NonNull Audience audience) {
         this.plugin = plugin;
         this.message = message;
         this.audience = audience;
@@ -50,7 +52,9 @@ public final class MessageBuilder {
      * @param error  error tag
      * @since 3.1.0
      */
-    public static void reload(final @NonNull Plugin plugin, final @NonNull String prefix, final @NonNull String error) {
+    public static void reload(final @NonNull Plugin plugin,
+                              final @NonNull String prefix,
+                              final @NonNull String error) {
         PREFIXES.put(plugin, prefix);
         ERRORS.put(plugin, error);
     }
@@ -64,8 +68,13 @@ public final class MessageBuilder {
      * @return The created MessageBuilder instance
      * @since 3.1.0
      */
-    public static @NonNull MessageBuilder of(final @NonNull Plugin plugin, final @NonNull String message, final @NonNull Audience audience) {
-        return new MessageBuilder(plugin, message, audience);
+    public static @NonNull MessageBuilder of(final @NonNull Plugin plugin,
+                                             final @NonNull String message,
+                                             final @NonNull Audience audience) {
+        return new MessageBuilder(plugin,
+            message,
+            audience
+        );
     }
 
     /**
@@ -76,8 +85,64 @@ public final class MessageBuilder {
      * @return The created MessageBuilder instance
      * @since 3.1.0
      */
-    public static @NonNull MessageBuilder of(final @NonNull Plugin plugin, final @NonNull String message) {
-        return new MessageBuilder(plugin, message, Audience.empty());
+    public static @NonNull MessageBuilder of(final @NonNull Plugin plugin,
+                                             final @NonNull String message) {
+        return new MessageBuilder(plugin,
+            message,
+            Audience.empty()
+        );
+    }
+
+    /**
+     * Add a new tag resolver
+     *
+     * @param tagResolver The tag resolver
+     * @return The builder instance
+     * @since 3.3.4
+     */
+    public @NonNull MessageBuilder addTagResolver(final @NonNull TagResolver tagResolver) {
+        placeholders.add(tagResolver);
+        return this;
+    }
+
+    /**
+     * Remove a tag resolver
+     *
+     * @param tagResolver The tag resolver
+     * @return The builder instance
+     * @since 3.3.4
+     */
+    public @NonNull MessageBuilder removeTagResolver(final @NonNull TagResolver tagResolver) {
+        placeholders.remove(tagResolver);
+        return this;
+    }
+
+    /**
+     * Replaces each substring of the message that matches the literal target sequence with the specified literal replacement sequence
+     *
+     * @param placeholder The sequence of char values to be replaced
+     * @param string      The replacement sequence of char values
+     * @return The builder instance
+     * @since 3.3.4
+     */
+    public @NonNull MessageBuilder replace(final @NonNull CharSequence placeholder,
+                                           final @NonNull CharSequence string) {
+        message = message.replace(placeholder, string);
+        return this;
+    }
+
+    /**
+     * Replaces each substring of the message that matches the given regular expression with the given replacement
+     *
+     * @param regex       The regular expression to which the string is to be matched
+     * @param replacement The string to be substituted for each match
+     * @return The builder instance
+     * @since 3.3.4
+     */
+    public @NonNull MessageBuilder replace(final @NonNull String regex,
+                                           final @NonNull String replacement) {
+        message = message.replaceAll(regex, replacement);
+        return this;
     }
 
     /**
@@ -88,8 +153,14 @@ public final class MessageBuilder {
      * @return The builder instance
      * @since 3.2.0
      */
-    public @NonNull MessageBuilder set(final @TagPattern @NonNull String placeholder, final @NonNull String string) {
-        placeholders.add(Placeholder.component(placeholder, new MessageBuilder(plugin, string, audience).component()));
+    public @NonNull MessageBuilder set(final @TagPattern @NonNull String placeholder,
+                                       final @NonNull String string) {
+        placeholders.add(Placeholder.component(placeholder,
+            new MessageBuilder(plugin,
+                string,
+                audience
+            ).component()
+        ));
         return this;
     }
 
@@ -101,8 +172,11 @@ public final class MessageBuilder {
      * @return The builder instance
      * @since 3.2.0
      */
-    public @NonNull MessageBuilder set(final @TagPattern @NonNull String placeholder, final @NonNull Component component) {
-        placeholders.add(Placeholder.component(placeholder, component));
+    public @NonNull MessageBuilder set(final @TagPattern @NonNull String placeholder,
+                                       final @NonNull Component component) {
+        placeholders.add(Placeholder.component(placeholder,
+            component
+        ));
         return this;
     }
 
@@ -114,8 +188,13 @@ public final class MessageBuilder {
      * @return The builder instance
      * @since 3.2.0
      */
-    public @NonNull MessageBuilder set(final @TagPattern @NonNull String placeholder, final @NonNull ItemStack itemStack) {
-        return set(placeholder, translatable("chat.square_brackets", itemStack.getItemMeta().itemName()).hoverEvent(itemStack.asHoverEvent()));
+    public @NonNull MessageBuilder set(final @TagPattern @NonNull String placeholder,
+                                       final @NonNull ItemStack itemStack) {
+        return set(placeholder,
+            translatable("chat.square_brackets",
+                itemStack.getItemMeta().itemName()
+            ).hoverEvent(itemStack.asHoverEvent())
+        );
     }
 
     /**
@@ -126,8 +205,11 @@ public final class MessageBuilder {
      * @return The builder instance
      * @since 3.2.0
      */
-    public @NonNull MessageBuilder set(final @TagPattern@NonNull String placeholder, final @NonNull Entity entity) {
-        return set(placeholder, entity.name().hoverEvent(entity.asHoverEvent()));
+    public @NonNull MessageBuilder set(final @TagPattern @NonNull String placeholder,
+                                       final @NonNull Entity entity) {
+        return set(placeholder,
+            entity.name().hoverEvent(entity.asHoverEvent())
+        );
     }
 
     /**
@@ -139,7 +221,8 @@ public final class MessageBuilder {
      * @return The builder instance.
      * @since 3.1.0
      */
-    public <T> @NonNull MessageBuilder set(final @TagPattern @NonNull String placeholder, final @NonNull T value) {
+    public <T> @NonNull MessageBuilder set(final @TagPattern @NonNull String placeholder,
+                                           final @NonNull T value) {
         return set(placeholder, String.valueOf(value));
     }
 
@@ -174,7 +257,8 @@ public final class MessageBuilder {
      * @since 3.1.0
      */
     public String string() {
-        return Popcorn.miniMessage().serialize(formatMessage());
+        return Popcorn.miniMessage()
+            .serialize(formatMessage());
     }
 
     /**
@@ -194,18 +278,27 @@ public final class MessageBuilder {
      * @since 3.1.0
      */
     private Component formatMessage() {
-        Component formatted = Popcorn.miniMessage().deserialize(message, placeholders.toArray(new TagResolver[0]));
+        Component formatted = Popcorn.miniMessage()
+            .deserialize(message,
+                placeholders.toArray(new TagResolver[0])
+            );
 
         if (error) {
-            formatted = new MessageBuilder(plugin, ERRORS.getOrDefault(plugin, "error <message>"), audience)
-                .set("message", formatted)
-                .component();
+            formatted = new MessageBuilder(plugin,
+                ERRORS.getOrDefault(plugin,
+                    "error <message>"
+                ),
+                audience
+            ).set("message", formatted).component();
         }
 
         if (prefix) {
-            formatted = new MessageBuilder(plugin, PREFIXES.getOrDefault(plugin, "prefix <message>"), audience)
-                .set("message", formatted)
-                .component();
+            formatted = new MessageBuilder(plugin,
+                PREFIXES.getOrDefault(plugin,
+                    "prefix <message>"
+                ),
+                audience
+            ).set("message", formatted).component();
         }
 
         return formatted;

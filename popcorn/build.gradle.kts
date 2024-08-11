@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "dev.kokiriglade"
-version = "3.3.3"
+version = "3.3.4"
 
 paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.REOBF_PRODUCTION
 

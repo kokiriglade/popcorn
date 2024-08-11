@@ -169,23 +169,6 @@ public class StonecutterInventoryImpl extends StonecutterInventory {
             getResultInventory().setItem(0, CraftItemStack.asNMSCopy(items[1]));
         }
 
-        @Override
-        public @NonNull CraftInventoryView getBukkitView() {
-            if (bukkitEntity == null) {
-                final CraftInventory inventory = new CraftInventoryStonecutter(this.container, getResultInventory()) {
-                    @Contract(pure = true)
-                    @Override
-                    public @NonNull InventoryHolder getHolder() {
-                        return inventoryHolder;
-                    }
-                };
-
-                bukkitEntity = new CraftInventoryView(player, inventory, this);
-            }
-
-            return bukkitEntity;
-        }
-
         @Contract(pure = true, value = "_ -> true")
         @Override
         public boolean stillValid(final net.minecraft.world.entity.player.@Nullable Player nmsPlayer) {

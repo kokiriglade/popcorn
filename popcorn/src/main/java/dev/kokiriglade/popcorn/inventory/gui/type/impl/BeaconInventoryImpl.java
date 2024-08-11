@@ -17,6 +17,7 @@ import org.bukkit.craftbukkit.inventory.CraftInventory;
 import org.bukkit.craftbukkit.inventory.CraftInventoryBeacon;
 import org.bukkit.craftbukkit.inventory.CraftInventoryView;
 import org.bukkit.craftbukkit.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.inventory.view.CraftBeaconView;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.InventoryHolder;
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -159,28 +160,6 @@ public class BeaconInventoryImpl extends BeaconInventory {
             IllegalAccessException exception) {
                 throw new RuntimeException(exception);
             }
-        }
-
-        @Override
-        public @NonNull CraftInventoryView getBukkitView() {
-            if (bukkitEntity == null) {
-                try {
-                    final CraftInventory inventory = new CraftInventoryBeacon((Container) beaconField.get(this)) {
-                        @Contract(pure = true)
-                        @Override
-                        public @NonNull InventoryHolder getHolder() {
-                            return inventoryHolder;
-                        }
-                    };
-
-                    bukkitEntity = new CraftInventoryView(player, inventory, this);
-                } catch (final
-                IllegalAccessException exception) {
-                    throw new RuntimeException(exception);
-                }
-            }
-
-            return bukkitEntity;
         }
 
         @Contract(pure = true, value = "_ -> true")

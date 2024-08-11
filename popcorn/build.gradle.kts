@@ -49,7 +49,7 @@ tasks {
             addStringOption("tag", "implNote:a:Implementation Note")
             addStringOption("tag", "apiNote:a:API Note")
             links(
-                "https://jd.papermc.io/paper/${rootProject.properties["mcVersion"]}/",
+                "https://jd.papermc.io/paper/1.21",//${rootProject.properties["mcVersion"]}/",
                 "https://jd.advntr.dev/api/4.17.0/",
                 "https://guava.dev/releases/32.1.2-jre/api/docs/",
                 "https://javadoc.io/static/dev.dejvokep/boosted-yaml/1.3/",

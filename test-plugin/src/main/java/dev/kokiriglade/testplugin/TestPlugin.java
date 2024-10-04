@@ -39,7 +39,7 @@ public final class TestPlugin extends JavaPlugin {
                         );
 
 
-                        sender.sendMessage(MessageBuilder.of(this, "Hello <player>!", sender)
+                        sender.sendMessage(MessageBuilder.of(this, "<freaky>Hello <player>!</freaky> 💗", sender)
                             .set("player", sender.getName())
                             .prefix(true)
                             .component()

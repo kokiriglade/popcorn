@@ -15,8 +15,9 @@ public final class PopcornTags {
     private static final TagResolver ALL = TagResolver.builder()
         .resolvers(
             TagResolver.standard(),
-            LinkTag.RESOLVER,
-            SmallTag.RESOLVER
+            link(),
+            small(),
+            freaky()
         )
         .build();
 
@@ -41,6 +42,16 @@ public final class PopcornTags {
      */
     public static @NonNull TagResolver small() {
         return SmallTag.RESOLVER;
+    }
+
+    /**
+     * Get a resolver for the {@value FreakyTag#FREAKY} tag.
+     *
+     * @return a resolver for the {@value FreakyTag#FREAKY} tag
+     * @since 3.3.5
+     */
+    public static @NonNull TagResolver freaky() {
+        return FreakyTag.RESOLVER;
     }
 
     /**
